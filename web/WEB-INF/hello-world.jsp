@@ -11,6 +11,7 @@
 <%-- TODO This is a test JSP, and should be deleted from the project. --%>
 
 <h1>${message}</h1>
+<h2>Chris changes, 666</h2>
 
 <p><img src="<c:url value="/images/${image}"/>"></p>
 
