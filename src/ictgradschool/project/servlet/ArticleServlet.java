@@ -26,5 +26,8 @@ public class ArticleServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(json);
+
+
+
     }
 }
