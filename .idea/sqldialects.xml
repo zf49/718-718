@@ -3,7 +3,6 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/scripts/articlesInfo.sql" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/scripts/db-init.sql" dialect="MariaDB" />
-    <file url="file://$PROJECT_DIR$/scripts/playground.sql" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/scripts/userInfo.sql" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/src/ictgradschool/project/repository/ArticleDao.java" dialect="MariaDB" />
   </component>
