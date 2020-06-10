@@ -6,6 +6,7 @@ import ictgradschool.project.util.DBConnectionUtils;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,8 +22,7 @@ public class CommentDAO {
                     while (resultSet.next()) {
                         int id = resultSet.getInt(1);
                         String content = resultSet.getString(2);
-                        //LocalDateTime dateCreated = resultSet.getDate(3).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-                        LocalDateTime dateCreated = resultSet.getTimestamp(3).toLocalDateTime();
+                        LocalDateTime dateCreated = resultSet.getDate(3).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
                         int authorId = resultSet.getInt(4);
                         int articleId = resultSet.getInt(5);
                         Comment comment = new Comment(authorId, articleId, id, content, dateCreated);
@@ -32,6 +32,35 @@ public class CommentDAO {
                 }
             }
         }
+    }
+
+    public boolean postNewComment(Comment comment, int articleId) {
+        comment.dateCreated = LocalDateTime.now();
+        try (Connection connection = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "INSERT INTO comment (content, date_created, author_id, article_id) VALUES (?,NOW(),?,?);")) {
+                statement.setString(1, comment.content);
+                statement.setInt(2, comment.authorId);
+                statement.setInt(3, articleId);
+                statement.executeQuery();
+            }
+        } catch (SQLException | IOException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean deleteComment(int commentId) {
+        try (Connection connection = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "DELETE FROM comment WHERE id = ?;")) {
+                statement.setInt(1, commentId);
+                statement.executeQuery();
+            }
+        }catch (SQLException | IOException e) {
+            return false;
+        }
+        return true;
     }
 
     public static void main(String[] args) throws IOException, SQLException {

@@ -17,4 +17,13 @@ public class CommentListController {
     public List<Comment> getCommentsByArticleId(int articleId) throws IOException, SQLException {
         return commentDAO.getCommentsForArticle(articleId);
     }
+
+    public boolean postNewComment(Comment comment, int articleId) {
+        return commentDAO.postNewComment(comment, articleId);
+    }
+
+    public boolean deleteComment(int commentId) {
+        return commentDAO.deleteComment(commentId);
+    }
+
 }
