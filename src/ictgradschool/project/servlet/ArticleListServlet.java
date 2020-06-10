@@ -73,9 +73,6 @@ public class ArticleListServlet extends HttpServlet {
                 articles.remove(a);
             }
         }
-
-
-
     }
 }
 
