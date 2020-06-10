@@ -6,7 +6,6 @@ import ictgradschool.project.util.DBConnectionUtils;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,7 +21,8 @@ public class CommentDAO {
                     while (resultSet.next()) {
                         int id = resultSet.getInt(1);
                         String content = resultSet.getString(2);
-                        LocalDateTime dateCreated = resultSet.getDate(3).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                        //LocalDateTime dateCreated = resultSet.getDate(3).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                        LocalDateTime dateCreated = resultSet.getTimestamp(3).toLocalDateTime();
                         int authorId = resultSet.getInt(4);
                         int articleId = resultSet.getInt(5);
                         Comment comment = new Comment(authorId, articleId, id, content, dateCreated);

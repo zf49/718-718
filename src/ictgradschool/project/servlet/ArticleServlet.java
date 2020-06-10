@@ -6,7 +6,6 @@ import ictgradschool.project.controller.CommentListController;
 import ictgradschool.project.entity.Comment;
 import ictgradschool.project.repository.CommentDAO;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +21,11 @@ public class ArticleServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String pathInfo = req.getPathInfo();
+        articleId = Integer.parseInt(pathInfo.split("/")[1]);
         // TODO get an article by ID
 
         // Codes below get all the comments for the article
-        String pathInfo = req.getPathInfo();
-        articleId = Integer.parseInt(pathInfo.substring(1));
         CommentListController commentListController = new CommentListController(new CommentDAO());
         List<Comment> comments = null;
         try {
@@ -52,10 +51,19 @@ public class ArticleServlet extends HttpServlet {
         } else {
             System.out.println("Fail to comment.");
         }
+        /*// For test
+        comment.dateCreated = LocalDateTime.now();
+        comment.id = 1234;
+        comment.articleId = articleId;
+        ObjectMapper objectMapperForComment = new ObjectMapper();
+        String commentsJson = objectMapperForComment.writeValueAsString(comment);
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().write(commentsJson);*/
 
     }
 
-    /* Reads the author ID and the content of a new content */
+    /* Reads the author ID and the content of a new comment */
     private Comment getNewComment(HttpServletRequest req) throws JsonProcessingException {
 
         StringBuilder sb = new StringBuilder();
@@ -71,7 +79,7 @@ public class ArticleServlet extends HttpServlet {
     }
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
 
         int id = Integer.parseInt(req.getParameter("commentId"));
         CommentListController commentListController = new CommentListController(new CommentDAO());
