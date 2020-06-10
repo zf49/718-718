@@ -4,10 +4,9 @@ import ictgradschool.project.entity.Article;
 import ictgradschool.project.util.DBConnectionUtils;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ArticleDao {
@@ -16,16 +15,19 @@ public class ArticleDao {
             try (Statement statement = connection.createStatement()) {
                 try (ResultSet resultSet = statement.executeQuery(
                         "SELECT id, title, content, date_created FROM article")) {
-                    System.out.println("mark 2");
+                    List<Article> articles = new LinkedList<>();
                     while (resultSet.next()) {
-                        System.out.println("mark 1");
-                        System.out.println(resultSet.getInt(1));
-                        // TODO: create article object, add to list, return
+                        int id = resultSet.getInt(1);
+                        String title = resultSet.getString(2);
+                        String content = resultSet.getString(3);
+//                        LocalDate dateCreated = resultSet.getDate(4).toLocalDateTime();
+//                        Article article = new Article(id, title, content, dateCreated);
+//                        articles.add(article);
                     }
+                    return articles;
                 }
             }
         }
-        return null;
     }
 
     public static void main(String[] args) throws IOException, SQLException {
