@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ictgradschool.project.controller.ArticleListController;
 import ictgradschool.project.entity.Article;
-import org.apache.logging.log4j.core.config.plugins.convert.TypeConverters;
+import ictgradschool.project.repository.ArticleDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
@@ -23,8 +24,13 @@ public class ArticleListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ArticleListController articleListController = new ArticleListController();
-        List<Article> articles = articleListController.getArticles();
+        ArticleListController articleListController = new ArticleListController(new ArticleDao());
+        List<Article> articles = null;
+        try {
+            articles = articleListController.getArticles();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(articles);
         resp.setContentType("application/json");
@@ -66,8 +72,13 @@ public class ArticleListServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         int id = Integer.parseInt(req.getParameter("id"));
-        ArticleListController articleListController = new ArticleListController();
-        List<Article> articles = articleListController.getArticles();
+        ArticleListController articleListController = new ArticleListController(new ArticleDao());
+        List<Article> articles = null;
+        try {
+            articles = articleListController.getArticles();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         for(Article a : articles){
             if(a.id == id){
                 articles.remove(a);
