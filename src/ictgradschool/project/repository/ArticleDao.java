@@ -6,6 +6,8 @@ import ictgradschool.project.util.DBConnectionUtils;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,9 +22,12 @@ public class ArticleDao {
                         int id = resultSet.getInt(1);
                         String title = resultSet.getString(2);
                         String content = resultSet.getString(3);
-//                        LocalDate dateCreated = resultSet.getDate(4).toLocalDateTime();
-//                        Article article = new Article(id, title, content, dateCreated);
-//                        articles.add(article);
+                        // TODO: uncomment this after we have date in data
+//                        LocalDateTime dateCreated = resultSet.getDate(4).toInstant()
+//                                .atZone(ZoneId.systemDefault())
+//                                .toLocalDateTime();
+                        Article article = new Article(id, title, content, null);
+                        articles.add(article);
                     }
                     return articles;
                 }
@@ -32,6 +37,6 @@ public class ArticleDao {
 
     public static void main(String[] args) throws IOException, SQLException {
         ArticleDao articleDao = new ArticleDao();
-        articleDao.getAllArticles();
+        System.out.println(articleDao.getAllArticles());
     }
 }

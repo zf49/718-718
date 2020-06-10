@@ -1,20 +1,20 @@
 package ictgradschool.project.controller;
 
 import ictgradschool.project.entity.Article;
+import ictgradschool.project.repository.ArticleDao;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class ArticleListController {
+    private ArticleDao articleDao;
 
-    public List<Article> getArticles() {
-        List<Article> articleList = new ArrayList<>();
-        Article article = new Article();
-        article.id = 1;
-        article.title = "Allways wanting food";
-        article.content = "I love cats i am one wake up scratch humans leg for food";
-        article.date = 1591672745;
-        articleList.add(article);
-        return articleList;
+    public ArticleListController(ArticleDao articleDao) {
+        this.articleDao = articleDao;
+    }
+
+    public List<Article> getArticles() throws IOException, SQLException {
+        return articleDao.getAllArticles();
     }
 }

@@ -9,10 +9,23 @@ public class Article {
     public long date;
     public LocalDateTime dateCreated;
 
+    public Article() {}
+
     public Article(int id, String title, String content, LocalDateTime dateCreated) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.dateCreated = dateCreated;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", date=" + date +
+                ", dateCreated=" + dateCreated +
+                '}';
     }
 }
