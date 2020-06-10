@@ -28,6 +28,7 @@ public class ArticleServlet extends HttpServlet {
             ObjectMapper objectMapper = new ObjectMapper();
             String json = objectMapper.writeValueAsString(article);
 
+
             resp.setContentType("application/json");
             resp.setCharacterEncoding("UTF-8");
             resp.getWriter().write(json);
@@ -39,8 +40,6 @@ public class ArticleServlet extends HttpServlet {
 
             ObjectMapper objectMapperForComment = new ObjectMapper();
             String commentsJson = objectMapperForComment.writeValueAsString(comments);
-
-
             resp.setContentType("application/json");
             resp.setCharacterEncoding("UTF-8");
             resp.getWriter().write(commentsJson);
@@ -50,5 +49,6 @@ public class ArticleServlet extends HttpServlet {
 
     private boolean isArticleUrl(String pathInfo) {
         return !pathInfo.contains("comments");
+
     }
 }
