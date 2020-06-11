@@ -2,6 +2,8 @@ package ictgradschool.project.util;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static ictgradschool.project.util.PasswordUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -48,5 +50,29 @@ class PasswordUtilTest {
         byte[] salt = getNextSalt();
         byte[] hash = hash(password.toCharArray(), salt);
         assertFalse(isExpectedPassword("password321".toCharArray(), salt, hash));
+    }
+
+    @Test
+    void testGenerateHashForTestData() {
+        String[] usernames = {
+                "Bret",
+                "Antonette",
+                "Samantha",
+                "Karianne",
+                "Kamren",
+                "Leopoldo_Corkery",
+                "Elwyn.Skiles",
+                "Maxime_Nienow",
+                "Delphine",
+                "Moriah.Stanton",
+        };
+        List.of(usernames)
+                .stream()
+                .map((username) -> username + "123")
+                .map(PasswordUtil::quickHash)
+                .forEach((hashInfo -> {
+                    System.out.printf("'%s', '%s'\n", hashInfo.saltBase64, hashInfo.hashBase64);
+                }));
+
     }
 }
