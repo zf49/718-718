@@ -44,7 +44,7 @@ public class ArticleListServlet extends HttpServlet {
 
         Article articleInput = getArticle(req);
         articleInput.id = 1234;
-        articleInput.date = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
+        articleInput.dateCreated = LocalDateTime.now();
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(articleInput);
         resp.setContentType("application/json");
