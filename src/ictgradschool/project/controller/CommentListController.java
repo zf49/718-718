@@ -1,21 +1,29 @@
 package ictgradschool.project.controller;
 
 import ictgradschool.project.entity.Comment;
+import ictgradschool.project.repository.CommentDAO;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class CommentListController {
+    private CommentDAO commentDAO;
 
-    public List<Comment> getCommentListByArticleId(int articleId){
-        List<Comment> commentList = new ArrayList<>();
-        Comment comment = new Comment();
-        comment.articleId = 1;
-        comment.content = "Good article!";
-        comment.date = 1591686802;
-        comment.userName = "commenter";
-        comment.id = 1;
-        commentList.add(comment);
-        return commentList;
+    public CommentListController(CommentDAO commentDAO) {
+        this.commentDAO = commentDAO;
     }
+
+    public List<Comment> getCommentsByArticleId(int articleId) throws IOException, SQLException {
+        return commentDAO.getCommentsForArticle(articleId);
+    }
+
+    public boolean postNewComment(Comment comment, int articleId) {
+        return commentDAO.postNewComment(comment, articleId);
+    }
+
+    public boolean deleteComment(int commentId) {
+        return commentDAO.deleteComment(commentId);
+    }
+
 }
