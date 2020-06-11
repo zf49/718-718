@@ -51,7 +51,9 @@ class UserDaoTest {
 
     @Test
     void testAddUser() throws IOException, SQLException {
-        User user = userDao.addUser("George", "George123");
+        User user = userDao.addUser("George",
+                "S4rKvEb7vOWJ5yLkX1qNuICtLX20lJMOH9vzkNnJV4E=",
+                "YogwH6+EIz9lvTurXPD7wdscRQc/viTM+tkS5nyuHY9vlbHKxNlP0jMNmAzOytj6qZLqHt7rt8ND/sE+f2MTwg==");
         assertNotNull(user);
         resetDBData();
     }

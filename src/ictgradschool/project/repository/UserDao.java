@@ -50,16 +50,15 @@ public class UserDao {
         }
     }
 
-    public User addUser(String username, String password) throws IOException, SQLException {
-        HashInfo hashInfo = quickHash(password);
+    public User addUser(String username, String saltBase64, String hashBase64) throws IOException, SQLException {
         try (Connection connection = getConnectionFromClasspath("database.properties")) {
             try (PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO user (username, salt, password_hash)\n" +
                             "values (?, ?, ?)\n"
             )) {
                 statement.setString(1, username);
-                statement.setString(2, hashInfo.saltBase64);
-                statement.setString(3, hashInfo.hashBase64);
+                statement.setString(2, saltBase64);
+                statement.setString(3, hashBase64);
                 statement.executeUpdate();
             }
             int id = getLastInsertedId(connection);

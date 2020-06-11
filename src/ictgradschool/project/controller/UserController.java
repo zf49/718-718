@@ -3,7 +3,6 @@ package ictgradschool.project.controller;
 import ictgradschool.project.entity.Token;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.UserDao;
-import ictgradschool.project.util.DBConnectionUtils;
 import ictgradschool.project.util.HashInfo;
 
 import java.io.IOException;
@@ -18,14 +17,15 @@ public class UserController {
         this.userDao = userDao;
     }
 
-    public void signUp(String username, String password, String confirmPassword) {
+    public User signUp(String username, String password, String confirmPassword) throws IOException, SQLException {
         if (!password.equals(confirmPassword)) {
             throw new UnsupportedOperationException();
         }
         HashInfo hashInfo = quickHash(password);
+        return userDao.addUser(username, hashInfo.saltBase64, hashInfo.hashBase64);
     }
 
-    public boolean isUserExist(String username) throws IOException, SQLException {
+    public boolean isUsernameExist(String username) throws IOException, SQLException {
         User user = userDao.getUserByName(username);
         throw new UnsupportedOperationException();
     }
