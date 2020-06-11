@@ -1,17 +1,24 @@
 package ictgradschool.project.repository;
 
 import ictgradschool.project.entity.User;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
+import static ictgradschool.project.repository.DBTestUtil.resetDBData;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserDaoTest {
 
     private UserDao userDao;
+
+    @BeforeAll
+    static void setUpBeforeAll() throws IOException, SQLException {
+        resetDBData();
+    }
 
     @BeforeEach
     void setUp() {
@@ -46,7 +53,6 @@ class UserDaoTest {
     void testAddUser() throws IOException, SQLException {
         User user = userDao.addUser("George", "George123");
         assertNotNull(user);
-        userDao.deleteUserById(user.getId());
+        resetDBData();
     }
-
 }
