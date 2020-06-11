@@ -2,6 +2,9 @@ package ictgradschool.project.controller;
 
 import ictgradschool.project.entity.Token;
 import ictgradschool.project.repository.UserDao;
+import ictgradschool.project.util.PasswordUtil;
+
+import static ictgradschool.project.util.PasswordUtil.*;
 
 public class UserController {
     private UserDao userDao;
@@ -11,7 +14,12 @@ public class UserController {
     }
 
     public void signUp(String username, String password, String confirmPassword) {
-        throw new UnsupportedOperationException();
+        if (!password.equals(confirmPassword)) {
+            throw new UnsupportedOperationException();
+        }
+        byte[] salt = getNextSalt();
+        String saltBase64 = base64Encode(salt);
+        hash(password.toCharArray(), salt);
     }
 
     public boolean isUserExist(String username) {

@@ -200,4 +200,12 @@ public class PasswordUtil {
     public static String base64Encode(byte[] array) {
         return Base64.getEncoder().encodeToString(array);
     }
+
+    public static PasswordHash quickHash(String password) {
+        byte[] salt = getNextSalt();
+        String saltBase64 = base64Encode(salt);
+        byte[] hash = hash(password.toCharArray(), salt);
+        String hashBase64 = base64Encode(hash);
+        return new PasswordHash(salt, saltBase64, hash, hashBase64);
+    }
 }

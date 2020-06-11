@@ -11,8 +11,8 @@ class PasswordUtilTest {
     void testSaltLength() {
         for (int i = 0; i < 100; i++) {
             byte[] salt = getNextSalt();
-            String encoded = base64Encode(salt);
-            assertEquals(44, encoded.length());
+            String saltBase64 = base64Encode(salt);
+            assertEquals(44, saltBase64.length());
         }
     }
 
@@ -20,19 +20,18 @@ class PasswordUtilTest {
     void testInsecureHashLength() {
         String password = "password123";
         byte[] insecureHash = insecureHash(password);
-        String encoded = base64Encode(insecureHash);
-        System.out.println(encoded);
-        assertEquals(88, encoded.length());
+        String insecureHashBase64 = base64Encode(insecureHash);
+        System.out.println(insecureHashBase64);
+        assertEquals(88, insecureHashBase64.length());
     }
 
     @Test
     void testHashLength() {
         String password = "password123";
         byte[] salt = getNextSalt();
-        String saltEncoded = base64Encode(salt);
         byte[] hash = hash(password.toCharArray(), salt);
-        String hashEncoded = base64Encode(hash);
-        assertEquals(88, hashEncoded.length());
+        String hashBase64 = base64Encode(hash);
+        assertEquals(88, hashBase64.length());
     }
 
     @Test
