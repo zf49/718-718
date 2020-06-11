@@ -213,6 +213,7 @@ VALUES (1, 1, 'sunt aut facere repellat provident occaecati excepturi optio repr
        (10, 100, 'at nam consequatur ea labore ea harum',
         'cupiditate quo est a modi nesciunt soluta↵ipsa vol…nam et distinctio eum↵accusamus ratione error aut');
 
+
 INSERT INTO comment (id, content, date_created, author_id, article_id)
 VALUES (1, 'laudantium enim quasi est quidem magnam voluptate ipsam eos
 tempora quo necessitatibus
@@ -2214,3 +2215,4 @@ atque aut et', NOW(), 10, 100),
 veniam nisi eos velit sed
 id totam inventore voluptatem laborum et eveniet
 aut aut aut maxime quia temporibus ut omnis', NOW(), 6, 100);
+
