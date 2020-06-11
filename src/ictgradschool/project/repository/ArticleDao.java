@@ -9,6 +9,7 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -108,18 +109,19 @@ public class ArticleDao {
             }
         }
     }
-    public void updateArticle(Article article) throws SQLException {
 
-        try (PreparedStatement ps = connection.prepareStatement("UPDATE article SET title=?,content=?,date_created=? WHERE id=?;")){
+    public Article updateArticle(Article article) throws SQLException {
+
+        try (PreparedStatement ps = connection.prepareStatement("UPDATE article SET title=?,content=?,date_created=?,author_id=? WHERE id=?;")){
             ps.setString(1, article.title);
             ps.setString(2, article.content);
-            //TODO
-            ps.setInt(4,article.id);
-
-
-
-
+            ps.setDate(3, (java.sql.Date) Date.from(article.dateCreated.atZone(ZoneId.systemDefault()).toInstant()));
+            ps.setInt(4, article.authorId);
+            ps.setInt(5,article.id);
+            ps.executeQuery();
         }
+        return getArticleById(article.id);
+
     }
 
 

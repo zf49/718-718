@@ -11,4 +11,8 @@ public class ArticleController {
     public Article getArticleById(int id) throws SQLException {
         return articleDao.getArticleById(id);
     }
+
+    public Article updateArticle(Article article) throws SQLException {
+        return articleDao.updateArticle(article);
+    }
 }

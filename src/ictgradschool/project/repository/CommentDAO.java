@@ -1,5 +1,6 @@
 package ictgradschool.project.repository;
 
+import ictgradschool.project.entity.Article;
 import ictgradschool.project.entity.Comment;
 import ictgradschool.project.util.DBConnectionUtils;
 
@@ -57,7 +58,24 @@ public class CommentDAO {
                 comment.id = r.getInt(1);
             }
         }
-        return comment;
+        return getCommentById(comment.id);
+    }
+
+    private Comment getCommentById(int commentId) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(
+                "SELECT content, date_created, author_id, article_id FROM comment WHERE id = ?;")) {
+            statement.setInt(1, commentId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                Comment comment = new Comment();
+                comment.id = commentId;
+                comment.content = resultSet.getString(1);
+                comment.dateCreated = resultSet.getTimestamp(2).toLocalDateTime();
+                //LocalDateTime dateCreated = resultSet.getDate(2).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                comment.authorId = resultSet.getInt(3);
+                comment.articleId = resultSet.getInt(4);
+                return comment;
+            }
+        }
     }
 
     public boolean deleteComment(int commentId) {

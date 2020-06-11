@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/articles/*")
@@ -44,8 +45,11 @@ public class ArticleServlet extends HttpServlet {
         try {
             comments = commentListController.getCommentsByArticleId(articleId);
         } catch (SQLException e) {
+            resp.setStatus(500);
             e.printStackTrace();
+            throw new ServletException("Database access error!", e);
         }
+
         ObjectMapper objectMapper = new ObjectMapper();
         String articleJson = objectMapper.writeValueAsString(article);
         String commentsJson = objectMapper.writeValueAsString(comments);
@@ -56,6 +60,39 @@ public class ArticleServlet extends HttpServlet {
 
     }
 
+    /* Updates the article */
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        StringBuilder sb = new StringBuilder();
+        String line;
+        try{
+            BufferedReader reader = req.getReader();
+            while((line = reader.readLine()) != null)
+                sb.append(line);
+        } catch (Exception ignored) {
+        }
+        Article article = new ObjectMapper().readValue(sb.toString(), Article.class);
+        article.id = articleId;
+        article.dateCreated = LocalDateTime.now();
+        ArticleController articleController = new ArticleController();
+        try {
+            article = articleController.updateArticle(article);
+        } catch (SQLException e) {
+            resp.setStatus(500);
+            e.printStackTrace();
+            throw new ServletException("Database access error!", e);
+        }
+
+        ObjectMapper objectMapperForComment = new ObjectMapper();
+        String articleJson = objectMapperForComment.writeValueAsString(article);
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().write(articleJson);
+
+    }
+
+    /* Creates a new comment */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
@@ -92,6 +129,7 @@ public class ArticleServlet extends HttpServlet {
 
     }
 
+    /* Deletes a comment */
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
 
