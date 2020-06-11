@@ -27,7 +27,7 @@ public class DateTimeTest {
     }
 
     @Test
-    void testGenerateRandomTimes() {
+    void testGenerateRandomTimesForArticles() {
         LocalDateTime startTime = LocalDateTime.of(2020, 3, 1, 0, 0);
         LocalDateTime endTime = LocalDateTime.of(2020, 6, 1, 0, 0);
 
@@ -39,11 +39,11 @@ public class DateTimeTest {
     }
 
     @Test
-    void testGenerateRandomTimes2() {
+    void testGenerateRandomTimesForComments() {
         LocalDateTime startTime = LocalDateTime.of(2020, 6, 1, 0, 0);
         LocalDateTime endTime = LocalDateTime.of(2020, 6, 10, 0, 0);
 
-        List<LocalDateTime> times = getRandomSortedTimesBetween(startTime, endTime, 100);
+        List<LocalDateTime> times = getRandomSortedTimesBetween(startTime, endTime, 500);
 
         for (LocalDateTime time : times) {
             System.out.println(time.toString());
