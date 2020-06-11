@@ -7,6 +7,7 @@ import ictgradschool.project.util.HashInfo;
 import java.io.IOException;
 import java.sql.*;
 
+import static ictgradschool.project.repository.DaoUtil.getLastInsertedId;
 import static ictgradschool.project.util.DBConnectionUtils.getConnectionFromClasspath;
 import static ictgradschool.project.util.PasswordUtil.quickHash;
 
@@ -73,14 +74,6 @@ public class UserDao {
                 statement.setInt(1, id);
                 statement.executeUpdate();
             }
-        }
-    }
-
-    private int getLastInsertedId(Connection connection) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT LAST_INSERT_ID();\n");
-            resultSet.next();
-            return resultSet.getInt(1);
         }
     }
 
