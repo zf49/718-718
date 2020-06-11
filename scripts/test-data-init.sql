@@ -1,14 +1,24 @@
-INSERT INTO user (id, username, password_hash)
-VALUES (1, 'Bret', '123123123123'),
-       (2, 'Antonette', 'ertertertert'),
-       (3, 'Samantha', 'asdipufh987p3145'),
-       (4, 'Karianne', 'klsduf870wer'),
-       (5, 'Kamren', '1982eyhniousdhf'),
-       (6, 'Leopoldo_Corkery', '9w8eynrc92'),
-       (7, 'Elwyn.Skiles', '9812-nc43yr13984r'),
-       (8, 'Maxime_Nienow', '1349c8n0yr'),
-       (9, 'Delphine', '134crn0987y31'),
-       (10, 'Moriah.Stanton', '13908n4cyrj1r');
+INSERT INTO user (id, username, salt, password_hash)
+VALUES (1, 'Bret', 'aJKEa9uPIe2UlDJl49+4epDL+vLX+gKO7cmySipyqqk=',
+        'ZdPgJV9nM7Qu4F8XxixvlzAkO9YVzfzlblcRPXVT+whhMOHZygHIzDkA/Luokjk9ny9b2ZIZT3vowKnhcjEZYw=='),
+       (2, 'Antonette', 'a14AaRWIrBY8zQb3uoKREeX7rpeM3PU+G3/QWJ2ZlrY=',
+        '6ZTSJU0+CvznZ9nTi4fMehIawcrO4eQwe5QlMUsmoi/+IdAv5Pv+FwrwJNhtP5Tf1BKSR5bYeVQWEECUbktajg=='),
+       (3, 'Samantha', '7PsV4Mp9jy7OM7JXDJ4G7LmqNvq3b5GLAIl7qxU8X94=',
+        'AE9+BNU62jEIFhirMexYsVJrVj/bqH9CZSZPWGZ4ZihY6NYoCcRcO85oHEvfsVCKHloNZpc3GumA5js2kaAMwA=='),
+       (4, 'Karianne', '73ku8UITkJ8pVOS+mK1tRoR5Hn27ZTOgcMIi5dfCRzg=',
+        'usCn31XyvZ7VUuzkIZsI1d+nUl5xB2A0ucS7Bgn/uiLaBBl+8pKKeCEs8qMDoEIp50db3YY+3avUXm9BOnSiBQ=='),
+       (5, 'Kamren', 'swhu+Z2C3Wp3HM3VZMonmPrc4j9zyygC+KEYLN0SvKg=',
+        'wMJ/k22hHybbKtGDqoHbVMto7WEP3JvrgQ1/0k6r+JuAaTV3SUoRZ+OikTOeBbQZOt4mqp6EQAbAzeHUmHmjdQ=='),
+       (6, 'Leopoldo_Corkery', 'y4SU2kEMGwMw4bLD8VvZ8yRdi59/HRt56usOhbLKrtw=',
+        'fzySwSzZoT+9w+fwZ8J2t03IgDHF5MjanfVayCoJXFiVl1kcV2Qvz4Bv2h6avGdHjFV8cQZAF0zDXcANHd0zrg=='),
+       (7, 'Elwyn.Skiles', 'nbe2rn9eI+gH+0XCm7w9AhthQAm1Cas9kWOAs507BsI=',
+        'yZy1246mORuOzXUzW0eEmWF8OX+HOPgpu4jIP3kgs+A3lhWI8PW7ipCMaQsuJaAWd6iWio7jXibR1zlV3jgz6w=='),
+       (8, 'Maxime_Nienow', '1DJt1JMBsLpIg6tm7UrRBPIFJskXB8+MjQS/IQ4v/Mg=',
+        'A4ky76Ue7U7OydN+6CQtquwyposxgipiNwqJU85afgqeWrQu9c7mDRy/zGJZHG7lIiBx9J/dtoK7w23q4HQbMA=='),
+       (9, 'Delphine', 'Ioxn2lwqEKwEoivibZYwyWX221poCEst8nKcFR4IX5A=',
+        's6eO+m8MdgQXaE22/VhZjekoOg1/WT+E2nRK6/vn3hyuqG6MFFY+TNmHas0dvUckFIFVItgU0YL3vn4jLT+R8w=='),
+       (10, 'Moriah.Stanton', 'BV7uKMb7DElEDKNvq/8N4TFNf6hzbCMZwDaJKs/pVDc=',
+        'PJ0VefYMHnC6PxvoAfaUCuUCwe9+s2Fv1kPV+Lcz/VhbazOJBXNCrSdqBw7Hxz6saYe2CMRXrS1YcfBJ/soCfA==');
 
 # TODO: add date created
 INSERT INTO article (author_id, id, title, content)
