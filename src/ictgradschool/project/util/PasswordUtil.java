@@ -201,11 +201,11 @@ public class PasswordUtil {
         return Base64.getEncoder().encodeToString(array);
     }
 
-    public static PasswordHash quickHash(String password) {
+    public static HashInfo quickHash(String password) {
         byte[] salt = getNextSalt();
         String saltBase64 = base64Encode(salt);
         byte[] hash = hash(password.toCharArray(), salt);
         String hashBase64 = base64Encode(hash);
-        return new PasswordHash(salt, saltBase64, hash, hashBase64);
+        return new HashInfo(salt, saltBase64, hash, hashBase64);
     }
 }
