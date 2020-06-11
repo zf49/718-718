@@ -7,8 +7,9 @@ DROP TABLE IF EXISTS user;
 CREATE TABLE IF NOT EXISTS user
 (
     id            INT          NOT NULL AUTO_INCREMENT,
-    username      VARCHAR(128) NOT NULL,
-    password_hash VARCHAR(128) NOT NULL,
+    username      VARCHAR(128) NOT NULL UNIQUE,
+    salt          CHAR(44)     NOT NULL,
+    password_hash CHAR(88)     NOT NULL,
     PRIMARY KEY (id)
 );
 
