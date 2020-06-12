@@ -6,9 +6,7 @@
 </head>
 <body>
 
-<header>
-    <jsp:include page="nav.jsp" />
-</header>
+<jsp:include page="nav.jsp" />
 
 <p>TODO: articles here</p>
 
