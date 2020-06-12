@@ -1,12 +1,15 @@
 package ictgradschool.project.repository;
 
 import ictgradschool.project.entity.Article;
+import ictgradschool.project.entity.Comment;
 import ictgradschool.project.util.DBConnectionUtils;
 
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,17 +30,17 @@ public class ArticleDao {
         try (Connection connection = DBConnectionUtils.getConnectionFromClasspath("database.properties")) {
             try (Statement statement = connection.createStatement()) {
                 try (ResultSet resultSet = statement.executeQuery(
-                        "SELECT id, title, content, date_created FROM article")) {
+                        "SELECT id, title, content, date_created, author_id FROM article")) {
                     List<Article> articles = new LinkedList<>();
                     while (resultSet.next()) {
                         int id = resultSet.getInt(1);
                         String title = resultSet.getString(2);
                         String content = resultSet.getString(3);
-                        // TODO: uncomment this after we have date in data
-//                        LocalDateTime dateCreated = resultSet.getDate(4).toInstant()
-//                                .atZone(ZoneId.systemDefault())
-//                                .toLocalDateTime();
-                        Article article = new Article(id, title, content, null);
+                        LocalDateTime dateCreated = resultSet.getDate(4).toInstant()
+                                .atZone(ZoneId.systemDefault())
+                                .toLocalDateTime();
+                        int authorId = resultSet.getInt(5);
+                        Article article = new Article(id, title, content, dateCreated, authorId);
                         articles.add(article);
                     }
                     return articles;
@@ -61,13 +64,31 @@ public class ArticleDao {
                    }
             }
     }
+
+    public Article getArticleById(int id) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(
+                "SELECT title, content, date_created, author_id FROM article WHERE id = ?;")) {
+            statement.setInt(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                Article article = new Article();
+                article.id = id;
+                article.title = resultSet.getString(1);
+                article.content = resultSet.getString(2);
+                article.dateCreated = resultSet.getTimestamp(3).toLocalDateTime();
+                //LocalDateTime dateCreated = resultSet.getDate(3).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                article.authorId = resultSet.getInt(4);
+                return article;
+            }
+        }
+    }
+
     private Article getArticleFromResultSet(ResultSet rs) throws SQLException {
         return new Article(
                 rs.getInt(1),
                 rs.getString(2),
                 rs.getString(3),
-                ///TODO renewdate
-                rs.getDate(4).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
+                rs.getDate(4).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
+                rs.getInt(5)
         );
     }
 
@@ -88,18 +109,19 @@ public class ArticleDao {
             }
         }
     }
-    public void updateArticle(Article article) throws SQLException {
 
-        try (PreparedStatement ps = connection.prepareStatement("UPDATE article SET title=?,content=?,date_created=? WHERE id=?;")){
+    public Article updateArticle(Article article) throws SQLException {
+
+        try (PreparedStatement ps = connection.prepareStatement("UPDATE article SET title=?,content=?,date_created=?,author_id=? WHERE id=?;")){
             ps.setString(1, article.title);
             ps.setString(2, article.content);
-            //TODO
-            ps.setInt(4,article.id);
-
-
-
-
+            ps.setDate(3, (java.sql.Date) Date.from(article.dateCreated.atZone(ZoneId.systemDefault()).toInstant()));
+            ps.setInt(4, article.authorId);
+            ps.setInt(5,article.id);
+            ps.executeQuery();
         }
+        return getArticleById(article.id);
+
     }
 
 

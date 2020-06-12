@@ -9,28 +9,18 @@ public class Article {
     public int id;
     public String title;
     public String content;
-    public long date;
+    public int authorId;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     public LocalDateTime dateCreated;
 
     public Article() {}
 
-    public Article(int id, String title, String content, LocalDateTime dateCreated) {
+    public Article(int id, String title, String content, LocalDateTime dateCreated, int authorId) {
         this.id = id;
         this.title = title;
         this.content = content;
+        this.authorId = authorId;
         this.dateCreated = dateCreated;
-    }
-
-    @Override
-    public String toString() {
-        return "Article{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", date=" + date +
-                ", dateCreated=" + dateCreated +
-                '}';
     }
 
     public static void main(String[] args) throws JsonProcessingException {
