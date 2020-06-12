@@ -1,4 +1,4 @@
-package ictgradschool.project.repository;
+package ictgradschool.project.testutil;
 
 import ictgradschool.project.util.DBConnectionUtils;
 import org.apache.ibatis.jdbc.ScriptRunner;
