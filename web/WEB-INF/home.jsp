@@ -6,20 +6,9 @@
 </head>
 <body>
 
-<c:choose>
-    <c:when test="${user == null}">
-        <p>You are not signed in.</p>
-        <form action="./sign-in" method="get">
-            <input type="submit" value="Sign In">
-        </form>
-    </c:when>
-    <c:otherwise>
-        <p>Hi, ${user.username}</p>
-        <form action="./sign-out" method="post">
-            <input type="submit" value="Sign Out">
-        </form>
-    </c:otherwise>
-</c:choose>
+<jsp:include page="nav.jsp" />
+
+<p>TODO: articles here</p>
 
 </body>
 </html>

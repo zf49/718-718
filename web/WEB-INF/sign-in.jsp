@@ -5,6 +5,7 @@
     <title>Sign In</title>
 </head>
 <body>
+<jsp:include page="nav.jsp" />
 <form action="./sign-in" method="post" class="form-example">
     <div>
         <label for="username">Username: </label>
