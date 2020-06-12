@@ -8,9 +8,7 @@
             <ul>
                 <li>You are not signed in.</li>
                 <li>
-                    <form action="./sign-in" method="get">
-                        <input type="submit" value="Sign In">
-                    </form>
+                    <button onclick="location.href='./sign-in'">Sign In</button>
                 </li>
             </ul>
         </c:when>
