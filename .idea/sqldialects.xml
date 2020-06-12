@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+<<<<<<< HEAD
     <file url="file://$PROJECT_DIR$/scripts/db-init.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/scripts/test-data-init.sql" dialect="MySQL" />
+=======
+    <file url="file://$PROJECT_DIR$/scripts/db-init.sql" dialect="MariaDB" />
+    <file url="file://$PROJECT_DIR$/scripts/test-data-init.sql" dialect="MariaDB" />
+>>>>>>> 7655bac1cbe01e75cf3c0d7f137a467d43b2e457
     <file url="file://$PROJECT_DIR$/src/ictgradschool/project/repository/ArticleDao.java" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/src/ictgradschool/project/repository/CommentDAO.java" dialect="GenericSQL" />
   </component>

@@ -1,16 +1,22 @@
 package ictgradschool.project.controller;
 
 import ictgradschool.project.entity.Article;
+import ictgradschool.project.repository.ArticleDao;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 import java.time.LocalDateTime;
 
 public class ArticleController {
-    public Article getArticleById(int id) {
-        Article article = new Article();
-        article.id = 1;
-        article.title = "Allways wanting food";
-        article.content = "I love cats i am one wake up scratch humans leg for food";
-        article.dateCreated = LocalDateTime.now();
-        return article;
+
+    ArticleDao articleDao = new ArticleDao();
+
+    public Article getArticleById(int id) throws SQLException, IOException {
+        return articleDao.getArticleById(id);
+    }
+
+    public Article updateArticle(Article article) throws SQLException, IOException {
+        return articleDao.updateArticle(article);
     }
 }

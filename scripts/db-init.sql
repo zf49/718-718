@@ -2,6 +2,7 @@
 
 DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS article;
+DROP TABLE IF EXISTS auth;
 DROP TABLE IF EXISTS user;
 
 CREATE TABLE IF NOT EXISTS user
@@ -34,4 +35,15 @@ CREATE TABLE IF NOT EXISTS comment
     PRIMARY KEY (id),
     FOREIGN KEY (author_id) REFERENCES user (id),
     FOREIGN KEY (article_id) REFERENCES article (id)
+);
+
+CREATE TABLE IF NOT EXISTS auth
+(
+    id          INT          NOT NULL AUTO_INCREMENT,
+    token       VARCHAR(128) NOT NULL,
+    expiry_date DATETIME     NOT NULL,
+    user_id     INT,
+    PRIMARY KEY (id),
+    UNIQUE KEY (token),
+    FOREIGN KEY (user_id) REFERENCES user (id)
 );
