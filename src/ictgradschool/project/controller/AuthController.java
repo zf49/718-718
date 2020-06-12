@@ -21,10 +21,8 @@ public class AuthController {
         }
         byte[] saltBytes = PasswordUtil.base64Decode(user.getSalt());
         byte[] passwordHashBytes = PasswordUtil.base64Decode(user.getPasswordHash());
-        boolean isValid = PasswordUtil.isExpectedPassword(password.toCharArray(), saltBytes, passwordHashBytes);
-        System.out.println("mark 1");
-        System.out.println(isValid);
-        return user;
+        boolean isPasswordValid = PasswordUtil.isExpectedPassword(password.toCharArray(), saltBytes, passwordHashBytes);
+        return isPasswordValid ? user : null;
     }
 
     public void signOut(Token token) {
