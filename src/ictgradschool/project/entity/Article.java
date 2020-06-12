@@ -3,6 +3,8 @@ package ictgradschool.project.entity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 public class Article {
@@ -13,7 +15,9 @@ public class Article {
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     public LocalDateTime dateCreated;
 
+
     public Article() {}
+
 
     public Article(int id, String title, String content, LocalDateTime dateCreated, int authorId) {
         this.id = id;
@@ -22,6 +26,19 @@ public class Article {
         this.authorId = authorId;
         this.dateCreated = dateCreated;
     }
+
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", authorId=" + authorId +
+                ", dateCreated=" + dateCreated +
+                '}';
+    }
+
 
     public static void main(String[] args) throws JsonProcessingException {
         Article article = new Article();

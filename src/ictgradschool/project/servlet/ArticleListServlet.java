@@ -45,6 +45,7 @@ public class ArticleListServlet extends HttpServlet {
         Article articleInput = getArticle(req);
         articleInput.id = 1234;
         articleInput.dateCreated = LocalDateTime.now();
+
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(articleInput);
         resp.setContentType("application/json");
@@ -71,7 +72,7 @@ public class ArticleListServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        int id = Integer.parseInt(req.getParameter("id"));
+        int authorId = Integer.parseInt(req.getParameter("authorId"));
         ArticleListController articleListController = new ArticleListController(new ArticleDao());
         List<Article> articles = null;
         try {
@@ -79,12 +80,15 @@ public class ArticleListServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        for(Article a : articles){
-            if(a.id == id){
-                articles.remove(a);
+            for(int i = 0; i < articles.size();i++){
+                  if(articles.get(i).authorId == authorId){
+                      articles.remove(i);
+                  }
             }
-        }
+
     }
+
+
 }
 
 
