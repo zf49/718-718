@@ -11,13 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet("/sign-in")
 public class SignInServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        forward(req, resp, "/WEB-INF/sign-in.jsp");
+        ServletUtil.forward(req, resp, getServletContext(), "/WEB-INF/sign-in.jsp");
     }
 
     @Override
@@ -27,11 +26,7 @@ public class SignInServlet extends HttpServlet {
 
         AuthController authController = new AuthController(new UserDao());
         User user = authController.signIn(username, password);
-        req.setAttribute("user", user);
-        forward(req, resp, user == null ? "/WEB-INF/sign-in-failure.jsp" : "/WEB-INF/sign-in-success.jsp");
-    }
-
-    private void forward(HttpServletRequest req, HttpServletResponse resp, String path) throws ServletException, IOException {
-        ServletUtil.forward(req, resp, getServletContext(), path);
+        req.getSession().setAttribute("user", user);
+        resp.sendRedirect(user == null ? "/sign-in-failure" : "/home");
     }
 }

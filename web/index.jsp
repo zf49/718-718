@@ -52,6 +52,7 @@
 
 <p><a href="<c:url value="/HelloWorld"/>">Hello, world!</a></p>
 <p><a href="<c:url value="/sign-in"/>">Sign In</a></p>
+<p><a href="<c:url value="/home"/>">Home</a></p>
 
 </body>
 </html>

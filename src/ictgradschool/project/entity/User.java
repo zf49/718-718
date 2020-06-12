@@ -1,10 +1,14 @@
 package ictgradschool.project.entity;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private int id;
     private String username;
     private String salt;
     private String passwordHash;
+
+    public User() {}
 
     public User(int id, String username, String salt, String passwordHash) {
         this.id = id;
