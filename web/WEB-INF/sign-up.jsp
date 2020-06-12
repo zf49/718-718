@@ -18,7 +18,7 @@
         <input type="password" name="password" id="password" required>
     </div>
     <div>
-        <label for="confirmPassword">Password: </label>
+        <label for="confirmPassword">Confirm Password: </label>
         <input type="password" name="confirmPassword" id="confirmPassword" required>
     </div>
     <div>
