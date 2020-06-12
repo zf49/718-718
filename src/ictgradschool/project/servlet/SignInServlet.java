@@ -16,7 +16,7 @@ import java.io.IOException;
 public class SignInServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        forward(req, resp, "/WEB-INF/sign-in.jsp");
+        ServletUtil.forward(req, resp, getServletContext(), "/WEB-INF/sign-in.jsp");
     }
 
     @Override
@@ -27,10 +27,6 @@ public class SignInServlet extends HttpServlet {
         AuthController authController = new AuthController(new UserDao());
         User user = authController.signIn(username, password);
         req.getSession().setAttribute("user", user);
-        forward(req, resp, user == null ? "/WEB-INF/sign-in-failure.jsp" : "/WEB-INF/sign-in-success.jsp");
-    }
-
-    private void forward(HttpServletRequest req, HttpServletResponse resp, String path) throws ServletException, IOException {
-        ServletUtil.forward(req, resp, getServletContext(), path);
+        resp.sendRedirect(user == null ? "/sign-in-failure" : "/home");
     }
 }
