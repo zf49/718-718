@@ -28,7 +28,7 @@ public class ArticleServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         String pathInfo = req.getPathInfo();
-        articleId = Integer.parseInt(pathInfo.split("/")[2]);
+        articleId = Integer.parseInt(pathInfo.split("/")[1]);
         ArticleController articleController = new ArticleController();
         Article article;
         try {
@@ -41,7 +41,7 @@ public class ArticleServlet extends HttpServlet {
 
         // Codes below get all the comments for the article
         CommentListController commentListController = new CommentListController(new CommentDAO());
-        List<Comment> comments = null;
+        List<Comment> comments;
         try {
             comments = commentListController.getCommentsByArticleId(articleId);
         } catch (SQLException e) {
@@ -50,13 +50,9 @@ public class ArticleServlet extends HttpServlet {
             throw new ServletException("Database access error!", e);
         }
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        String articleJson = objectMapper.writeValueAsString(article);
-        String commentsJson = objectMapper.writeValueAsString(comments);
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write(articleJson);
-        resp.getWriter().write(commentsJson);
+        req.setAttribute("article", article);
+        req.setAttribute("comments", comments);
+        req.getRequestDispatcher("WEB-INF/article.jsp").forward(req, resp);
 
     }
 

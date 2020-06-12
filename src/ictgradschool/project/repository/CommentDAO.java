@@ -14,7 +14,7 @@ public class CommentDAO {
 
     public CommentDAO() {
         try {
-            this.connection =  DBConnectionUtils.getConnectionFromClasspath("connection.properties");
+            this.connection =  DBConnectionUtils.getConnectionFromClasspath("database.properties");
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }

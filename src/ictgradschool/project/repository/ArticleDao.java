@@ -59,17 +59,19 @@ public class ArticleDao {
     }
 
     public Article getArticleById(int id) throws SQLException, IOException {
-        try (Connection connection = DBConnectionUtils.getConnectionFromClasspath("connection.properties")){
+        try (Connection connection = DBConnectionUtils.getConnectionFromClasspath("database.properties")){
             try (PreparedStatement statement = connection.prepareStatement(
                     "SELECT title, content, date_created, author_id FROM article WHERE id = ?;")) {
                 statement.setInt(1, id);
                 try (ResultSet resultSet = statement.executeQuery()) {
                     Article article = new Article();
                     article.id = id;
-                    article.title = resultSet.getString(1);
-                    article.content = resultSet.getString(2);
-                    article.dateCreated = resultSet.getTimestamp(3).toLocalDateTime();
-                    article.authorId = resultSet.getInt(4);
+                    while (resultSet.next()) {
+                        article.title = resultSet.getString(1);
+                        article.content = resultSet.getString(2);
+                        article.dateCreated = resultSet.getTimestamp(3).toLocalDateTime();
+                        article.authorId = resultSet.getInt(4);
+                    }
                     return article;
                 }
             }
@@ -105,7 +107,7 @@ public class ArticleDao {
 
 
     public Article updateArticle(Article article) throws SQLException, IOException {
-        try (Connection connection = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
+        try (Connection connection = DBConnectionUtils.getConnectionFromClasspath("database.properties")) {
             try (PreparedStatement ps = connection.prepareStatement("UPDATE article SET title=?,content=?,date_created=?,author_id=? WHERE id=?;")) {
                 ps.setString(1, article.title);
                 ps.setString(2, article.content);
@@ -197,10 +199,10 @@ public class ArticleDao {
 
     public static void main(String[] args) throws IOException, SQLException {
 
-
         ArticleDao articleDao = new ArticleDao();
 
-        System.out.println(articleDao.getAllArticles());
+        System.out.println(articleDao.getArticleById(2).toString());
+//        System.out.println(articleDao.getAllArticles());
 //        System.out.println(articleDao.findArticles("op"));
     }
 }
