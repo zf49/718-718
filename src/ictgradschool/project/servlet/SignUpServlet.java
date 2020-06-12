@@ -1,5 +1,8 @@
 package ictgradschool.project.servlet;
 
+import ictgradschool.project.controller.UserController;
+import ictgradschool.project.entity.User;
+import ictgradschool.project.repository.UserDao;
 import ictgradschool.project.util.ServletUtil;
 
 import javax.servlet.ServletException;
@@ -21,5 +24,11 @@ public class SignUpServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String confirmPassword = req.getParameter("confirmPassword");
+
+        UserController userController = new UserController(new UserDao());
+        User user = userController.signUp(username, password, confirmPassword);
+        req.getSession().setAttribute("user", user);
+        // TODO: add context path
+        resp.sendRedirect(user != null ? "./home" : "./sign-up-failure");
     }
 }

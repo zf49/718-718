@@ -53,7 +53,7 @@ public class UserDao {
         }
     }
 
-    public User addUser(String username, String saltBase64, String hashBase64) throws IOException, SQLException {
+    public User addUser(String username, String saltBase64, String hashBase64) throws IOException {
         try (Connection connection = getConnectionFromClasspath("database.properties")) {
             try (PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO user (username, salt, password_hash)\n" +
@@ -66,6 +66,9 @@ public class UserDao {
             }
             int id = getLastInsertedId(connection);
             return getUserById(connection, id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
