@@ -3,24 +3,31 @@ package ictgradschool.project.entity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 public class Article {
     public int id;
     public String title;
     public String content;
-    public long date;
+    public int authorId;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     public LocalDateTime dateCreated;
 
+
     public Article() {}
 
-    public Article(int id, String title, String content, LocalDateTime dateCreated) {
+
+    public Article(int id, String title, String content, int authorId, LocalDateTime dateCreated) {
         this.id = id;
         this.title = title;
         this.content = content;
+        this.authorId = authorId;
         this.dateCreated = dateCreated;
     }
+
+
 
     @Override
     public String toString() {
@@ -28,7 +35,7 @@ public class Article {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", date=" + date +
+                ", authorId=" + authorId +
                 ", dateCreated=" + dateCreated +
                 '}';
     }
