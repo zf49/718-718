@@ -26,13 +26,9 @@ public class SignInServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         AuthController authController = new AuthController(new UserDao());
-        try {
-            User user = authController.signIn(username, password);
-            req.setAttribute("user", user);
-            forward(req, resp, user == null ? "/WEB-INF/sign-in-failure.jsp" : "/WEB-INF/sign-in-success.jsp");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        User user = authController.signIn(username, password);
+        req.setAttribute("user", user);
+        forward(req, resp, user == null ? "/WEB-INF/sign-in-failure.jsp" : "/WEB-INF/sign-in-success.jsp");
     }
 
     private void forward(HttpServletRequest req, HttpServletResponse resp, String path) throws ServletException, IOException {

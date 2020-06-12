@@ -15,7 +15,7 @@ public class AuthController {
         this.userDao = userDao;
     }
 
-    public User signIn(String username, String password) throws IOException, SQLException {
+    public User signIn(String username, String password) throws IOException {
         User user = userDao.getUserByName(username);
         if (user == null) {
             return null;
