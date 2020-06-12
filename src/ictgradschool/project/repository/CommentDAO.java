@@ -1,10 +1,8 @@
 package ictgradschool.project.repository;
 
-import ictgradschool.project.entity.Article;
 import ictgradschool.project.entity.Comment;
 import ictgradschool.project.util.DBConnectionUtils;
 
-import javax.servlet.ServletException;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -79,18 +77,34 @@ public class CommentDAO {
     }
 
     public boolean deleteComment(int commentId) {
-        try (PreparedStatement statement = connection.prepareStatement(
-                "DELETE FROM comment WHERE id = ?;")) {
+        try (PreparedStatement statement = connection.prepareStatement("DELETE FROM comment WHERE id = ?;")) {
             statement.setInt(1, commentId);
             statement.executeQuery();
         }
         catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
         return true;
     }
 
-    public static void main(String[] args) throws IOException, SQLException {
+    public boolean deleteCommentsForArticle(int articleId) {
+        try (PreparedStatement statement = connection.prepareStatement("SELECT id FROM comment WHERE article_id = ?;")) {
+            statement.setInt(1, articleId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    if (!deleteComment(resultSet.getInt(1)))
+                        return false;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) throws SQLException {
         List<Comment> comments = new CommentDAO().getCommentsForArticle(1);
         for (Comment comment : comments)
         System.out.println(comment.toString());
