@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import static ictgradschool.project.repository.DBTestUtil.resetDBData;
+import static ictgradschool.project.testutil.DBTestUtil.resetDBData;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserDaoTest {

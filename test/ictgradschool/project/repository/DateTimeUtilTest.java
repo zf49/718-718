@@ -17,7 +17,7 @@ class DateTimeUtilTest {
         assertEquals(0, epoch);
     }
 
-    @Test
+//    @Test
     void testNow() {
         LocalDateTime now = LocalDateTime.now();
         ZonedDateTime zonedNow = now.atZone(ZoneId.systemDefault());

@@ -26,8 +26,8 @@ public class DateTimeTest {
         System.out.println(now);
     }
 
-    @Test
-    void testGenerateRandomTimesForArticles() {
+//    @Test
+    void generateRandomTimesForArticles() {
         LocalDateTime startTime = LocalDateTime.of(2020, 3, 1, 0, 0);
         LocalDateTime endTime = LocalDateTime.of(2020, 6, 1, 0, 0);
 
@@ -38,8 +38,8 @@ public class DateTimeTest {
         }
     }
 
-    @Test
-    void testGenerateRandomTimesForComments() {
+//    @Test
+    void generateRandomTimesForComments() {
         LocalDateTime startTime = LocalDateTime.of(2020, 6, 1, 0, 0);
         LocalDateTime endTime = LocalDateTime.of(2020, 6, 10, 0, 0);
 

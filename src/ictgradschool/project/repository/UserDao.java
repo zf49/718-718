@@ -31,9 +31,12 @@ public class UserDao {
         }
     }
 
-    public User getUserByName(String username) throws IOException, SQLException {
+    public User getUserByName(String username) throws IOException {
         try (Connection connection = getConnectionFromClasspath("database.properties")) {
             return getUserByName(connection, username);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
