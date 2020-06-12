@@ -6,7 +6,6 @@ import ictgradschool.project.repository.UserDao;
 import ictgradschool.project.util.PasswordUtil;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class AuthController {
     private UserDao userDao;

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet("/sign-in")
 public class SignInServlet extends HttpServlet {
@@ -27,7 +26,7 @@ public class SignInServlet extends HttpServlet {
 
         AuthController authController = new AuthController(new UserDao());
         User user = authController.signIn(username, password);
-        req.setAttribute("user", user);
+        req.getSession().setAttribute("user", user);
         forward(req, resp, user == null ? "/WEB-INF/sign-in-failure.jsp" : "/WEB-INF/sign-in-success.jsp");
     }
 
