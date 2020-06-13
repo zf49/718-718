@@ -13,6 +13,6 @@ import java.io.IOException;
 public class SignInFailureServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServletUtil.forward(req, resp, getServletContext(), "/WEB-INF/sign-in-failure.jsp");
+        ServletUtil.forward(req, resp, getServletContext(), "sign-in-failure.jsp");
     }
 }
