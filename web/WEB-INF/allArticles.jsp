@@ -5,13 +5,16 @@
     <title>Articles</title>
 </head>
 <body>
+<a href="/userArticles">User Articles</a><br>
+
       <h1>all articles</h1>
       <c:forEach items="${a}" var="a">
           <div class="articles">
              <h1 class="title">Title:${a.title}</h1>
               Create Date:<p class="date">${a.dateCreated}</p>
-              authorId :<p class="title">${a.authorId}</p>
-              content:<p class="title">${a.content}</p>
+              Article Id: <p class="date">${a.id}</p>
+              authorId :<p class="authorId">${a.authorId}</p>
+              content:<p class="content">${a.content}</p>
           </div>
       </c:forEach>
 

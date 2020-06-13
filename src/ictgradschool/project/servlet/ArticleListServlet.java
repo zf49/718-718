@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 
@@ -26,6 +25,8 @@ public class ArticleListServlet extends HttpServlet {
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/allArticles.jsp");
             dispatcher.forward(req,resp);
     }
+
+
 
 
     //    @Override
@@ -57,24 +58,13 @@ public class ArticleListServlet extends HttpServlet {
 //
 //
 //
-//    @Override
-//    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//
-//        int authorId = Integer.parseInt(req.getParameter("authorId"));
-//        ArticleListController articleListController = new ArticleListController(new ArticleDao());
-//        List<Article> articles = null;
-//        try {
-//            articles = articleListController.getArticles();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//            for(int i = 0; i < articles.size();i++){
-//                  if(articles.get(i).authorId == authorId){
-//                      articles.remove(i);
-//                  }
-//            }
-//
-//    }
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+
+
+    }
 
 
 }

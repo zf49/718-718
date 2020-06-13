@@ -27,6 +27,8 @@ public class Article {
         this.dateCreated = dateCreated;
     }
 
+
+
     public int getId() {
         return id;
     }

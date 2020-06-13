@@ -43,23 +43,27 @@ public class ArticleDao {
 
     }
 
-    public List<Article> getArticleByUserId(int authorId) throws SQLException, IOException {
+    public List<Article> getArticleByUserId(int authorId)  {
+        List<Article> articleList = new ArrayList<>();
         try (Connection connection = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
             try (PreparedStatement stmt = connection.prepareStatement(
                     "SELECT id, title, content, author_id, date_created FROM article WHERE author_id = ?")) {
                 stmt.setInt(1, authorId);
-                List<Article> articleList = new ArrayList<>();
                 try (ResultSet rs = stmt.executeQuery()) {
                     while (rs.next()) {
                         articleList.add(getArticleFromResultSet(rs));
                     }
                 }
-                if (articleList != null) {
-                    return articleList;
-                } else {
-                    return null;
-                }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (articleList != null) {
+            return articleList;
+        } else {
+            return null;
         }
     }
 
@@ -86,9 +90,9 @@ public class ArticleDao {
                 rs.getInt(1),
                 rs.getString(2),
                 rs.getString(3),
-                rs.getTimestamp(4).toLocalDateTime(),
-                rs.getInt(5)
-        );
+                rs.getTimestamp(5).toLocalDateTime(),
+                rs.getInt(4)
+                );
     }
 
 
@@ -189,6 +193,6 @@ public class ArticleDao {
 //        for(Article a : articleDao.getAllArticles()){
 //            System.out.println(a.title);
 //        }
-        System.out.println(articleDao.getAllArticles());
+        System.out.println(articleDao.getArticleByUserId(1));
     }
 }
