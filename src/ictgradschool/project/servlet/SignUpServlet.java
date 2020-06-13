@@ -1,6 +1,6 @@
 package ictgradschool.project.servlet;
 
-import ictgradschool.project.controller.AuthController;
+import ictgradschool.project.controller.UserController;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.UserDao;
 import ictgradschool.project.util.ServletUtil;
@@ -12,21 +12,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/sign-in")
-public class SignInServlet extends HttpServlet {
+@WebServlet("/sign-up")
+public class SignUpServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServletUtil.forward(req, resp, getServletContext(), "sign-in.jsp");
+        ServletUtil.forward(req, resp, getServletContext(), "sign-up.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        String confirmPassword = req.getParameter("confirmPassword");
 
-        AuthController authController = new AuthController(new UserDao());
-        User user = authController.signIn(username, password);
+        UserController userController = new UserController(new UserDao());
+        User user = userController.signUp(username, password, confirmPassword);
         req.getSession().setAttribute("user", user);
-        resp.sendRedirect(user == null ? "/sign-in-failure" : "/home");
+        // TODO: add context path
+        resp.sendRedirect(user != null ? "./home" : "./sign-up-failure");
     }
 }
