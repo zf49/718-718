@@ -17,9 +17,9 @@ public class UserController {
         this.userDao = userDao;
     }
 
-    public User signUp(String username, String password, String confirmPassword) throws IOException, SQLException {
+    public User signUp(String username, String password, String confirmPassword) throws IOException {
         if (!password.equals(confirmPassword)) {
-            throw new UnsupportedOperationException();
+            return null;
         }
         HashInfo hashInfo = quickHash(password);
         return userDao.addUser(username, hashInfo.saltBase64, hashInfo.hashBase64);

@@ -3,9 +3,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign In Success</title>
+    <title>Sign Up Failed</title>
 </head>
 <body>
-<p>Welcome ${user.username}!</p>
+<p>Incorrect input. Please try again</p>
 </body>
 </html>
