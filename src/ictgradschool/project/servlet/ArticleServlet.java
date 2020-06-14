@@ -7,7 +7,7 @@ import ictgradschool.project.controller.CommentListController;
 import ictgradschool.project.entity.Article;
 import ictgradschool.project.entity.Comment;
 import ictgradschool.project.entity.User;
-import ictgradschool.project.repository.CommentDAO;
+import ictgradschool.project.repository.ArticleDao;
 import ictgradschool.project.repository.UserDao;
 
 import javax.servlet.ServletException;
@@ -31,13 +31,20 @@ public class ArticleServlet extends HttpServlet {
 
         String pathInfo = req.getPathInfo();
         articleId = Integer.parseInt(pathInfo.split("/")[1]);
-        if (pathInfo.contains("comment"))
+        if (pathInfo.contains("delete"))
             this.doDelete(req, resp);
-
-        req.setAttribute("article", getArticleById(articleId, resp));
-        req.setAttribute("comments", getCommentsByArticleId(articleId, resp));
-        req.setAttribute("author", getUserByArticleId(articleId, resp));
-        req.getRequestDispatcher("/WEB-INF/article.jsp").forward(req, resp);
+        else {
+            Article article = getArticleById(articleId, resp);
+            if (article == null)
+                // TODO notice users that the article does not exist
+                resp.sendRedirect("/");
+            else {
+                req.setAttribute("article", article);
+                req.setAttribute("comments", getCommentsByArticleId(articleId, resp));
+                req.setAttribute("author", getUserByArticleId(articleId, resp));
+                req.getRequestDispatcher("/WEB-INF/article.jsp").forward(req, resp);
+            }
+        }
 
     }
 
@@ -145,14 +152,17 @@ public class ArticleServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        int id = Integer.parseInt(req.getParameter("commentId"));
-        CommentListController commentListController = new CommentListController();
-        if (commentListController.deleteComment(id)) {
-            System.out.println("Delete successfully!");
-        } else {
-            System.out.println("Fail to delete.");
+        if (req.getPathInfo().contains("commentId")) {
+            int id = Integer.parseInt(req.getParameter("commentId"));
+            CommentListController commentListController = new CommentListController();
+            commentListController.deleteComment(id);
+            resp.sendRedirect("/articles/"+articleId);
+        } else if (req.getPathInfo().contains("articleId")){
+            int id = Integer.parseInt(req.getParameter("articleId"));
+            ArticleDao articleDao = new ArticleDao();
+            articleDao.deleteOneArticle(id);
+            resp.sendRedirect("/");// TODO go back to last page
         }
-
     }
 
 }
