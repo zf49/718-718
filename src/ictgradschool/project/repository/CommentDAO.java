@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+// TODO: please rename this to `CommentDao`
 public class CommentDAO {
     private Connection connection;
 
