@@ -20,7 +20,7 @@ public class UserDao {
                 "SELECT user.id as id, username, salt, password_hash, avatar.name as avatar_name\n" +
                         "FROM user\n" +
                         "LEFT JOIN avatar ON user.avatar_id = avatar.id\n" +
-                        "WHERE username = ?;")) {
+                        "WHERE user.id = ?;")) {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 boolean hasNext = resultSet.next();
