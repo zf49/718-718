@@ -4,10 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
-public class Article {
+public class Article implements Comparable<Article> {
     public int id;
     public String title;
     public String content;
@@ -15,9 +14,7 @@ public class Article {
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     public LocalDateTime dateCreated;
 
-
     public Article() {}
-
 
     public Article(int id, String title, String content, LocalDateTime dateCreated, int authorId) {
         this.id = id;
@@ -26,8 +23,6 @@ public class Article {
         this.authorId = authorId;
         this.dateCreated = dateCreated;
     }
-
-
 
     public int getId() {
         return id;
@@ -80,6 +75,10 @@ public class Article {
                 '}';
     }
 
+    @Override
+    public int compareTo(Article article) {
+        return article.getId() - this.getId();
+    }
 
     public static void main(String[] args) throws JsonProcessingException {
         Article article = new Article();
@@ -90,4 +89,5 @@ public class Article {
         String json = new ObjectMapper().writeValueAsString(article);
         System.out.println(json);
     }
+
 }

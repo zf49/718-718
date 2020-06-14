@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -21,6 +22,7 @@ public class ShowAllArticleListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ArticleDao a = new ArticleDao();
         List<Article> articleList = a.getAllArticles();
+        Collections.sort(articleList);
         req.setAttribute("a", articleList);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/allArticles.jsp");
             dispatcher.forward(req,resp);

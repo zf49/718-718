@@ -20,7 +20,7 @@ public class CommentDAO {
         }
     }
 
-    public List<Comment> getCommentsForArticle(int targetArticleId) throws SQLException, IOException {
+    public List<Comment> getCommentsByArticleId(int targetArticleId) throws SQLException, IOException {
         try (PreparedStatement statement = connection.prepareStatement(
                 "SELECT id, content, date_created, author_id, article_id FROM comment WHERE article_id = ?;")) {
             statement.setInt(1, targetArticleId);
@@ -86,7 +86,7 @@ public class CommentDAO {
     }
 
     public static void main(String[] args) throws SQLException, IOException {
-        List<Comment> comments = new CommentDAO().getCommentsForArticle(1);
+        List<Comment> comments = new CommentDAO().getCommentsByArticleId(1);
         for (Comment comment : comments)
         System.out.println(comment.getAuthorName());
     }

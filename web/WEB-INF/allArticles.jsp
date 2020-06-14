@@ -18,7 +18,7 @@
               <h3 class="title">Title:${article.title}</h3>
               <p class="date">Create Date: ${article.dateCreated}</p>
               <p class="authorId">authorId: ${article.authorId}</p>
-              <p class="content">content: ${article.content.substring(0,50)}...</p>
+              <p class="content">content: ${article.content}</p>
 
               <c:if test="${article.authorId == user.id}">
                   <span>

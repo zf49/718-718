@@ -74,7 +74,8 @@ public class UserDao {
 
     public void deleteUserById(int id) throws IOException, SQLException {
         try (Connection connection = getConnectionFromClasspath("database.properties")) {
-            // TODO: delete articles and comments before deleting user
+            ArticleDao articleDao = new ArticleDao();
+            articleDao.deleteUserAllArticle(id);
             try (PreparedStatement statement = connection.prepareStatement("DELETE FROM user WHERE id = ?")) {
                 statement.setInt(1, id);
                 statement.executeUpdate();
