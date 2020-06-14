@@ -10,23 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.List;
-@WebServlet(urlPatterns = {"/userArticles"})
-public class UserAllArticles extends HttpServlet{
 
+@WebServlet(urlPatterns = "/delete")
+public class DeleteOneArticle extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //TODO
+        int articleId = Integer.parseInt(req.getParameter("articleId"));
 
-        ArticleDao a = new ArticleDao();
-        List<Article> articleList = a.getArticleByUserId(1);    // change the author id
-        req.setAttribute("a", articleList);
-        req.setAttribute("authorId", 1);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/userArticle.jsp");
+        ArticleDao articleDao = new ArticleDao();
+        articleDao.deleteOneArticle(articleId);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/editSuccess.jsp");
         dispatcher.forward(req,resp);
-
     }
-
-//
 }
