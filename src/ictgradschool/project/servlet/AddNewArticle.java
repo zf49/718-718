@@ -39,7 +39,6 @@ public class AddNewArticle extends HttpServlet {
     } catch (SQLException e) {
         e.printStackTrace();
     }
-
     }
 
 }
