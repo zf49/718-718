@@ -86,8 +86,6 @@ public class UserDao {
         String username = resultSet.getString(2);
         String salt = resultSet.getString(3);
         String passwordHash = resultSet.getString(4);
-        System.out.println("mark 4");
-        System.out.println(resultSet.getString(5));
         return new User(id, username, salt, passwordHash);
     }
 }
