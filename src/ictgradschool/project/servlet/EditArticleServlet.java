@@ -34,12 +34,7 @@ public class EditArticleServlet extends HttpServlet {
         ArticleDao articleDao = new ArticleDao();
         Article article  = null;
         if (req.getPathInfo().contains("articleId")) {
-            int articleId = Integer.parseInt(req.getParameter("articleId"));
-            article = articleDao.getArticleById(articleId);
-            article.title = req.getParameter("newTitle");
-            article.content = req.getParameter("newContent");
-            article = articleDao.updateArticle(article);
-            resp.sendRedirect("/articles/" + article.id);
+            this.doPut(req, resp);
         }
         else {
             article = new Article();
@@ -48,13 +43,23 @@ public class EditArticleServlet extends HttpServlet {
             article.authorId = Integer.parseInt(req.getParameter("authorId"));
             try {
                 article = articleDao.postNewArticle(article);
-                resp.sendRedirect("/articles/" + article.id);
             } catch (SQLException e) {
                 resp.setStatus(500);
                 e.printStackTrace();
                 throw new ServletException("Database access error!", e);
             }
+            resp.sendRedirect("/articles/" + article.id);
         }
     }
 
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ArticleDao articleDao = new ArticleDao();
+        int articleId = Integer.parseInt(req.getParameter("articleId"));
+        Article article = articleDao.getArticleById(articleId);
+        article.title = req.getParameter("newTitle");
+        article.content = req.getParameter("newContent");
+        article = articleDao.updateArticle(article);
+        resp.sendRedirect("/articles/" + article.id);
+    }
 }
