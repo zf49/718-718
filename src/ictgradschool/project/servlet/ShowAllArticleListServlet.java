@@ -28,9 +28,6 @@ public class ShowAllArticleListServlet extends HttpServlet {
             dispatcher.forward(req,resp);
     }
 
-
-
-
 }
 
 

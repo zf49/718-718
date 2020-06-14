@@ -47,8 +47,7 @@ public class EditArticleServlet extends HttpServlet {
                 throw new ServletException("Database access error!", e);
             }
             resp.sendRedirect("/articles/" + article.id);
-        }
-        else {                                              // Update an article
+        } else {                                              // Update an article
             article = articleDao.getArticleById(articleId);
             article.title = req.getParameter("articleTitle");
             article.content = req.getParameter("articleContent");
