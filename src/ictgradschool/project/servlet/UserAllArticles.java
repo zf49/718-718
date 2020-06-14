@@ -22,7 +22,6 @@ public class UserAllArticles extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             ArticleDao a = new ArticleDao();
-
             User user = (User) req.getSession().getAttribute("user");
             int authorId = user.getId();
             List<Article> articleList = a.getArticleByUserId(authorId);
