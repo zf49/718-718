@@ -14,26 +14,27 @@ public class CommentDAO {
 
     public CommentDAO() {
         try {
-            this.connection =  DBConnectionUtils.getConnectionFromClasspath("connection.properties");
+            this.connection =  DBConnectionUtils.getConnectionFromClasspath("database.properties");
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public List<Comment> getCommentsForArticle(int targetArticleId) throws SQLException {
+    public List<Comment> getCommentsForArticle(int targetArticleId) throws SQLException, IOException {
         try (PreparedStatement statement = connection.prepareStatement(
                 "SELECT id, content, date_created, author_id, article_id FROM comment WHERE article_id = ?;")) {
             statement.setInt(1, targetArticleId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 List<Comment> comments = new LinkedList<>();
+                UserDao userDao = new UserDao();
                 while (resultSet.next()) {
                     int id = resultSet.getInt(1);
                     String content = resultSet.getString(2);
-                    //LocalDateTime dateCreated = resultSet.getDate(3).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
                     LocalDateTime dateCreated = resultSet.getTimestamp(3).toLocalDateTime();
                     int authorId = resultSet.getInt(4);
                     int articleId = resultSet.getInt(5);
-                    Comment comment = new Comment(authorId, articleId, id, content, dateCreated);
+                    String authorName = userDao.getUserById(authorId).getUsername();
+                    Comment comment = new Comment(authorId, articleId, id, content, dateCreated, authorName);
                     comments.add(comment);
                 }
                 return comments;
@@ -41,7 +42,7 @@ public class CommentDAO {
         }
     }
 
-    public Comment postNewComment(Comment comment, int articleId) throws SQLException {
+    public Comment postNewComment(Comment comment, int articleId) throws IOException, SQLException {
         comment.dateCreated = LocalDateTime.now();
         comment.articleId = articleId;
         try (PreparedStatement statement = connection.prepareStatement(
@@ -51,26 +52,24 @@ public class CommentDAO {
             statement.setInt(3, articleId);
             statement.executeQuery();
         }
-        try (Statement statement = connection.createStatement()){
-            try (ResultSet r = statement.executeQuery("SELECT LAST_INSERT_ID();")){
-                comment.id = r.getInt(1);
-            }
-        }
+        comment.id = DaoUtil.getLastInsertedId(connection);
         return getCommentById(comment.id);
     }
 
-    private Comment getCommentById(int commentId) throws SQLException {
+    private Comment getCommentById(int commentId) throws SQLException, IOException {
         try (PreparedStatement statement = connection.prepareStatement(
                 "SELECT content, date_created, author_id, article_id FROM comment WHERE id = ?;")) {
             statement.setInt(1, commentId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 Comment comment = new Comment();
                 comment.id = commentId;
-                comment.content = resultSet.getString(1);
-                comment.dateCreated = resultSet.getTimestamp(2).toLocalDateTime();
-                //LocalDateTime dateCreated = resultSet.getDate(2).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-                comment.authorId = resultSet.getInt(3);
-                comment.articleId = resultSet.getInt(4);
+                while (resultSet.next()) {
+                    comment.content = resultSet.getString(1);
+                    comment.dateCreated = resultSet.getTimestamp(2).toLocalDateTime();
+                    comment.authorId = resultSet.getInt(3);
+                    comment.articleId = resultSet.getInt(4);
+                }
+                comment.authorName = new UserDao().getUserById(comment.authorId).getUsername();
                 return comment;
             }
         }
@@ -104,10 +103,10 @@ public class CommentDAO {
         return true;
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, IOException {
         List<Comment> comments = new CommentDAO().getCommentsForArticle(1);
         for (Comment comment : comments)
-        System.out.println(comment.toString());
+        System.out.println(comment.getAuthorName());
     }
 
 }

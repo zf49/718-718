@@ -201,7 +201,6 @@ public class ArticleDao {
 
     public static void main(String[] args) throws IOException, SQLException {
 
-
         ArticleDao articleDao = new ArticleDao();
 //        for(Article a : articleDao.getAllArticles()){
 //            System.out.println(a.title);

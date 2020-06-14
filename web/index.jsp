@@ -51,6 +51,7 @@
 <p>TODO: Replace or modify this page with an appropriate homepage for your project.</p>
 
 <p><a href="<c:url value="/HelloWorld"/>">Hello, world!</a></p>
+<p><a href="<c:url value="/articles/2"/>">Article</a></p>
 <p><a href="<c:url value="/sign-in"/>">Sign In</a></p>
 <p><a href="<c:url value="/home"/>">Home</a></p>
 
