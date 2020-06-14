@@ -7,11 +7,8 @@ import ictgradschool.project.util.DBConnectionUtils;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 public class ArticleDao {
@@ -99,9 +96,9 @@ public class ArticleDao {
             ps.setString(2, article.content);
             ps.setInt(3, article.authorId);
             ps.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
+            ps.executeQuery();
         }
         article.id = DaoUtil.getLastInsertedId(connection);
-        System.out.println(article.id); // TODO delete after test
         return getArticleById(article.id);
     }
 

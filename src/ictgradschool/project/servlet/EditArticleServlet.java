@@ -19,7 +19,7 @@ import java.util.List;
 public class EditArticleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Article article  = null;
+        Article article  = new Article();
         if (req.getPathInfo().contains("articleId")) {
             int articleId = Integer.parseInt(req.getParameter("articleId"));
             ArticleDao articleDao = new ArticleDao();
@@ -32,11 +32,9 @@ public class EditArticleServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ArticleDao articleDao = new ArticleDao();
+        int articleId = Integer.parseInt(req.getParameter("articleId"));
         Article article  = null;
-        if (req.getPathInfo().contains("articleId")) {
-            this.doPut(req, resp);
-        }
-        else {
+        if (articleId == 0) {                               // Add a new article
             article = new Article();
             article.title = req.getParameter("articleTitle");
             article.content = req.getParameter("articleContent");
@@ -50,16 +48,13 @@ public class EditArticleServlet extends HttpServlet {
             }
             resp.sendRedirect("/articles/" + article.id);
         }
+        else {                                              // Update an article
+            article = articleDao.getArticleById(articleId);
+            article.title = req.getParameter("articleTitle");
+            article.content = req.getParameter("articleContent");
+            article = articleDao.updateArticle(article);
+            resp.sendRedirect("/articles/" + article.id);
+        }
     }
 
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ArticleDao articleDao = new ArticleDao();
-        int articleId = Integer.parseInt(req.getParameter("articleId"));
-        Article article = articleDao.getArticleById(articleId);
-        article.title = req.getParameter("newTitle");
-        article.content = req.getParameter("newContent");
-        article = articleDao.updateArticle(article);
-        resp.sendRedirect("/articles/" + article.id);
-    }
 }

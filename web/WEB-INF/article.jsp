@@ -16,7 +16,7 @@
     <div>
         <span>${author.username}</span>
         <span>${article.dateCreated}</span>
-        <c:if test="${author.id == user.id}">
+        <c:if test="${article.authorId == user.id}">
             <span>
                 <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
             </span>
