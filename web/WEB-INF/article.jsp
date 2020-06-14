@@ -16,9 +16,13 @@
     <div>
         <span>${author.username}</span>
         <span>${article.dateCreated}</span>
-        <c:if test="${author.id == user.id}">
-            <span>Edit</span>
-            <span>Delete</span>
+        <c:if test="${article.authorId == user.id}">
+            <span>
+                <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
+            </span>
+            <span>
+                <a href="<c:url value="/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
+            </span>
         </c:if>
     </div>
     <div>
@@ -30,10 +34,12 @@
     <dl>
         <c:forEach var="comment" items="${comments}">
             <dt>${comment.authorName}:</dt>
-            <dd>${comment.content}<br>
-                    ${comment.dateCreated}
+            <dd><span>${comment.content}</span><br>
+                <span>${comment.dateCreated}</span>
                 <c:if test="${comment.authorId == user.id || author.id == user.id}">
-                    <span> <a href="<c:url value="/articles/${article.id}/commentId?commentId=${comment.id}"/>" methods="delete">Delete</a></span>
+                    <span>
+                        <a href="<c:url value="/articles/${article.id}/delete/commentId?commentId=${comment.id}"/>">Delete</a>
+                    </span>
                 </c:if>
             </dd>
         </c:forEach>

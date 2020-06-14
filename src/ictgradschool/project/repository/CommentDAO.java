@@ -43,8 +43,6 @@ public class CommentDAO {
     }
 
     public Comment postNewComment(Comment comment, int articleId) throws IOException, SQLException {
-        comment.dateCreated = LocalDateTime.now();
-        comment.articleId = articleId;
         try (PreparedStatement statement = connection.prepareStatement(
                 "INSERT INTO comment (content, date_created, author_id, article_id) VALUES (?,NOW(),?,?);")) {
             statement.setString(1, comment.content);
@@ -81,22 +79,6 @@ public class CommentDAO {
             statement.executeQuery();
         }
         catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    public boolean deleteCommentsForArticle(int articleId) {
-        try (PreparedStatement statement = connection.prepareStatement("SELECT id FROM comment WHERE article_id = ?;")) {
-            statement.setInt(1, articleId);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    if (!deleteComment(resultSet.getInt(1)))
-                        return false;
-                }
-            }
-        } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }

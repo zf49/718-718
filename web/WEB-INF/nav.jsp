@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <header style="background-color: gainsboro">
     <c:choose>
@@ -18,6 +18,7 @@
         <c:otherwise>
             <ul>
                 <li>Hi, ${user.username}</li>
+                <li><a href="<c:url value="/edit/"/>">Add a New Article</a></li>
                 <li>
                     <form action="./sign-out" method="post">
                         <input type="submit" value="Sign Out">
