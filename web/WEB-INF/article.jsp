@@ -2,7 +2,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>${article.title}</title>
 </head>
 <body>
