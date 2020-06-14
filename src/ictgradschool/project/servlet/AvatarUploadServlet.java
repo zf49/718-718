@@ -65,5 +65,6 @@ public class AvatarUploadServlet extends HttpServlet {
             throw new ServletException(e);
         }
 
+        resp.sendRedirect("./avatar-upload");
     }
 }

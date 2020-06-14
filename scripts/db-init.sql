@@ -4,6 +4,14 @@ DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS article;
 DROP TABLE IF EXISTS auth;
 DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS avatar;
+
+CREATE TABLE IF NOT EXISTS avatar
+(
+    id   INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(128),
+    PRIMARY KEY (id)
+);
 
 CREATE TABLE IF NOT EXISTS user
 (
@@ -11,7 +19,9 @@ CREATE TABLE IF NOT EXISTS user
     username      VARCHAR(128) NOT NULL UNIQUE,
     salt          CHAR(44)     NOT NULL,
     password_hash CHAR(88)     NOT NULL,
-    PRIMARY KEY (id)
+    avatar_id     INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (avatar_id) REFERENCES avatar (id)
 );
 
 CREATE TABLE IF NOT EXISTS article
