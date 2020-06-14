@@ -10,23 +10,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDateTime;
+
 import java.util.List;
-@WebServlet(urlPatterns = {"/userArticles"})
-public class UserAllArticles extends HttpServlet{
+
+
+@WebServlet(urlPatterns = {"/articles"})
+public class ShowAllArticleListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //TODO
-
         ArticleDao a = new ArticleDao();
-        List<Article> articleList = a.getArticleByUserId(1);    // change the author id
+        List<Article> articleList = a.getAllArticles();
         req.setAttribute("a", articleList);
-        req.setAttribute("authorId", 1);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/userArticle.jsp");
-        dispatcher.forward(req,resp);
-
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/allArticles.jsp");
+            dispatcher.forward(req,resp);
     }
 
-//
+
+
+
 }
+
+

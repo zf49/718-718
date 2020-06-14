@@ -15,6 +15,7 @@
               Article Id: <p class="date">${a.id}</p>
               authorId :<p class="authorId">${a.authorId}</p>
               content:<p class="content">${a.content}</p>
+
           </div>
       </c:forEach>
 
