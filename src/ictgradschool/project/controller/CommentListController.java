@@ -10,8 +10,8 @@ import java.util.List;
 public class CommentListController {
     private CommentDAO commentDAO;
 
-    public CommentListController(CommentDAO commentDAO) {
-        this.commentDAO = commentDAO;
+    public CommentListController() {
+        this.commentDAO = new CommentDAO();
     }
 
     public List<Comment> getCommentsByArticleId(int articleId) throws IOException, SQLException {

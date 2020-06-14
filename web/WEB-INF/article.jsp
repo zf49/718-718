@@ -7,10 +7,19 @@
 </head>
 <body>
 <div>
+
+    <jsp:include page="nav.jsp">
+        <jsp:param name="user" value="${user}"/>
+    </jsp:include>
+
     <h1>${article.title}</h1>
     <div>
-        <span>author</span>
+        <span>${author.username}</span>
         <span>${article.dateCreated}</span>
+        <c:if test="${author.id == user.id}">
+            <span>Edit</span>
+            <span>Delete</span>
+        </c:if>
     </div>
     <div>
         <p>${article.content}</p>
@@ -19,14 +28,20 @@
 <div>
     <h3>Comments:</h3>
     <dl>
-        <c:forEach var="comment" items="comments">
-            <dt>Username:</dt>
-            <dd>${comment.content} ${comment.dateCreated}</dd>
+        <c:forEach var="comment" items="${comments}">
+            <dt>${comment.authorName}:</dt>
+            <dd>${comment.content}<br>
+                    ${comment.dateCreated}
+                <c:if test="${comment.authorId == user.id || author.id == user.id}">
+                    <span>Delete</span>
+                </c:if>
+            </dd>
         </c:forEach>
     </dl>
-    <form>
-        <label for="enterComment">Username: </label>
-        <textarea id="enterComment" rows="5" cols="80">enter comment here</textarea>
+    <form action="/articles/${article.id}" method="post">
+        <input type="hidden" name="userId" value="${user.id}">
+        <label for="enterComment">${user.username}: </label>
+        <textarea id="enterComment" name="commentContent" rows="5" cols="80">enter comments here</textarea>
         <input type="submit" value="Comment">
     </form>
 </div>
