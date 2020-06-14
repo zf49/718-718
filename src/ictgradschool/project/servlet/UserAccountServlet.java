@@ -15,16 +15,20 @@ import java.sql.SQLException;
 public class UserAccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        User user = (User) req.getSession().getAttribute("user");
-//        req.setAttribute("user", user);
-        req.getRequestDispatcher("/myAccount.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/myAccount.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getPathInfo().contains("delete"))
             this.doDelete(req, resp);
-        // TODO else{...}
+        else
+            this.doPut(req, resp);
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // TODO update account information
     }
 
     @Override

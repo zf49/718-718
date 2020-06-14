@@ -8,14 +8,17 @@
 </head>
 <body>
 
-<jsp:include page="nav.jsp" />
-<form action="./account/update?userId=${user.id}" method="post" class="form-example">
+<jsp:include page="nav.jsp">
+    <jsp:param name="user" value="${user}"/>
+</jsp:include>
+
+<form action="./update?userId=${user.id}" method="post">
     <div>
         <label for="username">Username: </label>
         <input type="text" name="username" id="username" required value="${user.username}">
     </div>
     <div>
-        <label for="password">Password: </label>
+        <label for="password">New Password: </label>
         <input type="password" name="password" id="password" required>
     </div>
     <div>
@@ -23,10 +26,10 @@
         <input type="password" name="confirmPassword" id="confirmPassword" required>
     </div>
     <div>
-        <input type="submit" value="Update">
+        <input type="submit" value="Update (unfinished)">
     </div>
 </form>
-<form action="./account/delete?userId=${user.id}">
+<form action="./delete?userId=${user.id}" method="post">
     <input type="submit" value="Delete Account">
 </form>
 </body>
