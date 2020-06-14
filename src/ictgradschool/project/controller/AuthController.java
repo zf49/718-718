@@ -16,6 +16,8 @@ public class AuthController {
 
     public User signIn(String username, String password) throws IOException {
         User user = userDao.getUserByName(username);
+        System.out.println("mark 11");
+        System.out.println(user);
         if (user == null) {
             return null;
         }

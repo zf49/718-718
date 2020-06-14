@@ -24,14 +24,9 @@ public class SignInServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        System.out.println("mark 1");
-        System.out.println("username = " + username);
-        System.out.println("password = " + password);
 
         AuthController authController = new AuthController(new UserDao());
         User user = authController.signIn(username, password);
-        System.out.println("mark 2");
-        System.out.println(user);
         req.getSession().setAttribute("user", user);
         resp.sendRedirect(user == null ? "/sign-in-failure" : "/home");
 
