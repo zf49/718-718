@@ -36,15 +36,7 @@
         <p class="date">Create Date: ${article.dateCreated}</p>
         <p class="date" id = "${article.id}" name = "id"> Article Id: ${article.id}</p>
         <p class="authorId">authorId: ${article.authorId}</p>
-        <p class="content">content:${article.content.substring(0, 50)}...</p>
-        <%--<form action="/editArticle">
-        <input type="hidden" name="session" value="${article.id}">
-        <input type="submit" value="Update">
-        </form>
-        <form action="/delete">
-            <input type="hidden" name="articleId" value="${article.id}">
-            <input type="submit" value="Delete">
-        </form>--%>
+        <p class="content">content:${article.content}</p>
         <span>
             <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
         </span>

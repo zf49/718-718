@@ -14,6 +14,7 @@ import java.io.IOException;
 
 @WebServlet("/sign-in")
 public class SignInServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletUtil.forward(req, resp, getServletContext(), "sign-in.jsp");
@@ -23,7 +24,6 @@ public class SignInServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-
         System.out.println("mark 1");
         System.out.println("username = " + username);
         System.out.println("password = " + password);
@@ -34,5 +34,7 @@ public class SignInServlet extends HttpServlet {
         System.out.println(user);
         req.getSession().setAttribute("user", user);
         resp.sendRedirect(user == null ? "/sign-in-failure" : "/home");
+
+
     }
 }

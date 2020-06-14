@@ -35,7 +35,6 @@ public class AddNewArticle extends HttpServlet {
         String title = req.getParameter("title_AddArticle");
         LocalDateTime dateTime = LocalDateTime.now();
         Article article = new Article(articleId,title,content,dateTime,authorId);
-        System.out.println("" + articleId+ "------"+ authorId +"----------"+ content+"------"+title+dateTime);
         articleDao.postNewArticle(article);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/editSuccess.jsp");
         dispatcher.forward(req,resp);

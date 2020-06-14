@@ -16,7 +16,6 @@ public class DeleteOneArticle extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int articleId = Integer.parseInt(req.getParameter("articleId"));
-
         ArticleDao articleDao = new ArticleDao();
         articleDao.deleteOneArticle(articleId);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/editSuccess.jsp");
