@@ -67,24 +67,25 @@ public class ArticleDao {
         }
     }
 
-    public Article getArticleById(int id) throws SQLException, IOException {
-        try (Connection connection = DBConnectionUtils.getConnectionFromClasspath("database.properties")){
-            try (PreparedStatement statement = connection.prepareStatement(
-                    "SELECT title, content, date_created, author_id FROM article WHERE id = ?;")) {
-                statement.setInt(1, id);
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    Article article = new Article();
-                    article.id = id;
-                    while (resultSet.next()) {
-                        article.title = resultSet.getString(1);
-                        article.content = resultSet.getString(2);
-                        article.dateCreated = resultSet.getTimestamp(3).toLocalDateTime();
-                        article.authorId = resultSet.getInt(4);
+    public Article getArticleById(int id) {
+
+        Article article = null;
+        try (Connection connection = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
+            try (PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT id, title, content, author_id, date_created FROM article WHERE id = ?")) {
+                stmt.setInt(1, id);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        article = getArticleFromResultSet(rs);
                     }
-                    return article;
                 }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return article;
     }
 
     private Article getArticleFromResultSet(ResultSet rs) throws SQLException {
@@ -98,7 +99,7 @@ public class ArticleDao {
     }
 
 
-    public Article postNewArticle(Article article) throws SQLException {
+    public Article postNewArticle(Article article)  {
         try (Connection connection = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
             try (PreparedStatement ps = connection.prepareStatement(
                     "INSERT INTO article (id,title, content,author_id,date_created) VALUES (?, ?, ?, ?,?)")) {
@@ -110,13 +111,15 @@ public class ArticleDao {
             }
         } catch (IOException e) {
                 e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return article;
     }
 
 
-    public Article updateArticle(Article article) throws SQLException, IOException {
-        try (Connection connection = DBConnectionUtils.getConnectionFromClasspath("database.properties")) {
+    public Article updateArticle(Article article) {
+        try (Connection connection = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
             try (PreparedStatement ps = connection.prepareStatement("UPDATE article SET title=?,content=?,date_created=?,author_id=? WHERE id=?;")) {
                 ps.setString(1, article.title);
                 ps.setString(2, article.content);
@@ -125,11 +128,15 @@ public class ArticleDao {
                 ps.setInt(5, article.id);
                 ps.executeQuery();
             }
-            return getArticleById(article.id);
-        }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }return getArticleById(article.id);
+
     }
 
-    public void deleteOneArticle(int articleId) throws SQLException, IOException {
+    public void deleteOneArticle(int articleId)  {
         try (Connection connection = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
             try (PreparedStatement statement = connection.prepareStatement(
@@ -144,6 +151,10 @@ public class ArticleDao {
                  stmt.executeUpdate();
 
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -194,7 +205,6 @@ public class ArticleDao {
 //        for(Article a : articleDao.getAllArticles()){
 //            System.out.println(a.title);
 //        }
-        System.out.println(articleDao.getArticleByUserId(1));
-
+        System.out.println(articleDao.getArticleById(1));
     }
 }

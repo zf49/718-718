@@ -12,7 +12,8 @@
 
 <p>TODO: articles here</p>
 <a href="./articles">All Articles</a><br>
-<p><a href="<c:url value="/articles/2"/>">Article 2</a></p>
+<a href="./userArticles">User Articles</a><br>
+
 
 </body>
 </html>
