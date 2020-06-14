@@ -33,13 +33,12 @@
             <dd>${comment.content}<br>
                     ${comment.dateCreated}
                 <c:if test="${comment.authorId == user.id || author.id == user.id}">
-                    <span>Delete</span>
+                    <span> <a href="<c:url value="/articles/${article.id}/commentId?commentId=${comment.id}"/>" methods="delete">Delete</a></span>
                 </c:if>
             </dd>
         </c:forEach>
     </dl>
-    <form action="/articles/${article.id}" method="post">
-        <input type="hidden" name="userId" value="${user.id}">
+    <form action="/articles/${article.id}/userId?userId=${user.id}" method="post">
         <label for="enterComment">${user.username}: </label>
         <textarea id="enterComment" name="commentContent" rows="5" cols="80">enter comments here</textarea>
         <input type="submit" value="Comment">

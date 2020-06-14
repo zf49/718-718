@@ -31,6 +31,8 @@ public class ArticleServlet extends HttpServlet {
 
         String pathInfo = req.getPathInfo();
         articleId = Integer.parseInt(pathInfo.split("/")[1]);
+        if (pathInfo.contains("comment"))
+            this.doDelete(req, resp);
 
         req.setAttribute("article", getArticleById(articleId, resp));
         req.setAttribute("comments", getCommentsByArticleId(articleId, resp));
@@ -141,7 +143,7 @@ public class ArticleServlet extends HttpServlet {
 
     /* Deletes a comment */
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         int id = Integer.parseInt(req.getParameter("commentId"));
         CommentListController commentListController = new CommentListController();
