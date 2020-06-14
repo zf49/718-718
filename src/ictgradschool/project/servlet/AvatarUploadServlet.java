@@ -51,9 +51,8 @@ public class AvatarUploadServlet extends HttpServlet {
         factory.setRepository(tempFolder);
         ServletFileUpload upload = new ServletFileUpload(factory);
 
-        List<FileItem> fileItems = null;
         try {
-            fileItems = upload.parseRequest(req);
+            List<FileItem> fileItems = upload.parseRequest(req);
             for (FileItem fileItem : fileItems) {
                 System.out.println("mark 2");
                 System.out.println(fileItem.getFieldName());
@@ -61,10 +60,9 @@ public class AvatarUploadServlet extends HttpServlet {
                 File imageFile = new File(uploadsFolder, fileItem.getName());
                 fileItem.write(imageFile);
             }
+            resp.sendRedirect("./avatar-upload");
         } catch (Exception e) {
             throw new ServletException(e);
         }
-
-        resp.sendRedirect("./avatar-upload");
     }
 }
