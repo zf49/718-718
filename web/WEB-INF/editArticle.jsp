@@ -11,7 +11,6 @@
 <jsp:include page="nav.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
-
 <div>
     <form action="${pageContext.request.contextPath}/edit/articleId?articleId=${article.id}" method="post" class="editArticle">
         <label for="titleArea">Title: </label>

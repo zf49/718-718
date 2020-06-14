@@ -19,6 +19,7 @@
             <ul>
                 <li>Hi, ${user.username}</li>
                 <li><a href="<c:url value="/edit/"/>">Add a New Article</a></li>
+                <li value="${user.id}" name = "userId" id="userId"><a href="<c:url value="/userArticles"/>">User Article</a></li>
                 <li>
                     <form action="./sign-out" method="post">
                         <input type="submit" value="Sign Out">

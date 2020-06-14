@@ -9,9 +9,6 @@
 <jsp:include page="nav.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
-
-<a href="/userArticles">User Articles</a><br>
-
       <h1>all articles</h1>
       <c:forEach items="${a}" var="article">
           <div class="articles">
@@ -19,6 +16,7 @@
               <p class="date">Create Date: ${article.dateCreated}</p>
               <p class="authorId">authorId: ${article.authorId}</p>
               <p class="content">content: ${article.content.substring(0,50)}...</p>
+              <a href="<c:url value="/articles/${article.id}"/>">Show Details</a>
 
               <c:if test="${article.authorId == user.id}">
                   <span>

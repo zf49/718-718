@@ -27,19 +27,15 @@ public class AddNewArticle extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ArticleDao articleDao = new ArticleDao();
-
         try { int articleId = getLastInsertedId(DBConnectionUtils.getConnectionFromClasspath("connection.properties"));
-
         int authorId = Integer.parseInt(req.getParameter("authorId_AddArticle"));
         String content = req.getParameter("content_AddArticle");
         String title = req.getParameter("title_AddArticle");
         LocalDateTime dateTime = LocalDateTime.now();
         Article article = new Article(articleId,title,content,dateTime,authorId);
-        System.out.println("" + articleId+ "------"+ authorId +"----------"+ content+"------"+title+dateTime);
         articleDao.postNewArticle(article);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/editSuccess.jsp");
         dispatcher.forward(req,resp);
-
     } catch (SQLException e) {
         e.printStackTrace();
     }

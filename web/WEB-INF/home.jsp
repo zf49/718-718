@@ -12,8 +12,6 @@
 
 <p>TODO: articles here</p>
 <a href="./articles">All Articles</a><br>
-<a href="./userArticles">User Articles</a><br>
-
 
 </body>
 </html>
