@@ -29,6 +29,7 @@ class UserDaoTest {
     void testGetUserByName() throws IOException, SQLException {
         User user = userDao.getUserByName("Bret");
         assertNotNull(user);
+        assertNotNull(user.getAvatarName());
     }
 
     @Test
@@ -41,6 +42,7 @@ class UserDaoTest {
     void testGetUserById() throws IOException, SQLException {
         User user = userDao.getUserById(1);
         assertNotNull(user);
+        assertNotNull(user.getAvatarName());
     }
 
     @Test

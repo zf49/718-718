@@ -60,6 +60,14 @@ public class User implements Serializable {
         this.passwordHash = passwordHash;
     }
 
+    public String getAvatarName() {
+        return avatarName;
+    }
+
+    public void setAvatarName(String avatarName) {
+        this.avatarName = avatarName;
+    }
+
     @Override
     public String toString() {
         return "User{" +
