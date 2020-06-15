@@ -18,8 +18,6 @@ public class Article implements Comparable<Article> {
     public String authorName;
     public String date;
 
-
-
     public Article() {}
 
     public String getAuthorName() {

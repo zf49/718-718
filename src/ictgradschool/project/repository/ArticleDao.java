@@ -1,16 +1,11 @@
 package ictgradschool.project.repository;
-
 import ictgradschool.project.entity.Article;
 import ictgradschool.project.util.DBConnectionUtils;
-
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
-
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class ArticleDao {
     private Connection connection;
@@ -140,6 +135,5 @@ public class ArticleDao {
             }
         }
     }
-
 
 }
