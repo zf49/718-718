@@ -23,11 +23,12 @@ public class UserAllArticles extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             ArticleDao a = new ArticleDao();
             User user = (User) req.getSession().getAttribute("user");
+             String name =   user.getUsername();
             int authorId = user.getId();
             List<Article> articleList = a.getArticleByUserId(authorId);
             req.setAttribute("a", articleList);
-            req.setAttribute("authorId", authorId);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/userArticle.jsp");
+            req.setAttribute("name", name);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/user-article.jsp");
             dispatcher.forward(req,resp);
 
     }

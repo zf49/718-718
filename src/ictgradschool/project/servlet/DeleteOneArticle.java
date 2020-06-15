@@ -18,7 +18,7 @@ public class DeleteOneArticle extends HttpServlet {
         int articleId = Integer.parseInt(req.getParameter("articleId"));
         ArticleDao articleDao = new ArticleDao();
         articleDao.deleteOneArticle(articleId);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/editSuccess.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/edit-success.jsp");
         dispatcher.forward(req,resp);
     }
 }

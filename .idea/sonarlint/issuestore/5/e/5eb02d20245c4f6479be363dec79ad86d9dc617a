@@ -1,0 +1,5 @@
+
+°
+java:S1130 "Remove the declaration of thrown exception 'com.fasterxml.jackson.core.JsonProcessingException' which is a subclass of 'java.io.IOException'.(ä•·Ìúÿÿÿÿ8ıêÄšª.
+O
+java:S1068"-Remove this unused "formatter" private field.(îşüúÿÿÿÿ8ıêÄšª.

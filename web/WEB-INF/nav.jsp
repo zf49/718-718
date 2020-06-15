@@ -20,7 +20,7 @@
         <c:otherwise>
             <ul>
                 <li>Hi, <a href="<c:url value="${pageContext.request.contextPath}/account/"/>">${user.username}</a></li>
-                <li><a href="<c:url value="/edit/"/>">Add a New Article</a></li>
+                <li><a href="<c:url value="${pageContext.request.contextPath}/edit/"/>">Add a New Article</a></li>
                 <li value="${user.id}" name = "userId" id="userId">
                     <a href="<c:url value="${pageContext.request.contextPath}/userArticles"/>">User Article</a>
                 </li>

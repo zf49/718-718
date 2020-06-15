@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ArticleDao {
     private Connection connection;
@@ -25,9 +27,9 @@ public class ArticleDao {
         List<Article> articles = new ArrayList<>();
         try (Statement statement = connection.createStatement()) {
             try (ResultSet resultSet = statement.executeQuery(
-                    "SELECT id, title, content, date_created, author_id FROM article ORDER BY id DESC")) {
+                    "SELECT article.id AS article_id, article.title, article.content, article.date_created, article.author_id, user.id, username FROM article right JOIN user ON author_id = user.id ORDER BY id DESC")) {
                 while (resultSet.next()) {
-                    articles.add(getArticle(resultSet));
+                     articles.add(getArticle(resultSet));
                 }
             }
         } catch (SQLException e) {
@@ -37,10 +39,11 @@ public class ArticleDao {
     }
 
     private Article getArticle(ResultSet resultSet) throws SQLException {
-        Article article =  new Article(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getTimestamp(4).toLocalDateTime(), resultSet.getInt(5));
-         article.getBriefContent();
+        Article article =  new Article(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+                resultSet.getTimestamp(4).toLocalDateTime(), resultSet.getInt(5),resultSet.getString(7));
+        article.getBriefContent();
         System.out.println(article);
-         return article;
+        return article;
     }
 
     public List<Article> getArticleByUserId(int authorId) {
@@ -100,7 +103,7 @@ public class ArticleDao {
 
     public Article updateArticle(Article article) {
         try (PreparedStatement ps = connection.prepareStatement(
-                "UPDATE article SET title=?,content=?WHERE id=?;")) {
+                "UPDATE article SET title=?,content=? WHERE id=?;")) {
             ps.setString(1, article.title);
             ps.setString(2, article.content);
             ps.setInt(3, article.id);
@@ -139,15 +142,5 @@ public class ArticleDao {
         }
     }
 
-        public static void main(String[] args) throws IOException, SQLException {
-        ArticleDao articleDao = new ArticleDao();
-//        for(Article article : articleDao.getAllArticles()){
-//                             System.out.println(article.authorName);
-//
-//        }
-            System.out.println(articleDao.getAllArticles());
-          
-
-        }
 
 }

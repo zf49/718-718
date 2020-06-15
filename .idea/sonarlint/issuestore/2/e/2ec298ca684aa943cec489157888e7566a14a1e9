@@ -1,0 +1,7 @@
+
+‹
+java:S1130"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(ύΆ©8‘‹¶χª.
+^
+java:S1128"ARemove this unused import 'ictgradschool.project.entity.Comment'.(¥΄σ8΄Σ£Όª.
+
+java:S1130"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(ι¬άδωÿÿÿÿ8‘‹¶χª.

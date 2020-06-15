@@ -34,7 +34,7 @@ public class AddNewArticle extends HttpServlet {
         LocalDateTime dateTime = LocalDateTime.now();
         Article article = new Article(articleId,title,content,dateTime,authorId);
         articleDao.postNewArticle(article);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/editSuccess.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/edit-success.jsp");
         dispatcher.forward(req,resp);
     } catch (SQLException e) {
         e.printStackTrace();
