@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS article;
 DROP TABLE IF EXISTS auth;
 DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS user_detail;
 DROP TABLE IF EXISTS avatar;
 
 CREATE TABLE IF NOT EXISTS avatar
@@ -11,6 +12,16 @@ CREATE TABLE IF NOT EXISTS avatar
     id            INT NOT NULL AUTO_INCREMENT,
     name          VARCHAR(128),
     is_predefined BOOLEAN,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS user_detail
+(
+    id         INT NOT NULL AUTO_INCREMENT,
+    fname      VARCHAR(128),
+    lname      VARCHAR(128),
+    date_birth DATE,
+    descrip    TEXT,
     PRIMARY KEY (id)
 );
 
@@ -25,16 +36,6 @@ CREATE TABLE IF NOT EXISTS user
     PRIMARY KEY (id),
     FOREIGN KEY (avatar_id) REFERENCES avatar (id),
     FOREIGN KEY (detail_id) REFERENCES user_detail (id)
-);
-
-CREATE TABLE IF NOT EXISTS user_detail
-(
-    id         INT NOT NULL AUTO_INCREMENT,
-    fname      VARCHAR(128),
-    lname      VARCHAR(128),
-    date_birth DATE,
-    descrip    TEXT,
-    PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS article
