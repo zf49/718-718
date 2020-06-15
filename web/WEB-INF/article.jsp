@@ -45,11 +45,13 @@
             </dd>
         </c:forEach>
     </dl>
-    <form action="/articles/${article.id}/userId?userId=${user.id}" method="post">
-        <label for="enterComment">${user.username}: </label>
-        <textarea id="enterComment" name="commentContent" rows="5" cols="80">enter comments here</textarea>
-        <input type="submit" value="Comment">
-    </form>
+    <c:if test="${user != null}">
+        <form action="/articles/${article.id}/userId?userId=${user.id}" method="post">
+            <label for="enterComment">${user.username}: </label>
+            <textarea id="enterComment" name="commentContent" rows="5" cols="80">enter comments here</textarea>
+            <input type="submit" value="Comment">
+        </form>
+    </c:if>
 </div>
 </body>
 </html>
