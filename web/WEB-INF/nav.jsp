@@ -10,7 +10,7 @@
             <ul>
                 <li>You are not signed in.</li>
                 <li>
-                    <button onclick="location.href='./sign-up'">Sign Up</button>
+                    <button onclick="location.href='${pageContext.request.contextPath}/sign-up'">Sign Up</button>
                 </li>
                 <li>
                     <button onclick="location.href='./sign-in'">Sign In</button>
