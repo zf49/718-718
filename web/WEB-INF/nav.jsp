@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
+<%--TODO: add home link--%>
 <header style="background-color: gainsboro">
     <c:choose>
         <c:when test="${user == null}">

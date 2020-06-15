@@ -44,8 +44,10 @@
             <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
         </span>
         <span>
+<%--            TODO: use post or delete method --%>
             <a href="<c:url value="/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
         </span>
+<%--        TODO: add link to article details--%>
     </div>
 </c:forEach>
 
