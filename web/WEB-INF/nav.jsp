@@ -3,6 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <%--TODO: add home link--%>
+<%--TODO: No add article if not signed in--%>
 <header style="background-color: gainsboro">
     <c:choose>
         <c:when test="${user == null}">
