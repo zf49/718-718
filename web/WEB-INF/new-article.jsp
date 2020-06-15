@@ -6,22 +6,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Article</title>
+    <title>New Article</title>
 </head>
 <body>
 
-<jsp:include page="nav.jsp" />
-
+<jsp:include page="nav.jsp">
+    <jsp:param name="user" value="${user}"/>
+</jsp:include>
 <div>
-    <form action="" method="post" class="editArticle">
+    <form action="" method="post">
         <div>
             <label for="titleArea">Title: </label>
-            <input type="text" name="articleTitle" id="titleArea" required value="${article.title}">
+            <input type="text" name="articleTitle" id="titleArea" required>
         </div>
         <div>
             <label for="contentArea">Content:</label>
-            <textarea name="articleContent" id="contentArea" rows="20" cols="80">${article.content}</textarea>
+            <textarea name="articleContent" id="contentArea" rows="20" cols="80"></textarea>
         </div>
+        <input hidden type="text" name="authorId" value="${user.id}">
         <input type="submit" value="Confirm">
     </form>
 </div>

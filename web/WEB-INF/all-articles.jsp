@@ -20,14 +20,14 @@
               <p class="date">Create Date: ${article.date}</p>
               <p class="authorId">author Name: ${article.authorName}</p>
               <p class="content">content: ${article.content}...</p>
-              <a href="<c:url value="${pageContext.request.contextPath}/articles/${article.id}"/>">Show Details</a>
+              <p><a href="<c:url value="${pageContext.request.contextPath}/articles/${article.id}"/>">Show Details</a></p>
               <c:if test="${article.authorId == user.id}">
-                  <span>
+                  <p>
                       <a href="<c:url value="${pageContext.request.contextPath}/edit/articleId?articleId=${article.id}"/>">Edit</a>
-                  </span>
-                  <span>
-                      <a href="<c:url value="${pageContext.request.contextPath}/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
-                  </span>
+                  </p>
+                  <form action="${pageContext.request.contextPath}/delete/articleId?articleId=${article.id}" method="post">
+                      <input type="submit" value="Delete">
+                  </form>
               </c:if>
           </div>
       </c:forEach>

@@ -34,7 +34,7 @@ public class CommentDao {
         List<Comment> comments = new LinkedList<>();
         try (PreparedStatement statement = connection.prepareStatement(
                 "SELECT comment.id, content, date_created, author_id, article_id, user.username AS author_name " +
-                        "FROM comment LEFT OUTER JOIN user ON comment.author_id = user.id WHERE comment.article_id = ?;")) {
+                        "FROM comment LEFT JOIN user ON comment.author_id = user.id WHERE comment.article_id = ?;")) {
             statement.setInt(1, targetArticleId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
@@ -45,7 +45,7 @@ public class CommentDao {
         return comments;
     }
 
-    public Comment postNewComment(Comment comment, int articleId) throws IOException, SQLException {
+    public Comment postNewComment(Comment comment, int articleId) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(
                 "INSERT INTO comment (content, date_created, author_id, article_id) VALUES (?,NOW(),?,?);")) {
             statement.setString(1, comment.content);
@@ -57,11 +57,11 @@ public class CommentDao {
         return getCommentById(comment.id);
     }
 
-    private Comment getCommentById(int commentId) throws SQLException {
+    public Comment getCommentById(int commentId) throws SQLException {
         Comment comment = new Comment();
         try (PreparedStatement statement = connection.prepareStatement(
                 "SELECT comment.id, content, date_created, author_id, article_id, user.username AS author_name " +
-                        "FROM comment LEFT OUTER JOIN user ON comment.author_id = user.id WHERE comment.id = ?;")) {
+                        "FROM comment LEFT JOIN user ON comment.author_id = user.id WHERE comment.id = ?;")) {
             statement.setInt(1, commentId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next())

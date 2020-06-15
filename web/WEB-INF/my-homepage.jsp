@@ -10,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Article</title>
+    <title>${user.username}'s Homepage</title>
 </head>
 <body>
 <% pageContext.setAttribute("newLineChar", "\n"); %>
@@ -19,15 +19,14 @@
     <div class="articles">
         <h1 class="title">Title:${article.title}</h1>
         <p class="date">Create Date: ${article.date}</p>
-        <p class="date" id="${article.id}" name="id"> Article Id: ${article.id}</p>
-        <p class="authorId">author Name: ${name}</p>
+        <p class="authorId">Author Name: ${user.username}</p>
         <p class="content">content:${fn:replace(article.content, newLineChar, "<br>")}</p>
         <span>
             <a href="<c:url value="${pageContext.request.contextPath}/edit/articleId?articleId=${article.id}"/>">Edit</a>
         </span>
-        <span>
-            <a href="<c:url value="${pageContext.request.contextPath}/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
-        </span>
+        <form action="${pageContext.request.contextPath}/delete/articleId?articleId=${article.id}" method="post">
+            <input type="submit" value="Delete">
+        </form>
         <a href="<c:url value="${pageContext.request.contextPath}/articles/${article.id}"/>">Show Details</a>
 
     </div>

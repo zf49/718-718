@@ -1,6 +1,7 @@
 package ictgradschool.project.servlet;
 
 import ictgradschool.project.controller.UserController;
+import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.UserDao;
 
 import javax.servlet.ServletException;
@@ -11,11 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(urlPatterns = "/account/*")
+@WebServlet(urlPatterns = "/account")
 public class UserAccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/myAccount.jsp").forward(req, resp);
+        UserController userController = new UserController(new UserDao());
+        User user = (User) req.getSession().getAttribute("user");
+        user = userController.getUserDetails(user);
+        req.setAttribute("user", user);
+        req.getRequestDispatcher("/WEB-INF/my-account.jsp").forward(req, resp);
     }
 
     @Override
@@ -31,15 +36,4 @@ public class UserAccountServlet extends HttpServlet {
         // TODO update account information
     }
 
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserController userController = new UserController(new UserDao());
-        int userId = Integer.parseInt(req.getParameter("userId"));
-        try {
-            userController.deleteUser(userId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        resp.sendRedirect("/sign-out");
-    }
 }
