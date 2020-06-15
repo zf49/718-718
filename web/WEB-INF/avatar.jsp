@@ -8,7 +8,11 @@
 </head>
 <body>
 
+<<<<<<< HEAD:web/WEB-INF/avatar-upload.jsp
 <form action="${pageContext.request.contextPath}/avatar-upload" method="post" enctype="multipart/form-data">
+=======
+<form action="./avatar" method="post" enctype="multipart/form-data">
+>>>>>>> 858708db0a573e1d1decf25f8ffa912f50b70170:web/WEB-INF/avatar.jsp
     <div>
         <div>
             <label for="avatar-input">Image:</label><br>

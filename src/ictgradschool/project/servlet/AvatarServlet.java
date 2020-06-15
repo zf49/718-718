@@ -15,8 +15,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-@WebServlet("/avatar-upload")
-public class AvatarUploadServlet extends HttpServlet {
+@WebServlet("/avatar")
+public class AvatarServlet extends HttpServlet {
 
     private File uploadsFolder; // The folder where article images should be uploaded
     private File tempFolder; // The temp folder required by the file-upload logic
@@ -25,7 +25,6 @@ public class AvatarUploadServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
 
-        System.out.println("mark 1");
         initUpload();
     }
 
@@ -44,7 +43,7 @@ public class AvatarUploadServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServletUtil.forward(req, resp, getServletContext(), "avatar-upload.jsp");
+        ServletUtil.forward(req, resp, getServletContext(), "avatar.jsp");
     }
 
     @Override
@@ -61,7 +60,7 @@ public class AvatarUploadServlet extends HttpServlet {
             FileItem fileItem = fileItemOptional.get();
             String name = upload(fileItem);
 
-            resp.sendRedirect("./avatar-upload");
+            resp.sendRedirect("./avatar");
         } catch (Exception e) {
             throw new ServletException(e);
         }
