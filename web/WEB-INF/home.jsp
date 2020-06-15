@@ -32,5 +32,6 @@
         </c:if>
     </div>
 </c:forEach>
+
 </body>
 </html>

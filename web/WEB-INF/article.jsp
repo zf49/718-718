@@ -45,7 +45,6 @@
             </dd>
         </c:forEach>
     </dl>
-
     <c:if test="${user != null}">
         <form action="${pageContext.request.contextPath}/articles/${article.id}/userId?userId=${user.id}" method="post">
             <label for="enterComment">${user.username}: </label>
