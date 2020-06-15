@@ -60,7 +60,7 @@ public class AvatarServlet extends HttpServlet {
             FileItem fileItem = fileItemOptional.get();
             String name = upload(fileItem);
 
-            resp.sendRedirect("./avatar-upload");
+            resp.sendRedirect("./avatar");
         } catch (Exception e) {
             throw new ServletException(e);
         }
