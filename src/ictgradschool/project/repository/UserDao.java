@@ -20,7 +20,7 @@ public class UserDao {
                 "SELECT user.id as id, username, salt, password_hash, avatar.name as avatar_name\n" +
                         "FROM user\n" +
                         "LEFT JOIN avatar ON user.avatar_id = avatar.id\n" +
-                        "WHERE username = ?;")) {
+                        "WHERE user.id = ?;")) {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 boolean hasNext = resultSet.next();
@@ -85,8 +85,6 @@ public class UserDao {
         String username = resultSet.getString(2);
         String salt = resultSet.getString(3);
         String passwordHash = resultSet.getString(4);
-        System.out.println("mark 4");
-        System.out.println(resultSet.getString(5));
         return new User(id, username, salt, passwordHash);
     }
 }
