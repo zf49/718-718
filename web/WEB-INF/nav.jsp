@@ -20,6 +20,7 @@
         <c:otherwise>
             <ul>
                 <li>Hi, <a href="<c:url value="/account/"/>">${user.username}</a></li>
+                <li><a href="<c:url value="/avatar"/>">Avatar</a></li>
                 <li><a href="<c:url value="/edit/"/>">Add a New Article</a></li>
                 <li value="${user.id}" name = "userId" id="userId">
                     <a href="<c:url value="/userArticles"/>">User Article</a>

@@ -8,6 +8,7 @@
 </head>
 <body>
 
+<img src="${pageContext.request.contextPath}/avatar/${user.avatarName}" alt="">
 <form action="./avatar" method="post" enctype="multipart/form-data">
     <div>
         <div>
