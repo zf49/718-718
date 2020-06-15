@@ -4,8 +4,6 @@ import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.AvatarDao;
 import ictgradschool.project.repository.UserDao;
 
-import java.io.File;
-
 public class AvatarController {
     private User user;
     private UserDao userDao;
