@@ -161,7 +161,8 @@ public class ArticleServlet extends HttpServlet {
             int id = Integer.parseInt(req.getParameter("articleId"));
             ArticleDao articleDao = new ArticleDao();
             articleDao.deleteOneArticle(id);
-            resp.sendRedirect("/");// TODO go back to last page
+            String lastPage = req.getHeader("Referer");
+            resp.sendRedirect(lastPage == null ? "/" : lastPage);
         }
     }
 

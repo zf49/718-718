@@ -15,7 +15,7 @@ public class CommentListController {
     }
 
     public List<Comment> getCommentsByArticleId(int articleId) throws IOException, SQLException {
-        return commentDAO.getCommentsForArticle(articleId);
+        return commentDAO.getCommentsByArticleId(articleId);
     }
 
     public Comment postNewComment(Comment comment, int articleId) throws IOException, SQLException {
