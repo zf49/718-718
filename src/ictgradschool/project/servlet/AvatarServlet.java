@@ -6,6 +6,7 @@ import ictgradschool.project.repository.AvatarDao;
 import ictgradschool.project.repository.UserDao;
 import ictgradschool.project.util.ServletUtil;
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -56,27 +57,30 @@ public class AvatarServlet extends HttpServlet {
         AvatarDao avatarDao = new AvatarDao();
         AvatarController avatarController = new AvatarController(user, userDao, avatarDao);
 
-        // Set up file upload mechanism
-        ServletFileUpload upload = getUpload();
+        FileItem fileItem = getFileItem(req);
+        String name = upload(fileItem);
 
-        try {
-            List<FileItem> fileItems = upload.parseRequest(req);
-            Optional<FileItem> fileItemOptional = fileItems.stream()
-                    .filter(fileItem -> fileItem.getFieldName().equals("avatar"))
-                    .findFirst();
-            FileItem fileItem = fileItemOptional.get();
-            String name = upload(fileItem);
+        user = avatarController.updateAvatar(name);
 
-            user = avatarController.updateAvatar(name);
-
-            req.getSession().setAttribute("user", user);
-            resp.sendRedirect("./avatar");
-        } catch (Exception e) {
-            throw new ServletException(e);
-        }
+        req.getSession().setAttribute("user", user);
+        resp.sendRedirect("./avatar");
     }
 
-    private String upload(FileItem fileItem) throws Exception {
+    private FileItem getFileItem(HttpServletRequest req) {
+        ServletFileUpload upload = getUpload();
+        List<FileItem> fileItems = null;
+        try {
+            fileItems = upload.parseRequest(req);
+        } catch (FileUploadException e) {
+            e.printStackTrace();
+        }
+        Optional<FileItem> fileItemOptional = fileItems.stream()
+                .filter(fileItem -> fileItem.getFieldName().equals("avatar"))
+                .findFirst();
+        return fileItemOptional.get();
+    }
+
+    private String upload(FileItem fileItem) {
         String name = fileItem.getName();
         File imageFile = new File(uploadsFolder, name);
         while (imageFile.exists()) {
@@ -84,7 +88,11 @@ public class AvatarServlet extends HttpServlet {
             name = imageFile.getName() + "-2";
             imageFile = new File(uploadsFolder, name);
         }
-        fileItem.write(imageFile);
+        try {
+            fileItem.write(imageFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return name;
     }
 
