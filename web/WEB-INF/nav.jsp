@@ -20,6 +20,11 @@
         </c:when>
         <c:otherwise>
             <ul>
+                <li>
+                    <a href="<c:url value="/avatar"/>">
+                        <img src="${pageContext.request.contextPath}/${user.avatarPath}" alt="avatar">
+                    </a>
+                </li>
                 <li>Hi, <a href="<c:url value="${pageContext.request.contextPath}/account"/>">${user.username}</a></li>
                 <li><a href="<c:url value="${pageContext.request.contextPath}/new-article"/>">Add a New Article</a></li>
                 <li value="${user.id}" name = "userId" id="userId">

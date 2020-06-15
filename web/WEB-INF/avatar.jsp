@@ -15,11 +15,11 @@
             <input type="radio" id="bul" name="avatarName" value="Bulbasaur.png">
             <label for="bul">
                 <img src="${pageContext.request.contextPath}/avatar/Bulbasaur.png" alt="">
-            </label><br>
+            </label>
             <input type="radio" id="cha" name="avatarName" value="Charmander.png">
             <label for="cha">
                 <img src="${pageContext.request.contextPath}/avatar/Charmander.png" alt="">
-            </label><br>
+            </label>
             <input type="radio" id="far" name="avatarName" value="Farfetchd.png">
             <label for="far">
                 <img src="${pageContext.request.contextPath}/avatar/Farfetchd.png" alt="">
