@@ -45,7 +45,7 @@ public class CommentDao {
         return comments;
     }
 
-    public Comment postNewComment(Comment comment, int articleId) throws IOException, SQLException {
+    public Comment postNewComment(Comment comment, int articleId) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(
                 "INSERT INTO comment (content, date_created, author_id, article_id) VALUES (?,NOW(),?,?);")) {
             statement.setString(1, comment.content);

@@ -20,13 +20,12 @@
               <p class="content">content: ${article.content}...</p>
               <a href="<c:url value="/articles/${article.id}"/>">Show Details</a>
 
+
               <c:if test="${article.authorId == user.id}">
-                  <span>
-                      <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
-                  </span>
-                  <span>
-                      <a href="<c:url value="/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
-                  </span>
+                  <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
+                  <form action="./${article.id}/delete?articleId=${article.id}" method="post">
+                        <input type="submit" value="Delete">
+                  </form>
               </c:if>
           </div>
       </c:forEach>

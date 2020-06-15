@@ -43,10 +43,9 @@
         <span>
             <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
         </span>
-        <span>
-<%--            TODO: use post or delete method --%>
-            <a href="<c:url value="/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
-        </span>
+        <form action="/articles/${article.id}/delete?articleId=${article.id}" method="post">
+            <input type="submit" value="Delete">
+        </form>
 <%--        TODO: add link to article details--%>
     </div>
 </c:forEach>
