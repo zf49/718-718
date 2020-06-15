@@ -41,4 +41,13 @@ public class UserController {
     public void changePassword(Token token, String newPassword, String confirmNewPassword) {
         throw new UnsupportedOperationException();
     }
+
+    public User getUserDetails(User user) throws IOException {
+        try {
+            return userDao.getUserDetails(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 }

@@ -21,7 +21,7 @@ import static ictgradschool.project.repository.DaoUtil.getLastInsertedId;
 public class NewArticleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/newArticle.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/new-article.jsp").forward(req, resp);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class NewArticleServlet extends HttpServlet {
             e.printStackTrace();
             throw new ServletException("Database access error!", e);
         }
-        resp.sendRedirect(req.getContextPath() + "articles/" + article.id);
+        resp.sendRedirect(req.getContextPath() + "/articles/" + article.id);
     }
 
 }

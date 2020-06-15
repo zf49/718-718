@@ -23,7 +23,7 @@
 
               <c:if test="${article.authorId == user.id}">
                   <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
-                  <form action="./${article.id}/delete?articleId=${article.id}" method="post">
+                  <form action="./articles/${article.id}/delete?articleId=${article.id}" method="post">
                         <input type="submit" value="Delete">
                   </form>
               </c:if>

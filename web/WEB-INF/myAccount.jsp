@@ -8,23 +8,43 @@
 </head>
 <body>
 
-<jsp:include page="nav.jsp">
-    <jsp:param name="user" value="${user}"/>
-</jsp:include>
+<jsp:include page="nav.jsp" />
 
 <form action="./update?userId=${user.id}" method="post">
-    <div>
-        <label for="username">Username: </label>
-        <input type="text" name="username" id="username" required value="${user.username}">
-    </div>
-    <div>
-        <label for="password">New Password: </label>
-        <input type="password" name="password" id="password" required>
-    </div>
-    <div>
-        <label for="confirmPassword">Confirm Password: </label>
-        <input type="password" name="confirmPassword" id="confirmPassword" required>
-    </div>
+    <fieldset>
+        <legend>Basic Information</legend>
+        <div>
+            <label for="username">Username: </label>
+            <input type="text" name="username" id="username" required value="${user.username}">
+        </div>
+        <div>
+            <label for="password">New Password: </label>
+            <input type="password" name="password" id="password" required>
+        </div>
+        <div>
+            <label for="confirmPassword">Confirm Password: </label>
+            <input type="password" name="confirmPassword" id="confirmPassword" required>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Additional Information</legend>
+        <div>
+            <label for="fname">First Name: </label>
+            <input type="text" name="fname" id="fname" value="${user.fname}">
+        </div>
+        <div>
+            <label for="lname">Last Name: </label>
+            <input type="text" name="lname" id="lname" value="${user.lname}">
+        </div>
+        <div>
+            <label for="date_birth">Date of Birth: </label>
+            <input type="date" name="dateBirth" id="date_birth" value="${user.dateBirth}">
+        </div>
+        <div>
+            <label for="description">Description: </label>
+            <textarea name="description" id="description" cols="80" rows="20">${user.description}</textarea>
+        </div>
+    </fieldset>
     <div>
         <input type="submit" value="Update (unfinished)">
     </div>

@@ -34,7 +34,7 @@ public class CommentDao {
         List<Comment> comments = new LinkedList<>();
         try (PreparedStatement statement = connection.prepareStatement(
                 "SELECT comment.id, content, date_created, author_id, article_id, user.username AS author_name " +
-                        "FROM comment LEFT OUTER JOIN user ON comment.author_id = user.id WHERE comment.article_id = ?;")) {
+                        "FROM comment LEFT JOIN user ON comment.author_id = user.id WHERE comment.article_id = ?;")) {
             statement.setInt(1, targetArticleId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
@@ -61,7 +61,7 @@ public class CommentDao {
         Comment comment = new Comment();
         try (PreparedStatement statement = connection.prepareStatement(
                 "SELECT comment.id, content, date_created, author_id, article_id, user.username AS author_name " +
-                        "FROM comment LEFT OUTER JOIN user ON comment.author_id = user.id WHERE comment.id = ?;")) {
+                        "FROM comment LEFT JOIN user ON comment.author_id = user.id WHERE comment.id = ?;")) {
             statement.setInt(1, commentId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next())

@@ -30,7 +30,7 @@ public class EditArticleServlet extends HttpServlet {
         article.title = req.getParameter("articleTitle");
         article.content = req.getParameter("articleContent");
         article = articleDao.updateArticle(article);
-        resp.sendRedirect(req.getContextPath() + "articles/" + article.id);
+        resp.sendRedirect(req.getContextPath() + "/articles/" + article.id);
     }
 
 }

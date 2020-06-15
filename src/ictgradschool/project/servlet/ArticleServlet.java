@@ -20,13 +20,10 @@ import java.util.List;
 @WebServlet(urlPatterns = "/articles/*")
 public class ArticleServlet extends HttpServlet {
 
-    private int articleId;
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
-        String pathInfo = req.getPathInfo();
-        articleId = Integer.parseInt(pathInfo.split("/")[1]);
+        int articleId = Integer.parseInt(req.getPathInfo().split("/")[1]);
         Article article = getArticleById(articleId, resp);
         if (article == null)
             // TODO notice users that the article does not exist
@@ -78,9 +75,11 @@ public class ArticleServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
-        if (req.getPathInfo().contains("delete"))
+        String pathInfo = req.getPathInfo();
+        if (pathInfo.contains("delete"))
             this.doDelete(req, resp);
         else {
+            int articleId = Integer.parseInt(pathInfo.split("/")[1]);
             Comment comment = new Comment();
             comment.content = req.getParameter("commentContent");
             comment.authorId = Integer.parseInt(req.getParameter("userId"));
@@ -92,7 +91,7 @@ public class ArticleServlet extends HttpServlet {
                 e.printStackTrace();
                 throw new ServletException("Database access error!", e);
             }
-            resp.sendRedirect(req.getContextPath() + "articles/" + articleId);
+            resp.sendRedirect(req.getContextPath() + "/articles/" + articleId);
         }
 
     }
@@ -101,17 +100,19 @@ public class ArticleServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        if (req.getPathInfo().contains("commentId")) {
+        String pathInfo = req.getPathInfo();
+        if (pathInfo.contains("commentId")) {
+            int articleId = Integer.parseInt(pathInfo.split("/")[1]);
             int id = Integer.parseInt(req.getParameter("commentId"));
             CommentListController commentListController = new CommentListController();
             commentListController.deleteComment(id);
-            resp.sendRedirect(req.getContextPath() + "articles/" + articleId);
-        } else if (req.getPathInfo().contains("articleId")){
+            resp.sendRedirect(req.getContextPath() + "/articles/" + articleId);
+        } else if (pathInfo.contains("articleId")){
             int id = Integer.parseInt(req.getParameter("articleId"));
             ArticleDao articleDao = new ArticleDao();
             articleDao.deleteOneArticle(id);
             String lastPage = req.getHeader("Referer");
-            resp.sendRedirect(lastPage == null ? req.getContextPath() : lastPage);
+            resp.sendRedirect("/articles");
         }
     }
 

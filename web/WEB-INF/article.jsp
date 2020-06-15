@@ -21,7 +21,7 @@
             <span>
                 <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
             </span>
-            <form action="./delete?articleId=${article.id}" method="post">
+            <form action="./${article.id}/delete?articleId=${article.id}" method="post">
                 <input type="submit" value="Delete">
             </form>
         </c:if>
@@ -38,7 +38,7 @@
             <dd><span>${comment.content}</span><br>
                 <span>${comment.dateCreated}</span>
                 <c:if test="${comment.authorId == user.id || author.id == user.id}">
-                    <form action="./delete?commentId=${comment.id}" method="post">
+                    <form action="./${article.id}/delete?commentId=${comment.id}" method="post">
                         <input type="submit" value="Delete">
                     </form>
                 </c:if>
@@ -46,7 +46,7 @@
         </c:forEach>
     </dl>
     <c:if test="${user != null}">
-        <form action="./comment?userId=${user.id}" method="post">
+        <form action="./${article.id}/comment?userId=${user.id}" method="post">
             <label for="enterComment">${user.username}: </label>
             <textarea id="enterComment" name="commentContent" rows="5" cols="80">Enter comments here</textarea>
             <input type="submit" value="Comment">

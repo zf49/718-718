@@ -52,6 +52,25 @@ public class UserDao {
         }
     }
 
+    public User getUserDetails(User user) throws IOException, SQLException {
+        try (Connection connection = getConnectionFromClasspath("database.properties")) {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "SELECT user.id, fname, lname, date_birth, descrip FROM user " +
+                            "LEFT JOIN user_detail ON user.detail_id = user_detail.id WHERE user.id = ?;")) {
+                statement.setInt(1, user.getId());
+                try (ResultSet rs = statement.executeQuery()) {
+                    while (rs.next()) {
+                        user.setFname(rs.getString(2));
+                        user.setLname(rs.getString(3));
+                        user.setDateBirth(rs.getDate(4));
+                        user.setDescription(rs.getString(5));
+                    }
+                }
+            }
+        }
+        return user;
+    }
+
     public User addUser(String username, String saltBase64, String hashBase64) throws IOException {
         try (Connection connection = getConnectionFromClasspath("database.properties")) {
             try (PreparedStatement statement = connection.prepareStatement(
