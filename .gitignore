@@ -45,4 +45,5 @@ fabric.properties
 database.properties
 playground.sql
 
+.idea/**/sqldialects.xml
 

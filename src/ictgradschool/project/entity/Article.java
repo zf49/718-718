@@ -24,6 +24,11 @@ public class Article implements Comparable<Article> {
         this.dateCreated = dateCreated;
     }
 
+    public String getBriefContent() {
+        // TODO: get substring and add `...`
+        return content;
+    }
+
     public int getId() {
         return id;
     }

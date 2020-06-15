@@ -27,6 +27,7 @@ public class ArticleDao {
             try (ResultSet resultSet = statement.executeQuery(
                     "SELECT id, title, content, date_created, author_id FROM article ORDER BY id DESC")) {
                 while (resultSet.next()) {
+                    // TODO: extract article creation
                     int id = resultSet.getInt(1);
                     String title = resultSet.getString(2);
                     String content = resultSet.getString(3);
@@ -39,9 +40,7 @@ public class ArticleDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return articles;
-
     }
 
     public List<Article> getArticleByUserId(int authorId) {
@@ -86,7 +85,6 @@ public class ArticleDao {
         );
     }
 
-
     public Article postNewArticle(Article article) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(
                 "INSERT INTO article (title, content,author_id,date_created) VALUES (?, ?, ?, ?)")) {
@@ -102,6 +100,7 @@ public class ArticleDao {
 
 
     public Article updateArticle(Article article) {
+        // TODO: won't needed to update `date_created`
         try (PreparedStatement ps = connection.prepareStatement(
                 "UPDATE article SET title=?,content=?,date_created=? WHERE id=?;")) {
             ps.setString(1, article.title);
@@ -131,7 +130,6 @@ public class ArticleDao {
         }
     }
 
-
     public void deleteUserAllArticle(int authorId) throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement(
                 "SELECT id FROM article WHERE author_id = ?")) {
@@ -143,7 +141,6 @@ public class ArticleDao {
             }
         }
     }
-
 
         public static void main(String[] args) throws IOException, SQLException {
         ArticleDao articleDao = new ArticleDao();
