@@ -27,7 +27,6 @@ public class User implements Serializable {
         this.avatarName = avatarName;
     }
 
-
     public int getId() {
         return id;
     }
