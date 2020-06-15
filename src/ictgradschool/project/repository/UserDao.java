@@ -9,9 +9,12 @@ import static ictgradschool.project.repository.DaoUtil.getLastInsertedId;
 import static ictgradschool.project.util.DBConnectionUtils.getConnectionFromClasspath;
 
 public class UserDao {
-    public User getUserById(int id) throws IOException, SQLException {
+    public User getUserById(int id) {
         try (Connection connection = getConnectionFromClasspath("database.properties")) {
             return getUserById(connection, id);
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -110,5 +113,16 @@ public class UserDao {
         return new User(id, username, salt, passwordHash, avatarName);
     }
 
-
+    public void updateAvatarId(int id, int avatarId) {
+        try (Connection connection = getConnectionFromClasspath("database.properties")) {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE user SET avatar_id = ? WHERE id = ?")) {
+                statement.setInt(1, avatarId);
+                statement.setInt(2, id);
+                statement.executeUpdate();
+            }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

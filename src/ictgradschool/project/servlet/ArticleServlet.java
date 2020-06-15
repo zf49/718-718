@@ -39,13 +39,13 @@ public class ArticleServlet extends HttpServlet {
 
     private User getUserById(int id, HttpServletResponse resp) throws IOException, ServletException {
         UserDao userDao = new UserDao();
-        try {
+//        try {
             return userDao.getUserById(id);
-        } catch (SQLException e) {
-            resp.setStatus(500);
-            e.printStackTrace();
-            throw new ServletException("Database access error!", e);
-        }
+//        } catch (SQLException e) {
+//            resp.setStatus(500);
+//            e.printStackTrace();
+//            throw new ServletException("Database access error!", e);
+//        }
     }
 
     private Article getArticleById(int id, HttpServletResponse resp) throws IOException, ServletException {

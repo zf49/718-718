@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet({"/home", "", "/"})
+@WebServlet({"/home", ""})
 public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,7 +23,5 @@ public class HomeServlet extends HttpServlet {
         req.setAttribute("a", articleList);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/home.jsp");
         dispatcher.forward(req,resp);
-
     }
-
 }

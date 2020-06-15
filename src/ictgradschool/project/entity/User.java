@@ -72,6 +72,10 @@ public class User implements Serializable {
         this.avatarName = avatarName;
     }
 
+    public String getAvatarPath() {
+        return "avatar/" + avatarName;
+    }
+
     public String getFname() {
         return fname;
     }

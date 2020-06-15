@@ -1,4 +1,4 @@
-package ictgradschool.project.repository;
+package ictgradschool.project.entity;
 
 import ictgradschool.project.entity.User;
 

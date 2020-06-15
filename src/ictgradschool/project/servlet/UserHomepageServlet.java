@@ -25,12 +25,7 @@ public class UserHomepageServlet extends HttpServlet {
         UserDao userDao = new UserDao();
         int userId = Integer.parseInt(req.getPathInfo().split("/")[1]);
         List<Article> articleList = a.getArticleByUserId(userId);
-        User user = null;
-        try {
-            user = userDao.getUserById(userId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        User user = userDao.getUserById(userId);
         req.setAttribute("a", articleList);
         req.setAttribute("user", user);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/my-homepage.jsp");
