@@ -22,8 +22,8 @@ VALUES (1, 'Bret', 'aJKEa9uPIe2UlDJl49+4epDL+vLX+gKO7cmySipyqqk=',
 
 INSERT INTO user_detail (id, fname, lname, date_birth, descrip)
 VALUES (1, 'David', 'Bainbridge', '2001-01-01', 'Love basketball'),
-       (2, 'Geoff', 'Holmes', '2002-02-02', 'NA'),
-       (3, 'Annika', 'Hinze', '2003-03-03', 'NA'),
+       (2, 'Geoff', 'Holmes', '2002-02-02', NULL),
+       (3, 'Annika', 'Hinze', '2003-03-03', NULL),
        (4, 'Te Taka', 'Keegan', '2004-04-04', 'NA'),
        (5, 'Barney', 'Rubble', '2005-05-05', 'NA'),
        (6, 'SpongeBob', 'Squarepants', '2006-06-06', 'NA'),

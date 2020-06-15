@@ -20,19 +20,20 @@ CREATE TABLE IF NOT EXISTS user
     salt          CHAR(44)     NOT NULL,
     password_hash CHAR(88)     NOT NULL,
     avatar_id     INT,
+    detail_id     INT,
     PRIMARY KEY (id),
-    FOREIGN KEY (avatar_id) REFERENCES avatar (id)
+    FOREIGN KEY (avatar_id) REFERENCES avatar (id),
+    FOREIGN KEY (detail_id) REFERENCES user_detail (id)
 );
 
 CREATE TABLE IF NOT EXISTS user_detail
 (
-    id         INT NOT NULL,
+    id         INT NOT NULL AUTO_INCREMENT,
     fname      VARCHAR(128),
     lname      VARCHAR(128),
     date_birth DATE,
     descrip    TEXT,
-    PRIMARY KEY (id),
-    FOREIGN KEY (id) REFERENCES user (id)
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS article
