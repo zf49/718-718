@@ -13,7 +13,7 @@
                     <button onclick="location.href='${pageContext.request.contextPath}/sign-up'">Sign Up</button>
                 </li>
                 <li>
-                    <button onclick="location.href='./sign-in'">Sign In</button>
+                    <button onclick="location.href='${pageContext.request.contextPath}/sign-in'">Sign In</button>
                 </li>
             </ul>
         </c:when>
