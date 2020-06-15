@@ -5,7 +5,6 @@ import ictgradschool.project.controller.UserController;
 import ictgradschool.project.repository.ArticleDao;
 import ictgradschool.project.repository.UserDao;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,12 +14,12 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/delete/*")
 public class DeleteServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.sendRedirect("/home");
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String pathInfo = req.getPathInfo();
         String lastPage = req.getHeader("Referer"); // TODO how to use it?
         if (pathInfo.contains("commentId")) {
@@ -33,7 +32,7 @@ public class DeleteServlet extends HttpServlet {
             int id = Integer.parseInt(req.getParameter("articleId"));
             ArticleDao articleDao = new ArticleDao();
             articleDao.deleteOneArticle(id);
-            resp.sendRedirect("/articles");
+            resp.sendRedirect("/home");
         } else if (pathInfo.contains("userId")) {
             UserController userController = new UserController(new UserDao());
             int userId = Integer.parseInt(req.getParameter("userId"));

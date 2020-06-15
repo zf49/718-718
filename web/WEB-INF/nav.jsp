@@ -5,6 +5,7 @@
 <%--TODO: add home link--%>
 <%--TODO: No add article if not signed in--%>
 <header style="background-color: gainsboro">
+    <button onclick="location.href='${pageContext.request.contextPath}/home'">Homepage</button>
     <c:choose>
         <c:when test="${user == null}">
             <ul>
@@ -22,7 +23,7 @@
                 <li>Hi, <a href="<c:url value="${pageContext.request.contextPath}/account"/>">${user.username}</a></li>
                 <li><a href="<c:url value="${pageContext.request.contextPath}/new-article"/>">Add a New Article</a></li>
                 <li value="${user.id}" name = "userId" id="userId">
-                    <a href="<c:url value="${pageContext.request.contextPath}/userArticles"/>">User Article</a>
+                    <a href="<c:url value="${pageContext.request.contextPath}/user/${user.id}"/>">My Homepage</a>
                 </li>
                 <li>
                     <form action="/sign-out" method="post">
