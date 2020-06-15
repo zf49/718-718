@@ -14,6 +14,6 @@
 </head>
 <body>
 <h1>success</h1>
-<a href="./articles">All Articles</a><br>
+<a href="${pageContext.request.contextPath}/articles">All Articles</a><br>
 </body>
 </html>

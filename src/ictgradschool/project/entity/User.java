@@ -1,6 +1,7 @@
 package ictgradschool.project.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable {
     private int id;
@@ -9,6 +10,10 @@ public class User implements Serializable {
     private String salt;
     private String passwordHash;
     private String avatarName;
+    private String fname;
+    private String lname;
+    private Date dateBirth;
+    private String description;
 
     public User() {}
 
@@ -70,6 +75,39 @@ public class User implements Serializable {
     public String getAvatarPath() {
         return "avatar/" + avatarName;
     }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+    public Date getDateBirth() {
+        return dateBirth;
+    }
+
+    public void setDateBirth(Date dateBirth) {
+        this.dateBirth = dateBirth;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "User{" +

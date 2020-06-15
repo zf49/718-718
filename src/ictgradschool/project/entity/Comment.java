@@ -2,6 +2,7 @@ package ictgradschool.project.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Comment {
     public int authorId;
@@ -11,6 +12,8 @@ public class Comment {
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     public LocalDateTime dateCreated;
     public String authorName;
+    public String date;
+
 
     public Comment() {}
 
@@ -21,6 +24,16 @@ public class Comment {
         this.content = content;
         this.dateCreated = dateCreated;
         this.authorName = authorName;
+        date = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss").format(this.dateCreated);
+
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public int getAuthorId() {

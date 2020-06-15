@@ -1,12 +1,9 @@
 package ictgradschool.project.repository;
-
 import ictgradschool.project.entity.Article;
 import ictgradschool.project.util.DBConnectionUtils;
-
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,22 +22,22 @@ public class ArticleDao {
         List<Article> articles = new ArrayList<>();
         try (Statement statement = connection.createStatement()) {
             try (ResultSet resultSet = statement.executeQuery(
-                    "SELECT id, title, content, date_created, author_id FROM article ORDER BY id DESC")) {
+                    "SELECT article.id AS article_id, article.title, article.content, article.date_created, article.author_id, user.id, username FROM article right JOIN user ON author_id = user.id ORDER BY id DESC")) {
                 while (resultSet.next()) {
-                    // TODO: extract article creation
-                    int id = resultSet.getInt(1);
-                    String title = resultSet.getString(2);
-                    String content = resultSet.getString(3);
-                    LocalDateTime dateCreated = resultSet.getTimestamp(4).toLocalDateTime();
-                    int authorId = resultSet.getInt(5);
-                    Article article = new Article(id, title, content, dateCreated, authorId);
-                    articles.add(article);
+                     articles.add(getArticle(resultSet));
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return articles;
+    }
+
+    private Article getArticle(ResultSet resultSet) throws SQLException {
+        Article article =  new Article(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+                resultSet.getTimestamp(4).toLocalDateTime(), resultSet.getInt(5),resultSet.getString(7));
+        article.getBriefContent();
+        return article;
     }
 
     public List<Article> getArticleByUserId(int authorId) {
@@ -98,15 +95,12 @@ public class ArticleDao {
         return getArticleById(article.id);
     }
 
-
     public Article updateArticle(Article article) {
-        // TODO: won't needed to update `date_created`
         try (PreparedStatement ps = connection.prepareStatement(
-                "UPDATE article SET title=?,content=?,date_created=? WHERE id=?;")) {
+                "UPDATE article SET title=?,content=? WHERE id=?;")) {
             ps.setString(1, article.title);
             ps.setString(2, article.content);
-            ps.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now())); // TODO update time?
-            ps.setInt(4, article.id);
+            ps.setInt(3, article.id);
             ps.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -140,14 +134,6 @@ public class ArticleDao {
                 }
             }
         }
-    }
-
-        public static void main(String[] args) throws IOException, SQLException {
-        ArticleDao articleDao = new ArticleDao();
-//        for(Article a : articleDao.getAllArticles()){
-//            System.out.println(a.title);
-//        }
-//            System.out.println( articleDao.getUser("Antonette"));
     }
 
 }

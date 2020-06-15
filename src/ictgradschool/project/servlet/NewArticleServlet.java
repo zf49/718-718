@@ -17,29 +17,28 @@ import java.time.LocalDateTime;
 
 import static ictgradschool.project.repository.DaoUtil.getLastInsertedId;
 
-@WebServlet(urlPatterns = "/addnewarticle")
-public class AddNewArticle extends HttpServlet {
+@WebServlet(urlPatterns = "/new-article")
+public class NewArticleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        req.getRequestDispatcher("/WEB-INF/new-article.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ArticleDao articleDao = new ArticleDao();
-        try { int articleId = getLastInsertedId(DBConnectionUtils.getConnectionFromClasspath("connection.properties"));
-        int authorId = Integer.parseInt(req.getParameter("authorId_AddArticle"));
-        String content = req.getParameter("content_AddArticle");
-        String title = req.getParameter("title_AddArticle");
-        LocalDateTime dateTime = LocalDateTime.now();
-        Article article = new Article(articleId,title,content,dateTime,authorId);
-        articleDao.postNewArticle(article);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/editSuccess.jsp");
-        dispatcher.forward(req,resp);
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-
+        Article article = new Article();
+        article.title = req.getParameter("articleTitle");
+        article.content = req.getParameter("articleContent");
+        article.authorId = Integer.parseInt(req.getParameter("authorId"));
+        try {
+            article = articleDao.postNewArticle(article);
+        } catch (SQLException e) {
+            resp.setStatus(500);
+            e.printStackTrace();
+            throw new ServletException("Database access error!", e);
+        }
+        resp.sendRedirect(req.getContextPath() + "/articles/" + article.id);
     }
 
 }

@@ -5,7 +5,6 @@ import ictgradschool.project.util.DBConnectionUtils;
 
 import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,30 +19,33 @@ public class CommentDao {
         }
     }
 
-    public List<Comment> getCommentsByArticleId(int targetArticleId) throws SQLException, IOException {
-        // TODO: use join to get user info
-        try (PreparedStatement statement = connection.prepareStatement(
-                "SELECT id, content, date_created, author_id, article_id FROM comment WHERE article_id = ?;")) {
-            statement.setInt(1, targetArticleId);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                List<Comment> comments = new LinkedList<>();
-                UserDao userDao = new UserDao();
-                while (resultSet.next()) {
-                    int id = resultSet.getInt(1);
-                    String content = resultSet.getString(2);
-                    LocalDateTime dateCreated = resultSet.getTimestamp(3).toLocalDateTime();
-                    int authorId = resultSet.getInt(4);
-                    int articleId = resultSet.getInt(5);
-                    String authorName = userDao.getUserById(authorId).getUsername();
-                    Comment comment = new Comment(authorId, articleId, id, content, dateCreated, authorName);
-                    comments.add(comment);
-                }
-                return comments;
-            }
-        }
+    private Comment getCommentFromResultSet(ResultSet rs) throws SQLException {
+        return new Comment(
+                rs.getInt(4),
+                rs.getInt(5),
+                rs.getInt(1),
+                rs.getString(2),
+                rs.getTimestamp(3).toLocalDateTime(),
+                rs.getString(6)
+        );
     }
 
-    public Comment postNewComment(Comment comment, int articleId) throws IOException, SQLException {
+    public List<Comment> getCommentsByArticleId(int targetArticleId) throws SQLException {
+        List<Comment> comments = new LinkedList<>();
+        try (PreparedStatement statement = connection.prepareStatement(
+                "SELECT comment.id, content, date_created, author_id, article_id, user.username AS author_name " +
+                        "FROM comment LEFT JOIN user ON comment.author_id = user.id WHERE comment.article_id = ?;")) {
+            statement.setInt(1, targetArticleId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    comments.add(getCommentFromResultSet(resultSet));
+                }
+            }
+        }
+        return comments;
+    }
+
+    public Comment postNewComment(Comment comment, int articleId) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(
                 "INSERT INTO comment (content, date_created, author_id, article_id) VALUES (?,NOW(),?,?);")) {
             statement.setString(1, comment.content);
@@ -55,42 +57,28 @@ public class CommentDao {
         return getCommentById(comment.id);
     }
 
-    private Comment getCommentById(int commentId) throws SQLException, IOException {
+    public Comment getCommentById(int commentId) throws SQLException {
+        Comment comment = new Comment();
         try (PreparedStatement statement = connection.prepareStatement(
-                "SELECT content, date_created, author_id, article_id FROM comment WHERE id = ?;")) {
+                "SELECT comment.id, content, date_created, author_id, article_id, user.username AS author_name " +
+                        "FROM comment LEFT JOIN user ON comment.author_id = user.id WHERE comment.id = ?;")) {
             statement.setInt(1, commentId);
             try (ResultSet resultSet = statement.executeQuery()) {
-                // TODO: extract method to make comment object
-                Comment comment = new Comment();
-                comment.id = commentId;
-                while (resultSet.next()) {
-                    comment.content = resultSet.getString(1);
-                    comment.dateCreated = resultSet.getTimestamp(2).toLocalDateTime();
-                    comment.authorId = resultSet.getInt(3);
-                    comment.articleId = resultSet.getInt(4);
-                }
-                comment.authorName = new UserDao().getUserById(comment.authorId).getUsername();
-                return comment;
+                while (resultSet.next())
+                    comment = getCommentFromResultSet(resultSet);
             }
         }
+        return comment;
     }
 
-    public boolean deleteComment(int commentId) {
+    public void deleteComment(int commentId) {
         try (PreparedStatement statement = connection.prepareStatement("DELETE FROM comment WHERE id = ?;")) {
             statement.setInt(1, commentId);
             statement.executeQuery();
         }
         catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
-        return true;
-    }
-
-    public static void main(String[] args) throws SQLException, IOException {
-        List<Comment> comments = new CommentDao().getCommentsByArticleId(1);
-        for (Comment comment : comments)
-        System.out.println(comment.getAuthorName());
     }
 
 }

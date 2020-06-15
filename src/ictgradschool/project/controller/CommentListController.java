@@ -8,22 +8,31 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CommentListController {
-    private CommentDao commentDAO;
+    private CommentDao commentDao;
 
     public CommentListController() {
-        this.commentDAO = new CommentDao();
+        this.commentDao = new CommentDao();
     }
 
     public List<Comment> getCommentsByArticleId(int articleId) throws IOException, SQLException {
-        return commentDAO.getCommentsByArticleId(articleId);
+        return commentDao.getCommentsByArticleId(articleId);
+    }
+
+    public Comment getCommentById(int commentId) {
+        try {
+            return commentDao.getCommentById(commentId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public Comment postNewComment(Comment comment, int articleId) throws IOException, SQLException {
-        return commentDAO.postNewComment(comment, articleId);
+        return commentDao.postNewComment(comment, articleId);
     }
 
-    public boolean deleteComment(int commentId) {
-        return commentDAO.deleteComment(commentId);
+    public void deleteComment(int commentId) {
+        commentDao.deleteComment(commentId);
     }
 
 }

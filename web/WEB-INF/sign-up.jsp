@@ -8,7 +8,7 @@
 </head>
 <body>
 <jsp:include page="nav.jsp" />
-<form action="./sign-up" method="post" class="form-example">
+<form action="${pageContext.request.contextPath}/sign-up" method="post" class="form-example">
     <div>
         <label for="username">Username: </label>
         <input type="text" name="username" id="username" required>
