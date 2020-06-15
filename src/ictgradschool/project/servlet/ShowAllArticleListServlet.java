@@ -20,12 +20,11 @@ public class ShowAllArticleListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ArticleDao a = new ArticleDao();
-        List<Article> articleList = a.getAllArticles();
-        System.out.println(articleList);
-        req.setAttribute("a", articleList);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/all-articles.jsp");
-            dispatcher.forward(req,resp);
+//        ArticleDao a = new ArticleDao();
+//        List<Article> articleList = a.getAllArticles();
+//        req.setAttribute("a", articleList);
+//        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/all-articles.jsp");
+//            dispatcher.forward(req,resp);
     }
 
 }

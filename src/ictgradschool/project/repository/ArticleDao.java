@@ -42,7 +42,6 @@ public class ArticleDao {
         Article article =  new Article(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
                 resultSet.getTimestamp(4).toLocalDateTime(), resultSet.getInt(5),resultSet.getString(7));
         article.getBriefContent();
-        System.out.println(article);
         return article;
     }
 
