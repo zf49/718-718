@@ -12,7 +12,7 @@
     <div>
         <div>
             <label for="avatar-input">Image:</label><br>
-            <input type="file" name="image" id="avatar-input" required>
+            <input type="file" name="avatar" id="avatar-input" required>
         </div>
         <button type="submit">Upload</button>
     </div>
