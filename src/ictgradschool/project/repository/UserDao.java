@@ -9,9 +9,12 @@ import static ictgradschool.project.repository.DaoUtil.getLastInsertedId;
 import static ictgradschool.project.util.DBConnectionUtils.getConnectionFromClasspath;
 
 public class UserDao {
-    public User getUserById(int id) throws IOException, SQLException {
+    public User getUserById(int id) {
         try (Connection connection = getConnectionFromClasspath("database.properties")) {
             return getUserById(connection, id);
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

@@ -1,5 +1,6 @@
 package ictgradschool.project.servlet;
 
+import ictgradschool.project.controller.AvatarController;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.AvatarDao;
 import ictgradschool.project.repository.UserDao;
@@ -51,9 +52,10 @@ public class AvatarServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AvatarDao avatarDao = new AvatarDao();
-        UserDao userDao = new UserDao();
         User user = (User) req.getSession().getAttribute("user");
+        UserDao userDao = new UserDao();
+        AvatarDao avatarDao = new AvatarDao();
+        AvatarController avatarController = new AvatarController(user, userDao, avatarDao);
 
         // Set up file upload mechanism
         ServletFileUpload upload = getUpload();
@@ -66,12 +68,9 @@ public class AvatarServlet extends HttpServlet {
             FileItem fileItem = fileItemOptional.get();
             String name = upload(fileItem);
 
-            int avatarId = avatarDao.insertAvatar(name);
-            userDao.updateAvatarId(user.getId(), avatarId);
+            user = avatarController.updateAvatar(name);
 
-            user = userDao.getUserById(user.getId());
             req.getSession().setAttribute("user", user);
-
             resp.sendRedirect("./avatar");
         } catch (Exception e) {
             throw new ServletException(e);
