@@ -27,7 +27,7 @@ public class ArticleServlet extends HttpServlet {
         Article article = getArticleById(articleId, resp);
         if (article == null)
             // TODO notice users that the article does not exist
-            resp.sendRedirect(req.getHeader("Referer"));
+            resp.sendRedirect("/articles");
         else {
             req.setAttribute("article", article);
             req.setAttribute("comments", getCommentsByArticleId(articleId, resp));
@@ -112,6 +112,7 @@ public class ArticleServlet extends HttpServlet {
             ArticleDao articleDao = new ArticleDao();
             articleDao.deleteOneArticle(id);
             String lastPage = req.getHeader("Referer");
+            System.out.println("last page url: " + lastPage);
             resp.sendRedirect("/articles");
         }
     }

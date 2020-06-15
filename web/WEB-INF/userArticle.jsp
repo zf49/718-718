@@ -43,7 +43,7 @@
         <span>
             <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
         </span>
-        <form action="${pageContext.request.contextPath}/articles/${article.id}/delete?articleId=${article.id}" method="post">
+        <form action="${pageContext.request.contextPath}/delete/articleId?articleId=${article.id}" method="post">
             <input type="submit" value="Delete">
         </form>
 <%--        TODO: add link to article details--%>

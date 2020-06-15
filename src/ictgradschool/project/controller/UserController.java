@@ -30,8 +30,12 @@ public class UserController {
         throw new UnsupportedOperationException();
     }
 
-    public void deleteUser(int id) throws IOException, SQLException {
-        userDao.deleteUserById(id);
+    public void deleteUser(int id) throws IOException {
+        try {
+            userDao.deleteUserById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void changeUsername(Token token, String newUsername) {

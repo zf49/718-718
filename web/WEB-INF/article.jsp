@@ -21,7 +21,7 @@
             <span>
                 <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
             </span>
-            <form action="./${article.id}/delete?articleId=${article.id}" method="post">
+            <form action="${pageContext.request.contextPath}/delete/articleId?articleId=${article.id}" method="post">
                 <input type="submit" value="Delete">
             </form>
         </c:if>
@@ -38,7 +38,7 @@
             <dd><span>${comment.content}</span><br>
                 <span>${comment.dateCreated}</span>
                 <c:if test="${comment.authorId == user.id || author.id == user.id}">
-                    <form action="./${article.id}/delete?commentId=${comment.id}" method="post">
+                    <form action="${pageContext.request.contextPath}/delete/commentId?commentId=${comment.id}" method="post">
                         <input type="submit" value="Delete">
                     </form>
                 </c:if>

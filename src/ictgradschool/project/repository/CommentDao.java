@@ -57,7 +57,7 @@ public class CommentDao {
         return getCommentById(comment.id);
     }
 
-    private Comment getCommentById(int commentId) throws SQLException {
+    public Comment getCommentById(int commentId) throws SQLException {
         Comment comment = new Comment();
         try (PreparedStatement statement = connection.prepareStatement(
                 "SELECT comment.id, content, date_created, author_id, article_id, user.username AS author_name " +

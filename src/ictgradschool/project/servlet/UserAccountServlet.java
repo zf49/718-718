@@ -36,15 +36,4 @@ public class UserAccountServlet extends HttpServlet {
         // TODO update account information
     }
 
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserController userController = new UserController(new UserDao());
-        int userId = Integer.parseInt(req.getParameter("userId"));
-        try {
-            userController.deleteUser(userId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        resp.sendRedirect("/sign-out");
-    }
 }
