@@ -24,6 +24,17 @@ CREATE TABLE IF NOT EXISTS user
     FOREIGN KEY (avatar_id) REFERENCES avatar (id)
 );
 
+CREATE TABLE IF NOT EXISTS user_detail
+(
+    id         INT NOT NULL,
+    fname      VARCHAR(128),
+    lname      VARCHAR(128),
+    date_birth DATE,
+    descrip    TEXT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id) REFERENCES user (id)
+);
+
 CREATE TABLE IF NOT EXISTS article
 (
     id           INT NOT NULL AUTO_INCREMENT,

@@ -20,6 +20,18 @@ VALUES (1, 'Bret', 'aJKEa9uPIe2UlDJl49+4epDL+vLX+gKO7cmySipyqqk=',
        (10, 'Moriah.Stanton', 'BV7uKMb7DElEDKNvq/8N4TFNf6hzbCMZwDaJKs/pVDc=',
         'PJ0VefYMHnC6PxvoAfaUCuUCwe9+s2Fv1kPV+Lcz/VhbazOJBXNCrSdqBw7Hxz6saYe2CMRXrS1YcfBJ/soCfA==');
 
+INSERT INTO user_detail (id, fname, lname, date_birth, descrip)
+VALUES (1, 'David', 'Bainbridge', '2001-01-01', 'Love basketball'),
+       (2, 'Geoff', 'Holmes', '2002-02-02', 'NA'),
+       (3, 'Annika', 'Hinze', '2003-03-03', 'NA'),
+       (4, 'Te Taka', 'Keegan', '2004-04-04', 'NA'),
+       (5, 'Barney', 'Rubble', '2005-05-05', 'NA'),
+       (6, 'SpongeBob', 'Squarepants', '2006-06-06', 'NA'),
+       (7, 'Jack', 'Daniels', '2007-07-07', 'NA'),
+       (8, 'James', 'Speight', '2008-08-08', 'NA'),
+       (9, 'Henry', 'Wagstaff', '2009-09-09', 'NA'),
+       (10, 'Johnnie', 'Walker', '2010-10-10', 'NA');
+
 INSERT INTO article (author_id, id, title, content, date_created)
 VALUES (1, 1, 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
         'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',

@@ -29,7 +29,7 @@
         <input type="submit" value="addArticle">
     </div>
 </form>--%>
-
+<jsp:include page="nav.jsp"/>
 <c:forEach items="${a}" var="article">
     <div class="articles">
         <h1 class="title">Title:${article.title}</h1>

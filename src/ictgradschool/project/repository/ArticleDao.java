@@ -1,8 +1,6 @@
 package ictgradschool.project.repository;
 
 import ictgradschool.project.entity.Article;
-import ictgradschool.project.entity.Comment;
-import ictgradschool.project.entity.User;
 import ictgradschool.project.util.DBConnectionUtils;
 
 import java.io.IOException;
@@ -23,12 +21,11 @@ public class ArticleDao {
         }
     }
 
-    public List<Article> getAllArticles() throws IOException {
+    public List<Article> getAllArticles() {
         List<Article> articles = new ArrayList<>();
         try (Statement statement = connection.createStatement()) {
             try (ResultSet resultSet = statement.executeQuery(
-
-                    "SELECT id, title, content, date_created, author_id FROM article")) {
+                    "SELECT id, title, content, date_created, author_id FROM article ORDER BY id DESC")) {
                 while (resultSet.next()) {
                     int id = resultSet.getInt(1);
                     String title = resultSet.getString(2);
@@ -50,7 +47,7 @@ public class ArticleDao {
     public List<Article> getArticleByUserId(int authorId) {
         List<Article> articleList = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(
-                "SELECT id, title, content, author_id, date_created FROM article WHERE author_id = ?")) {
+                "SELECT id, title, content, author_id, date_created FROM article WHERE author_id = ? ORDER BY id DESC")) {
             stmt.setInt(1, authorId);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -129,14 +126,13 @@ public class ArticleDao {
         try (PreparedStatement stmt = connection.prepareStatement("DELETE FROM article WHERE id = ?")) {
             stmt.setObject(1, articleId);
             stmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
 
-    public void deleteUserAllArticle(int authorId) throws SQLException, IOException {
+    public void deleteUserAllArticle(int authorId) throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement(
                 "SELECT id FROM article WHERE author_id = ?")) {
             stmt.setInt(1, authorId);
