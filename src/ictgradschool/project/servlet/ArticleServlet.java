@@ -1,7 +1,5 @@
 package ictgradschool.project.servlet;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import ictgradschool.project.controller.ArticleController;
 import ictgradschool.project.controller.CommentListController;
 import ictgradschool.project.entity.Article;
@@ -15,10 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/articles/*")
@@ -41,14 +37,14 @@ public class ArticleServlet extends HttpServlet {
             else {
                 req.setAttribute("article", article);
                 req.setAttribute("comments", getCommentsByArticleId(articleId, resp));
-                req.setAttribute("author", getUserByArticleId(articleId, resp));
+                req.setAttribute("author", getUserById(article.getAuthorId(), resp));
                 req.getRequestDispatcher("/WEB-INF/article.jsp").forward(req, resp);
             }
         }
 
     }
 
-    private User getUserByArticleId(int id, HttpServletResponse resp) throws IOException, ServletException {
+    private User getUserById(int id, HttpServletResponse resp) throws IOException, ServletException {
         UserDao userDao = new UserDao();
         try {
             return userDao.getUserById(id);

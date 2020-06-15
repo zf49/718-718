@@ -22,8 +22,8 @@ public class CommentListController {
         return commentDAO.postNewComment(comment, articleId);
     }
 
-    public boolean deleteComment(int commentId) {
-        return commentDAO.deleteComment(commentId);
+    public void deleteComment(int commentId) {
+        commentDAO.deleteComment(commentId);
     }
 
 }
