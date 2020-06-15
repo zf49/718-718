@@ -33,9 +33,12 @@
 <c:forEach items="${a}" var="article">
     <div class="articles">
         <h1 class="title">Title:${article.title}</h1>
+<%--        TODO: format the date--%>
         <p class="date">Create Date: ${article.dateCreated}</p>
         <p class="date" id="${article.id}" name="id"> Article Id: ${article.id}</p>
+<%--        TODO: load author name instead of id--%>
         <p class="authorId">authorId: ${article.authorId}</p>
+<%--        TODO: split into paragraphs--%>
         <p class="content">content:${article.content}</p>
         <span>
             <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
