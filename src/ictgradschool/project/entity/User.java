@@ -5,8 +5,10 @@ import java.io.Serializable;
 public class User implements Serializable {
     private int id;
     private String username;
+    // TODO: No need to store `salt` and `hash` to session. Move'em to another class
     private String salt;
     private String passwordHash;
+    private String avatarName;
 
     public User() {}
 
@@ -15,6 +17,14 @@ public class User implements Serializable {
         this.username = username;
         this.salt = salt;
         this.passwordHash = passwordHash;
+    }
+
+    public User(int id, String username, String salt, String passwordHash, String avatarName) {
+        this.id = id;
+        this.username = username;
+        this.salt = salt;
+        this.passwordHash = passwordHash;
+        this.avatarName = avatarName;
     }
 
     public int getId() {
@@ -49,6 +59,14 @@ public class User implements Serializable {
         this.passwordHash = passwordHash;
     }
 
+    public String getAvatarName() {
+        return avatarName;
+    }
+
+    public void setAvatarName(String avatarName) {
+        this.avatarName = avatarName;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -56,6 +74,7 @@ public class User implements Serializable {
                 ", username='" + username + '\'' +
                 ", salt='" + salt + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +
+                ", avatarName='" + avatarName + '\'' +
                 '}';
     }
 }

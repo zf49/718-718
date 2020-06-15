@@ -1,24 +1,24 @@
-INSERT INTO user (id, username, salt, password_hash)
+INSERT INTO user (id, username, salt, password_hash, avatar_id)
 VALUES (1, 'Bret', 'aJKEa9uPIe2UlDJl49+4epDL+vLX+gKO7cmySipyqqk=',
-        'ZdPgJV9nM7Qu4F8XxixvlzAkO9YVzfzlblcRPXVT+whhMOHZygHIzDkA/Luokjk9ny9b2ZIZT3vowKnhcjEZYw=='),
+        'ZdPgJV9nM7Qu4F8XxixvlzAkO9YVzfzlblcRPXVT+whhMOHZygHIzDkA/Luokjk9ny9b2ZIZT3vowKnhcjEZYw==', 1),
        (2, 'Antonette', 'a14AaRWIrBY8zQb3uoKREeX7rpeM3PU+G3/QWJ2ZlrY=',
-        '6ZTSJU0+CvznZ9nTi4fMehIawcrO4eQwe5QlMUsmoi/+IdAv5Pv+FwrwJNhtP5Tf1BKSR5bYeVQWEECUbktajg=='),
+        '6ZTSJU0+CvznZ9nTi4fMehIawcrO4eQwe5QlMUsmoi/+IdAv5Pv+FwrwJNhtP5Tf1BKSR5bYeVQWEECUbktajg==', 2),
        (3, 'Samantha', '7PsV4Mp9jy7OM7JXDJ4G7LmqNvq3b5GLAIl7qxU8X94=',
-        'AE9+BNU62jEIFhirMexYsVJrVj/bqH9CZSZPWGZ4ZihY6NYoCcRcO85oHEvfsVCKHloNZpc3GumA5js2kaAMwA=='),
+        'AE9+BNU62jEIFhirMexYsVJrVj/bqH9CZSZPWGZ4ZihY6NYoCcRcO85oHEvfsVCKHloNZpc3GumA5js2kaAMwA==', 3),
        (4, 'Karianne', '73ku8UITkJ8pVOS+mK1tRoR5Hn27ZTOgcMIi5dfCRzg=',
-        'usCn31XyvZ7VUuzkIZsI1d+nUl5xB2A0ucS7Bgn/uiLaBBl+8pKKeCEs8qMDoEIp50db3YY+3avUXm9BOnSiBQ=='),
+        'usCn31XyvZ7VUuzkIZsI1d+nUl5xB2A0ucS7Bgn/uiLaBBl+8pKKeCEs8qMDoEIp50db3YY+3avUXm9BOnSiBQ==', 4),
        (5, 'Kamren', 'swhu+Z2C3Wp3HM3VZMonmPrc4j9zyygC+KEYLN0SvKg=',
-        'wMJ/k22hHybbKtGDqoHbVMto7WEP3JvrgQ1/0k6r+JuAaTV3SUoRZ+OikTOeBbQZOt4mqp6EQAbAzeHUmHmjdQ=='),
+        'wMJ/k22hHybbKtGDqoHbVMto7WEP3JvrgQ1/0k6r+JuAaTV3SUoRZ+OikTOeBbQZOt4mqp6EQAbAzeHUmHmjdQ==', 5),
        (6, 'Leopoldo_Corkery', 'y4SU2kEMGwMw4bLD8VvZ8yRdi59/HRt56usOhbLKrtw=',
-        'fzySwSzZoT+9w+fwZ8J2t03IgDHF5MjanfVayCoJXFiVl1kcV2Qvz4Bv2h6avGdHjFV8cQZAF0zDXcANHd0zrg=='),
+        'fzySwSzZoT+9w+fwZ8J2t03IgDHF5MjanfVayCoJXFiVl1kcV2Qvz4Bv2h6avGdHjFV8cQZAF0zDXcANHd0zrg==', 6),
        (7, 'Elwyn.Skiles', 'nbe2rn9eI+gH+0XCm7w9AhthQAm1Cas9kWOAs507BsI=',
-        'yZy1246mORuOzXUzW0eEmWF8OX+HOPgpu4jIP3kgs+A3lhWI8PW7ipCMaQsuJaAWd6iWio7jXibR1zlV3jgz6w=='),
+        'yZy1246mORuOzXUzW0eEmWF8OX+HOPgpu4jIP3kgs+A3lhWI8PW7ipCMaQsuJaAWd6iWio7jXibR1zlV3jgz6w==', 6),
        (8, 'Maxime_Nienow', '1DJt1JMBsLpIg6tm7UrRBPIFJskXB8+MjQS/IQ4v/Mg=',
-        'A4ky76Ue7U7OydN+6CQtquwyposxgipiNwqJU85afgqeWrQu9c7mDRy/zGJZHG7lIiBx9J/dtoK7w23q4HQbMA=='),
+        'A4ky76Ue7U7OydN+6CQtquwyposxgipiNwqJU85afgqeWrQu9c7mDRy/zGJZHG7lIiBx9J/dtoK7w23q4HQbMA==', 1),
        (9, 'Delphine', 'Ioxn2lwqEKwEoivibZYwyWX221poCEst8nKcFR4IX5A=',
-        's6eO+m8MdgQXaE22/VhZjekoOg1/WT+E2nRK6/vn3hyuqG6MFFY+TNmHas0dvUckFIFVItgU0YL3vn4jLT+R8w=='),
+        's6eO+m8MdgQXaE22/VhZjekoOg1/WT+E2nRK6/vn3hyuqG6MFFY+TNmHas0dvUckFIFVItgU0YL3vn4jLT+R8w==', 2),
        (10, 'Moriah.Stanton', 'BV7uKMb7DElEDKNvq/8N4TFNf6hzbCMZwDaJKs/pVDc=',
-        'PJ0VefYMHnC6PxvoAfaUCuUCwe9+s2Fv1kPV+Lcz/VhbazOJBXNCrSdqBw7Hxz6saYe2CMRXrS1YcfBJ/soCfA==');
+        'PJ0VefYMHnC6PxvoAfaUCuUCwe9+s2Fv1kPV+Lcz/VhbazOJBXNCrSdqBw7Hxz6saYe2CMRXrS1YcfBJ/soCfA==', 3);
 
 INSERT INTO user_detail (id, fname, lname, date_birth, descrip)
 VALUES (1, 'David', 'Bainbridge', '2001-01-01', 'Love basketball'),

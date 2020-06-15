@@ -40,8 +40,9 @@ public class UserDao {
 
     private User getUserByName(Connection connection, String username) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(
-                "SELECT id, username, salt, password_hash \n" +
+                "SELECT user.id, username, salt, password_hash, avatar.name as avatar_name\n" +
                         "FROM user\n" +
+                        "LEFT JOIN avatar ON user.avatar_id = avatar.id\n" +
                         "WHERE username = ?;\n")) {
             statement.setString(1, username);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -86,6 +87,9 @@ public class UserDao {
         String username = resultSet.getString(2);
         String salt = resultSet.getString(3);
         String passwordHash = resultSet.getString(4);
-        return new User(id, username, salt, passwordHash);
+        String avatarName = resultSet.getString(5);
+        return new User(id, username, salt, passwordHash, avatarName);
     }
+
+
 }
