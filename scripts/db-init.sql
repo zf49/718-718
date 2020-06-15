@@ -8,8 +8,9 @@ DROP TABLE IF EXISTS avatar;
 
 CREATE TABLE IF NOT EXISTS avatar
 (
-    id   INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(128),
+    id            INT NOT NULL AUTO_INCREMENT,
+    name          VARCHAR(128),
+    is_predefined BOOLEAN,
     PRIMARY KEY (id)
 );
 
@@ -20,8 +21,20 @@ CREATE TABLE IF NOT EXISTS user
     salt          CHAR(44)     NOT NULL,
     password_hash CHAR(88)     NOT NULL,
     avatar_id     INT,
+    detail_id     INT,
     PRIMARY KEY (id),
-    FOREIGN KEY (avatar_id) REFERENCES avatar (id)
+    FOREIGN KEY (avatar_id) REFERENCES avatar (id),
+    FOREIGN KEY (detail_id) REFERENCES user_detail (id)
+);
+
+CREATE TABLE IF NOT EXISTS user_detail
+(
+    id         INT NOT NULL AUTO_INCREMENT,
+    fname      VARCHAR(128),
+    lname      VARCHAR(128),
+    date_birth DATE,
+    descrip    TEXT,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS article
@@ -57,3 +70,12 @@ CREATE TABLE IF NOT EXISTS auth
     UNIQUE KEY (token),
     FOREIGN KEY (user_id) REFERENCES user (id)
 );
+
+INSERT INTO avatar (id, name, is_predefined)
+VALUES (1, 'Pikachu.png', true),
+       (2, 'Jigglypuff.png', true),
+       (3, 'Bulbasaur.png', true),
+       (4, 'Charmander.png', true),
+       (5, 'Squirtle.png', true),
+       (6, 'Geodude.png', true),
+       (7, 'Farfetchd.png', true);

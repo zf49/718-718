@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @WebServlet("/avatar-upload")
 public class AvatarUploadServlet extends HttpServlet {
@@ -25,9 +26,12 @@ public class AvatarUploadServlet extends HttpServlet {
         super.init();
 
         System.out.println("mark 1");
+        initUpload();
+    }
 
+    private void initUpload() {
         // Get the upload folder, ensure it exists.
-        uploadsFolder = new File(getServletContext().getRealPath("/assets/images"));
+        uploadsFolder = new File(getServletContext().getRealPath("/avatar"));
         if (!uploadsFolder.exists()) {
             uploadsFolder.mkdirs();
         }
@@ -47,22 +51,38 @@ public class AvatarUploadServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         // Set up file upload mechanism
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        factory.setRepository(tempFolder);
-        ServletFileUpload upload = new ServletFileUpload(factory);
+        ServletFileUpload upload = getUpload();
 
         try {
             List<FileItem> fileItems = upload.parseRequest(req);
-            for (FileItem fileItem : fileItems) {
-                System.out.println("mark 2");
-                System.out.println(fileItem.getFieldName());
-                System.out.println(fileItem.getName());
-                File imageFile = new File(uploadsFolder, fileItem.getName());
-                fileItem.write(imageFile);
-            }
+            Optional<FileItem> fileItemOptional = fileItems.stream()
+                    .filter(fileItem -> fileItem.getFieldName().equals("avatar"))
+                    .findFirst();
+            FileItem fileItem = fileItemOptional.get();
+            String name = upload(fileItem);
+
             resp.sendRedirect("./avatar-upload");
         } catch (Exception e) {
             throw new ServletException(e);
         }
     }
+
+    private String upload(FileItem fileItem) throws Exception {
+        String name = fileItem.getName();
+        File imageFile = new File(uploadsFolder, name);
+        while (imageFile.exists()) {
+            // TODO: fine grain the name management
+            name = imageFile.getName() + "-2";
+            imageFile = new File(uploadsFolder, name);
+        }
+        fileItem.write(imageFile);
+        return name;
+    }
+
+    private ServletFileUpload getUpload() {
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        factory.setRepository(tempFolder);
+        return new ServletFileUpload(factory);
+    }
 }
+

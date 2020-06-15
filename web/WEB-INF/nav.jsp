@@ -23,7 +23,7 @@
                     <a href="<c:url value="/userArticles"/>">User Article</a>
                 </li>
                 <li>
-                    <form action="./sign-out" method="post">
+                    <form action="/sign-out" method="post">
                         <input type="submit" value="Sign Out">
                     </form>
                 </li>
