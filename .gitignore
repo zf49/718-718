@@ -46,4 +46,4 @@ database.properties
 playground.sql
 
 .idea/**/sqldialects.xml
-
+.idea/sonarlint

@@ -26,7 +26,7 @@ public class EditArticleServlet extends HttpServlet {
             article = articleDao.getArticleById(articleId);
         }
         req.setAttribute("article", article);
-        req.getRequestDispatcher("/WEB-INF/editArticle.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/edit-article.jsp").forward(req, resp);
     }
 
     @Override
