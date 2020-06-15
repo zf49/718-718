@@ -12,15 +12,15 @@
 <form action="./avatar-select" method="post">
     <div>
         <div>
-            <input type="radio" id="bul" name="avatar" value="Bulbasaur.png">
+            <input type="radio" id="bul" name="avatarName" value="Bulbasaur.png">
             <label for="bul">
                 <img src="${pageContext.request.contextPath}/avatar/Bulbasaur.png" alt="">
             </label><br>
-            <input type="radio" id="cha" name="avatar" value="Charmander.png">
+            <input type="radio" id="cha" name="avatarName" value="Charmander.png">
             <label for="cha">
                 <img src="${pageContext.request.contextPath}/avatar/Charmander.png" alt="">
             </label><br>
-            <input type="radio" id="far" name="avatar" value="Farfetchd.png">
+            <input type="radio" id="far" name="avatarName" value="Farfetchd.png">
             <label for="far">
                 <img src="${pageContext.request.contextPath}/avatar/Farfetchd.png" alt="">
             </label>
