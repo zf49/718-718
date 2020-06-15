@@ -27,7 +27,7 @@ public class AvatarUploadServlet extends HttpServlet {
         System.out.println("mark 1");
 
         // Get the upload folder, ensure it exists.
-        uploadsFolder = new File(getServletContext().getRealPath("/assets/images"));
+        uploadsFolder = new File(getServletContext().getRealPath("/avatar"));
         if (!uploadsFolder.exists()) {
             uploadsFolder.mkdirs();
         }
