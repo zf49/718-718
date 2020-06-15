@@ -11,7 +11,7 @@
 <jsp:include page="nav.jsp" />
 
 <p>TODO: articles here</p>
-<a href="./articles">All Articles</a><br>
+<a href="${pageContext.request.contextPath}/articles">All Articles</a><br>
 
 </body>
 </html>

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form action="./avatar-upload" method="post" enctype="multipart/form-data">
+<form action="${pageContext.request.contextPath}/avatar-upload" method="post" enctype="multipart/form-data">
     <div>
         <div>
             <label for="avatar-input">Image:</label><br>

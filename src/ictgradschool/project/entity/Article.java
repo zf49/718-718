@@ -24,6 +24,16 @@ public class Article implements Comparable<Article> {
         this.dateCreated = dateCreated;
     }
 
+
+    public String getBriefContent() {
+        if(content.length()<=20){
+            return content;
+        }else {
+            content = content.substring(0, 20) + "...";
+            return content;
+        }
+    }
+
     public int getId() {
         return id;
     }
@@ -84,10 +94,9 @@ public class Article implements Comparable<Article> {
         Article article = new Article();
         article.id = 1234;
         article.title = "Some title";
-        article.content = "Some content";
-        article.dateCreated = LocalDateTime.now();
-        String json = new ObjectMapper().writeValueAsString(article);
-        System.out.println(json);
+        article.content = "Some contentakusdha ukshdklaj hdskajhsd klashd kajhsdlkajh sdkajshkajsh kjaslkdj a";
+        article.getBriefContent();
+        System.out.println(article);
     }
 
 }

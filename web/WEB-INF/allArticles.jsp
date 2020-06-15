@@ -16,16 +16,16 @@
           <div class="articles">
               <h3 class="title">Title:${article.title}</h3>
               <p class="date">Create Date: ${article.dateCreated}</p>
-              <p class="authorId">authorId: ${article.authorId}</p>
-              <p class="content">content: ${article.content.substring(0,50)}...</p>
+              <p class="authorId">authorId: ${article.id}</p>
+              <p class="content">content: ${article.content}...</p>
               <a href="<c:url value="/articles/${article.id}"/>">Show Details</a>
 
               <c:if test="${article.authorId == user.id}">
                   <span>
-                      <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
+                      <a href="<c:url value="${pageContext.request.contextPath}/edit/articleId?articleId=${article.id}"/>">Edit</a>
                   </span>
                   <span>
-                      <a href="<c:url value="/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
+                      <a href="<c:url value="${pageContext.request.contextPath}/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
                   </span>
               </c:if>
           </div>

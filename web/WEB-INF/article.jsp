@@ -19,10 +19,10 @@
         <span>${article.dateCreated}</span>
         <c:if test="${article.authorId == user.id}">
             <span>
-                <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
+                <a href="<c:url value="${pageContext.request.contextPath}/edit/articleId?articleId=${article.id}"/>">Edit</a>
             </span>
             <span>
-                <a href="<c:url value="/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
+                <a href="<c:url value="${pageContext.request.contextPath}/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
             </span>
         </c:if>
     </div>
@@ -39,13 +39,13 @@
                 <span>${comment.dateCreated}</span>
                 <c:if test="${comment.authorId == user.id || author.id == user.id}">
                     <span>
-                        <a href="<c:url value="/articles/${article.id}/delete/commentId?commentId=${comment.id}"/>">Delete</a>
+                        <a href="<c:url value="${pageContext.request.contextPath}/articles/${article.id}/delete/commentId?commentId=${comment.id}"/>">Delete</a>
                     </span>
                 </c:if>
             </dd>
         </c:forEach>
     </dl>
-    <form action="/articles/${article.id}/userId?userId=${user.id}" method="post">
+    <form action="${pageContext.request.contextPath}/articles/${article.id}/userId?userId=${user.id}" method="post">
         <label for="enterComment">${user.username}: </label>
         <textarea id="enterComment" name="commentContent" rows="5" cols="80">enter comments here</textarea>
         <input type="submit" value="Comment">

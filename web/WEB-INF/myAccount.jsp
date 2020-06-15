@@ -12,7 +12,7 @@
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
 
-<form action="./update?userId=${user.id}" method="post">
+<form action="${pageContext.request.contextPath}/update?userId=${user.id}" method="post">
     <div>
         <label for="username">Username: </label>
         <input type="text" name="username" id="username" required value="${user.username}">
@@ -29,7 +29,7 @@
         <input type="submit" value="Update (unfinished)">
     </div>
 </form>
-<form action="./delete?userId=${user.id}" method="post">
+<form action="${pageContext.request.contextPath}/delete?userId=${user.id}" method="post">
     <input type="submit" value="Delete Account">
 </form>
 </body>

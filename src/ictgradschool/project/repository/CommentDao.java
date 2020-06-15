@@ -9,11 +9,10 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
-// TODO: please rename this to `CommentDao`
-public class CommentDAO {
+public class CommentDao {
     private Connection connection;
 
-    public CommentDAO() {
+    public CommentDao() {
         try {
             this.connection =  DBConnectionUtils.getConnectionFromClasspath("database.properties");
         } catch (IOException | SQLException e) {
@@ -22,6 +21,7 @@ public class CommentDAO {
     }
 
     public List<Comment> getCommentsByArticleId(int targetArticleId) throws SQLException, IOException {
+        // TODO: use join to get user info
         try (PreparedStatement statement = connection.prepareStatement(
                 "SELECT id, content, date_created, author_id, article_id FROM comment WHERE article_id = ?;")) {
             statement.setInt(1, targetArticleId);
@@ -60,6 +60,7 @@ public class CommentDAO {
                 "SELECT content, date_created, author_id, article_id FROM comment WHERE id = ?;")) {
             statement.setInt(1, commentId);
             try (ResultSet resultSet = statement.executeQuery()) {
+                // TODO: extract method to make comment object
                 Comment comment = new Comment();
                 comment.id = commentId;
                 while (resultSet.next()) {
@@ -87,7 +88,7 @@ public class CommentDAO {
     }
 
     public static void main(String[] args) throws SQLException, IOException {
-        List<Comment> comments = new CommentDAO().getCommentsByArticleId(1);
+        List<Comment> comments = new CommentDao().getCommentsByArticleId(1);
         for (Comment comment : comments)
         System.out.println(comment.getAuthorName());
     }
