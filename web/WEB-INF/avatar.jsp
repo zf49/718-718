@@ -25,6 +25,7 @@
         <button type="submit">Confirm</button>
     </div>
 </form>
+
 <form action="${pageContext.request.contextPath}/avatar" method="post" enctype="multipart/form-data">
     <div>
         <div>

@@ -23,6 +23,5 @@ public class HomeServlet extends HttpServlet {
         req.setAttribute("a", articleList);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/home.jsp");
         dispatcher.forward(req,resp);
-
     }
 }
