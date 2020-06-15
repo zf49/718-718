@@ -1,33 +1,33 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>${article.title}</title>
 </head>
 <body>
-
+<% pageContext.setAttribute("newLineChar", "\n"); %>
     <jsp:include page="nav.jsp">
         <jsp:param name="user" value="${user}"/>
     </jsp:include>
-
 <div>
     <h1>${article.title}</h1>
     <div>
-        <span>${author.username}</span>
-        <span>${article.dateCreated}</span>
+        <p>Author: ${author.username}</p>
+        <p>Create Date: ${article.date}</p>
         <c:if test="${article.authorId == user.id}">
-            <span>
-                <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
-            </span>
+            <p>
+                <a href="<c:url value="${pageContext.request.contextPath}/edit/articleId?articleId=${article.id}"/>">Edit</a>
+            </p>
             <form action="${pageContext.request.contextPath}/delete/articleId?articleId=${article.id}" method="post">
                 <input type="submit" value="Delete">
             </form>
         </c:if>
     </div>
     <div>
-        <p>${article.content}</p>
+        <p>${fn:replace(article.content, newLineChar, "<br>")}</p>
     </div>
 </div>
 <div>
@@ -36,7 +36,7 @@
         <c:forEach var="comment" items="${comments}">
             <dt>${comment.authorName}:</dt>
             <dd><span>${comment.content}</span><br>
-                <span>${comment.dateCreated}</span>
+                <span>${comment.date}</span>
                 <c:if test="${comment.authorId == user.id || author.id == user.id}">
                     <form action="${pageContext.request.contextPath}/delete/commentId?commentId=${comment.id}" method="post">
                         <input type="submit" value="Delete">

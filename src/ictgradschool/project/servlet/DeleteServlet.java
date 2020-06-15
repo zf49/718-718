@@ -2,11 +2,9 @@ package ictgradschool.project.servlet;
 
 import ictgradschool.project.controller.CommentListController;
 import ictgradschool.project.controller.UserController;
-import ictgradschool.project.entity.Article;
 import ictgradschool.project.repository.ArticleDao;
 import ictgradschool.project.repository.UserDao;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

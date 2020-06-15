@@ -10,7 +10,7 @@
 
 <jsp:include page="nav.jsp" />
 
-<form action="./update?userId=${user.id}" method="post">
+<form action="" method="post">
     <fieldset>
         <legend>Basic Information</legend>
         <div>
@@ -49,8 +49,10 @@
         <input type="submit" value="Update (unfinished)">
     </div>
 </form>
+
 <form action="${pageContext.request.contextPath}/delete/userId?userId=${user.id}" method="post">
     <input type="submit" value="Delete Account">
 </form>
+
 </body>
 </html>

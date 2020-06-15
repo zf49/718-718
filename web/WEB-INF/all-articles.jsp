@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html>
 <html lang="en">
 <head>
@@ -15,16 +17,16 @@
       <c:forEach items="${a}" var="article">
           <div class="articles">
               <h3 class="title">Title:${article.title}</h3>
-              <p class="date">Create Date: ${article.dateCreated}</p>
-              <p class="authorId">authorId: ${article.authorId}</p>
+              <p class="date">Create Date: ${article.date}</p>
+              <p class="authorId">author Name: ${article.authorName}</p>
               <p class="content">content: ${article.content}...</p>
-              <a href="<c:url value="/articles/${article.id}"/>">Show Details</a>
-
-
+              <p><a href="<c:url value="${pageContext.request.contextPath}/articles/${article.id}"/>">Show Details</a></p>
               <c:if test="${article.authorId == user.id}">
-                  <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
+                  <p>
+                      <a href="<c:url value="${pageContext.request.contextPath}/edit/articleId?articleId=${article.id}"/>">Edit</a>
+                  </p>
                   <form action="${pageContext.request.contextPath}/delete/articleId?articleId=${article.id}" method="post">
-                        <input type="submit" value="Delete">
+                      <input type="submit" value="Delete">
                   </form>
               </c:if>
           </div>

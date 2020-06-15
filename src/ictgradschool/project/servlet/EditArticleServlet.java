@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet(urlPatterns = "/edit/*")
 public class EditArticleServlet extends HttpServlet {
@@ -19,11 +18,11 @@ public class EditArticleServlet extends HttpServlet {
         ArticleDao articleDao = new ArticleDao();
         int articleId = Integer.parseInt(req.getParameter("articleId"));
         req.setAttribute("article", articleDao.getArticleById(articleId));
-        req.getRequestDispatcher("/WEB-INF/editArticle.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/edit-article.jsp").forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         ArticleDao articleDao = new ArticleDao();
         int articleId = Integer.parseInt(req.getParameter("articleId"));
         Article article = articleDao.getArticleById(articleId);
