@@ -67,6 +67,9 @@ public class User implements Serializable {
         this.avatarName = avatarName;
     }
 
+    public String getAvatarPath() {
+        return "avatar/" + avatarName;
+    }
     @Override
     public String toString() {
         return "User{" +

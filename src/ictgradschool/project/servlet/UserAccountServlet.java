@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(urlPatterns = "/account/*")
+@WebServlet(urlPatterns = "/account")
 public class UserAccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

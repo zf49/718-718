@@ -34,6 +34,7 @@ public class EditArticleServlet extends HttpServlet {
         ArticleDao articleDao = new ArticleDao();
         int articleId = Integer.parseInt(req.getParameter("articleId"));
         Article article  = null;
+        // TODO: extract to another servlet
         if (articleId == 0) {                               // Add a new article
             article = new Article();
             article.title = req.getParameter("articleTitle");
