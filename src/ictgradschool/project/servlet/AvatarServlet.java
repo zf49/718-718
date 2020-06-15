@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @WebServlet("/avatar-upload")
-public class AvatarUploadServlet extends HttpServlet {
+public class AvatarServlet extends HttpServlet {
 
     private File uploadsFolder; // The folder where article images should be uploaded
     private File tempFolder; // The temp folder required by the file-upload logic
