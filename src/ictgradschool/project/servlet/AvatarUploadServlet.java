@@ -59,13 +59,24 @@ public class AvatarUploadServlet extends HttpServlet {
                     .filter(fileItem -> fileItem.getFieldName().equals("avatar"))
                     .findFirst();
             FileItem fileItem = fileItemOptional.get();
-            File imageFile = new File(uploadsFolder, fileItem.getName());
-            fileItem.write(imageFile);
+            String name = upload(fileItem);
 
             resp.sendRedirect("./avatar-upload");
         } catch (Exception e) {
             throw new ServletException(e);
         }
+    }
+
+    private String upload(FileItem fileItem) throws Exception {
+        String name = fileItem.getName();
+        File imageFile = new File(uploadsFolder, name);
+        while (imageFile.exists()) {
+            // TODO: fine grain the name management
+            name = imageFile.getName() + "-2";
+            imageFile = new File(uploadsFolder, name);
+        }
+        fileItem.write(imageFile);
+        return name;
     }
 
     private ServletFileUpload getUpload() {
