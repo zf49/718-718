@@ -8,6 +8,8 @@
 </head>
 <body>
 
+<jsp:include page="nav.jsp" />
+
 <img src="${pageContext.request.contextPath}/avatar/${user.avatarName}" alt="">
 <form action="./avatar-select" method="post">
     <div>
