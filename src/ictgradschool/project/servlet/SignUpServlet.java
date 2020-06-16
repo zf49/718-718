@@ -28,7 +28,6 @@ public class SignUpServlet extends HttpServlet {
         UserController userController = new UserController(new UserDao());
         User user = userController.signUp(username, password, confirmPassword);
         req.getSession().setAttribute("user", user);
-        // TODO: add context path
-        resp.sendRedirect(user != null ? "./home" : "./sign-up-failure");
+        resp.sendRedirect(req.getContextPath() + (user != null ? "/home" : "/sign-up-failure"));
     }
 }

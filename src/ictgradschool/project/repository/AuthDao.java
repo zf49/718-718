@@ -1,5 +1,6 @@
 package ictgradschool.project.repository;
 
+import ictgradschool.project.entity.Auth;
 import ictgradschool.project.entity.User;
 
 import java.io.IOException;
