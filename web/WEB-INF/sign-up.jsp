@@ -8,6 +8,7 @@
     <title>Sign Up</title>
     <jsp:include page="bootstrap.jsp" />
     <link rel="stylesheet" href="<c:url value="/css/sign-in-floating-labels.css" />">
+    <script type="text/javascript" src="<c:url value="/javascript/sign-up.js" />"></script>
 </head>
 <body>
 <jsp:include page="nav.jsp" />
