@@ -10,3 +10,8 @@
     border-bottom-left-radius: 0;
     border-left: 0;
 }
+
+.homepageButton{
+    float: left;
+    margin-right: 1%;
+}
