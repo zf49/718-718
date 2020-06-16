@@ -5,8 +5,13 @@ import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.UserDao;
 import ictgradschool.project.util.HashInfo;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static ictgradschool.project.util.PasswordUtil.*;
 
@@ -44,6 +49,34 @@ public class UserController {
 
     public void changePassword(Token token, String newPassword, String confirmNewPassword) {
         throw new UnsupportedOperationException();
+    }
+
+    public User changeUser(HttpServletRequest req, int userId) throws IOException {
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        String confirmPassword = req.getParameter("confirmPassword");
+        if (!password.equals(confirmPassword)) {
+            return null;
+        }
+        HashInfo hashInfo = quickHash(password);
+        return userDao.changeUser(userId, username, hashInfo.saltBase64, hashInfo.hashBase64);
+    }
+
+    public void changeUserDetail(HttpServletRequest req, User user) throws IOException {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = format.parse(req.getParameter("dateBirth"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int detailId = Integer.parseInt(req.getParameter("detailId"));
+        user.setDetailId(detailId);
+        user.setFname(req.getParameter("fname"));
+        user.setLname(req.getParameter("lname"));
+        user.setDateBirth(date);
+        user.setDescription(req.getParameter("description"));
+        userDao.updateUserDetail(user);
     }
 
     public User getUserDetails(User user) throws IOException {

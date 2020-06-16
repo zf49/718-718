@@ -14,6 +14,7 @@ public class User implements Serializable {
     private String lname;
     private Date dateBirth;
     private String description;
+    private int detailId;
 
     public User() {}
 
@@ -106,6 +107,14 @@ public class User implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getDetailId() {
+        return detailId;
+    }
+
+    public void setDetailId(int detailId) {
+        this.detailId = detailId;
     }
 
     @Override

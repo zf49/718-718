@@ -58,20 +58,71 @@ public class UserDao {
     public User getUserDetails(User user) throws IOException, SQLException {
         try (Connection connection = getConnectionFromClasspath("database.properties")) {
             try (PreparedStatement statement = connection.prepareStatement(
-                    "SELECT user.id, fname, lname, date_birth, descrip FROM user " +
+                    "SELECT detail_id, fname, lname, date_birth, descrip FROM user " +
                             "LEFT JOIN user_detail ON user.detail_id = user_detail.id WHERE user.id = ?;")) {
                 statement.setInt(1, user.getId());
                 try (ResultSet rs = statement.executeQuery()) {
                     while (rs.next()) {
+                        user.setDetailId(rs.getInt(1));
                         user.setFname(rs.getString(2));
                         user.setLname(rs.getString(3));
-                        user.setDateBirth(rs.getDate(4));
+                        Date date = rs.getDate(4);
+                        if (date == null)
+                            user.setDateBirth(null);
+                        else
+                            user.setDateBirth(new java.util.Date(date.getTime()));
                         user.setDescription(rs.getString(5));
                     }
                 }
             }
         }
         return user;
+    }
+
+    public void updateUserDetail(User user) throws IOException {
+        try (Connection connection = getConnectionFromClasspath("database.properties")) {
+            Integer detailId = user.getDetailId();
+            if (detailId == null || detailId == 0)
+                addUserDetails(user, connection);
+            else {
+                updateUserDetails(user, connection);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateUserDetails(User user, Connection connection) throws SQLException {
+        try (PreparedStatement stmt = connection.prepareStatement(
+                "UPDATE user_detail SET fname = ?, lname = ?, date_birth = ?, descrip = ? WHERE id = ?;")) {
+            stmt.setInt(5, user.getDetailId());
+            transferUserDetailToStatement(user, stmt);
+        }
+    }
+
+    public void addUserDetails(User user) {
+        // TODO
+    }
+
+    private void addUserDetails(User user, Connection connection) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(
+                "INSERT INTO user_detail (fname, lname, date_birth, descrip) VALUES (?,?,?,?);")) {
+            transferUserDetailToStatement(user, statement);
+        }
+        int detailId = getLastInsertedId(connection);
+        try (PreparedStatement stmt = connection.prepareStatement("UPDATE user SET detail_id = ? WHERE id = ?")) {
+            stmt.setInt(1, detailId);
+            stmt.setInt(2, user.getId());
+            stmt.executeUpdate();
+        }
+    }
+
+    private void transferUserDetailToStatement(User user, PreparedStatement statement) throws SQLException {
+        statement.setString(1, user.getFname());
+        statement.setString(2, user.getLname());
+        statement.setDate(3, new Date(user.getDateBirth().getTime())); // TODO how to convert sql.Date to util.Date
+        statement.setString(4, user.getDescription());
+        statement.executeUpdate();
     }
 
     public User addUser(String username, String saltBase64, String hashBase64) throws IOException {
@@ -86,6 +137,23 @@ public class UserDao {
                 statement.executeUpdate();
             }
             int id = getLastInsertedId(connection);
+            return getUserById(connection, id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public User changeUser(int id, String username, String saltBase64, String hashBase64) throws IOException {
+        try (Connection connection = getConnectionFromClasspath("database.properties")) {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE user SET username = ?, salt = ?, password_hash = ? WHERE id = ?;")) {
+                statement.setString(1, username);
+                statement.setString(2, saltBase64);
+                statement.setString(3, hashBase64);
+                statement.setInt(4, id);
+                statement.executeUpdate();
+            }
             return getUserById(connection, id);
         } catch (SQLException e) {
             e.printStackTrace();
