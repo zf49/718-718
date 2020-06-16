@@ -38,7 +38,7 @@
         </div>
         <div>
             <label for="date_birth">Date of Birth: </label>
-            <input type="date" name="dateBirth" id="date_birth" value="${user.dateBirth}">
+            <input type="date" name="dateBirth" id="date_birth" value="${user.date}">
         </div>
         <div>
             <label for="description">Introduce Yourself: </label>
