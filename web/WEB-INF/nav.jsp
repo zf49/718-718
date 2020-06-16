@@ -4,38 +4,38 @@
 
 <%--TODO: add home link--%>
 <%--TODO: No add article if not signed in--%>
-<header style="background-color: gainsboro">
-    <button onclick="location.href='<c:url value="/home"/>'">Homepage</button>
+<header class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+        <li class="nav-item">
+            <a class="nav-link" href="<c:url value="/home"/>">Home</a>
+        </li>
     <c:choose>
         <c:when test="${user == null}">
-            <ul>
-                <li>You are not signed in.</li>
-                <li>
-                    <button onclick="location.href='<c:url value="sign-up"/>'">Sign Up</button>
-                </li>
-                <li>
-                    <button onclick="location.href='<c:url value="sign-in"/>'">Sign In</button>
-                </li>
-            </ul>
+            <li class="nav-item">
+                <button class="btn nav-link" onclick="location.href='<c:url value="sign-in"/>'">Sign In</button>
+            </li>
+            <li class="nav-item">
+                <button class="btn nav-link" onclick="location.href='<c:url value="sign-up"/>'">Sign Up</button>
+            </li>
         </c:when>
         <c:otherwise>
-            <ul>
-                <li>
-                    <a href="<c:url value="/avatar"/>">
-                        <img src="<c:url value="/${user.avatarPath}"/>" alt="avatar">
-                    </a>
-                </li>
-                <li>Hi, <a href="<c:url value="/account"/>">${user.username}</a></li>
-                <li><a href="<c:url value="/new-article"/>">Add a New Article</a></li>
-                <li>
-                    <a href="<c:url value="/user/${user.id}"/>">My Homepage</a>
-                </li>
-                <li>
-                    <form action="<c:url value="/sign-out"/>" method="post">
-                        <input type="submit" value="Sign Out">
-                    </form>
-                </li>
-            </ul>
+            <li class="nav-item">
+<%--                <a href="<c:url value="/avatar"/>">--%>
+<%--                    <img src="<c:url value="/${user.avatarPath}"/>" alt="avatar">--%>
+<%--                </a>--%>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="<c:url value="/account"/>">${user.username}</a></li>
+            <li class="nav-item"><a class="nav-link" href="<c:url value="/new-article"/>">Write Article</a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/user/${user.id}"/>">My Articles</a>
+            </li>
+            <li class="nav-item">
+                <form class="form-inline" action="<c:url value="/sign-out"/>" method="post">
+<%--                    <input class="btn nav-link" type="submit" value="Sign Out">--%>
+                    <button class="btn nav-link" type="submit">Sign Out</button>
+                </form>
+            </li>
         </c:otherwise>
     </c:choose>
+    </ul>
 </header>
