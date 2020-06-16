@@ -33,7 +33,7 @@
         </small>
     </div>
     <div>
-        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign Up">
+        <input class="btn btn-lg btn-primary btn-block" id="submit" type="submit" value="Sign Up" disabled>
     </div>
 </form>
 </body>

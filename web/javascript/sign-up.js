@@ -4,26 +4,31 @@ window.addEventListener('load', () => {
     let passwordInput = document.getElementById('password');
     let confirmPasswordInput = document.getElementById('confirmPassword');
     let passwordsDontMatchLabel = document.getElementById('password-dont-match');
+    let submitButton = document.getElementById('submit');
 
-    let passwordMatch = false;
+    let usernameAvailable = true;
+    let passwordMatch = true;
 
     usernameInput.addEventListener('input', () => {
         console.log(usernameInput.value);
     });
 
     passwordInput.addEventListener('input', () => {
-        console.log(passwordInput.value);
         updatePasswordMatch();
     });
 
     confirmPasswordInput.addEventListener('input', () => {
-        console.log(confirmPasswordInput.value);
         updatePasswordMatch();
     });
 
     function updatePasswordMatch() {
         passwordMatch = passwordInput.value === confirmPasswordInput.value;
         setLabelShow(passwordsDontMatchLabel, !passwordMatch);
+        updateSubmitEnabled();
+    }
+
+    function updateSubmitEnabled() {
+        submitButton.disabled = !(usernameAvailable && passwordMatch);
     }
 
     function setLabelShow(label, show) {
