@@ -78,7 +78,7 @@ public class UserController {
     }
 
     public void changeUserDetail(HttpServletRequest req, User user) throws IOException {
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
             date = format.parse(req.getParameter("dateBirth"));
