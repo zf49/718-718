@@ -20,11 +20,9 @@ public class UsernameAvailabilityServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getPathInfo().substring(1);
-        System.out.println(username);
-
         UserDao userDao = new UserDao();
-        User user = userDao.getUserByName(username);
 
+        User user = userDao.getUserByName(username);
         UsernameAvailability availability = new UsernameAvailability(username, user == null);
         String availabilityJson = new ObjectMapper().writeValueAsString(availability);
 
