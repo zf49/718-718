@@ -11,6 +11,7 @@ window.addEventListener('load', () => {
 
     usernameInput.addEventListener('input', () => {
         console.log(usernameInput.value);
+        // TODO: check username availability
     });
 
     passwordInput.addEventListener('input', () => {
