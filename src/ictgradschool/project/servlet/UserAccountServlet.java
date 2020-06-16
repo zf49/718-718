@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet(urlPatterns = "/account")
 public class UserAccountServlet extends HttpServlet {
@@ -25,15 +24,13 @@ public class UserAccountServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getPathInfo().contains("delete"))
-            this.doDelete(req, resp);
-        else
-            this.doPut(req, resp);
-    }
+        UserController userController = new UserController(new UserDao());
+        User user = (User) req.getSession().getAttribute("user");
+        userController.changeUserDetail(req, user);
 
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // TODO update account information
+        user = userController.changeUser(req, user.getId());
+        if (user != null)
+            req.getSession().setAttribute("user", user);
     }
 
 }
