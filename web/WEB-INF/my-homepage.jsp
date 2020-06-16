@@ -3,7 +3,9 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <jsp:include page="bootstrap.jsp" />
     <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
     <title>${user.username}'s Homepage</title>
