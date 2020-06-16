@@ -51,6 +51,21 @@ public class UserController {
         throw new UnsupportedOperationException();
     }
 
+    public void addUserDetail(HttpServletRequest req, User user) throws IOException {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = format.parse(req.getParameter("dateBirth"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        user.setDateBirth(date);
+        user.setFname(req.getParameter("fname"));
+        user.setLname(req.getParameter("lname"));
+        user.setDescription(req.getParameter("description"));
+        userDao.addUserDetails(user);
+    }
+
     public User changeUser(HttpServletRequest req, int userId) throws IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");

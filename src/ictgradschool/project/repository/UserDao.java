@@ -100,8 +100,12 @@ public class UserDao {
         }
     }
 
-    public void addUserDetails(User user) {
-        // TODO
+    public void addUserDetails(User user) throws IOException {
+        try (Connection connection = getConnectionFromClasspath("database.properties")) {
+            addUserDetails(user, connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void addUserDetails(User user, Connection connection) throws SQLException {
@@ -120,7 +124,7 @@ public class UserDao {
     private void transferUserDetailToStatement(User user, PreparedStatement statement) throws SQLException {
         statement.setString(1, user.getFname());
         statement.setString(2, user.getLname());
-        statement.setDate(3, new Date(user.getDateBirth().getTime())); // TODO how to convert sql.Date to util.Date
+        statement.setDate(3, new Date(user.getDateBirth().getTime()));
         statement.setString(4, user.getDescription());
         statement.executeUpdate();
     }
