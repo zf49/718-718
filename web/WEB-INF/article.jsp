@@ -55,7 +55,6 @@
     <hr>
     <c:if test="${user != null}">
         <form action="./${article.id}/comment?userId=${user.id}" method="post">
-<%--            <label for="enterComment">${user.username}: </label>--%>
             <textarea id="enterComment" name="commentContent" rows="5" cols="80" class="form-control form-control-dark w-100">Enter comments here</textarea>
     <br>
             <input type="submit" class="btn btn-sm btn-outline-secondary" value="Comment">
