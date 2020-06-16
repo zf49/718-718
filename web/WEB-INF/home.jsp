@@ -8,9 +8,6 @@
 </head>
 <body>
 
-<%--<jsp:include page="nav.jsp" />--%>
-<%--<p>TODO: articles here</p>--%>
-<%--<a href="${pageContext.request.contextPath}/articles">All Articles</a><br>--%>
 <jsp:include page="nav.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
@@ -21,14 +18,14 @@
         <p class="date">Create Date: ${article.date}</p>
         <p class="authorId">author Name: ${article.authorName}</p>
         <p class="content">content: ${article.content}...</p>
-        <a href="<c:url value="${pageContext.request.contextPath}/articles/${article.id}"/>">Show Details</a>
+        <a href="<c:url value="/articles/${article.id}"/>">Show Details</a>
         <c:if test="${article.authorId == user.id}">
-                  <span>
-                      <a href="<c:url value="${pageContext.request.contextPath}/edit/articleId?articleId=${article.id}"/>">Edit</a>
-                  </span>
             <span>
-                      <a href="<c:url value="${pageContext.request.contextPath}/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
-                  </span>
+                <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
+            </span>
+            <span>
+                <a href="<c:url value="/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
+            </span>
         </c:if>
     </div>
 </c:forEach>

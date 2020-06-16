@@ -22,7 +22,7 @@ public class ArticleDao {
         List<Article> articles = new ArrayList<>();
         try (Statement statement = connection.createStatement()) {
             try (ResultSet resultSet = statement.executeQuery(
-                    "SELECT article.id AS article_id, article.title, article.content, article.date_created, article.author_id, user.id, username FROM article right JOIN user ON author_id = user.id ORDER BY id DESC")) {
+                    "SELECT article.id AS article_id, article.title, article.content, article.date_created, article.author_id, user.id, username FROM article LEFT JOIN user ON author_id = user.id ORDER BY id DESC")) {
                 while (resultSet.next()) {
                      articles.add(getArticle(resultSet));
                 }
@@ -34,8 +34,14 @@ public class ArticleDao {
     }
 
     private Article getArticle(ResultSet resultSet) throws SQLException {
-        Article article =  new Article(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
-                resultSet.getTimestamp(4).toLocalDateTime(), resultSet.getInt(5),resultSet.getString(7));
+        Article article = new Article(
+                resultSet.getInt(1),
+                resultSet.getString(2),
+                resultSet.getString(3),
+                resultSet.getTimestamp(4).toLocalDateTime(),
+                resultSet.getInt(5),
+                resultSet.getString(7)
+        );
         article.getBriefContent();
         return article;
     }

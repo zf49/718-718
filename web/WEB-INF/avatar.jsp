@@ -11,8 +11,8 @@
 
 <jsp:include page="nav.jsp" />
 
-<img src="${pageContext.request.contextPath}/avatar/${user.avatarName}" alt="">
-<form action="./avatar-select" method="post">
+<img src="<c:url value="/avatar/${user.avatarName}"/>" alt="">
+<form action="<c:url value="/avatar-select"/>" method="post">
     <div>
         <div>
             <c:forEach var="name" items="${predefinedAvatarNames}">
@@ -26,7 +26,7 @@
     </div>
 </form>
 
-<form action="${pageContext.request.contextPath}/avatar" method="post" enctype="multipart/form-data">
+<form action="<c:url value="/avatar"/>" method="post" enctype="multipart/form-data">
     <div>
         <div>
             <label for="avatar-input">Image:</label><br>

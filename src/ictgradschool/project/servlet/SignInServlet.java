@@ -28,7 +28,6 @@ public class SignInServlet extends HttpServlet {
         AuthController authController = new AuthController(new UserDao());
         User user = authController.signIn(username, password);
         req.getSession().setAttribute("user", user);
-        // TODO: get redirect and redirect to it
-        resp.sendRedirect(user == null ? "/sign-in-failure" : "/home");
+        resp.sendRedirect(getServletContext().getContextPath() + (user == null ? "/sign-in-failure" : "/home"));
     }
 }

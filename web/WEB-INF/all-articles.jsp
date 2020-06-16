@@ -20,12 +20,12 @@
               <p class="date">Create Date: ${article.date}</p>
               <p class="authorId">author Name: ${article.authorName}</p>
               <p class="content">content: ${article.content}...</p>
-              <p><a href="<c:url value="${pageContext.request.contextPath}/articles/${article.id}"/>">Show Details</a></p>
+              <p><a href="<c:url value="/articles/${article.id}"/>">Show Details</a></p>
               <c:if test="${article.authorId == user.id}">
                   <p>
-                      <a href="<c:url value="${pageContext.request.contextPath}/edit/articleId?articleId=${article.id}"/>">Edit</a>
+                      <a href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
                   </p>
-                  <form action="${pageContext.request.contextPath}/delete/articleId?articleId=${article.id}" method="post">
+                  <form action="<c:url value="/delete/articleId?articleId=${article.id}"/>" method="post">
                       <input type="submit" value="Delete">
                   </form>
               </c:if>
