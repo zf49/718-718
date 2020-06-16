@@ -41,12 +41,13 @@
             <input type="date" name="dateBirth" id="date_birth" value="${user.dateBirth}">
         </div>
         <div>
-            <label for="description">Description: </label>
+            <label for="description">Introduce Yourself: </label>
             <textarea name="description" id="description" cols="80" rows="20">${user.description}</textarea>
         </div>
     </fieldset>
     <div>
-        <input type="submit" value="Update (unfinished)">
+        <input hidden name="detailId" value="${user.detailId}">
+        <input type="submit" value="Update">
     </div>
 </form>
 
