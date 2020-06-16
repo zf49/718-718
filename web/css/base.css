@@ -4,3 +4,9 @@
     width: 40px;
     height: 40px;
 }
+
+.deleteRightButton {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 0;
+}

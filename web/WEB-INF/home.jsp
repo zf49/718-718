@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+
     <jsp:include page="bootstrap.jsp" />
     <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
 </head>
@@ -13,13 +14,12 @@
 <jsp:include page="nav.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
-<h1>all articles</h1>
 <c:forEach items="${a}" var="article">
     <div class="articles">
+        <h1>all articles</h1>
         <h2 class="title blog-post-title">Title:${article.title}</h2>
-        <p class="date blog-post-meta">Create Date: ${article.date}</p>
-        <p class="authorId">author Name: ${article.authorName}</p>
-        <p class="content">content: ${article.content}...</p>
+        <p class="date blog-post-meta">Create Date: ${article.date}  By ${article.authorName}</p>
+        <p class="content blog-main">content: ${article.content}...</p>
         <a href="<c:url value="/articles/${article.id}"/>">Show Details</a>
         <c:if test="${article.authorId == user.id}">
             <span>

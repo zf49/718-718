@@ -4,52 +4,60 @@
 
 <html lang="en">
 <head>
+    <jsp:include page="bootstrap.jsp" />
+    <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
     <meta charset="UTF-8">
     <title>${article.title}</title>
+
 </head>
 <body>
 <% pageContext.setAttribute("newLineChar", "\n"); %>
-    <jsp:include page="nav.jsp">
-        <jsp:param name="user" value="${user}"/>
-    </jsp:include>
-<div>
-    <h1>${article.title}</h1>
-    <div>
-        <p>Author: ${author.username}</p>
-        <p>Create Date: ${article.date}</p>
+
+<jsp:include page="nav.jsp">
+    <jsp:param name="user" value="${user}"/>
+</jsp:include>
+<br><br>
+<div class = "articlePage card-body">
+    <div class = "articleDetails">
+        <h1 class="title">${article.title}</h1>
+        <p class="blog-post-meta">Author: ${author.username}</p>
+        <p class="blog-post-meta">Create Date: ${article.date}</p>
         <c:if test="${article.authorId == user.id}">
-            <p>
-                <a href="<c:url value="${pageContext.request.contextPath}/edit/articleId?articleId=${article.id}"/>">Edit</a>
-            </p>
+            <div class="btn-group">
+                <a class="btn btn-sm btn-outline-secondary" href="<c:url value="${pageContext.request.contextPath}/edit/articleId?articleId=${article.id}"/>">Edit</a>
+
             <form action="${pageContext.request.contextPath}/delete/articleId?articleId=${article.id}" method="post">
-                <input type="submit" value="Delete">
+                <input type="submit" class="deleteRightButton btn btn-sm btn-outline-secondary" value="Delete">
             </form>
+            </div>
         </c:if>
     </div>
-    <div>
+    <div class="content blog-main">
         <p>${fn:replace(article.content, newLineChar, "<br>")}</p>
     </div>
 </div>
-<div>
+<hr>
+<div class = "card-body" >
     <h3>Comments:</h3>
     <dl>
         <c:forEach var="comment" items="${comments}">
             <dt>${comment.authorName}:</dt>
             <dd><span>${comment.content}</span><br>
-                <span>${comment.date}</span>
+                <span class="blog-post-meta">${comment.date}</span>
                 <c:if test="${comment.authorId == user.id || author.id == user.id}">
                     <form action="${pageContext.request.contextPath}/delete/commentId?commentId=${comment.id}" method="post">
-                        <input type="submit" value="Delete">
+                        <input type="submit" class="btn btn-sm btn-outline-secondary" value="Delete">
                     </form>
                 </c:if>
             </dd>
         </c:forEach>
     </dl>
+    <hr>
     <c:if test="${user != null}">
         <form action="./${article.id}/comment?userId=${user.id}" method="post">
-            <label for="enterComment">${user.username}: </label>
-            <textarea id="enterComment" name="commentContent" rows="5" cols="80">Enter comments here</textarea>
-            <input type="submit" value="Comment">
+            <textarea id="enterComment" name="commentContent" rows="5" cols="80" class="form-control form-control-dark w-100">Enter comments here</textarea>
+    <br>
+            <input type="submit" class="btn btn-sm btn-outline-secondary" value="Comment">
         </form>
     </c:if>
 </div>
