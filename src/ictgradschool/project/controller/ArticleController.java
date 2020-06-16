@@ -3,20 +3,16 @@ package ictgradschool.project.controller;
 import ictgradschool.project.entity.Article;
 import ictgradschool.project.repository.ArticleDao;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
-import java.time.LocalDateTime;
-
 public class ArticleController {
 
     ArticleDao articleDao = new ArticleDao();
 
-    public Article getArticleById(int id) throws SQLException, IOException {
+    public Article getArticleById(int id) {
         return articleDao.getArticleById(id);
     }
 
-    public Article updateArticle(Article article) throws SQLException, IOException {
+    public Article updateArticle(Article article) {
         return articleDao.updateArticle(article);
     }
+
 }
