@@ -15,3 +15,27 @@
     float: left;
     margin-right: 1%;
 }
+
+.homeArticle{
+    background: white;
+    opacity: 0.9;
+}
+
+.homeButton{
+    text-align: center;
+    font-size: 2em;
+}
+.homeArticle .showDetails{
+    opacity: 1;
+    font-size: 1.2em;
+    font-weight: 900;
+}
+
+body {
+    background-image: url("background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.welcome{
+    opacity: 0.9;
+}
