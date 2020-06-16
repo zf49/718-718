@@ -1,6 +1,8 @@
 package ictgradschool.project.entity;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class User implements Serializable {
@@ -9,12 +11,15 @@ public class User implements Serializable {
     // TODO: No need to store `salt` and `hash` to session. Move'em to another class
     private String salt;
     private String passwordHash;
+
     private String avatarName;
     private String fname;
     private String lname;
     private Date dateBirth;
     private String description;
+
     private int detailId;
+    private String date;
 
     public User() {}
 
@@ -115,6 +120,17 @@ public class User implements Serializable {
 
     public void setDetailId(int detailId) {
         this.detailId = detailId;
+    }
+
+    public String getDate() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(dateBirth);
+    }
+
+    public void setDate(String date) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        this.dateBirth = format.parse(date);
+        this.date = date;
     }
 
     @Override
