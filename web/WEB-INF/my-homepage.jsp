@@ -3,10 +3,12 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <jsp:include page="bootstrap.jsp" />
     <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
-    <title>${user.username}'s Homepage</title>
+    <title>${pageUser.username}'s Homepage</title>
 </head>
 <body>
 <% pageContext.setAttribute("newLineChar", "\n"); %>
@@ -18,7 +20,7 @@
     <div class="articles card-body">
         <h1 class="title">Title:${article.title}</h1>
         <p class="blog-post-meta date">Create Date: ${article.date}</p>
-        <p class="blog-post-meta authorId">Author Name: ${user.username}</p>
+        <p class="blog-post-meta authorId">Author Name: ${pageUser.username}</p>
         <p class="content">content:${fn:replace(article.content, newLineChar, "<br>")}</p>
             <span class = "homepageButton">
             <a class="btn btn-sm btn-outline-secondary homepageButton" href="<c:url value="${pageContext.request.contextPath}/edit/articleId?articleId=${article.id}"/>">Edit</a>
