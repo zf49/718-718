@@ -20,9 +20,9 @@
         </c:when>
         <c:otherwise>
             <li class="nav-item">
-<%--                <a href="<c:url value="/avatar"/>">--%>
-<%--                    <img src="<c:url value="/${user.avatarPath}"/>" alt="avatar">--%>
-<%--                </a>--%>
+                <a href="<c:url value="/avatar"/>">
+                    <img class="avatar-img" src="<c:url value="/${user.avatarPath}"/>" alt="avatar">
+                </a>
             </li>
             <li class="nav-item"><a class="nav-link" href="<c:url value="/account"/>">${user.username}</a></li>
             <li class="nav-item"><a class="nav-link" href="<c:url value="/new-article"/>">Write Article</a></li>
