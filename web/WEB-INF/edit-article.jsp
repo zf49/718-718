@@ -5,24 +5,28 @@
 <html>
 <html lang="en">
 <head>
+    <jsp:include page="bootstrap.jsp" />
+    <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
     <meta charset="UTF-8">
     <title>Edit Article</title>
 </head>
 <body>
 
 <jsp:include page="nav.jsp" />
-
-<div>
+<br>
+<br>
+<div class = "editArticle card-body container">
     <form action="" method="post" class="editArticle">
         <div>
-            <label for="titleArea">Title: </label>
-            <input type="text" name="articleTitle" id="titleArea" required value="${article.title}">
+            <h4><label for="titleArea">Title: </label></h4>
+            <input type="text" class="form-control form-control-dark w-100" name="articleTitle" id="titleArea" required value="${article.title}">
         </div>
         <div>
-            <label for="contentArea">Content:</label>
-            <textarea name="articleContent" id="contentArea" rows="20" cols="80">${article.content}</textarea>
+            <h4><label for="contentArea">Content:</label> </h4>
+            <textarea name="articleContent" class="form-control form-control-dark w-100" id="contentArea" rows="20" cols="80">${article.content}</textarea>
         </div>
-        <input type="submit" value="Confirm">
+        <br>
+        <input type="submit" value="Confirm" >
     </form>
 </div>
 

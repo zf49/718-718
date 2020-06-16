@@ -12,10 +12,10 @@
     <c:choose>
         <c:when test="${user == null}">
             <li class="nav-item">
-                <button class="btn nav-link" onclick="location.href='<c:url value="sign-in"/>'">Sign In</button>
+                <button class="btn nav-link" onclick="location.href='<c:url value="/sign-in"/>'">Sign In</button>
             </li>
             <li class="nav-item">
-                <button class="btn nav-link" onclick="location.href='<c:url value="sign-up"/>'">Sign Up</button>
+                <button class="btn nav-link" onclick="location.href='<c:url value="/sign-up"/>'">Sign Up</button>
             </li>
         </c:when>
         <c:otherwise>
