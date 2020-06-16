@@ -8,6 +8,8 @@
     <title>Sign Up</title>
     <jsp:include page="bootstrap.jsp" />
     <link rel="stylesheet" href="<c:url value="/css/sign-in-floating-labels.css" />">
+    <script>const servletContextPath = "${pageContext.request.contextPath}"</script>
+    <script type="text/javascript" src="<c:url value="/javascript/sign-up.js" />"></script>
 </head>
 <body>
 <jsp:include page="nav.jsp" />
@@ -16,6 +18,9 @@
     <div class="form-label-group">
         <input class="form-control" type="text" name="username" id="username" placeholder="Username" required autocomplete="on">
         <label for="username">Username</label>
+        <small id="username-taken" class="form-text text-danger d-none">
+            Username already taken
+        </small>
     </div>
     <div class="form-label-group">
         <input class="form-control" type="password" name="password" id="password" placeholder="Password" required autocomplete="on">
@@ -24,9 +29,12 @@
     <div class="form-label-group">
         <input class="form-control" type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required autocomplete="on">
         <label for="confirmPassword">Confirm Password</label>
+        <small id="password-dont-match" class="form-text text-danger d-none">
+            Passwords don't match
+        </small>
     </div>
     <div>
-        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign Up">
+        <input class="btn btn-lg btn-primary btn-block" id="submit" type="submit" value="Sign Up" disabled>
     </div>
 </form>
 </body>
