@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Avatar Upload</title>
+    <jsp:include page="bootstrap.jsp" />
 </head>
 <body>
 
