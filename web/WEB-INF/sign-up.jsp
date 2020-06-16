@@ -7,23 +7,23 @@
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <jsp:include page="bootstrap.jsp" />
-    <link rel="stylesheet" href="<c:url value="/css/signin.css" />">
+    <link rel="stylesheet" href="<c:url value="/css/sign-in-floating-labels.css" />">
 </head>
 <body>
 <jsp:include page="nav.jsp" />
 <form class="form-signin" action="${pageContext.request.contextPath}/sign-up" method="post" class="form-example">
     <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
-    <div class="form-group">
-        <label for="username" class="sr-only">Username: </label>
+    <div class="form-label-group">
         <input class="form-control" type="text" name="username" id="username" placeholder="Username" required autocomplete="on">
+        <label for="username">Username</label>
     </div>
-    <div class="form-group">
-        <label for="password" class="sr-only">Password: </label>
+    <div class="form-label-group">
         <input class="form-control" type="password" name="password" id="password" placeholder="Password" required autocomplete="on">
+        <label for="password">Password</label>
     </div>
-    <div class="form-group">
-        <label for="confirmPassword" class="sr-only">Confirm Password: </label>
+    <div class="form-label-group">
         <input class="form-control" type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required autocomplete="on">
+        <label for="confirmPassword">Confirm Password</label>
     </div>
     <div>
         <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign Up">
