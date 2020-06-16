@@ -16,6 +16,7 @@
 <jsp:include page="nav.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
+<div class="container">
 <br><br>
 <div class = "articlePage card-body">
     <div class = "articleDetails">
@@ -60,6 +61,7 @@
             <input type="submit" class="btn btn-sm btn-outline-secondary" value="Comment">
         </form>
     </c:if>
+</div>
 </div>
 </body>
 </html>
