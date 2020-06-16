@@ -1,17 +1,25 @@
 window.addEventListener('load', () => {
-    let usernameInput = document.getElementById('username');
-    let usernameTakenLabel = document.getElementById('username-taken');
-    let passwordInput = document.getElementById('password');
-    let confirmPasswordInput = document.getElementById('confirmPassword');
-    let passwordsDontMatchLabel = document.getElementById('password-dont-match');
-    let submitButton = document.getElementById('submit');
+    const usernameInput = document.getElementById('username');
+    const usernameTakenLabel = document.getElementById('username-taken');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const passwordsDontMatchLabel = document.getElementById('password-dont-match');
+    const submitButton = document.getElementById('submit');
 
     let usernameAvailable = true;
     let passwordMatch = true;
 
-    usernameInput.addEventListener('input', () => {
-        console.log(usernameInput.value);
-        // TODO: check username availability
+    usernameInput.addEventListener('input', async () => {
+        let username = usernameInput.value;
+        let response = await fetch(`${servletContextPath}/username-available/${username}`);
+        let json = await response.json();
+
+        // skip if input has already changed to something else
+        if (usernameInput.value !== json.username) {
+            return;
+        }
+
+        updateUsernameAvailable(json.available);
     });
 
     passwordInput.addEventListener('input', () => {
@@ -21,6 +29,12 @@ window.addEventListener('load', () => {
     confirmPasswordInput.addEventListener('input', () => {
         updatePasswordMatch();
     });
+
+    function updateUsernameAvailable(available) {
+        usernameAvailable = available;
+        setLabelShow(usernameTakenLabel, !usernameAvailable);
+        updateSubmitEnabled();
+    }
 
     function updatePasswordMatch() {
         passwordMatch = passwordInput.value === confirmPasswordInput.value;
