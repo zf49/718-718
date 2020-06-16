@@ -18,9 +18,8 @@
 <c:forEach items="${a}" var="article">
     <div class="articles">
         <h2 class="title blog-post-title">Title:${article.title}</h2>
-        <p class="date blog-post-meta">Create Date: ${article.date}</p>
-        <p class="authorId">author Name: ${article.authorName}</p>
-        <p class="content">content: ${article.content}...</p>
+        <p class="date blog-post-meta">Create Date: ${article.date}  By ${article.authorName}</p>
+        <p class="content blog-main">content: ${article.content}...</p>
         <a href="<c:url value="/articles/${article.id}"/>">Show Details</a>
         <c:if test="${article.authorId == user.id}">
             <span>

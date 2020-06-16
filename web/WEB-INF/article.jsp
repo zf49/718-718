@@ -6,15 +6,18 @@
 <head>
     <meta charset="UTF-8">
     <title>${article.title}</title>
+    <jsp:include page="bootstrap.jsp" />
+    <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
 </head>
 <body>
 <% pageContext.setAttribute("newLineChar", "\n"); %>
     <jsp:include page="nav.jsp">
         <jsp:param name="user" value="${user}"/>
     </jsp:include>
+<main role="main">
 <div>
-    <h1>${article.title}</h1>
     <div>
+        <h1 class = "py-1 mb-2">${article.title}</h1>
         <p>Author: ${author.username}</p>
         <p>Create Date: ${article.date}</p>
         <c:if test="${article.authorId == user.id}">
@@ -53,5 +56,6 @@
         </form>
     </c:if>
 </div>
+</main>
 </body>
 </html>
