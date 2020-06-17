@@ -108,8 +108,7 @@ public class CommentDao {
     private Comment getCommentById2(Connection connection, int id) {
         Comment comment = new Comment();
         try (PreparedStatement statement = connection.prepareStatement(
-                "SELECT comment.id, content, date_created, author_id, article_id," +
-                        " user.username, level, parent_id AS author_name " +
+                "SELECT comment.id, content, date_created, author_id, article_id, user.username, level, parent_id " +
                         "FROM comment LEFT JOIN user ON comment.author_id = user.id " +
                         "WHERE comment.id = ?;")) {
             statement.setInt(1, id);

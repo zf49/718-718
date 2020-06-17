@@ -1,6 +1,5 @@
 package ictgradschool.project.controller;
 
-import ictgradschool.project.entity.Token;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.UserDao;
 import ictgradschool.project.util.HashInfo;
@@ -43,15 +42,7 @@ public class UserController {
         }
     }
 
-    public void changeUsername(Token token, String newUsername) {
-        throw new UnsupportedOperationException();
-    }
-
-    public void changePassword(Token token, String newPassword, String confirmNewPassword) {
-        throw new UnsupportedOperationException();
-    }
-
-    public void addUserDetail(HttpServletRequest req, User user) throws IOException {
+    public void addUserDetail(HttpServletRequest req) throws IOException {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
@@ -59,6 +50,7 @@ public class UserController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        User user = (User) req.getSession().getAttribute("user");
         user.setDateBirth(date);
         user.setFname(req.getParameter("fname"));
         user.setLname(req.getParameter("lname"));

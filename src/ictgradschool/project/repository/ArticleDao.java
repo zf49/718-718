@@ -65,11 +65,12 @@ public class ArticleDao {
     public Article getArticleById(int id) {
         Article article = null;
         try (PreparedStatement stmt = connection.prepareStatement(
-                "SELECT id, title, content, author_id, date_created FROM article WHERE id = ?")) {
+                "SELECT article.id, title, content, author_id, date_created, username FROM article LEFT JOIN user ON author_id = user.id WHERE article.id = ?")) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     article = getArticleFromResultSet(rs);
+                    article.setAuthorName(rs.getString(6));
                 }
             }
         } catch (SQLException e) {
@@ -88,17 +89,17 @@ public class ArticleDao {
         );
     }
 
-    public Article postNewArticle(Article article) throws SQLException {
+    public Article postNewArticle(String title, String content, int authorId) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(
-                "INSERT INTO article (title, content,author_id,date_created) VALUES (?, ?, ?, ?)")) {
-            ps.setString(1, article.title);
-            ps.setString(2, article.content);
-            ps.setInt(3, article.authorId);
+                "INSERT INTO article (title, content, author_id, date_created) VALUES (?, ?, ?, ?)")) {
+            ps.setString(1, title);
+            ps.setString(2, content);
+            ps.setInt(3, authorId);
             ps.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
             ps.executeQuery();
         }
-        article.id = DaoUtil.getLastInsertedId(connection);
-        return getArticleById(article.id);
+        int id = DaoUtil.getLastInsertedId(connection);
+        return getArticleById(id);
     }
 
     public Article updateArticle(Article article) {

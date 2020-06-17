@@ -1,6 +1,7 @@
 package ictgradschool.project.controller;
 
 import ictgradschool.project.entity.Comment;
+import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.CommentDao;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +47,13 @@ public class CommentListController {
 
     public void deleteComment(int commentId) throws IOException {
         commentDao.deleteCommentById2(commentId);
+    }
+
+    public Comment insertCommentToComment(HttpServletRequest req) throws IOException {
+        String content = req.getParameter("replyContent");
+        int parentId = Integer.parseInt(req.getParameter("parentId"));
+        User user = (User) req.getSession().getAttribute("user");
+        return commentDao.insertCommentToComment2(content, user.getId(), parentId);
     }
 
 }

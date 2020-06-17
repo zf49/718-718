@@ -1,11 +1,9 @@
 package ictgradschool.project.servlet;
 
-import ictgradschool.project.controller.ArticleController;
 import ictgradschool.project.controller.CommentListController;
 import ictgradschool.project.entity.Article;
 import ictgradschool.project.entity.Comment;
-import ictgradschool.project.entity.User;
-import ictgradschool.project.repository.UserDao;
+import ictgradschool.project.repository.ArticleDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,21 +20,18 @@ public class ArticleServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         int articleId = Integer.parseInt(req.getPathInfo().split("/")[1]);
-        ArticleController articleController = new ArticleController();
-        Article article = articleController.getArticleById(articleId);
+        ArticleDao articleDao = new ArticleDao();
+        Article article = articleDao.getArticleById(articleId);
 
         if (article == null) {
             req.getRequestDispatcher("/WEB-INF/not-exist.jsp").forward(req, resp);
         }
         else {
-            UserDao userDao = new UserDao();
-            User author = userDao.getUserById(article.getAuthorId());
             CommentListController commentListController = new CommentListController();
             List<Comment> comments = commentListController.getCommentsByArticleId(articleId);
 
             req.setAttribute("article", article);
             req.setAttribute("comments", comments);
-            req.setAttribute("author", author);
             req.getRequestDispatcher("/WEB-INF/article.jsp").forward(req, resp);
         }
 

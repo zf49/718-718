@@ -21,7 +21,7 @@
 <div class = "articlePage card-body">
     <div class = "articleDetails">
         <h1 class="title">${article.title}</h1>
-        <p class="blog-post-meta">Author: ${author.username}</p>
+        <p class="blog-post-meta">Author: ${article.authorName}</p>
         <p class="blog-post-meta">Create Date: ${article.date}</p>
         <c:if test="${article.authorId == user.id}">
             <div class="btn-group">
@@ -62,7 +62,7 @@
                                 </form>
                             </div>
                         </c:if>
-                        <c:if test="${comment.authorId == user.id || author.id == user.id}">
+                        <c:if test="${comment.authorId == user.id || article.authorId == user.id}">
                             <form action="<c:url value="/delete/commentId?commentId=${comment.id}"/>"
                                   method="post">
                                 <input type="submit" class="btn btn-sm btn-outline-secondary" value="Delete">
