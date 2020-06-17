@@ -8,8 +8,7 @@
     <jsp:include page="bootstrap.jsp" />
 
 <%--    <link href="<c:url value="${pageContext.request.contextPath}/css/homepage.css"/>" rel="stylesheet">--%>
-        <link href="<c:url value="${pageContext.request.contextPath}/css/blog.css"/>" rel="stylesheet">
-
+    <link href="<c:url value="${pageContext.request.contextPath}/css/blog.css"/>" rel="stylesheet">
     <link href="<c:url value="${pageContext.request.contextPath}/css/base.css"/>" rel="stylesheet">
 </head>
 <body>
