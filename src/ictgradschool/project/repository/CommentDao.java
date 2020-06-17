@@ -52,6 +52,7 @@ public class CommentDao {
             statement.setString(1, comment.content);
             statement.setInt(2, comment.authorId);
             statement.setInt(3, articleId);
+            // FIXME: executeUpdate ?
             statement.executeQuery();
         }
         comment.id = DaoUtil.getLastInsertedId(connection);
@@ -81,7 +82,7 @@ public class CommentDao {
         }
     }
 
-    public void insertCommentToComment2(String content, int parentId, int articleId) throws IOException {
+    public void insertCommentToComment2(String content, int authorId, int parentId) throws IOException {
         try (Connection connection = DBConnectionUtils.getConnection()) {
             Comment parentComment = getCommentById2(parentId);
             int level = parentComment.getLevel() + 1;
@@ -89,11 +90,11 @@ public class CommentDao {
             PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO comment (content, date_created, author_id, article_id, level, parent_id) VALUES (?, NOW(), ?, ?, ?, ?);");
             statement.setString(1, content);
-            statement.setInt(2, parentComment.getAuthorId());
-            statement.setInt(3, articleId);
+            statement.setInt(2, authorId);
+            statement.setInt(3, parentComment.getArticleId());
             statement.setInt(4, level);
             statement.setInt(5, parentId);
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -130,13 +131,11 @@ public class CommentDao {
         );
     }
 
-
-    public void deleteCommentById2(int commentId) {
-
-    }
-
     public List<Comment> getCommentsByArticleId2(int articleId) {
         return null;
     }
 
+    public void deleteCommentById2(int commentId) {
+
+    }
 }
