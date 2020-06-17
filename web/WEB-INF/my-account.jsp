@@ -7,6 +7,8 @@
     <jsp:include page="bootstrap.jsp"/>
     <link href="<c:url value="/css/form-validation.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/album.css"/>" rel="stylesheet">
+    <script>const servletContextPath = "${pageContext.request.contextPath}"</script>
+    <script type="text/javascript" src="<c:url value="/javascript/sign-up.js" />"></script>
     <title>My Account - Setting</title>
 </head>
 <body class="bg-light">
@@ -26,6 +28,9 @@
                     <div class="mb-3">
                         <label for="username">Username: </label>
                         <input type="text" name="username" id="username" required value="${user.username}" class="form-control">
+                        <small id="username-taken" class="form-text text-danger d-none">
+                            Username already taken
+                        </small>
                     </div>
                     <div class="mb-3">
                         <label for="password">Password: </label>
@@ -34,9 +39,15 @@
                     <div class="mb-3">
                         <label for="confirmPassword">Confirm Password: </label>
                         <input type="password" name="confirmPassword" id="confirmPassword" required class="form-control">
+                        <small id="password-dont-match" class="form-text text-danger d-none">
+                            Passwords don't match
+                        </small>
                     </div>
                 </fieldset>
-                <hr class="mb-4">
+                <input type="submit" value="Update basic information" name="submitButton" class="btn btn-primary btn-lg btn-block">
+            </form>
+            <hr class="mb-4">
+            <form action="" method="post">
                 <fieldset>
                     <legend class="mb-3">Additional Information <span class="text-muted">(Optional)</span></legend>
                     <div class="row">
@@ -60,7 +71,7 @@
                     <input hidden name="detailId" value="${user.detailId}">
                 </fieldset>
                 <div>
-                    <input type="submit" value="Update account settings" class="btn btn-primary btn-lg btn-block">
+                    <input type="submit" value="Update additional information" name="submitButton" class="btn btn-primary btn-lg btn-block">
                 </div>
             </form>
         </div>
