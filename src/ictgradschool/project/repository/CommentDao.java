@@ -167,19 +167,15 @@ public class CommentDao {
             map.put(comment.getId(), comment);
             if (comment.hasParent()) {
                 Comment parentComment = map.get(comment.getParentId());
+                // The parent will not exist if it's deleted
+                if (parentComment == null) {
+                    break;
+                }
                 parentComment.addChild(comment);
             } else {
                 comments.add(comment);
             }
         }
         return comments;
-    }
-
-    public void deleteCommentById2(int commentId) throws IOException {
-        try (Connection connection = DBConnectionUtils.getConnection()) {
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }
