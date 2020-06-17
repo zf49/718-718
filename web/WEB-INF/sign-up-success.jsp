@@ -23,19 +23,19 @@
 <form action="" method="post">
     <div>
         <label for="fname">First Name: </label>
-        <input type="text" name="fname" id="fname">
+        <input type="text" name="fname" id="fname" required>
     </div>
     <div>
         <label for="lname">Last Name: </label>
-        <input type="text" name="lname" id="lname">
+        <input type="text" name="lname" id="lname" required>
     </div>
     <div>
         <label for="date_birth">Date of Birth: </label>
-        <input type="date" name="dateBirth" id="date_birth">
+        <input type="date" name="dateBirth" id="date_birth" required>
     </div>
     <div>
         <label for="description">Introduce Yourself: </label>
-        <textarea name="description" class="form-control form-control-dark w-100" id="description" cols="80" rows="20"></textarea>
+        <textarea name="description" class="form-control form-control-dark w-100" id="description" cols="80" rows="20" required></textarea>
     </div>
     <div>
         <input type="submit" class=" btn btn-sm btn-outline-secondary homeButton" value="Confirm">
