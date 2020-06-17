@@ -44,8 +44,8 @@ public class CommentListController {
         }
     }
 
-    public void deleteComment(int commentId) {
-        commentDao.deleteComment(commentId);
+    public void deleteComment(int commentId) throws IOException {
+        commentDao.deleteCommentById2(commentId);
     }
 
 }
