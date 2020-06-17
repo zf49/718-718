@@ -19,7 +19,6 @@ public class User implements Serializable {
     private String description;
 
     private int detailId;
-    private String date;
 
     public User() {}
 
@@ -130,7 +129,6 @@ public class User implements Serializable {
     public void setDate(String date) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         this.dateBirth = format.parse(date);
-        this.date = date;
     }
 
     @Override
