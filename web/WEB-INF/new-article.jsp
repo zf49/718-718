@@ -14,8 +14,8 @@
 <jsp:include page="nav.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
-<br><br>
-<div class="editArticle card-body container">
+<br><br><br>
+<div class="editArticle card-body container about-author center-text homeArticle ">
     <form action="" method="post">
         <div>
             <h4><label for="titleArea">Title: </label></h4>
@@ -28,8 +28,9 @@
         </div>
         <br>
         <input hidden type="text" name="authorId" value="${user.id}">
-        <input type="submit" class="btn btn-outline-primary" value="Confirm">
+        <input type="submit" class="btn btn-primary" value="Confirm">
     </form>
 </div>
+<br><br><br>
 </body>
 </html>

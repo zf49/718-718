@@ -15,7 +15,8 @@
 <jsp:include page="nav.jsp" />
 <br>
 <br>
-<div class = "editArticle card-body container">
+<br>
+<div class = "editArticle card-body container about-author center-text homeArticle">
     <form action="" method="post" class="editArticle">
         <div>
             <h4><label for="titleArea">Title: </label></h4>
@@ -27,7 +28,7 @@
             <textarea name="articleContent" class="form-control form-control-dark w-100" id="contentArea" rows="20" cols="80">${article.content}</textarea>
         </div>
         <br>
-        <input type="submit" class="btn btn-outline-primary" value="Confirm" >
+        <input type="submit" class="btn btn-primary" value="Confirm" >
     </form>
 </div>
 </body>

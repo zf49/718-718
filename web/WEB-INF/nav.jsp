@@ -7,8 +7,12 @@
         <li class="nav-item">
             <a class="nav-link" href="<c:url value="/home"/>">Home</a>
         </li>
+    </ul>
+    <div class="container" style="padding-right: 0;margin-right: 0;width:auto">
+        <ul class="navbar-nav bd-navbar-nav flex-row">
     <c:choose>
         <c:when test="${user == null}">
+           
             <li class="nav-item">
                 <button class="btn nav-link" onclick="location.href='<c:url value="/sign-in"/>'">Sign In</button>
             </li>
@@ -36,4 +40,5 @@
         </c:otherwise>
     </c:choose>
     </ul>
+    </div>
 </header>

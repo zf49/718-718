@@ -37,5 +37,6 @@
         <input class="btn btn-lg btn-primary btn-block" id="submit" type="submit" value="Sign Up" disabled>
     </div>
 </form>
+<br><br><br>
 </body>
 </html>

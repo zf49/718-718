@@ -12,8 +12,7 @@
 <body>
 <% pageContext.setAttribute("newLineChar", "\n"); %>
 <jsp:include page="nav.jsp" />
-<br>
-<br>
+<br><br><br>
 <c:if test="${a == null || fn:length(a) == 0}">
 <div class="container about-author center-text homeArticle" style="padding: 9%">
     <h1 class="container" style="text-align: center">You need to write something!</h1>
@@ -26,21 +25,14 @@
         <p class="blog-post-meta date">Create Date: ${article.date}</p>
         <p class="blog-post-meta authorId">Author Name: ${pageUser.username}</p>
         <p class="content">content:${fn:replace(article.content, newLineChar, "<br>")}</p>
-            <span class = "homepageButton">
-            <a class="btn btn-sm btn-outline-secondary homepageButton" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
-            </span>
-            <span class = "homepageButton">
+        <a class="btn btn-primary" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
+        <a class="btn btn-primary" href="<c:url value="/articles/${article.id}"/>">Show Details</a>
             <form action="<c:url value="/delete/articleId?articleId=${article.id}"/>" method="post">
-            <input type="submit" class="btn btn-sm btn-outline-secondary " value="Delete">
+            <input type="submit" class="btn btn-danger my-2" value="Delete">
             </form>
-            </span>
-            <span class = "homepageButton">
-             <a class="btn btn-sm btn-outline-secondary" href="<c:url value="/articles/${article.id}"/>">Show Details</a>
-            </span>
     </div>
     <hr>
     </div>
-
 </c:forEach>
 </body>
 </html>
