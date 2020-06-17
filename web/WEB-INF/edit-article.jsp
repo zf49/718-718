@@ -27,9 +27,8 @@
             <textarea name="articleContent" class="form-control form-control-dark w-100" id="contentArea" rows="20" cols="80">${article.content}</textarea>
         </div>
         <br>
-        <input type="submit" value="Confirm" >
+        <input type="submit" class="btn btn-outline-primary" value="Confirm" >
     </form>
 </div>
-
 </body>
 </html>
