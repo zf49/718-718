@@ -30,10 +30,10 @@ public class ArticleServlet extends HttpServlet {
             resp.sendRedirect("/home");
         }
         else {
-            CommentListController commentListController = new CommentListController();
-            List<Comment> comments = commentListController.getCommentsByArticleId(articleId);
             UserDao userDao = new UserDao();
             User author = userDao.getUserById(article.getAuthorId());
+            CommentListController commentListController = new CommentListController();
+            List<Comment> comments = commentListController.getCommentsByArticleId(articleId);
 
             req.setAttribute("article", article);
             req.setAttribute("comments", comments);

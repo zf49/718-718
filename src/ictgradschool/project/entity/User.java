@@ -1,7 +1,6 @@
 package ictgradschool.project.entity;
 
 import java.io.Serializable;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
