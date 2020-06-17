@@ -53,8 +53,7 @@ public class CommentDao {
             statement.setString(1, comment.content);
             statement.setInt(2, comment.authorId);
             statement.setInt(3, articleId);
-            // FIXME: executeUpdate ?
-            statement.executeQuery();
+            statement.executeUpdate();
         }
         comment.id = DaoUtil.getLastInsertedId(connection);
         return getCommentById(comment.id);
@@ -77,7 +76,7 @@ public class CommentDao {
     public void deleteComment(int commentId) {
         try (PreparedStatement statement = connection.prepareStatement("DELETE FROM comment WHERE id = ?;")) {
             statement.setInt(1, commentId);
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
