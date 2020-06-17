@@ -4,6 +4,7 @@ import ictgradschool.project.entity.Comment;
 import ictgradschool.project.repository.CommentDao;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,13 +16,9 @@ public class CommentListController {
         this.commentDao = new CommentDao();
     }
 
-    public List<Comment> getCommentsByArticleId(int articleId) {
-        try {
-            return commentDao.getCommentsByArticleId(articleId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+    public List<Comment> getCommentsByArticleId(int articleId) throws IOException {
+        List<Comment> comments = commentDao.getCommentsByArticleId2(articleId);
+        return Comment.flatten(comments);
     }
 
     public Comment getCommentById(int commentId) {
