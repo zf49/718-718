@@ -77,7 +77,7 @@
                 <li>All of your articles will be removed.</li>
                 <li>All of your comments will be removed.</li>
             </ul>
-            <form action="${pageContext.request.contextPath}/delete/userId?userId=${user.id}" method="post">
+            <form action="<c:url value="/delete/userId?userId=${user.id}"/>" method="post">
                 <input type="submit" value="Delete account" class="btn btn-danger my-2">
             </form>
         </div>
