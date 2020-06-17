@@ -176,14 +176,14 @@ public class CommentDao {
 
     public void deleteCommentById2(int commentId) throws IOException {
         try (Connection connection = DBConnectionUtils.getConnection()) {
-            removeParentReference2(commentId, connection);
+            removeReferenceToComment2(connection, commentId);
             deleteComment2(connection, commentId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private void removeParentReference2(int commentId, Connection connection) throws SQLException {
+    private void removeReferenceToComment2(Connection connection, int commentId) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(
                 "UPDATE comment SET parent_id = null WHERE parent_id = ?")) {
             statement.setInt(1, commentId);
