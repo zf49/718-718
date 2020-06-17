@@ -139,19 +139,23 @@ public class CommentDao {
 
     public List<Comment> getCommentsByArticleId2(int articleId) throws IOException {
         try (Connection connection = DBConnectionUtils.getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(
-                    "SELECT comment.id, content, date_created, author_id, article_id, username, level, parent_id " +
-                            "FROM comment " +
-                            "LEFT JOIN user ON user.id = comment.author_id " +
-                            "WHERE article_id = ?")) {
-                statement.setInt(1, articleId);
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    return makeNestedComments(resultSet);
-                }
-            }
+            return getCommentsByArticleId2(connection, articleId);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    private List<Comment> getCommentsByArticleId2(Connection connection, int articleId) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(
+                "SELECT comment.id, content, date_created, author_id, article_id, username, level, parent_id " +
+                        "FROM comment " +
+                        "LEFT JOIN user ON user.id = comment.author_id " +
+                        "WHERE article_id = ?")) {
+            statement.setInt(1, articleId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                return makeNestedComments(resultSet);
+            }
         }
     }
 
@@ -171,7 +175,11 @@ public class CommentDao {
         return comments;
     }
 
-    public void deleteCommentById2(int commentId) {
-        // TODO: implement
+    public void deleteCommentById2(int commentId) throws IOException {
+        try (Connection connection = DBConnectionUtils.getConnection()) {
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
