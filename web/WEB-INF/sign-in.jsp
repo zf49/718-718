@@ -11,7 +11,7 @@
 </head>
 <body>
 <jsp:include page="nav.jsp" />
-<form class="form-signin homeArticle" action="${pageContext.request.contextPath}/sign-in" method="post">
+<form class="form-signin homeArticle" action="<c:url value="/sign-in"/>" method="post">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <div class="form-label-group">
         <input class="form-control" type="text" name="username" id="username" placeholder="Username" required autofocus autocomplete="on">

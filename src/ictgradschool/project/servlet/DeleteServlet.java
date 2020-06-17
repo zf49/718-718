@@ -21,7 +21,6 @@ public class DeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String pathInfo = req.getPathInfo();
-        String lastPage = req.getHeader("Referer"); // TODO how to use it?
         if (pathInfo.contains("commentId")) {
             int id = Integer.parseInt(req.getParameter("commentId"));
             CommentListController commentListController = new CommentListController();
@@ -32,12 +31,12 @@ public class DeleteServlet extends HttpServlet {
             int id = Integer.parseInt(req.getParameter("articleId"));
             ArticleDao articleDao = new ArticleDao();
             articleDao.deleteOneArticle(id);
-            resp.sendRedirect("/home");
+            resp.sendRedirect(req.getHeader("referer"));
         } else if (pathInfo.contains("userId")) {
             UserController userController = new UserController(new UserDao());
             int userId = Integer.parseInt(req.getParameter("userId"));
             userController.deleteUser(userId);
-            resp.sendRedirect("/home");
+            resp.sendRedirect(req.getHeader("referer"));
         }
     }
 }

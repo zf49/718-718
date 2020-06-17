@@ -33,7 +33,7 @@
                     <div class="card mb-4 shadow-sm">
                         <div class="bd-placeholder-img card-img-top">
                             <label for="predefined-${name}" title="${name}">
-                                <img height="225" src="${pageContext.request.contextPath}/avatar/${name}" alt="${name}">
+                                <img height="225" src="<c:url value="/avatar/${name}"/>" alt="${name}">
                             </label>
                         </div>
                         <div class="card-body">

@@ -6,9 +6,8 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <jsp:include page="bootstrap.jsp" />
-<%--    <link href="<c:url value="${pageContext.request.contextPath}/css/blog.css"/>" rel="stylesheet">--%>
-    <link href="<c:url value="${pageContext.request.contextPath}/css/base.css"/>" rel="stylesheet">
-    <link href="<c:url value="${pageContext.request.contextPath}/css/blog.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/base.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
 
 </head>
 

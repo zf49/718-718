@@ -27,7 +27,7 @@
             <div class="btn-group">
                 <a class="btn btn-sm btn-outline-secondary" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
 
-            <form action="${pageContext.request.contextPath}/delete/articleId?articleId=${article.id}" method="post">
+            <form action="<c:url value="/delete/articleId?articleId=${article.id}"/>" method="post">
                 <input type="submit" class="deleteRightButton btn btn-sm btn-outline-secondary" value="Delete">
             </form>
             </div>
@@ -53,7 +53,7 @@
                                 Reply
                             </button>
                             <div class="collapse bg-light" id="replyComment${comment.id}" style="margin-bottom: 5px">
-                                <form action="${pageContext.request.contextPath}/reply-comment" method="post">
+                                <form action="<c:url value="/reply-comment"/>" method="post">
                             <textarea id="replyArea" name="replyContent" rows="5" cols="80"
                                       class="form-control form-control-dark w-100" placeholder="Enter here"></textarea>
                                     <input hidden name="parentId" value="${comment.id}">
@@ -63,7 +63,7 @@
                             </div>
                         </c:if>
                         <c:if test="${comment.authorId == user.id || author.id == user.id}">
-                            <form action="${pageContext.request.contextPath}/delete/commentId?commentId=${comment.id}"
+                            <form action="<c:url value="/delete/commentId?commentId=${comment.id}"/>"
                                   method="post">
                                 <input type="submit" class="btn btn-sm btn-outline-secondary" value="Delete">
                             </form>

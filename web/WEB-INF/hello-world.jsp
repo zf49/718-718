@@ -13,7 +13,7 @@
 <h1>${message}</h1>
 <h2>Chris changes, 666</h2>
 
-<p><img src="<c:url value="${pageContext.request.contextPath}/images/${image}"/>"></p>
+<p><img src="<c:url value="/images/${image}"/>"></p>
 
 </body>
 </html>
