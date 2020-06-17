@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Comment {
+public class Comment implements Comparable<Comment> {
     public int id;
     public String content;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -116,16 +116,45 @@ public class Comment {
                 "authorId=" + authorId +
                 ", articleId=" + articleId +
                 ", id=" + id +
-                ", content='" + content + '\'' +
+                ", content='" + content.substring(0, Math.min(16, content.length())) + '\'' +
                 ", dateCreated=" + dateCreated +
                 '}';
     }
 
-    public static List<Comment> flatten(List<Comment> comments) {
-        throw new UnsupportedOperationException();
+    public List<Comment> getChildren() {
+        return children;
     }
 
-    public static List<Comment> recursiveSort(List<Comment> comments) {
-        throw new UnsupportedOperationException();
+    public static List<Comment> flatten(List<Comment> comments) {
+        List<Comment> results = new LinkedList<>();
+        for (Comment comment : comments) {
+            addCommentRecursively(results, comment);
+        }
+        return results;
+    }
+
+    /**
+     * First add the comment itself, then add its child comments recursively
+     * @param results
+     * @param comment
+     */
+    private static void addCommentRecursively(List<Comment> results, Comment comment) {
+        results.add(comment);
+        for (Comment child : comment.getChildren()) {
+            addCommentRecursively(results, child);
+        }
+    }
+
+    public void addChild(Comment comment) {
+        children.add(comment);
+    }
+
+    public boolean hasParent() {
+        return parentId != 0;
+    }
+
+    @Override
+    public int compareTo(Comment o) {
+        return id - o.id;
     }
 }
