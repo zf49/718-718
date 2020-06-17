@@ -41,7 +41,7 @@
                 <a class="btn btn-lg btn-primary btn-block homeButton" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
             </span>
             <span>
-                <a class="btn btn-lg btn-primary btn-block homeButton" href="<c:url value="/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
+                <a class="btn btn-danger my-2 homeButton" style="display: block" href="<c:url value="/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
             </span>
         </c:if>
         <hr>

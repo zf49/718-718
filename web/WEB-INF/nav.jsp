@@ -5,7 +5,7 @@
 <header class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <ul class="navbar-nav bd-navbar-nav flex-row">
         <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/home"/>">Home</a>
+            <a class="nav-link" style="font-size: 1.2em" href="<c:url value="/home"/>">Home</a>
         </li>
     </ul>
     <div class="container" style="padding-right: 0;margin-right: 0;width:auto">

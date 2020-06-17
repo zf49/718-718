@@ -25,12 +25,15 @@
         <p class="blog-post-meta date">Create Date: ${article.date}</p>
         <p class="blog-post-meta authorId">Author Name: ${pageUser.username}</p>
         <p class="content">content:${fn:replace(article.content, newLineChar, "<br>")}</p>
-        <a class="btn btn-primary" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
+        <div style="display: inline-block">
+            <a class="btn btn-primary" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
         <a class="btn btn-primary" href="<c:url value="/articles/${article.id}"/>">Show Details</a>
-            <form action="<c:url value="/delete/articleId?articleId=${article.id}"/>" method="post">
+        </div>
+           <div style="display: inline-block"><form action="<c:url value="/delete/articleId?articleId=${article.id}"/>" method="post">
             <input type="submit" class="btn btn-danger my-2" value="Delete">
             </form>
-    </div>
+           </div>
+        </div>
     <hr>
     </div>
 </c:forEach>

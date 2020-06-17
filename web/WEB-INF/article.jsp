@@ -51,11 +51,25 @@
                     <dd><span>${comment.content}</span><br>
                         <span class="blog-post-meta" style="margin-right: 5px">${comment.date}</span>
                         <c:if test="${user != null && comment.level < 2}">
-                            <button type="button" data-toggle="collapse" data-target="#replyComment${comment.id}"
-                                    class="btn btn-primary" style="margin-bottom: 5px"
+                          <div>
+                              <div style="display: inline-block">
+                                  <button type="button" data-toggle="collapse" data-target="#replyComment${comment.id}"
+                                    class="btn btn-primary my-2" style="margin-bottom: 5px"
                                     aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                                 Reply
-                            </button>
+                          </button>
+                              </div>
+                              <div style="display: inline-block">
+                            <c:if test="${comment.authorId == user.id || author.id == user.id}">
+                                <form action="<c:url value="/delete/commentId?commentId=${comment.id}"/>"
+                                      method="post">
+                                    <input type="submit" class="btn btn-danger my-2" value="Delete">
+                                </form>
+                            </c:if>
+                              </div>
+                          </div>
+
+
                             <div class="collapse bg-light" id="replyComment${comment.id}" style="margin-bottom: 5px">
                                 <form action="<c:url value="/reply-comment"/>" method="post">
                             <textarea id="replyArea" name="replyContent" rows="5" cols="80"
@@ -66,12 +80,12 @@
                                 </form>
                             </div>
                         </c:if>
-                        <c:if test="${comment.authorId == user.id || author.id == user.id}">
-                            <form action="<c:url value="/delete/commentId?commentId=${comment.id}"/>"
-                                  method="post">
-                                <input type="submit" class="btn btn-danger my-2" value="Delete">
-                            </form>
-                        </c:if>
+<%--                        <c:if test="${comment.authorId == user.id || author.id == user.id}">--%>
+<%--                            <form action="<c:url value="/delete/commentId?commentId=${comment.id}"/>"--%>
+<%--                                  method="post">--%>
+<%--                                <input type="submit" class="btn btn-danger my-2" value="Delete">--%>
+<%--                            </form>--%>
+<%--                        </c:if>--%>
                     </dd>
                 </div>
             </c:forEach>
