@@ -27,7 +27,7 @@
 
                 <a class="btn btn-primary" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
 
-            <form action="<c:url value="/delete/articleId?articleId=${article.id}"/>" method="post">
+            <form style="display: contents" action="<c:url value="/delete/articleId?articleId=${article.id}"/>" method="post">
                 <input type="submit" class="btn btn-danger my-2" value="Delete">
             </form>
         </c:if>
@@ -46,12 +46,13 @@
         <h3>Comments:</h3>
         <dl>
             <c:forEach var="comment" items="${comments}">
+                <div>
                 <div style="padding-left: ${comment.level * 3}rem">
                     <dt>${comment.authorName}:</dt>
                     <dd><span>${comment.content}</span><br>
                         <span class="blog-post-meta" style="margin-right: 5px">${comment.date}</span>
                         <c:if test="${user != null && comment.level < 2}">
-                          <div>
+                          <div style="display: contents">
                               <div style="display: inline-block">
                                   <button type="button" data-toggle="collapse" data-target="#replyComment${comment.id}"
                                     class="btn btn-primary my-2" style="margin-bottom: 5px"
@@ -68,8 +69,6 @@
                             </c:if>
                               </div>
                           </div>
-
-
                             <div class="collapse bg-light" id="replyComment${comment.id}" style="margin-bottom: 5px">
                                 <form action="<c:url value="/reply-comment"/>" method="post">
                             <textarea id="replyArea" name="replyContent" rows="5" cols="80"
@@ -80,14 +79,10 @@
                                 </form>
                             </div>
                         </c:if>
-<%--                        <c:if test="${comment.authorId == user.id || author.id == user.id}">--%>
-<%--                            <form action="<c:url value="/delete/commentId?commentId=${comment.id}"/>"--%>
-<%--                                  method="post">--%>
-<%--                                <input type="submit" class="btn btn-danger my-2" value="Delete">--%>
-<%--                            </form>--%>
-<%--                        </c:if>--%>
                     </dd>
                 </div>
+                </div>
+
             </c:forEach>
         </dl>
         <hr>
