@@ -166,15 +166,38 @@ public class CommentDao {
             map.put(comment.getId(), comment);
             if (comment.hasParent()) {
                 Comment parentComment = map.get(comment.getParentId());
-                // The parent will not exist if it's deleted
-                if (parentComment == null) {
-                    break;
-                }
                 parentComment.addChild(comment);
-            } else {
+            } else if (comment.getLevel() == 0) {
                 comments.add(comment);
             }
         }
         return comments;
+    }
+
+    public void deleteCommentById2(int commentId) throws IOException {
+        try (Connection connection = DBConnectionUtils.getConnection()) {
+            removeParentReference2(commentId, connection);
+            deleteComment2(connection, commentId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void removeParentReference2(int commentId, Connection connection) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(
+                "UPDATE comment SET parent_id = null WHERE parent_id = ?")) {
+            statement.setInt(1, commentId);
+            statement.executeUpdate();
+        }
+    }
+
+    public void deleteComment2(Connection connection, int commentId) {
+        try (PreparedStatement statement = connection.prepareStatement(
+                "DELETE FROM comment WHERE id = ?;")) {
+            statement.setInt(1, commentId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
