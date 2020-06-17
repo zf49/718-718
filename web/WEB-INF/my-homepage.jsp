@@ -15,7 +15,7 @@
 <jsp:include page="nav.jsp" />
 <br>
 <br>
-<div class="container">
+<div class="container about-author center-text homeArticle">
 <c:forEach items="${a}" var="article">
     <div class="articles card-body">
         <h1 class="title">Title:${article.title}</h1>

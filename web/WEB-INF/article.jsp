@@ -16,7 +16,7 @@
 <jsp:include page="nav.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
-<div class="container">
+<div class="container about-author center-text homeArticle">
 <br><br>
 <div class = "articlePage card-body">
     <div class = "articleDetails">
