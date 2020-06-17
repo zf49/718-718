@@ -3,17 +3,21 @@ package ictgradschool.project.entity;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
+import java.util.List;
 
-public class Comment {
-    public int authorId;
-    public int articleId;
+public class Comment implements Comparable<Comment> {
     public int id;
     public String content;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     public LocalDateTime dateCreated;
+    public int authorId;
+    public int articleId;
     public String authorName;
-    public String date;
 
+    private int level;
+    private int parentId;
+    private List<Comment> children = new LinkedList<>();
 
     public Comment() {}
 
@@ -24,16 +28,22 @@ public class Comment {
         this.content = content;
         this.dateCreated = dateCreated;
         this.authorName = authorName;
-        date = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss").format(this.dateCreated);
+    }
 
+    public Comment(int id, String content, LocalDateTime dateCreated, int authorId, int articleId,
+                   String authorName, int level, int parentId) {
+        this.id = id;
+        this.content = content;
+        this.dateCreated = dateCreated;
+        this.authorId = authorId;
+        this.articleId = articleId;
+        this.authorName = authorName;
+        this.level = level;
+        this.parentId = parentId;
     }
 
     public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
+        return DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss").format(this.dateCreated);
     }
 
     public int getAuthorId() {
@@ -84,14 +94,67 @@ public class Comment {
         this.authorName = authorName;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
                 "authorId=" + authorId +
                 ", articleId=" + articleId +
                 ", id=" + id +
-                ", content='" + content + '\'' +
+                ", content='" + content.substring(0, Math.min(16, content.length())) + '\'' +
                 ", dateCreated=" + dateCreated +
                 '}';
+    }
+
+    public List<Comment> getChildren() {
+        return children;
+    }
+
+    public static List<Comment> flatten(List<Comment> comments) {
+        List<Comment> results = new LinkedList<>();
+        for (Comment comment : comments) {
+            addCommentRecursively(results, comment);
+        }
+        return results;
+    }
+
+    /**
+     * First add the comment itself, then add its child comments recursively
+     * @param results
+     * @param comment
+     */
+    private static void addCommentRecursively(List<Comment> results, Comment comment) {
+        results.add(comment);
+        for (Comment child : comment.getChildren()) {
+            addCommentRecursively(results, child);
+        }
+    }
+
+    public void addChild(Comment comment) {
+        children.add(comment);
+    }
+
+    public boolean hasParent() {
+        return parentId != 0;
+    }
+
+    @Override
+    public int compareTo(Comment o) {
+        return id - o.id;
     }
 }

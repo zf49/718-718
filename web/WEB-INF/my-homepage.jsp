@@ -31,7 +31,7 @@
             </form>
             </span>
             <span class = "homepageButton">
-             <a class="btn btn-sm btn-outline-secondary" href="<c:url value="${pageContext.request.contextPath}/articles/${article.id}"/>">Show Details</a>
+             <a class="btn btn-sm btn-outline-secondary" href="<c:url value="/articles/${article.id}"/>">Show Details</a>
             </span>
     </div>
     <hr>
