@@ -26,11 +26,14 @@ public class UserAccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserController userController = new UserController(new UserDao());
         User user = (User) req.getSession().getAttribute("user");
-        userController.changeUserDetail(req, user);
-
-        user = userController.changeUser(req, user.getId());
+        String form = req.getParameter("submitButton");
+        if (form.contains("additional"))
+            userController.changeUserDetail(req, user);
+        else
+            user = userController.changeUser(req, user.getId());
         if (user != null)
             req.getSession().setAttribute("user", user);
+        resp.sendRedirect(req.getContextPath() + "/account");
     }
 
 }
