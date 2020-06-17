@@ -15,7 +15,7 @@ import java.io.IOException;
 public class DeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.sendRedirect("/home");
+        resp.sendRedirect(req.getContextPath() + "/home");
     }
 
     @Override
@@ -31,12 +31,15 @@ public class DeleteServlet extends HttpServlet {
             int id = Integer.parseInt(req.getParameter("articleId"));
             ArticleDao articleDao = new ArticleDao();
             articleDao.deleteOneArticle(id);
-            resp.sendRedirect(req.getHeader("referer"));
+//            resp.sendRedirect(req.getHeader("referer"));
+            resp.sendRedirect(req.getContextPath() + "/home");
         } else if (pathInfo.contains("userId")) {
             UserController userController = new UserController(new UserDao());
             int userId = Integer.parseInt(req.getParameter("userId"));
             userController.deleteUser(userId);
-            resp.sendRedirect(req.getHeader("referer"));
+            req.getSession().invalidate();
+            System.out.println(req.getHeader("referer"));
+            resp.sendRedirect(req.getContextPath() + "/home");
         }
     }
 }
