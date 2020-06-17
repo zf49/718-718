@@ -8,7 +8,6 @@
     <jsp:include page="bootstrap.jsp"/>
     <link href="<c:url value="/css/album.css"/>" rel="stylesheet">
     <title>Avatar Upload</title>
-    <jsp:include page="bootstrap.jsp" />
 </head>
 <body>
 
