@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,8 +14,13 @@
 <jsp:include page="nav.jsp" />
 <br>
 <br>
-<div class="container about-author center-text homeArticle">
+<c:if test="${a == null || fn:length(a) == 0}">
+<div class="container about-author center-text homeArticle" style="padding: 9%">
+    <h1 class="container" style="text-align: center">You need to write something!</h1>
+</div>
+</c:if>
 <c:forEach items="${a}" var="article">
+    <div class="container about-author center-text homeArticle">
     <div class="articles card-body">
         <h1 class="title">Title:${article.title}</h1>
         <p class="blog-post-meta date">Create Date: ${article.date}</p>
@@ -35,7 +39,8 @@
             </span>
     </div>
     <hr>
+    </div>
+
 </c:forEach>
-</div>
 </body>
 </html>

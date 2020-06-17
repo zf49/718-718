@@ -12,7 +12,7 @@ public class User implements Serializable {
     private String salt;
     private String passwordHash;
 
-    private String avatarName;
+    private String avatarName = "Pikachu.png";
     private String fname;
     private String lname;
     private Date dateBirth;
