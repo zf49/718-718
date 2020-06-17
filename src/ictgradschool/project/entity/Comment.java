@@ -42,6 +42,10 @@ public class Comment {
         this.parentId = parentId;
     }
 
+    public String getDate() {
+        return DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss").format(this.dateCreated);
+    }
+
     public int getAuthorId() {
         return authorId;
     }
