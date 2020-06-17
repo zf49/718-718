@@ -5,7 +5,6 @@ import ictgradschool.project.util.DBConnectionUtils;
 
 import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -147,30 +146,32 @@ public class CommentDao {
                             "WHERE article_id = ?")) {
                 statement.setInt(1, articleId);
                 try (ResultSet resultSet = statement.executeQuery()) {
-
-                    List<Comment> comments = new LinkedList<>();
-                    Map<Integer, Comment> map = new HashMap<>();
-                    while (resultSet.next()) {
-                        Comment comment = makeComment2(resultSet);
-                        map.put(comment.getId(), comment);
-                        if (comment.hasParent()) {
-                            Comment parentComment = map.get(comment.getParentId());
-                            parentComment.addChild(comment);
-                        } else {
-                            comments.add(comment);
-                        }
-                    }
-                    return comments;
+                    return makeNestedComments(resultSet);
                 }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public void deleteCommentById2(int commentId) {
+    private List<Comment> makeNestedComments(ResultSet resultSet) throws SQLException {
+        List<Comment> comments = new LinkedList<>();
+        Map<Integer, Comment> map = new HashMap<>();
+        while (resultSet.next()) {
+            Comment comment = makeComment2(resultSet);
+            map.put(comment.getId(), comment);
+            if (comment.hasParent()) {
+                Comment parentComment = map.get(comment.getParentId());
+                parentComment.addChild(comment);
+            } else {
+                comments.add(comment);
+            }
+        }
+        return comments;
+    }
 
+    public void deleteCommentById2(int commentId) {
+        // TODO: implement
     }
 }
