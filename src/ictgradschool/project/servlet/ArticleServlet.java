@@ -26,8 +26,7 @@ public class ArticleServlet extends HttpServlet {
         Article article = articleController.getArticleById(articleId);
 
         if (article == null) {
-            // TODO notice users that the article does not exist
-            resp.sendRedirect("/home");
+            req.getRequestDispatcher("/WEB-INF/not-exist.jsp").forward(req, resp);
         }
         else {
             UserDao userDao = new UserDao();

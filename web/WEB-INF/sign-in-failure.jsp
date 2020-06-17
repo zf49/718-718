@@ -6,16 +6,15 @@
     <meta charset="UTF-8">
     <title>Sign In Failed</title>
     <meta http-equiv="refresh" content="5;<c:url value="/sign-in"/>">
-    <script type="text/javascript">
-        window.addEventListener("load", function () {
-            const time = document.getElementById("countdown");
-            function countdown() { time.innerText = (parseInt(time.innerText) - 1) + ""; }
-            setInterval(countdown, 1000);
-        })
-    </script>
+    <jsp:include page="bootstrap.jsp"/>
+    <link href="<c:url value="/css/base.css"/>" rel="stylesheet">
+    <script type="text/javascript" src="<c:url value="/javascript/countdown.js" />"></script>
 </head>
 <body>
-<p>Incorrect username or password. Please try again.</p>
-<p>Automatically return to <a href="<c:url value="/sign-up"/>">sign-in</a> page in <span id="countdown">5</span> seconds</p>
+<div class="jumbotron text-center welcome container" style="font-size: 150%; padding-top: 6rem;">
+    <p>Incorrect username or password. Please try again.</p>
+    <p>Automatically return to <a href="<c:url value="/sign-up"/>">sign-in</a> page in <span id="countdown">5</span>
+        seconds</p>
+</div>
 </body>
 </html>
