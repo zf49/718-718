@@ -3,18 +3,21 @@ package ictgradschool.project.entity;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Comment {
     public int id;
     public String content;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     public LocalDateTime dateCreated;
-    public String authorName;
     public int authorId;
     public int articleId;
+    public String authorName;
 
-    private int level = 0;
+    private int level;
     private int parentId;
+    private List<Comment> children = new LinkedList<>();
 
     public Comment() {}
 
@@ -25,6 +28,18 @@ public class Comment {
         this.content = content;
         this.dateCreated = dateCreated;
         this.authorName = authorName;
+    }
+
+    public Comment(int id, String content, LocalDateTime dateCreated, int authorId, int articleId,
+                   String authorName, int level, int parentId) {
+        this.id = id;
+        this.content = content;
+        this.dateCreated = dateCreated;
+        this.authorId = authorId;
+        this.articleId = articleId;
+        this.authorName = authorName;
+        this.level = level;
+        this.parentId = parentId;
     }
 
     public int getAuthorId() {
@@ -75,6 +90,22 @@ public class Comment {
         this.authorName = authorName;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
@@ -84,5 +115,13 @@ public class Comment {
                 ", content='" + content + '\'' +
                 ", dateCreated=" + dateCreated +
                 '}';
+    }
+
+    public static List<Comment> flatten(List<Comment> comments) {
+        throw new UnsupportedOperationException();
+    }
+
+    public static List<Comment> recursiveSort(List<Comment> comments) {
+        throw new UnsupportedOperationException();
     }
 }

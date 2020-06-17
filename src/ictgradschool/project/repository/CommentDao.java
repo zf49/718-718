@@ -5,6 +5,7 @@ import ictgradschool.project.util.DBConnectionUtils;
 
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class CommentDao {
 
     public CommentDao() {
         try {
-            this.connection =  DBConnectionUtils.getConnectionFromClasspath("database.properties");
+            this.connection = DBConnectionUtils.getConnectionFromClasspath("database.properties");
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
@@ -75,10 +76,67 @@ public class CommentDao {
         try (PreparedStatement statement = connection.prepareStatement("DELETE FROM comment WHERE id = ?;")) {
             statement.setInt(1, commentId);
             statement.executeQuery();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void insertCommentToComment2(String content, int parentId, int articleId) throws IOException {
+        try (Connection connection = DBConnectionUtils.getConnection()) {
+            Comment parentComment = getCommentById2(parentId);
+            int level = parentComment.getLevel() + 1;
+            assert level <= 2;
+            PreparedStatement statement = connection.prepareStatement(
+                    "INSERT INTO comment (content, date_created, author_id, article_id, level, parent_id) VALUES (?, NOW(), ?, ?, ?, ?);");
+            statement.setString(1, content);
+            statement.setInt(2, parentComment.getAuthorId());
+            statement.setInt(3, articleId);
+            statement.setInt(4, level);
+            statement.setInt(5, parentId);
+            statement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Comment getCommentById2(int id) {
+        Comment comment = new Comment();
+        try (PreparedStatement statement = connection.prepareStatement(
+                "SELECT comment.id, content, date_created, author_id, article_id," +
+                        " user.username, level, parent_id AS author_name " +
+                        "FROM comment LEFT JOIN user ON comment.author_id = user.id " +
+                        "WHERE comment.id = ?;")) {
+            statement.setInt(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next())
+                    comment = makeComment2(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return comment;
+    }
+
+    private Comment makeComment2(ResultSet resultSet) throws SQLException {
+        return new Comment(
+                resultSet.getInt(1),
+                resultSet.getString(2),
+                resultSet.getTimestamp(3).toLocalDateTime(),
+                resultSet.getInt(4),
+                resultSet.getInt(5),
+                resultSet.getString(6),
+                resultSet.getInt(7),
+                resultSet.getInt(8)
+        );
+    }
+
+
+    public void deleteCommentById2(int commentId) {
+
+    }
+
+    public List<Comment> getCommentsByArticleId2(int articleId) {
+        return null;
     }
 
 }

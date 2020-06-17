@@ -56,9 +56,12 @@ CREATE TABLE IF NOT EXISTS comment
     date_created DATETIME,
     author_id    INT NOT NULL,
     article_id   INT NOT NULL,
+    level        INT DEFAULT 0,
+    parent_id    INT,
     PRIMARY KEY (id),
     FOREIGN KEY (author_id) REFERENCES user (id),
-    FOREIGN KEY (article_id) REFERENCES article (id)
+    FOREIGN KEY (article_id) REFERENCES article (id),
+    FOREIGN KEY (parent_id) REFERENCES comment (id)
 );
 
 CREATE TABLE IF NOT EXISTS auth
@@ -73,10 +76,10 @@ CREATE TABLE IF NOT EXISTS auth
 );
 
 INSERT INTO avatar (id, name, is_predefined)
-VALUES (1, 'Pikachu.png', true),
-       (2, 'Jigglypuff.png', true),
-       (3, 'Bulbasaur.png', true),
-       (4, 'Charmander.png', true),
-       (5, 'Squirtle.png', true),
-       (6, 'Geodude.png', true),
-       (7, 'Farfetchd.png', true);
+VALUES (1, 'Pikachu.png', TRUE),
+       (2, 'Jigglypuff.png', TRUE),
+       (3, 'Bulbasaur.png', TRUE),
+       (4, 'Charmander.png', TRUE),
+       (5, 'Squirtle.png', TRUE),
+       (6, 'Geodude.png', TRUE),
+       (7, 'Farfetchd.png', TRUE);
