@@ -25,9 +25,9 @@
         <p class="blog-post-meta">Create Date: ${article.date}</p>
         <c:if test="${article.authorId == user.id}">
             <div class="btn-group">
-                <a class="btn btn-sm btn-outline-secondary" href="<c:url value="${pageContext.request.contextPath}/edit/articleId?articleId=${article.id}"/>">Edit</a>
+                <a class="btn btn-sm btn-outline-secondary" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
 
-            <form action="${pageContext.request.contextPath}/delete/articleId?articleId=${article.id}" method="post">
+            <form action="<c:url value="/delete/articleId?articleId=${article.id}"/>" method="post">
                 <input type="submit" class="deleteRightButton btn btn-sm btn-outline-secondary" value="Delete">
             </form>
             </div>
@@ -46,7 +46,7 @@
             <dd><span>${comment.content}</span><br>
                 <span class="blog-post-meta">${comment.date}</span>
                 <c:if test="${comment.authorId == user.id || author.id == user.id}">
-                    <form action="${pageContext.request.contextPath}/delete/commentId?commentId=${comment.id}" method="post">
+                    <form action="<c:url value="/delete/commentId?commentId=${comment.id}"/>" method="post">
                         <input type="submit" class="btn btn-sm btn-outline-secondary" value="Delete">
                     </form>
                 </c:if>

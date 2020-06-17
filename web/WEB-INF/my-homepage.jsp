@@ -23,10 +23,10 @@
         <p class="blog-post-meta authorId">Author Name: ${pageUser.username}</p>
         <p class="content">content:${fn:replace(article.content, newLineChar, "<br>")}</p>
             <span class = "homepageButton">
-            <a class="btn btn-sm btn-outline-secondary homepageButton" href="<c:url value="${pageContext.request.contextPath}/edit/articleId?articleId=${article.id}"/>">Edit</a>
+            <a class="btn btn-sm btn-outline-secondary homepageButton" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
             </span>
             <span class = "homepageButton">
-            <form action="${pageContext.request.contextPath}/delete/articleId?articleId=${article.id}" method="post">
+            <form action="<c:url value="/delete/articleId?articleId=${article.id}"/>" method="post">
             <input type="submit" class="btn btn-sm btn-outline-secondary " value="Delete">
             </form>
             </span>
