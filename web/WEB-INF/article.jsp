@@ -34,7 +34,7 @@
     </div>
     <div class="container">
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
-                aria-expanded="false" aria-controls="collapseExample">Comments
+                aria-expanded="false" aria-controls="collapseExample">Show/Hide Comments
         </button>
         <hr>
     </div>

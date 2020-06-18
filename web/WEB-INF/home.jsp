@@ -8,9 +8,7 @@
     <jsp:include page="bootstrap.jsp" />
 </head>
 <body>
-<jsp:include page="nav.jsp">
-    <jsp:param name="user" value="${user}"/>
-</jsp:include>
+<jsp:include page="nav.jsp" />
 <br><br><br>
 <section class="jumbotron text-center welcome container">
     <p class = "blog-post-title">OLD IRON</p>
@@ -22,7 +20,7 @@
 </div>
 </section>
 <div >
-<c:forEach items="${a}" var="article">
+<c:forEach items="${articles}" var="article">
     <div class="container about-author center-text homeArticle ">
         <p class="blog-post-title">${article.title}</p>
         <p class="date blog-post-meta">Create Date: ${article.date}  By <a href="<c:url value="/user/${article.authorId}"/>">${article.authorName}</a></p>

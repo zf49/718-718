@@ -12,14 +12,15 @@
 <% pageContext.setAttribute("newLineChar", "\n"); %>
 <jsp:include page="nav.jsp" />
 <br><br><br>
-<c:if test="${a == null || fn:length(a) == 0}">
+<c:if test="${articles == null || fn:length(articles) == 0}">
     <div class="container about-author center-text homeArticle" style="padding: 9%">
-        <p class="container blog-post-title" style="text-align: center">You need to write something!</p>
+        <p class="container blog-post-title" style="text-align: center">There's nothing here!</p>
         <br><br>
+<%--        TODO: check if the current user is the author--%>
         <a class="btn btn-lg btn-primary btn-block" href="<c:url value="/new-article"/>">Write Article</a><br>
     </div>
 </c:if>
-<c:forEach items="${a}" var="article">
+<c:forEach items="${articles}" var="article">
     <div class="container about-author center-text homeArticle">
         <div class="articles card-body">
             <p class="blog-post-title text-truncate">Title: ${article.title}</p>
