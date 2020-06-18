@@ -6,18 +6,11 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <jsp:include page="bootstrap.jsp" />
-<%--    <link href="<c:url value="/css/homepage.css"/>" rel="stylesheet">--%>
-    <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
-    <link href="<c:url value="/css/base.css"/>" rel="stylesheet">
-
 </head>
-
 <body>
-
 <jsp:include page="nav.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
-    <br><br><br>
 <section class="jumbotron text-center welcome container">
     <p class = "blog-post-title">OLD IRON</p>
     <p>

@@ -6,16 +6,13 @@
 <html lang="en">
 <head>
     <jsp:include page="bootstrap.jsp" />
-    <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
     <meta charset="UTF-8">
     <title>Edit Article</title>
 </head>
 <body>
 
 <jsp:include page="nav.jsp" />
-<br>
-<br>
-<br>
+
 <div class = "editArticle card-body container about-author center-text homeArticle">
     <form action="" method="post" class="editArticle">
         <div>

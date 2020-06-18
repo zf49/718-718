@@ -6,7 +6,6 @@
 <html lang="en">
 <head>
     <jsp:include page="bootstrap.jsp" />
-    <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
     <meta charset="UTF-8">
     <title>New Article</title>
 </head>
@@ -14,7 +13,7 @@
 <jsp:include page="nav.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
-<br><br><br>
+
 <div class="editArticle card-body container about-author center-text homeArticle ">
     <form action="" method="post">
         <div>

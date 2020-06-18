@@ -41,14 +41,19 @@ body {
 }
 
 
-@media screen and (max-height: 1200px) {
-    body {
-        background-image: url("background.jpg");
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size:100% 100%;
-    }
-}
+.bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
 
 .welcome{
     opacity: 0.9;
@@ -63,3 +68,7 @@ body {
     border-color: black;
 }
 
+body {
+    min-height: 75rem;
+    padding-top: 4.5rem;
+}

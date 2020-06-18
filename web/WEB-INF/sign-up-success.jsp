@@ -6,14 +6,12 @@
     <meta charset="UTF-8">
     <title>More User's Information</title>
     <jsp:include page="bootstrap.jsp"/>
-    <link href="<c:url value="/css/base.css"/>" rel="stylesheet">
-    <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
+
 </head>
 <body>
 <jsp:include page="nav.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
-<br><br><br>
 <div class="container homeArticle editArticle card-body container">
     <p class="lead text-muted mt-2">Welcome ${user.username}! Below is a list of information to let others know more about you. </p>
 
