@@ -21,7 +21,7 @@ public class UserDao {
 
     private User getUserById(Connection connection, int id) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(
-                "SELECT user.id as id, username, salt, password_hash, avatar.name as avatar_name\n" +
+                "SELECT user.id as id, username, avatar.name as avatar_name\n" +
                         "FROM user\n" +
                         "LEFT JOIN avatar ON user.avatar_id = avatar.id\n" +
                         "WHERE user.id = ?;")) {
@@ -80,7 +80,7 @@ public class UserDao {
 
     private User getUserByName(Connection connection, String username) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(
-                "SELECT user.id, username, salt, password_hash, avatar.name as avatar_name\n" +
+                "SELECT user.id, username, avatar.name as avatar_name\n" +
                         "FROM user\n" +
                         "LEFT JOIN avatar ON user.avatar_id = avatar.id\n" +
                         "WHERE username = ?;\n")) {
@@ -221,10 +221,8 @@ public class UserDao {
     private User makeUser(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt(1);
         String username = resultSet.getString(2);
-        String salt = resultSet.getString(3);
-        String passwordHash = resultSet.getString(4);
-        String avatarName = resultSet.getString(5);
-        return new User(id, username, salt, passwordHash, avatarName);
+        String avatarName = resultSet.getString(3);
+        return new User(id, username, avatarName);
     }
 
     public void updateAvatarId(int id, int avatarId) {
