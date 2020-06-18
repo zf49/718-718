@@ -1,8 +1,10 @@
 package ictgradschool.project.repository;
 
 import ictgradschool.project.entity.User;
+import ictgradschool.project.entity.UserCredential;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.*;
 
 import static ictgradschool.project.repository.DaoUtil.getLastInsertedId;
@@ -29,6 +31,16 @@ public class UserDao {
                 boolean hasNext = resultSet.next();
                 return hasNext ? makeUser(resultSet) : null;
             }
+        }
+    }
+
+    public UserCredential getUserCredentialByName(String username) throws IOException {
+        try (Connection connection = getConnectionFromClasspath("database.properties")) {
+            // TODO: implement
+            throw new UnsupportedEncodingException();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
