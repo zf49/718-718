@@ -37,6 +37,7 @@ public class ArticleController {
         String title = req.getParameter("articleTitle");
         String content = req.getParameter("articleContent");
         int authorId = Integer.parseInt(req.getParameter("authorId"));
+        title = StringEscapeUtils.escapeHtml4(title);
         content = StringEscapeUtils.escapeHtml4(content);
         try {
             article = articleDao.postNewArticle(title, content, authorId);
