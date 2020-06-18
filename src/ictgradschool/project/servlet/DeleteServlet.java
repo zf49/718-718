@@ -11,11 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 @WebServlet(urlPatterns = "/delete/*")
 public class DeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("mark 2");
         String pathInfo = req.getPathInfo();
         if (pathInfo.contains("commentId")) {
             int id = Integer.parseInt(req.getParameter("commentId"));
@@ -28,17 +30,6 @@ public class DeleteServlet extends HttpServlet {
             ArticleDao articleDao = new ArticleDao();
             articleDao.deleteArticle(id);
             resp.sendRedirect(req.getHeader("referer"));
-        }
-        else if (pathInfo.contains("userId")) {
-            int id = Integer.parseInt(req.getParameter("userId"));
-            UserController userController = new UserController(new UserDao());
-            try {
-                userController.deleteUser(req, id);
-                req.getSession().invalidate();
-                resp.sendRedirect(req.getContextPath() + "/home");
-            } catch (UnauthorizedException e) {
-                resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-            }
         }
     }
 }
