@@ -4,7 +4,6 @@ import ictgradschool.project.entity.User;
 import ictgradschool.project.entity.UserCredential;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.sql.*;
 
 import static ictgradschool.project.repository.DaoUtil.getLastInsertedId;
