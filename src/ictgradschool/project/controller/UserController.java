@@ -3,6 +3,7 @@ package ictgradschool.project.controller;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.UserDao;
 import ictgradschool.project.util.HashInfo;
+import org.apache.commons.text.StringEscapeUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -47,9 +48,9 @@ public class UserController {
     public void addUserDetail(HttpServletRequest req) throws IOException {
         User user = (User) req.getSession().getAttribute("user");
         user.setDateBirth(convertStringToDate(req.getParameter("dateBirth")));
-        user.setFname(req.getParameter("fname"));
-        user.setLname(req.getParameter("lname"));
-        user.setDescription(req.getParameter("description"));
+        user.setFname(StringEscapeUtils.escapeHtml4(req.getParameter("fname")));
+        user.setLname(StringEscapeUtils.escapeHtml4(req.getParameter("lname")));
+        user.setDescription(StringEscapeUtils.escapeHtml4(req.getParameter("description")));
         userDao.addUserDetails(user);
     }
 
@@ -67,10 +68,10 @@ public class UserController {
     public void changeUserDetail(HttpServletRequest req, User user) throws IOException {
         int detailId = Integer.parseInt(req.getParameter("detailId"));
         user.setDetailId(detailId);
-        user.setFname(req.getParameter("fname"));
-        user.setLname(req.getParameter("lname"));
+        user.setFname(StringEscapeUtils.escapeHtml4(req.getParameter("fname")));
+        user.setLname(StringEscapeUtils.escapeHtml4(req.getParameter("lname")));
         user.setDateBirth(convertStringToDate(req.getParameter("dateBirth")));
-        user.setDescription(req.getParameter("description"));
+        user.setDescription(StringEscapeUtils.escapeHtml4(req.getParameter("description")));
         userDao.updateUserDetail(user);
     }
 

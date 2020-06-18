@@ -3,6 +3,7 @@ package ictgradschool.project.controller;
 import ictgradschool.project.entity.Comment;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.CommentDao;
+import org.apache.commons.text.StringEscapeUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -29,6 +30,7 @@ public class CommentListController {
     public Comment addComment(HttpServletRequest req) throws IOException {
         int articleId = Integer.parseInt(req.getPathInfo().split("/")[1]);
         String content = req.getParameter("commentContent");
+        content = StringEscapeUtils.escapeHtml4(content);
         int parentId = Integer.parseInt(req.getParameter("parentId"));
         User user = (User) req.getSession().getAttribute("user");
         return commentDao.insertNewComment(content, user.getId(), articleId, parentId);
