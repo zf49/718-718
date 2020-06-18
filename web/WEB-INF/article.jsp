@@ -44,7 +44,7 @@
                 <div>
                     <div style="padding-left: ${comment.level * 3}rem">
                         <dt>${comment.authorName}:</dt>
-                        <dd><span>${comment.content}</span><br>
+                        <dd class="text-wrap"><span>${comment.content}</span><br>
                             <span class="blog-post-meta" style="margin-right: 5px">${comment.date}</span>
                             <c:if test="${user != null && comment.level < 2}">
                                 <div style="display: contents">
@@ -69,7 +69,7 @@
                                      style="margin-bottom: 5px">
                                     <form action="" method="post">
                                     <textarea id="replyArea" name="commentContent" rows="5" cols="80"
-                                              class="form-control form-control-dark w-100"
+                                              class="form-control form-control-dark w-100 text-wrap"
                                               placeholder="Enter here"></textarea>
                                         <input hidden name="parentId" value="${comment.id}">
                                         <br>
@@ -85,15 +85,14 @@
         <hr>
         <c:if test="${user != null}">
             <form action="" method="post">
-                <textarea id="enterComment" name="commentContent" rows="5" cols="80"
-                          class="form-control form-control-dark w-100" placeholder="Enter comments here"></textarea>
+                <textarea id="enterComment" name="commentContent" rows="5" cols="80" placeholder="Enter comments here"
+                          class="form-control form-control-dark w-100 text-wrap"></textarea>
                 <input hidden name="parentId" value="0">
                 <br>
                 <input type="submit" class="btn btn-primary" value="Comment">
             </form>
         </c:if>
     </div>
-</div>
 </div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package ictgradschool.project.controller;
 
 import ictgradschool.project.entity.Article;
+import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.ArticleDao;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,8 @@ public class ArticleController {
     }
 
     public Article editArticle(HttpServletRequest req) throws IOException {
+        User user = (User) req.getSession().getAttribute("user");
+        assert String.valueOf(user.getId()).equals(req.getParameter("authorId"));
         int articleId = Integer.parseInt(req.getParameter("articleId"));
         String title = req.getParameter("articleTitle");
         String content = req.getParameter("articleContent");

@@ -7,7 +7,6 @@ import ictgradschool.project.util.HashInfo;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,24 +33,20 @@ public class UserController {
         throw new UnsupportedOperationException();
     }
 
-    public void deleteUser(int id) throws IOException {
-        try {
-            userDao.deleteUserById(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public void deleteUser(HttpServletRequest req, int id) throws IOException {
+        User user = (User) req.getSession().getAttribute("user");
+        if (user.getId() == id) {
+            try {
+                userDao.deleteUserById(user.getId());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public void addUserDetail(HttpServletRequest req) throws IOException {
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = null;
-        try {
-            date = format.parse(req.getParameter("dateBirth"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         User user = (User) req.getSession().getAttribute("user");
-        user.setDateBirth(date);
+        user.setDateBirth(convertStringToDate(req.getParameter("dateBirth")));
         user.setFname(req.getParameter("fname"));
         user.setLname(req.getParameter("lname"));
         user.setDescription(req.getParameter("description"));
@@ -70,20 +65,24 @@ public class UserController {
     }
 
     public void changeUserDetail(HttpServletRequest req, User user) throws IOException {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = null;
-        try {
-            date = format.parse(req.getParameter("dateBirth"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         int detailId = Integer.parseInt(req.getParameter("detailId"));
         user.setDetailId(detailId);
         user.setFname(req.getParameter("fname"));
         user.setLname(req.getParameter("lname"));
-        user.setDateBirth(date);
+        user.setDateBirth(convertStringToDate(req.getParameter("dateBirth")));
         user.setDescription(req.getParameter("description"));
         userDao.updateUserDetail(user);
+    }
+
+    private Date convertStringToDate(String s) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = format.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 
     public User getUserDetails(User user) throws IOException {

@@ -23,9 +23,9 @@
 <div >
 <c:forEach items="${a}" var="article">
     <div class="container about-author center-text homeArticle ">
-        <p class="title blog-post-title">${article.title}</p>
+        <p class="title blog-post-title text-truncate">${article.title}</p>
         <p class="date blog-post-meta">Create Date: ${article.date}  By ${article.authorName}</p>
-        <p class="content blog-main"> ${article.briefContent}...</p>
+        <p class="content blog-main text-truncate"> ${article.briefContent}...</p>
         <span>
         <a class="btn btn-lg btn-primary btn-block" href="<c:url value="/articles/${article.id}"/>">Show Details</a>
         </span>

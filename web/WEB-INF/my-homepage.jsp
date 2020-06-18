@@ -20,10 +20,10 @@
 <c:forEach items="${a}" var="article">
     <div class="container about-author center-text homeArticle">
         <div class="articles card-body">
-            <h1 class="title">Title:${article.title}</h1>
+            <h1 class="title text-truncate">Title:${article.title}</h1>
             <p class="blog-post-meta date">Create Date: ${article.date}</p>
             <p class="blog-post-meta authorId">Author Name: ${pageUser.username}</p>
-            <p class="content">content:${fn:replace(article.briefContent, newLineChar, "<br>")}</p>
+            <p class="content text-truncate">content:${fn:replace(article.briefContent, newLineChar, "<br>")}</p>
             <div style="display: inline-block">
                 <a class="btn btn-primary" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
                 <a class="btn btn-primary" href="<c:url value="/articles/${article.id}"/>">Show Details</a>

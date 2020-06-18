@@ -19,9 +19,7 @@ public class DeleteServlet extends HttpServlet {
         if (pathInfo.contains("commentId")) {
             int id = Integer.parseInt(req.getParameter("commentId"));
             CommentListController commentListController = new CommentListController();
-//            int articleId = commentListController.getCommentById(id).getArticleId();
             commentListController.deleteComment(id);
-//            resp.sendRedirect(req.getContextPath() + "/articles/" + articleId);
             resp.sendRedirect(req.getHeader("referer"));
         }
         else if (pathInfo.contains("articleId")){
@@ -33,7 +31,7 @@ public class DeleteServlet extends HttpServlet {
         else if (pathInfo.contains("userId")) {
             int id = Integer.parseInt(req.getParameter("userId"));
             UserController userController = new UserController(new UserDao());
-            userController.deleteUser(id);
+            userController.deleteUser(req, id);
             req.getSession().invalidate();
             resp.sendRedirect(req.getContextPath() + "/home");
         }
