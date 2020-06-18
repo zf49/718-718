@@ -102,5 +102,4 @@ public class DBConnectionUtils {
     public static Connection getConnection() throws IOException, SQLException {
         return getConnectionFromClasspath("database.properties");
     }
-
 }
