@@ -6,9 +6,6 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <jsp:include page="bootstrap.jsp" />
-    <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
-    <link href="<c:url value="/css/base.css"/>" rel="stylesheet">
-
 </head>
 <body>
 <jsp:include page="nav.jsp">

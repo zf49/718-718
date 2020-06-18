@@ -6,7 +6,6 @@
 <html lang="en">
 <head>
     <jsp:include page="bootstrap.jsp" />
-    <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
     <meta charset="UTF-8">
     <title>New Article</title>
 </head>

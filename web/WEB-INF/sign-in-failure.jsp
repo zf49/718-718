@@ -7,7 +7,6 @@
     <title>Sign In Failed</title>
     <meta http-equiv="refresh" content="5;<c:url value="/sign-in"/>">
     <jsp:include page="bootstrap.jsp"/>
-    <link href="<c:url value="/css/base.css"/>" rel="stylesheet">
     <script type="text/javascript" src="<c:url value="/javascript/countdown.js" />"></script>
 </head>
 <body>

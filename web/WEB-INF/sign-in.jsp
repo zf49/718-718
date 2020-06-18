@@ -25,7 +25,5 @@
         <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign In">
     </div>
 </form>
-<br><br><br>
-
 </body>
 </html>

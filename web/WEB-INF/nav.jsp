@@ -1,11 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
-</head>
-<body>
+
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
@@ -24,7 +20,7 @@
     </li>
     <li class="nav-item">
         <button class="btn nav-link" onclick="location.href='<c:url value="/sign-up"/>'">Sign Up</button>
-    </li>
+        </li>
     </c:when>
     <c:otherwise>
         <li class="nav-item">
@@ -48,4 +44,4 @@
         </ul>
     </div>
 </nav>
-</body>
+
