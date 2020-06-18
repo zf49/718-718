@@ -10,11 +10,10 @@
 </head>
 <body>
 <% pageContext.setAttribute("newLineChar", "\n"); %>
-
 <jsp:include page="nav.jsp" />
 <c:if test="${a == null || fn:length(a) == 0}">
     <div class="container about-author center-text homeArticle" style="padding: 9%">
-        <h1 class="container" style="text-align: center">You need to write something!</h1>
+        <h2 class="container" style="text-align: center">You have written nothing! Click <a href="<c:url value="/new-article"/>">here</a> and go to write.</h2>
     </div>
 </c:if>
 <c:forEach items="${a}" var="article">
