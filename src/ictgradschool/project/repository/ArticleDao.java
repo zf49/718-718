@@ -112,22 +112,20 @@ public class ArticleDao {
         }
     }
 
-    public void deleteArticle(int articleId) throws IOException, SQLException {
+    public void deleteArticle(int articleId) throws IOException {
         try (Connection connection = DBConnectionUtils.getConnection()) {
             try (PreparedStatement stmt = connection.prepareStatement(
                     "DELETE FROM comment WHERE article_id = ? ORDER BY id DESC;")) {
                 stmt.setInt(1, articleId);
-                stmt.executeQuery();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+                stmt.executeUpdate();
             }
 
             try (PreparedStatement stmt = connection.prepareStatement("DELETE FROM article WHERE id = ?")) {
                 stmt.setObject(1, articleId);
                 stmt.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

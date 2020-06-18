@@ -169,7 +169,12 @@ public class UserDao {
         try (Connection connection = getConnectionFromClasspath("database.properties")) {
             ArticleDao articleDao = new ArticleDao();
             articleDao.deleteUserAllArticle(id);
-            try (PreparedStatement statement = connection.prepareStatement("DELETE FROM user WHERE id = ?")) {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "DELETE FROM comment WHERE author_id = ? ORDER BY id DESC;")) {
+                statement.setInt(1, id);
+                statement.executeUpdate();
+            }
+            try (PreparedStatement statement = connection.prepareStatement("DELETE FROM user WHERE id = ?;")) {
                 statement.setInt(1, id);
                 statement.executeUpdate();
             }
@@ -182,6 +187,9 @@ public class UserDao {
         String salt = resultSet.getString(3);
         String passwordHash = resultSet.getString(4);
         String avatarName = resultSet.getString(5);
+        if(avatarName == null){                //set default avatar, but database doesn't have related data
+           avatarName = "Pikachu.png";
+        }
         return new User(id, username, salt, passwordHash, avatarName);
     }
 

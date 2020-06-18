@@ -23,10 +23,10 @@
 }
 
 .homeButton{
-    margin-top: 2%;
+    margin-top: 1%;
     text-align: center;
-    font-size: 1em;
 }
+
 .homeArticle .showDetails{
     opacity: 1;
     font-size: 1.2em;
@@ -37,7 +37,19 @@ body {
     background-image: url("background.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-size:100% 100%;
 }
+
+
+@media screen and (max-height: 1200px) {
+    body {
+        background-image: url("background.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size:100% 100%;
+    }
+}
+
 .welcome{
     opacity: 0.9;
 }

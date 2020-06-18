@@ -12,8 +12,9 @@
 <body>
 
 <jsp:include page="nav.jsp"/>
-
-<section class="jumbotron text-center bg-light">
+<br><br><br>
+ <div class="container about-author center-text homeArticle">
+<section class="jumbotron text-center bg-light ">
     <div class="container">
         <img height="450" src="<c:url value="/avatar/${user.avatarName}"/>" alt="${user.avatarName}"
              title="${user.avatarName}">
@@ -73,6 +74,6 @@
         </p>
     </div>
 </footer>
-
+ </div>
 </body>
 </html>

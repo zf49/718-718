@@ -4,71 +4,83 @@
 
 <html lang="en">
 <head>
-    <jsp:include page="bootstrap.jsp" />
+    <jsp:include page="bootstrap.jsp"/>
     <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
     <meta charset="UTF-8">
     <title>${article.title}</title>
-
 </head>
 <body>
 <% pageContext.setAttribute("newLineChar", "\n"); %>
-
 <jsp:include page="nav.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
+<br><br><br>
 <div class="container about-author center-text homeArticle">
-<br><br>
-<div class = "articlePage card-body">
-    <div class = "articleDetails">
-        <h1 class="title">${article.title}</h1>
-        <p class="blog-post-meta">Author: ${article.authorName}</p>
-        <p class="blog-post-meta">Create Date: ${article.date}</p>
-        <c:if test="${article.authorId == user.id}">
-            <div class="btn-group">
-                <a class="btn btn-sm btn-outline-secondary" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
-
-            <form action="<c:url value="/delete/articleId?articleId=${article.id}"/>" method="post">
-                <input type="submit" class="deleteRightButton btn btn-sm btn-outline-secondary" value="Delete">
-            </form>
-            </div>
-        </c:if>
+    <div class="articlePage card-body">
+        <div class="articleDetails">
+            <h1 class="title">${article.title}</h1>
+            <p class="blog-post-meta">Author: ${article.authorName}</p>
+            <p class="blog-post-meta">Create Date: ${article.date}</p>
+            <c:if test="${article.authorId == user.id}">
+                <a class="btn btn-primary" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
+                <form style="display: contents" action="<c:url value="/delete/articleId?articleId=${article.id}"/>"
+                      method="post">
+                    <input type="submit" class="btn btn-danger my-2" value="Delete">
+                </form>
+            </c:if>
+        </div>
+        <div class="content blog-main">
+            <p>${fn:replace(article.content, newLineChar, "<br>")}</p>
+        </div>
     </div>
-    <div class="content blog-main">
-        <p>${fn:replace(article.content, newLineChar, "<br>")}</p>
+    <div class="container">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                aria-expanded="false" aria-controls="collapseExample">Comments
+        </button>
+        <hr>
     </div>
-</div>
-<hr>
-    <div class="card-body">
+    <div class="collapse card-body" id="collapseExample">
         <h3>Comments:</h3>
         <dl>
             <c:forEach var="comment" items="${comments}">
-                <div style="padding-left: ${comment.level * 3}rem">
-                    <dt>${comment.authorName}:</dt>
-                    <dd><span>${comment.content}</span><br>
-                        <span class="blog-post-meta" style="margin-right: 5px">${comment.date}</span>
-                        <c:if test="${user != null && comment.level < 2}">
-                            <button type="button" data-toggle="collapse" data-target="#replyComment${comment.id}"
-                                    class="btn btn-sm btn-outline-secondary" style="margin-bottom: 5px"
-                                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                                Reply
-                            </button>
-                            <div class="collapse bg-light" id="replyComment${comment.id}" style="margin-bottom: 5px">
-                                <form action="" method="post">
+                <div>
+                    <div style="padding-left: ${comment.level * 3}rem">
+                        <dt>${comment.authorName}:</dt>
+                        <dd><span>${comment.content}</span><br>
+                            <span class="blog-post-meta" style="margin-right: 5px">${comment.date}</span>
+                            <c:if test="${user != null && comment.level < 2}">
+                                <div style="display: contents">
+                                    <div style="display: inline-block">
+                                        <button type="button" data-toggle="collapse"
+                                                data-target="#replyComment${comment.id}"
+                                                class="btn btn-primary my-2" style="margin-bottom: 5px"
+                                                aria-controls="navbarHeader" aria-expanded="false"
+                                                aria-label="Toggle navigation">Reply
+                                        </button>
+                                    </div>
+                                    <div style="display: inline-block">
+                                        <c:if test="${comment.authorId == user.id || author.id == user.id}">
+                                            <form action="<c:url value="/delete/commentId?commentId=${comment.id}"/>"
+                                                  method="post">
+                                                <input type="submit" class="btn btn-danger my-2" value="Delete">
+                                            </form>
+                                        </c:if>
+                                    </div>
+                                </div>
+                                <div class="collapse bg-light" id="replyComment${comment.id}"
+                                     style="margin-bottom: 5px">
+                                    <form action="" method="post">
                                     <textarea id="replyArea" name="commentContent" rows="5" cols="80"
-                                      class="form-control form-control-dark w-100" placeholder="Enter here"></textarea>
-                                    <input hidden name="parentId" value="${comment.id}">
-                                    <br>
-                                    <input type="submit" class="btn btn-sm btn-outline-secondary" value="Comment">
-                                </form>
-                            </div>
-                        </c:if>
-                        <c:if test="${comment.authorId == user.id || article.authorId == user.id}">
-                            <form action="<c:url value="/delete/commentId?commentId=${comment.id}"/>"
-                                  method="post">
-                                <input type="submit" class="btn btn-sm btn-outline-secondary" value="Delete">
-                            </form>
-                        </c:if>
-                    </dd>
+                                              class="form-control form-control-dark w-100"
+                                              placeholder="Enter here"></textarea>
+                                        <input hidden name="parentId" value="${comment.id}">
+                                        <br>
+                                        <input type="submit" class="btn btn-primary" value="Comment">
+                                    </form>
+                                </div>
+                            </c:if>
+                        </dd>
+                    </div>
                 </div>
             </c:forEach>
         </dl>
@@ -79,10 +91,11 @@
                           class="form-control form-control-dark w-100" placeholder="Enter comments here"></textarea>
                 <input hidden name="parentId" value="0">
                 <br>
-                <input type="submit" class="btn btn-sm btn-outline-secondary" value="Comment">
+                <input type="submit" class="btn btn-primary" value="Comment">
             </form>
         </c:if>
     </div>
+</div>
 </div>
 </body>
 </html>
