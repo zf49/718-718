@@ -13,7 +13,6 @@ import java.sql.SQLException;
 public class DBTestUtil {
     public static void resetDBData() throws IOException, SQLException {
         runScript("scripts/db-init.sql");
-        runScript("scripts/test-data-init.sql");
     }
 
     public static void runScript(String scriptPath) throws IOException, SQLException {
