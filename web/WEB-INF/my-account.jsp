@@ -13,6 +13,7 @@
 </head>
 <body class="bg-light">
 <jsp:include page="nav.jsp"/>
+<br><br><br>
 <div class="container about-author center-text homeArticle" style="text-align: -webkit-center">
     <div class="text-center mb-4" style="padding-top: 6rem">
         <img class="d-block mx-auto" src="<c:url value="/${user.avatarPath}"/>" alt="avatar" height="200"><br>

@@ -10,8 +10,8 @@
     <title>Avatar Upload</title>
 </head>
 <body>
-
 <jsp:include page="nav.jsp"/>
+<br><br><br>
  <div class="container about-author center-text homeArticle">
 <section class="jumbotron text-center bg-light ">
     <div class="container">

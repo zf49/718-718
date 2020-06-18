@@ -37,7 +37,6 @@ body {
     background-image: url("background.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size:100% 100%;
 }
 
 
@@ -66,9 +65,4 @@ body {
 .btn-outline-primary {
     color: black;
     border-color: black;
-}
-
-body {
-    min-height: 75rem;
-    padding-top: 4.5rem;
 }

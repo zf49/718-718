@@ -11,6 +11,8 @@
     <script type="text/javascript" src="<c:url value="/javascript/countdown.js" />"></script>
 </head>
 <body>
+<br><br><br>
+
 <div class="jumbotron text-center welcome container" style="font-size: 150%; padding-top: 6rem;">
     <p>${message}</p>
     <p>Please try again.</p>

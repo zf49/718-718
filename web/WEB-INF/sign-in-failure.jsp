@@ -10,6 +10,7 @@
     <script type="text/javascript" src="<c:url value="/javascript/countdown.js" />"></script>
 </head>
 <body>
+<br><br><br>
 <div class="jumbotron text-center welcome container" style="font-size: 150%; padding-top: 6rem;">
     <p>Incorrect username or password. Please try again.</p>
     <p>Automatically return to <a href="<c:url value="/sign-in"/>">sign in</a> page in <span id="countdown">5</span>
