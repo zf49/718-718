@@ -19,8 +19,8 @@ public class ArticleListController {
         return articleDao.getAllArticles();
     }
 
-    public Article postNewArticle(Article article) throws IOException, SQLException {
+    /*public Article postNewArticle(Article article) throws IOException, SQLException {
         return articleDao.postNewArticle(article);
-    }
+    }*/
 
 }

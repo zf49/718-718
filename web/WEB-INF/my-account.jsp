@@ -52,20 +52,20 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="fname">First Name: </label>
-                            <input type="text" name="fname" id="fname" value="${user.fname}" class="form-control">
+                            <input type="text" name="fname" id="fname" value="${user.fname}" class="form-control" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="lname">Last Name: </label>
-                            <input type="text" name="lname" id="lname" value="${user.lname}" class="form-control">
+                            <input type="text" name="lname" id="lname" value="${user.lname}" class="form-control" required>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="date_birth">Date of Birth: </label>
-                        <input type="date" name="dateBirth" id="date_birth" value="${user.date}" class="form-control">
+                        <input type="date" name="dateBirth" id="date_birth" value="${user.date}" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label for="description">Introduce Yourself: </label>
-                        <textarea name="description" id="description" rows="5" class="form-control">${user.description}</textarea>
+                        <textarea name="description" id="description" rows="5" class="form-control" required>${user.description}</textarea>
                     </div>
                     <input hidden name="detailId" value="${user.detailId}">
                 </fieldset>
