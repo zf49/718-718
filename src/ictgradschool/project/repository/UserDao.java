@@ -36,13 +36,35 @@ public class UserDao {
 
     public UserCredential getUserCredentialByName(String username) throws IOException {
         try (Connection connection = getConnection()) {
-            // TODO: implement
-            throw new UnsupportedEncodingException();
+            return getUserCredentialByName(connection, username);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
+    private UserCredential getUserCredentialByName(Connection connection, String username) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(
+                "SELECT user.id, username, salt, password_hash, avatar.name as avatar_name\n" +
+                        "FROM user\n" +
+                        "LEFT JOIN avatar ON user.avatar_id = avatar.id\n" +
+                        "WHERE username = ?;\n")) {
+            statement.setString(1, username);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                boolean hasNext = resultSet.next();
+                return hasNext ? makeUserCredential(resultSet) : null;
+            }
+        }
+    }
+
+    private UserCredential makeUserCredential(ResultSet resultSet) throws SQLException {
+        return new UserCredential(
+                resultSet.getInt(1),
+                resultSet.getString(2),
+                resultSet.getString(3),
+                resultSet.getString(4)
+        );
+    }
+
 
     public User getUserByName(String username) throws IOException {
         try (Connection connection = getConnection()) {
@@ -199,6 +221,7 @@ public class UserDao {
         String salt = resultSet.getString(3);
         String passwordHash = resultSet.getString(4);
         String avatarName = resultSet.getString(5);
+        // TODO: make this more resilient
         if(avatarName == null){                //set default avatar, but database doesn't have related data
            avatarName = "Pikachu.png";
         }

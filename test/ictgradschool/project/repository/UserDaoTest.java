@@ -1,6 +1,7 @@
 package ictgradschool.project.repository;
 
 import ictgradschool.project.entity.User;
+import ictgradschool.project.entity.UserCredential;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -58,5 +59,12 @@ class UserDaoTest {
                 "YogwH6+EIz9lvTurXPD7wdscRQc/viTM+tkS5nyuHY9vlbHKxNlP0jMNmAzOytj6qZLqHt7rt8ND/sE+f2MTwg==");
         assertNotNull(user);
         resetDBData();
+    }
+
+    @Test
+    void testGetUserCredential() throws IOException {
+        UserCredential credential = userDao.getUserCredentialByName("Bret");
+        assertNotNull(credential);
+        System.out.println(credential);
     }
 }
