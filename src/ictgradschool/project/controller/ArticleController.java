@@ -7,6 +7,7 @@ import ictgradschool.project.repository.ArticleDao;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.sql.SQLException;
+import org.apache.commons.text.StringEscapeUtils;
 
 public class ArticleController {
 
@@ -36,6 +37,7 @@ public class ArticleController {
         String title = req.getParameter("articleTitle");
         String content = req.getParameter("articleContent");
         int authorId = Integer.parseInt(req.getParameter("authorId"));
+        content = StringEscapeUtils.escapeHtml4(content);
         try {
             article = articleDao.postNewArticle(title, content, authorId);
         } catch (SQLException e) {

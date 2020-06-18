@@ -7,11 +7,9 @@ import java.util.Date;
 public class User implements Serializable {
     private int id;
     private String username;
-    // TODO: No need to store `salt` and `hash` to session. Move'em to another class
-    private String salt;
-    private String passwordHash;
 
     private String avatarName;
+    // TODO: rename to `firstName` and `lastName`
     private String fname;
     private String lname;
     private Date dateBirth;
@@ -21,18 +19,9 @@ public class User implements Serializable {
 
     public User() {}
 
-    public User(int id, String username, String salt, String passwordHash) {
+    public User(int id, String username, String avatarName) {
         this.id = id;
         this.username = username;
-        this.salt = salt;
-        this.passwordHash = passwordHash;
-    }
-
-    public User(int id, String username, String salt, String passwordHash, String avatarName) {
-        this.id = id;
-        this.username = username;
-        this.salt = salt;
-        this.passwordHash = passwordHash;
         this.avatarName = avatarName;
     }
 
@@ -50,22 +39,6 @@ public class User implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
     }
 
     public String getAvatarName() {
@@ -133,8 +106,6 @@ public class User implements Serializable {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", salt='" + salt + '\'' +
-                ", passwordHash='" + passwordHash + '\'' +
                 ", avatarName='" + avatarName + '\'' +
                 '}';
     }
