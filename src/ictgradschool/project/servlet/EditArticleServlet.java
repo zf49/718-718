@@ -1,6 +1,7 @@
 package ictgradschool.project.servlet;
 
 import ictgradschool.project.controller.ArticleController;
+import ictgradschool.project.controller.exception.UnauthorizedException;
 import ictgradschool.project.entity.Article;
 
 import javax.servlet.ServletException;
@@ -23,8 +24,13 @@ public class EditArticleServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         ArticleController controller = new ArticleController();
-        Article article = controller.editArticle(req);
-        resp.sendRedirect(req.getContextPath() + "/articles/" + article.getId());
+        Article article = null;
+        try {
+            article = controller.editArticle(req);
+            resp.sendRedirect(req.getContextPath() + "/articles/" + article.getId());
+        } catch (UnauthorizedException e) {
+            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        }
     }
 
 }

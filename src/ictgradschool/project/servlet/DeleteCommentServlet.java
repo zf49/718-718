@@ -1,6 +1,8 @@
 package ictgradschool.project.servlet;
 
 import ictgradschool.project.controller.CommentListController;
+import ictgradschool.project.controller.exception.UnauthorizedException;
+import ictgradschool.project.entity.User;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,10 +14,14 @@ import java.io.IOException;
 public class DeleteCommentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        // TODO: check authorization
+        User user = (User) req.getSession().getAttribute("user");
         int id = Integer.parseInt(req.getParameter("commentId"));
         CommentListController commentListController = new CommentListController();
-        commentListController.deleteComment(id);
-        resp.sendRedirect(req.getHeader("referer"));
+        try {
+            commentListController.deleteComment(user.getId(), id);
+            resp.sendRedirect(req.getHeader("referer"));
+        } catch (UnauthorizedException e) {
+            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        }
     }
 }

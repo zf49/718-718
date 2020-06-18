@@ -45,6 +45,15 @@ public class CommentDao {
         return level;
     }
 
+    public Comment getCommentById(int id) throws IOException {
+        try (Connection connection = DBConnectionUtils.getConnection()) {
+            return getCommentById(connection, id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     private Comment getCommentById(Connection connection, int id) {
         Comment comment = new Comment();
         try (PreparedStatement statement = connection.prepareStatement(
