@@ -19,9 +19,10 @@ public class DeleteServlet extends HttpServlet {
         if (pathInfo.contains("commentId")) {
             int id = Integer.parseInt(req.getParameter("commentId"));
             CommentListController commentListController = new CommentListController();
-            int articleId = commentListController.getCommentById(id).getArticleId();
+//            int articleId = commentListController.getCommentById(id).getArticleId();
             commentListController.deleteComment(id);
-            resp.sendRedirect(req.getContextPath() + "/articles/" + articleId);
+//            resp.sendRedirect(req.getContextPath() + "/articles/" + articleId);
+            resp.sendRedirect(req.getHeader("referer"));
         }
         else if (pathInfo.contains("articleId")){
             int id = Integer.parseInt(req.getParameter("articleId"));

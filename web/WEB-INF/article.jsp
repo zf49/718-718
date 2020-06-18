@@ -53,8 +53,8 @@
                                 Reply
                             </button>
                             <div class="collapse bg-light" id="replyComment${comment.id}" style="margin-bottom: 5px">
-                                <form action="<c:url value="/reply-comment"/>" method="post">
-                            <textarea id="replyArea" name="replyContent" rows="5" cols="80"
+                                <form action="" method="post">
+                                    <textarea id="replyArea" name="commentContent" rows="5" cols="80"
                                       class="form-control form-control-dark w-100" placeholder="Enter here"></textarea>
                                     <input hidden name="parentId" value="${comment.id}">
                                     <br>
@@ -74,9 +74,10 @@
         </dl>
         <hr>
         <c:if test="${user != null}">
-            <form action="./${article.id}/comment?userId=${user.id}" method="post">
+            <form action="" method="post">
                 <textarea id="enterComment" name="commentContent" rows="5" cols="80"
                           class="form-control form-control-dark w-100" placeholder="Enter comments here"></textarea>
+                <input hidden name="parentId" value="0">
                 <br>
                 <input type="submit" class="btn btn-sm btn-outline-secondary" value="Comment">
             </form>

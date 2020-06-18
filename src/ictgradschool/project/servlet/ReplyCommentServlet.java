@@ -11,10 +11,10 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/reply-comment")
 public class ReplyCommentServlet extends HttpServlet {
-    @Override
+   /* @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         CommentListController controller = new CommentListController();
-        Comment comment = controller.insertCommentToComment(req);
+        Comment comment = controller.addComment(req);
         resp.sendRedirect(req.getContextPath() + "/articles/" + comment.getArticleId());
-    }
+    }*/
 }

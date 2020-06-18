@@ -42,8 +42,8 @@ public class ArticleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         CommentListController controller = new CommentListController();
-        Comment comment = controller.postNewComment(req);
-        resp.sendRedirect(req.getContextPath() + "/articles/" + comment.getArticleId());
+        Comment comment = controller.addComment(req);
+        resp.sendRedirect(req.getHeader("referer"));
 
     }
 

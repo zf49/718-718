@@ -116,7 +116,7 @@ public class ArticleDao {
     }
 
     public void deleteOneArticle(int articleId) {
-        try (PreparedStatement stmt = connection.prepareStatement("DELETE FROM comment WHERE article_id = ?;")) {
+        try (PreparedStatement stmt = connection.prepareStatement("DELETE FROM comment WHERE article_id = ? ORDER BY id DESC;")) {
             stmt.setInt(1, articleId);
             stmt.executeQuery();
         } catch (SQLException ex) {
