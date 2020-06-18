@@ -18,7 +18,7 @@
     <div class="articlePage card-body">
         <div class="articleDetails">
             <p class = "blog-post-title text-break">${article.title}</p>
-            <p class="blog-post-meta">Author: ${article.authorName}</p>
+            <p class="blog-post-meta">Author: <a href="<c:url value="/user/${article.authorId}"/>">${article.authorName}</a></p>
             <p class="blog-post-meta">Create Date: ${article.date}</p>
             <c:if test="${article.authorId == user.id}">
                 <a class="btn btn-primary" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
