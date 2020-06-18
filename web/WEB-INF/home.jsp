@@ -34,7 +34,7 @@
     <div class="container about-author center-text homeArticle ">
         <h2 class="title blog-post-title">${article.title}</h2>
         <p class="date blog-post-meta">Create Date: ${article.date}  By ${article.authorName}</p>
-        <p class="content blog-main"> ${article.content}...</p>
+        <p class="content blog-main"> ${article.briefContent}...</p>
         <span>
         <a class="btn btn-sm btn-outline-secondary homeBtn" href="<c:url value="/articles/${article.id}"/>">Show Details</a>
         </span>

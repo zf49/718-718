@@ -27,7 +27,7 @@ public class DeleteServlet extends HttpServlet {
         else if (pathInfo.contains("articleId")){
             int id = Integer.parseInt(req.getParameter("articleId"));
             ArticleDao articleDao = new ArticleDao();
-            articleDao.deleteOneArticle(id);
+            articleDao.deleteArticle(id);
             resp.sendRedirect(req.getHeader("referer"));
         }
         else if (pathInfo.contains("userId")) {

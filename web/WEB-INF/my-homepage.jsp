@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +20,7 @@
         <h1 class="title">Title:${article.title}</h1>
         <p class="blog-post-meta date">Create Date: ${article.date}</p>
         <p class="blog-post-meta authorId">Author Name: ${pageUser.username}</p>
-        <p class="content">content:${fn:replace(article.content, newLineChar, "<br>")}</p>
+        <p class="content">content:${fn:replace(article.briefContent, newLineChar, "<br>")}</p>
             <span class = "homepageButton">
             <a class="btn btn-sm btn-outline-secondary homepageButton" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
             </span>
