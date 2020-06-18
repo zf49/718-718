@@ -12,6 +12,7 @@ public class User implements Serializable {
     private String passwordHash;
 
     private String avatarName;
+    // TODO: rename to `firstName` and `lastName`
     private String fname;
     private String lname;
     private Date dateBirth;
