@@ -8,6 +8,7 @@
     <jsp:include page="bootstrap.jsp" />
 </head>
 <body>
+<%--TODO: remove user--%>
 <jsp:include page="nav.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
@@ -22,7 +23,7 @@
 </div>
 </section>
 <div >
-<c:forEach items="${a}" var="article">
+<c:forEach items="${articles}" var="article">
     <div class="container about-author center-text homeArticle ">
         <p class="blog-post-title">${article.title}</p>
         <p class="date blog-post-meta">Create Date: ${article.date}  By ${article.authorName}</p>

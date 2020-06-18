@@ -25,7 +25,7 @@ public class UserHomepageServlet extends HttpServlet {
         List<Article> articleList = a.getArticleByUserId(userId);
         User user = userDao.getUserById(userId);
 
-        req.setAttribute("a", articleList);
+        req.setAttribute("articles", articleList);
         System.out.println(articleList.size());
         req.setAttribute("pageUser", user);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/my-homepage.jsp");
