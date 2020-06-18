@@ -8,10 +8,7 @@
     <jsp:include page="bootstrap.jsp" />
 </head>
 <body>
-<%--TODO: remove user--%>
-<jsp:include page="nav.jsp">
-    <jsp:param name="user" value="${user}"/>
-</jsp:include>
+<jsp:include page="nav.jsp" />
 <br><br><br>
 <section class="jumbotron text-center welcome container">
     <p class = "blog-post-title">OLD IRON</p>
