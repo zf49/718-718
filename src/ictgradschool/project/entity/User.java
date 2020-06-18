@@ -20,12 +20,6 @@ public class User implements Serializable {
     public User() {}
 
     // TODO: remove salt and hash parameters
-    public User(int id, String username, String salt, String passwordHash) {
-        this.id = id;
-        this.username = username;
-    }
-
-    // TODO: remove salt and hash parameters
     public User(int id, String username, String salt, String passwordHash, String avatarName) {
         this.id = id;
         this.username = username;
