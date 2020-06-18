@@ -198,7 +198,7 @@ public class UserDao {
         }
     }
 
-    public void deleteUserById(int id) throws IOException, SQLException {
+    public void deleteUserById(int id) throws IOException {
         try (Connection connection = getConnection()) {
             ArticleDao articleDao = new ArticleDao();
             articleDao.deleteUserAllArticle(id);
@@ -211,6 +211,8 @@ public class UserDao {
                 statement.setInt(1, id);
                 statement.executeUpdate();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
