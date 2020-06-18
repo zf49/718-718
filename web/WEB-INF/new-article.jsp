@@ -30,7 +30,7 @@
         </div>
         <br>
         <input hidden type="text" name="authorId" value="${user.id}">
-        <input type="submit" class="btn btn-primary" value="Confirm">
+        <input type="submit" class="btn btn-primary" value="Post Article">
     </form>
 </div>
 <br><br><br>
