@@ -2,6 +2,7 @@ package ictgradschool.project.controller;
 
 import ictgradschool.project.controller.exception.InvalidUsernameException;
 import ictgradschool.project.controller.exception.PasswordsDontMatchException;
+import ictgradschool.project.controller.exception.UnauthorizedException;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.UserDao;
 import ictgradschool.project.util.HashInfo;
@@ -51,15 +52,12 @@ public class UserController {
         throw new UnsupportedOperationException();
     }
 
-    public void deleteUser(HttpServletRequest req, int id) throws IOException {
+    public void deleteUser(HttpServletRequest req, int id) throws IOException, UnauthorizedException {
         User user = (User) req.getSession().getAttribute("user");
-        if (user.getId() == id) {
-            try {
-                userDao.deleteUserById(user.getId());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        if (user.getId() != id) {
+            throw new UnauthorizedException();
         }
+        userDao.deleteUserById(user.getId());
     }
 
     public void addUserDetail(HttpServletRequest req) throws IOException {

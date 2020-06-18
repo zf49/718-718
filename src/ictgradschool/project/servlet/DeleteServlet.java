@@ -2,6 +2,7 @@ package ictgradschool.project.servlet;
 
 import ictgradschool.project.controller.CommentListController;
 import ictgradschool.project.controller.UserController;
+import ictgradschool.project.controller.exception.UnauthorizedException;
 import ictgradschool.project.repository.ArticleDao;
 import ictgradschool.project.repository.UserDao;
 
@@ -31,9 +32,13 @@ public class DeleteServlet extends HttpServlet {
         else if (pathInfo.contains("userId")) {
             int id = Integer.parseInt(req.getParameter("userId"));
             UserController userController = new UserController(new UserDao());
-            userController.deleteUser(req, id);
-            req.getSession().invalidate();
-            resp.sendRedirect(req.getContextPath() + "/home");
+            try {
+                userController.deleteUser(req, id);
+                req.getSession().invalidate();
+                resp.sendRedirect(req.getContextPath() + "/home");
+            } catch (UnauthorizedException e) {
+                resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+            }
         }
     }
 }
