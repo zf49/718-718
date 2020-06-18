@@ -18,7 +18,6 @@ public class ArticleServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-
         int articleId = Integer.parseInt(req.getPathInfo().split("/")[1]);
         ArticleDao articleDao = new ArticleDao();
         Article article = articleDao.getArticleById(articleId);

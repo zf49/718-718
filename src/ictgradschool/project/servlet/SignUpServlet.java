@@ -1,6 +1,8 @@
 package ictgradschool.project.servlet;
 
 import ictgradschool.project.controller.UserController;
+import ictgradschool.project.controller.exception.InvalidUsernameException;
+import ictgradschool.project.controller.exception.PasswordsDontMatchException;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.UserDao;
 import ictgradschool.project.util.ServletUtil;
@@ -26,8 +28,13 @@ public class SignUpServlet extends HttpServlet {
         String confirmPassword = req.getParameter("confirmPassword");
 
         UserController userController = new UserController(new UserDao());
-        User user = userController.signUp(username, password, confirmPassword);
-        req.getSession().setAttribute("user", user);
-        resp.sendRedirect(req.getContextPath() + (user != null ? "/sign-up-success" : "/sign-up-failure"));
+        try {
+            User user = userController.signUp(username, password, confirmPassword);
+            req.getSession().setAttribute("user", user);
+            resp.sendRedirect(req.getContextPath() + "/sign-up-success");
+        } catch (InvalidUsernameException | PasswordsDontMatchException e) {
+            req.setAttribute("message", e.getMessage());
+            ServletUtil.forward(req, resp, getServletContext(), "/sign-up-failure.jsp");
+        }
     }
 }

@@ -1,8 +1,12 @@
 package ictgradschool.project.controller;
 
+import ictgradschool.project.controller.exception.InvalidUsernameException;
+import ictgradschool.project.controller.exception.PasswordsDontMatchException;
+import ictgradschool.project.controller.exception.UnauthorizedException;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.UserDao;
 import ictgradschool.project.util.HashInfo;
+import org.apache.commons.text.StringEscapeUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -10,6 +14,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import static ictgradschool.project.util.PasswordUtil.*;
 
@@ -20,12 +25,26 @@ public class UserController {
         this.userDao = userDao;
     }
 
-    public User signUp(String username, String password, String confirmPassword) throws IOException {
-        if (!password.equals(confirmPassword)) {
-            return null;
-        }
+    public User signUp(String username, String password, String confirmPassword) throws IOException, InvalidUsernameException, PasswordsDontMatchException {
+        checkUsernameValidity(username);
+        checkPasswordsMatch(password, confirmPassword);
         HashInfo hashInfo = quickHash(password);
         return userDao.addUser(username, hashInfo.saltBase64, hashInfo.hashBase64);
+    }
+
+    private void checkPasswordsMatch(String password, String confirmPassword) throws PasswordsDontMatchException {
+        if (!password.equals(confirmPassword)) {
+            throw new PasswordsDontMatchException();
+        }
+    }
+
+    private void checkUsernameValidity(String username) throws InvalidUsernameException {
+        if (username.length() < 3) {
+            throw new InvalidUsernameException("Username must be at least 3 characters.");
+        }
+        if (!Pattern.matches("[a-zA-Z0-9]+", username)) {
+            throw new InvalidUsernameException("Username can only contain letters and numbers.");
+        }
     }
 
     public boolean isUsernameExist(String username) throws IOException, SQLException {
@@ -33,23 +52,20 @@ public class UserController {
         throw new UnsupportedOperationException();
     }
 
-    public void deleteUser(HttpServletRequest req, int id) throws IOException {
+    public void deleteUser(HttpServletRequest req, int id) throws IOException, UnauthorizedException {
         User user = (User) req.getSession().getAttribute("user");
-        if (user.getId() == id) {
-            try {
-                userDao.deleteUserById(user.getId());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        if (user.getId() != id) {
+            throw new UnauthorizedException();
         }
+        userDao.deleteUserById(user.getId());
     }
 
     public void addUserDetail(HttpServletRequest req) throws IOException {
         User user = (User) req.getSession().getAttribute("user");
         user.setDateBirth(convertStringToDate(req.getParameter("dateBirth")));
-        user.setFname(req.getParameter("fname"));
-        user.setLname(req.getParameter("lname"));
-        user.setDescription(req.getParameter("description"));
+        user.setFname(StringEscapeUtils.escapeHtml4(req.getParameter("fname")));
+        user.setLname(StringEscapeUtils.escapeHtml4(req.getParameter("lname")));
+        user.setDescription(StringEscapeUtils.escapeHtml4(req.getParameter("description")));
         userDao.addUserDetails(user);
     }
 
@@ -67,10 +83,10 @@ public class UserController {
     public void changeUserDetail(HttpServletRequest req, User user) throws IOException {
         int detailId = Integer.parseInt(req.getParameter("detailId"));
         user.setDetailId(detailId);
-        user.setFname(req.getParameter("fname"));
-        user.setLname(req.getParameter("lname"));
+        user.setFname(StringEscapeUtils.escapeHtml4(req.getParameter("fname")));
+        user.setLname(StringEscapeUtils.escapeHtml4(req.getParameter("lname")));
         user.setDateBirth(convertStringToDate(req.getParameter("dateBirth")));
-        user.setDescription(req.getParameter("description"));
+        user.setDescription(StringEscapeUtils.escapeHtml4(req.getParameter("description")));
         userDao.updateUserDetail(user);
     }
 
