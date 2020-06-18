@@ -24,6 +24,8 @@ public class ArticleController {
         int articleId = Integer.parseInt(req.getParameter("articleId"));
         String title = req.getParameter("articleTitle");
         String content = req.getParameter("articleContent");
+        title = StringEscapeUtils.escapeHtml4(title);
+        content = StringEscapeUtils.escapeHtml4(content);
         try {
             return articleDao.updateArticle(title, content, articleId);
         } catch (SQLException e) {
@@ -37,6 +39,7 @@ public class ArticleController {
         String title = req.getParameter("articleTitle");
         String content = req.getParameter("articleContent");
         int authorId = Integer.parseInt(req.getParameter("authorId"));
+        title = StringEscapeUtils.escapeHtml4(title);
         content = StringEscapeUtils.escapeHtml4(content);
         try {
             article = articleDao.postNewArticle(title, content, authorId);
