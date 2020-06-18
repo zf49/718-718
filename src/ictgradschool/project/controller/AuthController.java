@@ -2,6 +2,7 @@ package ictgradschool.project.controller;
 
 import ictgradschool.project.entity.Token;
 import ictgradschool.project.entity.User;
+import ictgradschool.project.entity.UserCredential;
 import ictgradschool.project.repository.UserDao;
 import ictgradschool.project.util.PasswordUtil;
 
@@ -15,14 +16,11 @@ public class AuthController {
     }
 
     public User signIn(String username, String password) throws IOException {
-        User user = userDao.getUserByName(username);
-        if (user == null) {
+        UserCredential credential = userDao.getUserCredentialByName(username);
+        if (!credential.isExpectedPassword(password)) {
             return null;
         }
-        byte[] saltBytes = PasswordUtil.base64Decode(user.getSalt());
-        byte[] passwordHashBytes = PasswordUtil.base64Decode(user.getPasswordHash());
-        boolean isPasswordValid = PasswordUtil.isExpectedPassword(password.toCharArray(), saltBytes, passwordHashBytes);
-        return isPasswordValid ? user : null;
+        return userDao.getUserByName(username);
     }
 
     public void signOut(Token token) {

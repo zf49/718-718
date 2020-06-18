@@ -1,5 +1,3 @@
--- TODO: Add your database init script here. This should initialize all your tables, and add any initial data required.
-
 DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS article;
 DROP TABLE IF EXISTS auth;
@@ -31,7 +29,7 @@ CREATE TABLE IF NOT EXISTS user
     username      VARCHAR(128) NOT NULL UNIQUE,
     salt          CHAR(44)     NOT NULL,
     password_hash CHAR(88)     NOT NULL,
-    avatar_id     INT,
+    avatar_id     INT DEFAULT 1,
     detail_id     INT,
     PRIMARY KEY (id),
     FOREIGN KEY (avatar_id) REFERENCES avatar (id),
