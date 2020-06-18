@@ -26,18 +26,18 @@
                 <fieldset>
                     <legend class="mb-3">Basic Information</legend>
                     <div class="mb-3">
-                        <p class="blog-post-title"><label for="username">Username: </label></p>
+                        <label for="username">Username: </label>
                         <input type="text" name="username" id="username" required value="${user.username}" class="form-control">
                         <small id="username-taken" class="form-text text-danger d-none">
                             Username already taken
                         </small>
                     </div>
                     <div class="mb-3">
-                        <p class="blog-post-title"> <label for="password">Password: </label> </p>
+                        <label for="password">Password: </label>
                         <input type="password" name="password" id="password" required class="form-control">
                     </div>
                     <div class="mb-3">
-                        <p class="blog-post-title"><label for="confirmPassword">Confirm Password: </label> </p>
+                        <label for="confirmPassword">Confirm Password: </label>
                         <input type="password" name="confirmPassword" id="confirmPassword" required class="form-control">
                         <small id="password-dont-match" class="form-text text-danger d-none">
                             Passwords don't match
@@ -49,23 +49,23 @@
             <hr>
             <form action="" method="post">
                 <fieldset>
-                    <p class="blog-post-title"><legend class="mb-3">Additional Information <span class="text-muted">(Optional)</span></legend></p>
+                    <legend class="mb-3">Additional Information <span class="text-muted">(Optional)</span></legend>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <p class="blog-post-title"><label for="fname">First Name: </label></p>
+                            <label for="fname">First Name: </label>
                             <input type="text" name="fname" id="fname" value="${user.fname}" class="form-control" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <p class="blog-post-title"><label for="lname">Last Name: </label></p>
+                            <label for="lname">Last Name: </label>
                             <input type="text" name="lname" id="lname" value="${user.lname}" class="form-control" required>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <p class="blog-post-title"><label for="date_birth">Date of Birth: </label></p>
+                        <label for="date_birth">Date of Birth: </label>
                         <input type="date" name="dateBirth" id="date_birth" value="${user.date}" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <p class="blog-post-title"><label for="description">Introduce Yourself: </label></p>
+                        <label for="description">Introduce Yourself: </label>
                         <textarea name="description" id="description" rows="5" class="form-control" required>${user.description}</textarea>
                     </div>
                     <input hidden name="detailId" value="${user.detailId}">
