@@ -11,6 +11,7 @@
 <jsp:include page="nav.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
+<br><br><br>
 <section class="jumbotron text-center welcome container">
     <p class = "blog-post-title">OLD IRON</p>
     <p>
@@ -23,7 +24,7 @@
 <div >
 <c:forEach items="${a}" var="article">
     <div class="container about-author center-text homeArticle ">
-        <p class="title blog-post-title text-truncate">${article.title}</p>
+        <p class="blog-post-title">${article.title}</p>
         <p class="date blog-post-meta">Create Date: ${article.date}  By ${article.authorName}</p>
         <p class="content blog-main text-truncate"> ${article.briefContent}...</p>
         <span>

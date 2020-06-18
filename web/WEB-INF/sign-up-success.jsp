@@ -12,12 +12,12 @@
 <jsp:include page="nav.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
+<br><br><br>
 <div class="container homeArticle editArticle card-body container">
-    <p class="lead text-muted mt-2">Welcome ${user.username}! Below is a list of information to let others know more about you. </p>
+    <p class="blog-post-title" style="color: black">Welcome ${user.username}! Below is a list of information to let others know more about you. </p>
 
-    <button class="btn btn-sm btn-outline-secondary homeButton mb-4" onclick="location.href='<c:url value="/home"/>'">Skip
+    <button class="btn btn-primary" onclick="location.href='<c:url value="/home"/>'">Skip
     </button>
-
     <form action="" method="post">
         <div class="row">
         <div class="col-md-6 mb-3">
@@ -38,7 +38,7 @@
                       rows="5" required></textarea>
         </div>
         <div class="mb-4">
-            <input type="submit" class=" btn btn-sm btn-outline-secondary homeButton" value="Confirm">
+            <input type="submit" class=" btn btn-danger my-2" value="Confirm">
         </div>
     </form>
 </div>
