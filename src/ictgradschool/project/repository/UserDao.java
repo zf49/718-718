@@ -220,10 +220,6 @@ public class UserDao {
         String salt = resultSet.getString(3);
         String passwordHash = resultSet.getString(4);
         String avatarName = resultSet.getString(5);
-        // TODO: make this more resilient
-        if(avatarName == null){                //set default avatar, but database doesn't have related data
-           avatarName = "Pikachu.png";
-        }
         return new User(id, username, salt, passwordHash, avatarName);
     }
 
