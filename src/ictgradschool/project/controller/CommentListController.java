@@ -1,6 +1,7 @@
 package ictgradschool.project.controller;
 
 import ictgradschool.project.entity.Comment;
+import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.CommentDao;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,35 +18,20 @@ public class CommentListController {
     }
 
     public List<Comment> getCommentsByArticleId(int articleId) throws IOException {
-        List<Comment> comments = commentDao.getCommentsByArticleId2(articleId);
+        List<Comment> comments = commentDao.getCommentsByArticleId(articleId);
         return Comment.flatten(comments);
     }
 
-    public Comment getCommentById(int commentId) {
-        try {
-            return commentDao.getCommentById(commentId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public Comment postNewComment(HttpServletRequest req) {
-        Comment comment = new Comment();
-        String pathInfo = req.getPathInfo();
-        int articleId = Integer.parseInt(pathInfo.split("/")[1]);
-        comment.setContent(req.getParameter("commentContent"));
-        comment.setAuthorId(Integer.parseInt(req.getParameter("userId")));
-        try {
-            return commentDao.postNewComment(comment, articleId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public void deleteComment(int commentId) throws IOException {
-        commentDao.deleteCommentById2(commentId);
+        commentDao.deleteCommentById(commentId);
+    }
+
+    public Comment addComment(HttpServletRequest req) throws IOException {
+        int articleId = Integer.parseInt(req.getPathInfo().split("/")[1]);
+        String content = req.getParameter("commentContent");
+        int parentId = Integer.parseInt(req.getParameter("parentId"));
+        User user = (User) req.getSession().getAttribute("user");
+        return commentDao.insertNewComment(content, user.getId(), articleId, parentId);
     }
 
 }

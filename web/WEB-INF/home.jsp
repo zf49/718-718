@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,7 +32,7 @@
     <div class="container about-author center-text homeArticle ">
         <p class="title blog-post-title">${article.title}</p>
         <p class="date blog-post-meta">Create Date: ${article.date}  By ${article.authorName}</p>
-        <p class="content blog-main"> ${article.content}...</p>
+        <p class="content blog-main"> ${article.briefContent}...</p>
         <span>
         <a class="btn btn-lg btn-primary btn-block" href="<c:url value="/articles/${article.id}"/>">Show Details</a>
         </span>

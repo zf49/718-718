@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Comment implements Comparable<Comment> {
+public class Comment {
     public int id;
     public String content;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -40,6 +40,49 @@ public class Comment implements Comparable<Comment> {
         this.authorName = authorName;
         this.level = level;
         this.parentId = parentId;
+    }
+
+    public boolean hasParent() {
+        return parentId != 0;
+    }
+
+    public void addChild(Comment comment) {
+        children.add(comment);
+    }
+
+    public List<Comment> getChildren() {
+        return children;
+    }
+
+    public static List<Comment> flatten(List<Comment> comments) {
+        List<Comment> results = new LinkedList<>();
+        for (Comment comment : comments) {
+            addCommentRecursively(results, comment);
+        }
+        return results;
+    }
+
+    /**
+     * First add the comment itself, then add its child comments recursively
+     * @param results
+     * @param comment
+     */
+    private static void addCommentRecursively(List<Comment> results, Comment comment) {
+        results.add(comment);
+        for (Comment child : comment.getChildren()) {
+            addCommentRecursively(results, child);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "authorId=" + authorId +
+                ", articleId=" + articleId +
+                ", id=" + id +
+                ", content='" + content.substring(0, Math.min(16, content.length())) + '\'' +
+                ", dateCreated=" + dateCreated +
+                '}';
     }
 
     public String getDate() {
@@ -110,51 +153,4 @@ public class Comment implements Comparable<Comment> {
         this.parentId = parentId;
     }
 
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "authorId=" + authorId +
-                ", articleId=" + articleId +
-                ", id=" + id +
-                ", content='" + content.substring(0, Math.min(16, content.length())) + '\'' +
-                ", dateCreated=" + dateCreated +
-                '}';
-    }
-
-    public List<Comment> getChildren() {
-        return children;
-    }
-
-    public static List<Comment> flatten(List<Comment> comments) {
-        List<Comment> results = new LinkedList<>();
-        for (Comment comment : comments) {
-            addCommentRecursively(results, comment);
-        }
-        return results;
-    }
-
-    /**
-     * First add the comment itself, then add its child comments recursively
-     * @param results
-     * @param comment
-     */
-    private static void addCommentRecursively(List<Comment> results, Comment comment) {
-        results.add(comment);
-        for (Comment child : comment.getChildren()) {
-            addCommentRecursively(results, child);
-        }
-    }
-
-    public void addChild(Comment comment) {
-        children.add(comment);
-    }
-
-    public boolean hasParent() {
-        return parentId != 0;
-    }
-
-    @Override
-    public int compareTo(Comment o) {
-        return id - o.id;
-    }
 }

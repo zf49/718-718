@@ -169,7 +169,12 @@ public class UserDao {
         try (Connection connection = getConnectionFromClasspath("database.properties")) {
             ArticleDao articleDao = new ArticleDao();
             articleDao.deleteUserAllArticle(id);
-            try (PreparedStatement statement = connection.prepareStatement("DELETE FROM user WHERE id = ?")) {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "DELETE FROM comment WHERE author_id = ? ORDER BY id DESC;")) {
+                statement.setInt(1, id);
+                statement.executeUpdate();
+            }
+            try (PreparedStatement statement = connection.prepareStatement("DELETE FROM user WHERE id = ?;")) {
                 statement.setInt(1, id);
                 statement.executeUpdate();
             }
