@@ -17,7 +17,7 @@ public class DBTestUtil {
     }
 
     public static void runScript(String scriptPath) throws IOException, SQLException {
-        Connection con = DBConnectionUtils.getConnectionFromClasspath("database.properties");
+        Connection con = DBConnectionUtils.getConnection();
         ScriptRunner scriptRunner = new ScriptRunner(con);
         Reader reader = new BufferedReader(new FileReader(scriptPath));
         scriptRunner.runScript(reader);
