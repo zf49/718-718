@@ -16,7 +16,7 @@
 <div class="container about-author center-text homeArticle">
     <div class="articlePage card-body">
         <div class="articleDetails">
-            <h1 class="title">${article.title}</h1>
+            <h1 class="title text-break">${article.title}</h1>
             <p class="blog-post-meta">Author: ${article.authorName}</p>
             <p class="blog-post-meta">Create Date: ${article.date}</p>
             <c:if test="${article.authorId == user.id}">
@@ -27,7 +27,7 @@
                 </form>
             </c:if>
         </div>
-        <div class="content blog-main">
+        <div class="content blog-main text-break">
             <p>${fn:replace(article.content, newLineChar, "<br>")}</p>
         </div>
     </div>
