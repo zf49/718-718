@@ -1,5 +1,7 @@
 package ictgradschool.project.controller;
 
+import ictgradschool.project.controller.exception.InvalidUsernameException;
+import ictgradschool.project.controller.exception.PasswordsDontMatchException;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.UserDao;
 import ictgradschool.project.util.HashInfo;
@@ -11,6 +13,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import static ictgradschool.project.util.PasswordUtil.*;
 
@@ -21,12 +24,26 @@ public class UserController {
         this.userDao = userDao;
     }
 
-    public User signUp(String username, String password, String confirmPassword) throws IOException {
-        if (!password.equals(confirmPassword)) {
-            return null;
-        }
+    public User signUp(String username, String password, String confirmPassword) throws IOException, InvalidUsernameException, PasswordsDontMatchException {
+        checkUsernameValidity(username);
+        checkPasswordsMatch(password, confirmPassword);
         HashInfo hashInfo = quickHash(password);
         return userDao.addUser(username, hashInfo.saltBase64, hashInfo.hashBase64);
+    }
+
+    private void checkPasswordsMatch(String password, String confirmPassword) throws PasswordsDontMatchException {
+        if (!password.equals(confirmPassword)) {
+            throw new PasswordsDontMatchException();
+        }
+    }
+
+    private void checkUsernameValidity(String username) throws InvalidUsernameException {
+        if (username.length() < 3) {
+            throw new InvalidUsernameException();
+        }
+        if (!Pattern.matches("[a-zA-Z0-9]+", username)) {
+            throw new InvalidUsernameException();
+        }
     }
 
     public boolean isUsernameExist(String username) throws IOException, SQLException {
