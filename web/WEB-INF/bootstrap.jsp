@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="<c:url value="/lib/bootstrap-4.5.0-dist/css/bootstrap.min.css"/>" crossorigin="anonymous">
 <script src="<c:url value="/lib/bootstrap-4.5.0-dist/js/bootstrap.min.js"/>" crossorigin="anonymous"></script>
 <link href="<c:url value="/css/bootstrap-fixup.css"/>" rel="stylesheet">
-<link href="<c:url value="/css/base.css"/>" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
-
+<link href="<c:url value="/css/base.css"/>" rel="stylesheet">

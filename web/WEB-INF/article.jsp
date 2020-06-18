@@ -13,10 +13,11 @@
 <jsp:include page="nav.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
+<br><br><br>
 <div class="container about-author center-text homeArticle">
     <div class="articlePage card-body">
         <div class="articleDetails">
-            <h1 class="title">${article.title}</h1>
+            <p class = "blog-post-title">${article.title}</p>
             <p class="blog-post-meta">Author: ${article.authorName}</p>
             <p class="blog-post-meta">Create Date: ${article.date}</p>
             <c:if test="${article.authorId == user.id}">

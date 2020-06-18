@@ -2,10 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<header class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="btn nav-link" style="font-size: 1.2em" href="<c:url value="/home"/>">Home</a>
+            <a class="btn nav-link"  href="<c:url value="/home"/>">Home</a>
         </li>
     </ul>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,5 +43,5 @@
 </c:choose>
         </ul>
     </div>
-</nav>
+</header>
 
