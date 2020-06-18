@@ -1,7 +1,5 @@
 package ictgradschool.project.entity;
 
-import ictgradschool.project.entity.User;
-
 import java.time.LocalDateTime;
 
 public class Auth {
