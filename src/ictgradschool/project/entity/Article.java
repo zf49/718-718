@@ -27,11 +27,18 @@ public class Article {
         date = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss").format(this.dateCreated);
     }
 
+    public String getBriefTitle() {
+        if (title.length() <= 20)
+            return title;
+        else
+            return title.substring(0, 21) + "...";
+    }
+
     public String getBriefContent() {
-        if(content.length() <= 20){
+        if(content.length() <= 140){
             return content;
         }else {
-            return content.substring(0, 20) + "...";
+            return content.substring(0, 141) + "...";
         }
     }
 
