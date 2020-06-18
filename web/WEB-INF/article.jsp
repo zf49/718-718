@@ -44,7 +44,7 @@
                 <div>
                     <div style="padding-left: ${comment.level * 3}rem">
                         <dt>${comment.authorName}:</dt>
-                        <dd class="text-wrap"><span>${comment.content}</span><br>
+                        <dd class="text-break"><span>${comment.content}</span><br>
                             <span class="blog-post-meta" style="margin-right: 5px">${comment.date}</span>
                             <c:if test="${user != null && comment.level < 2}">
                                 <div style="display: contents">
@@ -57,7 +57,7 @@
                                         </button>
                                     </div>
                                     <div style="display: inline-block">
-                                        <c:if test="${comment.authorId == user.id || author.id == user.id}">
+                                        <c:if test="${comment.authorId == user.id || article.authorId == user.id}">
                                             <form action="<c:url value="/delete/commentId?commentId=${comment.id}"/>"
                                                   method="post">
                                                 <input type="submit" class="btn btn-danger my-2" value="Delete">

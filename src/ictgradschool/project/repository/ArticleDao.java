@@ -84,7 +84,7 @@ public class ArticleDao {
         return articleList;
     }
 
-    public Article postNewArticle(String title, String content, int authorId) throws SQLException, IOException {
+    public Article postNewArticle(String title, String content, int authorId) throws IOException {
         try (Connection connection = DBConnectionUtils.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(
                     "INSERT INTO article (title, content, author_id, date_created) VALUES (?, ?, ?, ?)")) {
@@ -96,6 +96,9 @@ public class ArticleDao {
             }
             int id = DaoUtil.getLastInsertedId(connection);
             return getArticleById(connection, id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

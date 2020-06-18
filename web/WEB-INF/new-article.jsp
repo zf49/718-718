@@ -27,7 +27,6 @@
                       rows="20" cols="80"></textarea>
         </div>
         <br>
-        <input hidden type="text" name="authorId" value="${user.id}">
         <input type="submit" class="btn btn-primary" value="Confirm">
     </form>
 </div>

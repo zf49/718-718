@@ -7,7 +7,6 @@ import ictgradschool.project.repository.ArticleDao;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.sql.SQLException;
 import org.apache.commons.text.StringEscapeUtils;
 
 public class ArticleController {
@@ -34,18 +33,12 @@ public class ArticleController {
     }
 
     public Article addArticle(HttpServletRequest req) throws IOException {
-        Article article = null;
         String title = req.getParameter("articleTitle");
         String content = req.getParameter("articleContent");
-        int authorId = Integer.parseInt(req.getParameter("authorId"));
+        User user = (User) req.getSession().getAttribute("user");
         title = StringEscapeUtils.escapeHtml4(title);
         content = StringEscapeUtils.escapeHtml4(content);
-        try {
-            article = articleDao.postNewArticle(title, content, authorId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return article;
+        return articleDao.postNewArticle(title, content, user.getId());
     }
 
     public void deleteArticle(int articleId, int userId) throws IOException, UnauthorizedException {
