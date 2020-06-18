@@ -16,7 +16,6 @@
     <div class="container about-author center-text homeArticle" style="padding: 9%">
         <p class="container blog-post-title" style="text-align: center">There's nothing here!</p>
         <br><br>
-<%--        TODO: check if the current user is the author--%>
     <c:if test="${user != null && user.id == pageUser.id}">
         <a class="btn btn-lg btn-primary btn-block" href="<c:url value="/new-article"/>">Write Article</a><br>
     </c:if>

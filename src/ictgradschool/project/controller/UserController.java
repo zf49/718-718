@@ -47,11 +47,6 @@ public class UserController {
         }
     }
 
-    public boolean isUsernameExist(String username) throws IOException, SQLException {
-        User user = userDao.getUserByName(username);
-        throw new UnsupportedOperationException();
-    }
-
     public void deleteUser(HttpServletRequest req, int id) throws IOException, UnauthorizedException {
         User user = (User) req.getSession().getAttribute("user");
         if (user.getId() != id) {
@@ -63,8 +58,8 @@ public class UserController {
     public void addUserDetail(HttpServletRequest req) throws IOException {
         User user = (User) req.getSession().getAttribute("user");
         user.setDateBirth(convertStringToDate(req.getParameter("dateBirth")));
-        user.setFname(StringEscapeUtils.escapeHtml4(req.getParameter("fname")));
-        user.setLname(StringEscapeUtils.escapeHtml4(req.getParameter("lname")));
+        user.setFirstName(StringEscapeUtils.escapeHtml4(req.getParameter("fname")));
+        user.setLastName(StringEscapeUtils.escapeHtml4(req.getParameter("lname")));
         user.setDescription(StringEscapeUtils.escapeHtml4(req.getParameter("description")));
         userDao.addUserDetails(user);
     }
@@ -83,8 +78,8 @@ public class UserController {
     public void changeUserDetail(HttpServletRequest req, User user) throws IOException {
         int detailId = Integer.parseInt(req.getParameter("detailId"));
         user.setDetailId(detailId);
-        user.setFname(StringEscapeUtils.escapeHtml4(req.getParameter("fname")));
-        user.setLname(StringEscapeUtils.escapeHtml4(req.getParameter("lname")));
+        user.setFirstName(StringEscapeUtils.escapeHtml4(req.getParameter("fname")));
+        user.setLastName(StringEscapeUtils.escapeHtml4(req.getParameter("lname")));
         user.setDateBirth(convertStringToDate(req.getParameter("dateBirth")));
         user.setDescription(StringEscapeUtils.escapeHtml4(req.getParameter("description")));
         userDao.updateUserDetail(user);
