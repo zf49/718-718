@@ -1,6 +1,8 @@
 package ictgradschool.project.servlet;
 
 import ictgradschool.project.controller.AuthController;
+import ictgradschool.project.controller.exception.IncorrectPasswordException;
+import ictgradschool.project.controller.exception.NoSuchUsernameException;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.UserDao;
 import ictgradschool.project.util.ServletUtil;
@@ -26,8 +28,12 @@ public class SignInServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         AuthController authController = new AuthController(new UserDao());
-        User user = authController.signIn(username, password);
-        req.getSession().setAttribute("user", user);
-        resp.sendRedirect(getServletContext().getContextPath() + (user == null ? "/sign-in-failure" : "/home"));
+        try {
+            User user = authController.signIn(username, password);
+            req.getSession().setAttribute("user", user);
+            resp.sendRedirect(req.getContextPath() + "/home");
+        } catch (NoSuchUsernameException | IncorrectPasswordException e) {
+            resp.sendRedirect(req.getContextPath() + "/sign-in-failure");
+        }
     }
 }

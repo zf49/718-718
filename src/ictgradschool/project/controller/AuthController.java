@@ -1,5 +1,7 @@
 package ictgradschool.project.controller;
 
+import ictgradschool.project.controller.exception.IncorrectPasswordException;
+import ictgradschool.project.controller.exception.NoSuchUsernameException;
 import ictgradschool.project.entity.Token;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.entity.UserCredential;
@@ -15,10 +17,13 @@ public class AuthController {
         this.userDao = userDao;
     }
 
-    public User signIn(String username, String password) throws IOException {
+    public User signIn(String username, String password) throws IOException, NoSuchUsernameException, IncorrectPasswordException {
         UserCredential credential = userDao.getUserCredentialByName(username);
+        if (credential == null) {
+            throw new NoSuchUsernameException();
+        }
         if (!credential.isExpectedPassword(password)) {
-            return null;
+            throw new IncorrectPasswordException();
         }
         return userDao.getUserByName(username);
     }

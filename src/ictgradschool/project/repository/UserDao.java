@@ -35,6 +35,7 @@ public class UserDao {
 
     public UserCredential getUserCredentialByName(String username) throws IOException {
         try (Connection connection = getConnection()) {
+            System.out.println("mark 1");
             return getUserCredentialByName(connection, username);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -50,6 +51,9 @@ public class UserDao {
             statement.setString(1, username);
             try (ResultSet resultSet = statement.executeQuery()) {
                 boolean hasNext = resultSet.next();
+                System.out.println("mark 2");
+                System.out.println("hasNext = " + hasNext);
+                System.out.println(makeUserCredential(resultSet));
                 return hasNext ? makeUserCredential(resultSet) : null;
             }
         }
