@@ -3,7 +3,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="<c:url value="/css/bootstrap.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/blog.css"/>" rel="stylesheet">
 </head>
 <body>
