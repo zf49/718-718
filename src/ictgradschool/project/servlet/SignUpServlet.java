@@ -33,7 +33,8 @@ public class SignUpServlet extends HttpServlet {
             req.getSession().setAttribute("user", user);
             resp.sendRedirect(req.getContextPath() + "/sign-up-success");
         } catch (InvalidUsernameException | PasswordsDontMatchException e) {
-            resp.sendRedirect(req.getContextPath() + "/sign-up-failure");
+            req.setAttribute("message", e.getMessage());
+            ServletUtil.forward(req, resp, getServletContext(), "/sign-up-failure.jsp");
         }
     }
 }

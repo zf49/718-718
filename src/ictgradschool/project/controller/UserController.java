@@ -39,10 +39,10 @@ public class UserController {
 
     private void checkUsernameValidity(String username) throws InvalidUsernameException {
         if (username.length() < 3) {
-            throw new InvalidUsernameException();
+            throw new InvalidUsernameException("Username must be at least 3 characters.");
         }
         if (!Pattern.matches("[a-zA-Z0-9]+", username)) {
-            throw new InvalidUsernameException();
+            throw new InvalidUsernameException("Username can only contain letters and numbers.");
         }
     }
 
