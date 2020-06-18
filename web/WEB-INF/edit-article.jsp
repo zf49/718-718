@@ -13,9 +13,7 @@
 <body>
 
 <jsp:include page="nav.jsp" />
-<br>
-<br>
-<br>
+
 <div class = "editArticle card-body container about-author center-text homeArticle">
     <form action="" method="post" class="editArticle">
         <div>

@@ -12,7 +12,7 @@
 <body>
 <% pageContext.setAttribute("newLineChar", "\n"); %>
 <jsp:include page="nav.jsp" />
-<br><br><br>
+
 <c:if test="${a == null || fn:length(a) == 0}">
 <div class="container about-author center-text homeArticle" style="padding: 9%">
     <h1 class="container" style="text-align: center">You need to write something!</h1>

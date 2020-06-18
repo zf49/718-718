@@ -14,7 +14,6 @@
 <jsp:include page="nav.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
-<br><br><br>
 <div class="container homeArticle editArticle card-body container">
 <p>Welcome ${user.username}! Below is a list of information to let others know more about you. </p>
 
