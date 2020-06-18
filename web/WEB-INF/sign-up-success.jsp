@@ -18,7 +18,7 @@
 <div class="container homeArticle editArticle card-body container">
 <p>Welcome ${user.username}! Below is a list of information to let others know more about you. </p>
 
-<button class=" btn btn-sm btn-outline-secondary homeButton" onclick="location.href='<c:url value="/home"/>'">Skip</button>
+<button class="btn btn-danger my-2" onclick="location.href='<c:url value="/home"/>'">Skip</button>
 
 <form action="" method="post">
     <div>
@@ -38,9 +38,10 @@
         <textarea name="description" class="form-control form-control-dark w-100" id="description" cols="80" rows="20" required></textarea>
     </div>
     <div>
-        <input type="submit" class=" btn btn-sm btn-outline-secondary homeButton" value="Confirm">
+        <input type="submit" class=" btn btn-primary" value="Confirm">
     </div>
 </form>
 </div>
+<br><br><br>
 </body>
 </html>
