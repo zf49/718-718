@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 import static ictgradschool.project.repository.DaoUtil.getLastInsertedId;
+import static ictgradschool.project.util.DBConnectionUtils.getConnection;
 import static ictgradschool.project.util.DBConnectionUtils.getConnectionFromClasspath;
 
 public class AuthDao {
@@ -18,7 +19,7 @@ public class AuthDao {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime expiryDate = now.plusMinutes(5);
         String token = "TODO";
-        try (Connection connection = getConnectionFromClasspath("database.properties")) {
+        try (Connection connection = getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO auth (token, expiry_date, user_id)\n" +
                             "values (?, ?, ?)\n"

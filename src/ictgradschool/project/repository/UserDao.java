@@ -1,16 +1,18 @@
 package ictgradschool.project.repository;
 
 import ictgradschool.project.entity.User;
+import ictgradschool.project.entity.UserCredential;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.*;
 
 import static ictgradschool.project.repository.DaoUtil.getLastInsertedId;
-import static ictgradschool.project.util.DBConnectionUtils.getConnectionFromClasspath;
+import static ictgradschool.project.util.DBConnectionUtils.getConnection;
 
 public class UserDao {
     public User getUserById(int id) {
-        try (Connection connection = getConnectionFromClasspath("database.properties")) {
+        try (Connection connection = getConnection()) {
             return getUserById(connection, id);
         } catch (SQLException | IOException e) {
             e.printStackTrace();
@@ -32,8 +34,18 @@ public class UserDao {
         }
     }
 
+    public UserCredential getUserCredentialByName(String username) throws IOException {
+        try (Connection connection = getConnection()) {
+            // TODO: implement
+            throw new UnsupportedEncodingException();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public User getUserByName(String username) throws IOException {
-        try (Connection connection = getConnectionFromClasspath("database.properties")) {
+        try (Connection connection = getConnection()) {
             return getUserByName(connection, username);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,7 +68,7 @@ public class UserDao {
     }
 
     public User getUserDetails(User user) throws IOException, SQLException {
-        try (Connection connection = getConnectionFromClasspath("database.properties")) {
+        try (Connection connection = getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
                     "SELECT detail_id, fname, lname, date_birth, descrip FROM user " +
                             "LEFT JOIN user_detail ON user.detail_id = user_detail.id WHERE user.id = ?;")) {
@@ -80,7 +92,7 @@ public class UserDao {
     }
 
     public void updateUserDetail(User user) throws IOException {
-        try (Connection connection = getConnectionFromClasspath("database.properties")) {
+        try (Connection connection = getConnection()) {
             Integer detailId = user.getDetailId();
             if (detailId == null || detailId == 0)
                 addUserDetails(user, connection);
@@ -101,7 +113,7 @@ public class UserDao {
     }
 
     public void addUserDetails(User user) throws IOException {
-        try (Connection connection = getConnectionFromClasspath("database.properties")) {
+        try (Connection connection = getConnection()) {
             addUserDetails(user, connection);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -130,7 +142,7 @@ public class UserDao {
     }
 
     public User addUser(String username, String saltBase64, String hashBase64) throws IOException {
-        try (Connection connection = getConnectionFromClasspath("database.properties")) {
+        try (Connection connection = getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO user (username, salt, password_hash)\n" +
                             "values (?, ?, ?)\n"
@@ -149,7 +161,7 @@ public class UserDao {
     }
 
     public User changeUser(int id, String username, String saltBase64, String hashBase64) throws IOException {
-        try (Connection connection = getConnectionFromClasspath("database.properties")) {
+        try (Connection connection = getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
                     "UPDATE user SET username = ?, salt = ?, password_hash = ? WHERE id = ?;")) {
                 statement.setString(1, username);
@@ -166,7 +178,7 @@ public class UserDao {
     }
 
     public void deleteUserById(int id) throws IOException, SQLException {
-        try (Connection connection = getConnectionFromClasspath("database.properties")) {
+        try (Connection connection = getConnection()) {
             ArticleDao articleDao = new ArticleDao();
             articleDao.deleteUserAllArticle(id);
             try (PreparedStatement statement = connection.prepareStatement(
@@ -194,7 +206,7 @@ public class UserDao {
     }
 
     public void updateAvatarId(int id, int avatarId) {
-        try (Connection connection = getConnectionFromClasspath("database.properties")) {
+        try (Connection connection = getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
                     "UPDATE user SET avatar_id = ? WHERE id = ?")) {
                 statement.setInt(1, avatarId);

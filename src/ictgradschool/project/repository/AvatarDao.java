@@ -9,7 +9,7 @@ import java.util.List;
 
 public class AvatarDao {
     public int insertAvatar(String name) {
-        try (Connection connection = DBConnectionUtils.getConnectionFromClasspath("database.properties")) {
+        try (Connection connection = DBConnectionUtils.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO avatar (name, is_predefined) VALUES (?, false)")) {
                 statement.setString(1, name);
@@ -23,7 +23,7 @@ public class AvatarDao {
     }
 
     public List<String> getPredefinedAvatarNames() {
-        try (Connection connection = DBConnectionUtils.getConnectionFromClasspath("database.properties")) {
+        try (Connection connection = DBConnectionUtils.getConnection()) {
             try (Statement statement1 = connection.createStatement()) {
                 ResultSet resultSet = statement1.executeQuery(
                         "SELECT name from avatar WHERE is_predefined=true");

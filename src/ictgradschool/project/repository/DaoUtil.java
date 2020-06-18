@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static ictgradschool.project.util.DBConnectionUtils.getConnection;
 import static ictgradschool.project.util.DBConnectionUtils.getConnectionFromClasspath;
 
 public class DaoUtil {
@@ -21,7 +22,7 @@ public class DaoUtil {
 
     public static void main(String[] args) {
         try
-            (Connection connection = getConnectionFromClasspath("database.properties")){
+            (Connection connection = getConnection()){
             System.out.println(getLastInsertedId(connection));
         } catch (IOException e) {
             e.printStackTrace();
