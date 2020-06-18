@@ -1,5 +1,6 @@
 package ictgradschool.project.controller;
 
+import ictgradschool.project.controller.exception.UnauthorizedException;
 import ictgradschool.project.entity.Comment;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.CommentDao;
@@ -23,8 +24,12 @@ public class CommentListController {
         return Comment.flatten(comments);
     }
 
-    public void deleteComment(int commentId) throws IOException {
-        commentDao.deleteCommentById(commentId);
+    public void deleteComment(int userId, int commentId) throws IOException, UnauthorizedException {
+        int authorId = commentDao.getCommentById(commentId).getAuthorId();
+        if (authorId == userId)
+            commentDao.deleteCommentById(commentId);
+        else
+            throw new UnauthorizedException();
     }
 
     public Comment addComment(HttpServletRequest req) throws IOException {

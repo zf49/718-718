@@ -10,7 +10,6 @@
 </head>
 <body>
 <% pageContext.setAttribute("newLineChar", "\n"); %>
-
 <jsp:include page="nav.jsp" />
 <br><br><br>
 <c:if test="${articles == null || fn:length(articles) == 0}">
@@ -24,7 +23,7 @@
 <c:forEach items="${articles}" var="article">
     <div class="container about-author center-text homeArticle">
         <div class="articles card-body">
-            <p class="blog-post-title">Title:${article.title}</p>
+            <p class="blog-post-title text-truncate">Title: ${article.title}</p>
             <p class="blog-post-meta date">Create Date: ${article.date}</p>
             <p class="blog-post-meta authorId">Author Name: ${pageUser.username}</p>
             <p class="content text-truncate">${fn:replace(article.briefContent, newLineChar, "<br>")}</p>

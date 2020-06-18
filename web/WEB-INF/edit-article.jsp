@@ -18,7 +18,6 @@
             <p class = "blog-post-title"><label for="titleArea">Title: </label></p>
             <input type="text" class="form-control form-control-dark w-100" name="articleTitle" id="titleArea"
                    required value="${article.title}">
-            <input hidden name="authorId" value="${article.authorId}">
         </div>
         <br>
         <div>
