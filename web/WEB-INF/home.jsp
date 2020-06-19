@@ -33,7 +33,7 @@
                 <a class="btn btn-outline-info" style="font-weight:  500;" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
             </span>
             <span>
-                <a class="btn btn-danger" style="display: inline-block;" href="<c:url value="/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
+                <a class="btn btn-outline-danger" style="display: inline-block;" href="<c:url value="/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
             </span>
         </c:if>
         <hr>

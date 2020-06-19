@@ -24,7 +24,7 @@
                 <a class="btn btn-outline-info" style="font-weight: 600;" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
                 <form style="display: contents" action="<c:url value="/delete/articleId?articleId=${article.id}"/>"
                       method="post">
-                    <input type="submit" class="btn btn-danger" value="Delete">
+                    <input type="submit" class="btn btn-outline-danger" value="Delete">
                 </form>
             </c:if>
         </div>
@@ -58,7 +58,7 @@
                                         <c:if test="${comment.authorId == user.id || article.authorId == user.id}">
                                             <form style="display: unset; margin-top: 1em;" action="<c:url value="/delete/commentId?commentId=${comment.id}"/>"
                                                   method="post">
-                                                <input type="submit" class="btn btn-danger" value="Delete">
+                                                <input type="submit" class="btn btn-outline-danger" value="Delete">
                                             </form>
                                         </c:if>
                                 </div>
