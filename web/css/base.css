@@ -66,3 +66,10 @@ body {
     color: black;
     border-color: black;
 }
+a:focus, a:active, a:hover, button:focus, button:active, button:hover, a b.light-color:hover {
+    text-decoration: none;
+    color: #FFAD4D;
+}
+a{
+    color: #17a2b8;
+}

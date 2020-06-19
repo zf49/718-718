@@ -16,7 +16,7 @@
 <div class="jumbotron text-center welcome container" style="font-size: 150%; padding-top: 6rem;">
     <p>${message}</p>
     <p>Please try again.</p>
-    <p>Automatically returning to <a href="<c:url value="/sign-up"/>">sign up</a> page in <span id="countdown">5</span>
+    <p>Automatically returning to <a class="btn btn-info" href="<c:url value="/sign-up"/>">sign up</a> page in <span id="countdown">5</span>
         seconds</p>
 </div>
 </body>

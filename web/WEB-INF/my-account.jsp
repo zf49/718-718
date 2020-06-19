@@ -17,7 +17,7 @@
 <div class="container about-author center-text homeArticle" style="text-align: -webkit-center">
     <div class="text-center mb-4" style="padding-top: 6rem">
         <img class="d-block mx-auto" src="<c:url value="/${user.avatarPath}"/>" alt="avatar" height="200"><br>
-        <a href="<c:url value="/avatar"/>" class="btn btn-primary my-2">Change Avatar</a>
+        <a href="<c:url value="/avatar"/>" class="btn btn-outline-info my-2">Change Avatar</a>
     </div>
 
     <div class="container about-author center-text homeArticle">
@@ -44,7 +44,7 @@
                         </small>
                     </div>
                 </fieldset>
-                <input type="submit" value="Update basic information" name="submitButton" class="btn btn-primary btn-lg btn-block">
+                <input type="submit" value="Update basic information" name="submitButton" class="btn btn-info btn-lg btn-block">
             </form>
             <hr>
             <form action="" method="post">
@@ -71,7 +71,7 @@
                     <input hidden name="detailId" value="${user.detailId}">
                 </fieldset>
                 <div>
-                    <input type="submit" value="Update additional information" name="submitButton" class="btn btn-primary btn-lg btn-block">
+                    <input type="submit" value="Update additional information" name="submitButton" class="btn btn-info btn-lg btn-block">
                 </div>
             </form>
         </div>
