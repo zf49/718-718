@@ -79,17 +79,16 @@
     <hr>
     <div>
         <div class="container about-author center-text homeArticle">
-            <h4>Delete account</h4>
+            <legend class="mb-3">Delete account</legend>
             <p>Deleting your account has the following effects:</p>
             <div>
                 <p>All of your articles will be removed.</p>
                 <p>All of your comments will be removed.</p>
             </div>
             <form action="<c:url value="/delete/userId?userId=${user.id}"/>" method="post">
-                <input type="submit" value="Delete account" class="btn btn-danger my-2">
+                <input type="submit" value="Delete account" class="btn btn-danger btn-lg my-2">
             </form>
         </div>
-
     </div>
 </div>
 <br><br><br>
