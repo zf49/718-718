@@ -5,7 +5,7 @@
       <paths name="Deployment">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/" local="$PROJECT_DIR$/out/artifacts/group_6_release" web="/tweety_group-6-release" />
           </mappings>
         </serverdata>
       </paths>
