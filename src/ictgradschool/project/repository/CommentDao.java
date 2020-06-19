@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class CommentDao {
-
     public Comment insertNewComment(String content, int authorId, int articleId, int parentId) throws IOException {
         try (Connection connection = DBConnectionUtils.getConnection()) {
             int level = getLevelByParentId(connection, parentId);
@@ -22,10 +21,11 @@ public class CommentDao {
                 statement.setInt(2, authorId);
                 statement.setInt(3, articleId);
                 statement.setInt(4, level);
-                if (parentId == 0)
+                if (parentId == 0) {
                     statement.setNull(5, Types.INTEGER);
-                else
+                } else {
                     statement.setInt(5, parentId);
+                }
                 statement.executeUpdate();
             }
             int newId = DaoUtil.getLastInsertedId(connection);
@@ -117,6 +117,8 @@ public class CommentDao {
                 parentComment.addChild(comment);
             } else if (comment.getLevel() == 0) {
                 comments.add(comment);
+            } else {
+                // Comments without parent and level > 0 is not showing to the user
             }
         }
         return comments;

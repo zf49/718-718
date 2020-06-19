@@ -100,10 +100,11 @@ public class UserDao {
                         user.setFname(rs.getString(2));
                         user.setLname(rs.getString(3));
                         Date date = rs.getDate(4);
-                        if (date == null)
+                        if (date == null) {
                             user.setDateBirth(null);
-                        else
+                        } else {
                             user.setDateBirth(new java.util.Date(date.getTime()));
+                        }
                         user.setDescription(rs.getString(5));
                     }
                 }
@@ -115,9 +116,9 @@ public class UserDao {
     public void updateUserDetail(User user) throws IOException {
         try (Connection connection = getConnection()) {
             Integer detailId = user.getDetailId();
-            if (detailId == null || detailId == 0)
+            if (detailId == null || detailId == 0) {
                 addUserDetails(user, connection);
-            else {
+            } else {
                 updateUserDetails(user, connection);
             }
         } catch (SQLException e) {

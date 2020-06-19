@@ -17,7 +17,6 @@ import java.util.List;
 public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        ServletUtil.forward(req, resp, getServletContext(), "home.jsp");
         ArticleDao a = new ArticleDao();
         List<Article> articleList = a.getAllArticles();
         req.setAttribute("articles", articleList);

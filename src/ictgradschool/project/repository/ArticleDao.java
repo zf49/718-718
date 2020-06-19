@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleDao {
-
     public List<Article> getAllArticles() throws IOException {
         List<Article> articles = new ArrayList<>();
         try (Connection connection = DBConnectionUtils.getConnection()) {
@@ -44,7 +43,7 @@ public class ArticleDao {
         Article article = null;
         try (Connection connection = DBConnectionUtils.getConnection()) {
             article = getArticleById(connection, id);
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return article;

@@ -26,10 +26,11 @@ public class CommentListController {
 
     public void deleteComment(int userId, int commentId) throws IOException, UnauthorizedException {
         int authorId = commentDao.getCommentById(commentId).getAuthorId();
-        if (authorId == userId)
+        if (authorId == userId) {
             commentDao.deleteCommentById(commentId);
-        else
+        } else {
             throw new UnauthorizedException();
+        }
     }
 
     public Comment addComment(HttpServletRequest req) throws IOException {
