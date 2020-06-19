@@ -31,5 +31,4 @@ public class UserHomepageServlet extends HttpServlet {
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/my-homepage.jsp");
         dispatcher.forward(req, resp);
     }
-
 }

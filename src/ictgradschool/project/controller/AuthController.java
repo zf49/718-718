@@ -2,11 +2,9 @@ package ictgradschool.project.controller;
 
 import ictgradschool.project.controller.exception.IncorrectPasswordException;
 import ictgradschool.project.controller.exception.NoSuchUsernameException;
-import ictgradschool.project.entity.Token;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.entity.UserCredential;
 import ictgradschool.project.repository.UserDao;
-import ictgradschool.project.util.PasswordUtil;
 
 import java.io.IOException;
 
@@ -26,9 +24,5 @@ public class AuthController {
             throw new IncorrectPasswordException();
         }
         return userDao.getUserByName(username);
-    }
-
-    public void signOut(Token token) {
-        throw new UnsupportedOperationException();
     }
 }
