@@ -17,7 +17,7 @@ Nested comments
 - Copy `[PROJECT_ROOT]/web/WEB-INF/res/connection.properties` to `[PROJECT_ROOT]/web/WEB-INF/res/database.properties`
 - Set up database config in `database.properties`
 - Run `db-init.sql`
-- Build and the server
+- Build and run the server
 
 ## Test Account
 
