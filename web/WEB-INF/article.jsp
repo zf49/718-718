@@ -7,6 +7,15 @@
     <jsp:include page="bootstrap.jsp"/>
     <meta charset="UTF-8">
     <title>${article.title}</title>
+    <script type="text/javascript">
+        function showOrHideComments() {
+            const button = document.getElementById("showOrHideButton");
+            if (button.innerText === "Hide Comments")
+                button.innerText = "Show comments";
+            else
+                button.innerText = "Hide Comments";
+        }
+    </script>
 </head>
 <body>
 <% pageContext.setAttribute("newLineChar", "\n"); %>
@@ -34,7 +43,8 @@
     </div>
     <div class="container">
         <button class="btn btn-outline-info" type="button" data-toggle="collapse" data-target="#collapseExample"
-                aria-expanded="false" aria-controls="collapseExample">Show/Hide Comments
+                aria-expanded="false" aria-controls="collapseExample" id="showOrHideButton"
+                onclick="showOrHideComments();">Hide Comments
         </button>
         <hr>
     </div>
