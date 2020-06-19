@@ -35,7 +35,6 @@
         </li>
         <li class="nav-item">
             <form class="form-inline" action="<c:url value="/sign-out"/>" method="post">
-                    <%--                    <input class="btn nav-link" type="submit" value="Sign Out">--%>
                 <button class="btn nav-link" style="font-size: 1.3rem" type="submit">Sign Out</button>
             </form>
         </li>
