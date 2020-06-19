@@ -30,7 +30,11 @@ public class SignInServlet extends HttpServlet {
         AuthController authController = new AuthController(new UserDao());
         try {
             User user = authController.signIn(username, password);
+
+            // TODO: debug
+            req.getSession().setMaxInactiveInterval(10);
             req.getSession().setAttribute("user", user);
+
             resp.sendRedirect(req.getContextPath() + "/home");
         } catch (NoSuchUsernameException | IncorrectPasswordException e) {
             resp.sendRedirect(req.getContextPath() + "/sign-in-failure");
