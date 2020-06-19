@@ -71,6 +71,7 @@
                                     <c:if test="${comment.canDelete(user.id, article)}">
                                         <form style="display: unset; margin-top: 1em;" action="<c:url value="/delete/commentId?commentId=${comment.id}"/>"
                                               method="post">
+                                            <input hidden name="articleAuthorId" value="${article.authorId}">
                                             <input type="submit" class="btn btn-outline-danger" value="Delete">
                                         </form>
                                     </c:if>

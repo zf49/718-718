@@ -33,6 +33,16 @@ public class CommentListController {
         }
     }
 
+    public void deleteComment2(int userId, int commentId, int articleAuthorId) throws IOException, UnauthorizedException {
+        int authorId = commentDao.getCommentById(commentId).getAuthorId();
+        if (authorId == userId || articleAuthorId == userId) {
+            commentDao.deleteCommentById(commentId);
+        } else {
+            throw new UnauthorizedException();
+        }
+    }
+
+
     public Comment addComment(HttpServletRequest req) throws IOException {
         int articleId = Integer.parseInt(req.getPathInfo().split("/")[1]);
         String content = req.getParameter("commentContent");
