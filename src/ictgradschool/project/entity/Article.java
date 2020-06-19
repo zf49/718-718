@@ -2,10 +2,11 @@ package ictgradschool.project.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Article {
+public class Article implements Serializable {
     public int id;
     public String title;
     public String content;
