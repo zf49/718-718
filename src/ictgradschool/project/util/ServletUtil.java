@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class ServletUtil {
+    public static final int kSessionTimeInterval = 7 * 24 * 60 * 60;
+
     public static void forward(HttpServletRequest req, HttpServletResponse resp, ServletContext context, String relativePath) throws ServletException, IOException {
         RequestDispatcher dispatcher = context.getRequestDispatcher("/WEB-INF/" + relativePath);
         dispatcher.forward(req, resp);

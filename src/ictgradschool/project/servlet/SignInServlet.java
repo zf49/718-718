@@ -31,8 +31,7 @@ public class SignInServlet extends HttpServlet {
         try {
             User user = authController.signIn(username, password);
 
-            // TODO: debug
-            req.getSession().setMaxInactiveInterval(10);
+            req.getSession().setMaxInactiveInterval(ServletUtil.kSessionTimeInterval);
             req.getSession().setAttribute("user", user);
 
             resp.sendRedirect(req.getContextPath() + "/home");
