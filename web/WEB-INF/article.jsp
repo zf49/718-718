@@ -65,18 +65,18 @@
                             </c:if>
                             <c:if test="${user != null && comment.level < 2}">
                                 <div style="display: contents">
-                                        <button type="button" data-toggle="collapse"
-                                                data-target="#replyComment${comment.id}"
-                                                class="btn btn-outline-info" style="font-weight: 600;"
-                                                aria-controls="navbarHeader" aria-expanded="false"
-                                                aria-label="Toggle navigation">Reply
-                                        </button>
-                                        <c:if test="${comment.authorId == user.id || article.authorId == user.id}">
-                                            <form style="display: unset; margin-top: 1em;" action="<c:url value="/delete/commentId?commentId=${comment.id}"/>"
-                                                  method="post">
-                                                <input type="submit" class="btn btn-outline-danger" value="Delete">
-                                            </form>
-                                        </c:if>
+                                    <button type="button" data-toggle="collapse"
+                                            data-target="#replyComment${comment.id}"
+                                            class="btn btn-outline-info" style="font-weight: 600;"
+                                            aria-controls="navbarHeader" aria-expanded="false"
+                                            aria-label="Toggle navigation">Reply
+                                    </button>
+                                    <c:if test="${comment.authorId == user.id || article.authorId == user.id}">
+                                        <form style="display: unset; margin-top: 1em;" action="<c:url value="/delete/commentId?commentId=${comment.id}"/>"
+                                              method="post">
+                                            <input type="submit" class="btn btn-outline-danger" value="Delete">
+                                        </form>
+                                    </c:if>
                                 </div>
                                 <div class="collapse bg-light" id="replyComment${comment.id}"
                                      style="margin-bottom: 5px">
