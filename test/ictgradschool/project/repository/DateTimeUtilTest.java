@@ -7,7 +7,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 import static ictgradschool.project.util.DateTimeUtil.getEpoch;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DateTimeUtilTest {
 
@@ -17,7 +17,7 @@ class DateTimeUtilTest {
         assertEquals(0, epoch);
     }
 
-//    @Test
+    //    @Test
     void testNow() {
         LocalDateTime now = LocalDateTime.now();
         ZonedDateTime zonedNow = now.atZone(ZoneId.systemDefault());
