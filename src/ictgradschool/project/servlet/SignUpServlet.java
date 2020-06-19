@@ -31,6 +31,7 @@ public class SignUpServlet extends HttpServlet {
         UserController userController = new UserController(new UserDao());
         try {
             User user = userController.signUp(username, password, confirmPassword);
+            req.getSession().setMaxInactiveInterval(ServletUtil.kSessionTimeInterval);
             req.getSession().setAttribute("user", user);
             resp.sendRedirect(req.getContextPath() + "/sign-up-success");
         } catch (InvalidUsernameException | PasswordsDontMatchException | InvalidPasswordException e) {
