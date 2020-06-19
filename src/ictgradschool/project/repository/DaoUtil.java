@@ -19,15 +19,4 @@ public class DaoUtil {
             return resultSet.getInt(1);
         }
     }
-
-    public static void main(String[] args) {
-        try
-            (Connection connection = getConnection()){
-            System.out.println(getLastInsertedId(connection));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }

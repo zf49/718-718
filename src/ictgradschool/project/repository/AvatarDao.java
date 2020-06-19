@@ -38,10 +38,4 @@ public class AvatarDao {
             return null;
         }
     }
-
-    public static void main(String[] args) {
-        AvatarDao avatarDao = new AvatarDao();
-        List<String> names = avatarDao.getPredefinedAvatarNames();
-        System.out.println(names);
-    }
 }

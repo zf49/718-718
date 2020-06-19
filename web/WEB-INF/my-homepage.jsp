@@ -36,7 +36,7 @@
             </div>
             <div style="display: inline-block">
                 <form action="<c:url value="/delete/articleId?articleId=${article.id}"/>" method="post">
-                    <input type="submit" class="btn btn-danger my-2" value="Delete">
+                    <input type="submit" class="btn btn-outline-danger my-2" value="Delete">
                 </form>
                 </c:if>
             </div>
