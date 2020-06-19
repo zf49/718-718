@@ -44,7 +44,7 @@
                         </small>
                     </div>
                 </fieldset>
-                <input type="submit" value="Update basic information" name="submitButton" class="btn btn-info btn-lg btn-block">
+                <input type="submit" value="Update basic information" name="submitButton" id="submit" class="btn btn-info btn-lg btn-block">
             </form>
             <hr>
             <form action="" method="post">
