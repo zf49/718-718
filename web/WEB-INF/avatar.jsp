@@ -15,13 +15,9 @@
  <div class="container about-author center-text homeArticle">
 <section class="jumbotron text-center bg-light ">
     <div class="container">
-        <img height="450" src="<c:url value="/avatar/${user.avatarName}"/>" alt="${user.avatarName}"
+        <img class="d-block mx-auto" src="<c:url value="/avatar/${user.avatarName}"/>" alt="${user.avatarName}"
              title="${user.avatarName}">
         <p class="lead text-muted">You can <a href="#selectAvatar">select</a> one from the list or <a href="#uploadAvatar">upload</a> your own avatar</p>
-<%--        <p>--%>
-<%--            <a href="#uploadAvatar" class="btn btn-outline-info">Upload Avatar</a>--%>
-<%--            <a href="#selectAvatar" class="btn btn-outline-secondary">Select Avatar</a>--%>
-<%--        </p>--%>
     </div>
 </section>
 
