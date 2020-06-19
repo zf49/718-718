@@ -44,7 +44,7 @@
             <c:forEach var="comment" items="${comments}">
                 <div>
                     <div style="padding-left: ${comment.level * 3}rem">
-                        <dt>${comment.authorName}:</dt>
+                        <dt><a href="<c:url value="/user/${comment.authorId}"/>">${comment.authorName}</a>:</dt>
                         <dd class="text-break"><span>${comment.content}</span><br>
                             <span class="blog-post-meta" style="margin-right: 5px">${comment.date}</span>
                             <c:if test="${user != null && comment.level < 2}">

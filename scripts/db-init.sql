@@ -64,17 +64,6 @@ CREATE TABLE IF NOT EXISTS comment
     FOREIGN KEY (parent_id) REFERENCES comment (id)
 );
 
-/*CREATE TABLE IF NOT EXISTS auth
-(
-    id          INT          NOT NULL AUTO_INCREMENT,
-    token       VARCHAR(128) NOT NULL,
-    expiry_date DATETIME     NOT NULL,
-    user_id     INT,
-    PRIMARY KEY (id),
-    UNIQUE KEY (token),
-    FOREIGN KEY (user_id) REFERENCES user (id)
-);*/
-
 -- Set up data
 
 INSERT INTO avatar (id, name, is_predefined)

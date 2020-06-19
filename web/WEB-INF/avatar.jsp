@@ -37,7 +37,7 @@
                             </label>
                         </div>
                         <div class="card-body">
-                            <input type="radio" id="predefined-${name}" name="avatarName" value="${name}">
+                            <input type="radio" id="predefined-${name}" name="avatarName" value="${name}" required>
                         </div>
                     </div>
                 </c:forEach>
