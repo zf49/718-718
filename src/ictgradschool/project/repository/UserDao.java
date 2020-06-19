@@ -203,11 +203,16 @@ public class UserDao {
     public void deleteUserById(int id) throws IOException {
         try (Connection connection = getConnection()) {
             ArticleDao articleDao = new ArticleDao();
+            CommentDao commentDao = new CommentDao();
             articleDao.deleteUserAllArticle(id);
             try (PreparedStatement statement = connection.prepareStatement(
-                    "DELETE FROM comment WHERE author_id = ? ORDER BY id DESC;")) {
+                    "SELECT id FROM comment WHERE author_id = ?;")) {
                 statement.setInt(1, id);
-                statement.executeUpdate();
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        commentDao.deleteCommentById(resultSet.getInt(1));
+                    }
+                }
             }
             try (PreparedStatement statement = connection.prepareStatement("DELETE FROM user WHERE id = ?;")) {
                 statement.setInt(1, id);
