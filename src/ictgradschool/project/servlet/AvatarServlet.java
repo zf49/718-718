@@ -4,6 +4,7 @@ import ictgradschool.project.controller.AvatarController;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.AvatarDao;
 import ictgradschool.project.repository.UserDao;
+import ictgradschool.project.servlet.exception.UserNotSignedInException;
 import ictgradschool.project.util.ServletUtil;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -56,18 +57,22 @@ public class AvatarServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = (User) req.getSession().getAttribute("user");
-        UserDao userDao = new UserDao();
-        AvatarDao avatarDao = new AvatarDao();
-        AvatarController avatarController = new AvatarController(user, userDao, avatarDao);
+        try {
+            User user = ServletUtil.getCurrentUser(req);
+            UserDao userDao = new UserDao();
+            AvatarDao avatarDao = new AvatarDao();
+            AvatarController avatarController = new AvatarController(user, userDao, avatarDao);
 
-        FileItem fileItem = getFileItem(req);
-        String name = upload(fileItem);
+            FileItem fileItem = getFileItem(req);
+            String name = upload(fileItem);
 
-        user = avatarController.updateAvatar(name);
+            user = avatarController.updateAvatar(name);
 
-        req.getSession().setAttribute("user", user);
-        resp.sendRedirect("./avatar");
+            req.getSession().setAttribute("user", user);
+            resp.sendRedirect("./avatar");
+        } catch (UserNotSignedInException e) {
+            resp.sendRedirect(req.getContextPath() + "/sign-in");
+        }
     }
 
     private FileItem getFileItem(HttpServletRequest req) {

@@ -23,7 +23,7 @@ public class AvatarPickServlet extends HttpServlet {
             req.getSession().setAttribute("user", user);
             resp.sendRedirect("./avatar");
         } catch (UserNotSignedInException e) {
-            resp.sendRedirect("./sign-in");
+            resp.sendRedirect(req.getContextPath() + "/sign-in");
         }
     }
 
