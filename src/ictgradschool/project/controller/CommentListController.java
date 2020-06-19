@@ -8,7 +8,6 @@ import org.apache.commons.text.StringEscapeUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 public class CommentListController {
@@ -24,14 +23,15 @@ public class CommentListController {
         return Comment.flatten(comments);
     }
 
-    public void deleteComment(int userId, int commentId) throws IOException, UnauthorizedException {
+    public void deleteComment(int userId, int commentId, int articleAuthorId) throws IOException, UnauthorizedException {
         int authorId = commentDao.getCommentById(commentId).getAuthorId();
-        if (authorId == userId) {
+        if (authorId == userId || articleAuthorId == userId) {
             commentDao.deleteCommentById(commentId);
         } else {
             throw new UnauthorizedException();
         }
     }
+
 
     public Comment addComment(HttpServletRequest req) throws IOException {
         int articleId = Integer.parseInt(req.getPathInfo().split("/")[1]);

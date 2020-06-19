@@ -1,7 +1,7 @@
 package ictgradschool.project.controller;
 
-import ictgradschool.project.controller.exception.InvalidUsernameException;
 import ictgradschool.project.controller.exception.InvalidPasswordException;
+import ictgradschool.project.controller.exception.InvalidUsernameException;
 import ictgradschool.project.controller.exception.PasswordsDontMatchException;
 import ictgradschool.project.controller.exception.UnauthorizedException;
 import ictgradschool.project.entity.User;
@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-import static ictgradschool.project.util.PasswordUtil.*;
+import static ictgradschool.project.util.PasswordUtil.quickHash;
 
 public class UserController {
     private static final int kMinUsernameLength = 3;

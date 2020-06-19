@@ -9,7 +9,6 @@ public class User implements Serializable {
     private String username;
 
     private String avatarName;
-    // TODO: rename to `firstName` and `lastName`
     private String firstName;
     private String lastName;
     private Date dateBirth;
@@ -17,7 +16,8 @@ public class User implements Serializable {
 
     private int detailId;
 
-    public User() {}
+    public User() {
+    }
 
     public User(int id, String username, String avatarName) {
         this.id = id;

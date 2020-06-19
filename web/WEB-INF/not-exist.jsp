@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign In Failed</title>
+    <title>Page Not Found</title>
     <meta http-equiv="refresh" content="5;<c:url value="/home"/>">
     <jsp:include page="bootstrap.jsp"/>
     <script type="text/javascript" src="<c:url value="/javascript/countdown.js" />"></script>

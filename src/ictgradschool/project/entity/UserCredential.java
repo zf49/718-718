@@ -8,7 +8,8 @@ public class UserCredential {
     private String salt;
     private String passwordHash;
 
-    public UserCredential() {}
+    public UserCredential() {
+    }
 
     public UserCredential(int id, String username, String salt, String passwordHash) {
         this.id = id;

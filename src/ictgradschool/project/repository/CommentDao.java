@@ -135,7 +135,7 @@ public class CommentDao {
 
     private void removeReferenceToComment(Connection connection, int commentId) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(
-                "UPDATE comment SET parent_id = null WHERE parent_id = ?")) {
+                "UPDATE comment SET parent_id = NULL WHERE parent_id = ?")) {
             statement.setInt(1, commentId);
             statement.executeUpdate();
         }

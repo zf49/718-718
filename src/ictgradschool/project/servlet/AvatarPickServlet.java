@@ -4,6 +4,7 @@ import ictgradschool.project.controller.AvatarController;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.AvatarDao;
 import ictgradschool.project.repository.UserDao;
+import ictgradschool.project.servlet.exception.UserNotSignedInException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,16 +17,21 @@ import java.io.IOException;
 public class AvatarPickServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AvatarController avatarController = getAvatarController(req);
-        User user;
-        String avatarName = req.getParameter("avatarName");
-        user = avatarController.updateAvatar(avatarName);
-        req.getSession().setAttribute("user", user);
-        resp.sendRedirect("./avatar");
+        try {
+            String avatarName = req.getParameter("avatarName");
+            User user = getAvatarController(req).updateAvatar(avatarName);
+            req.getSession().setAttribute("user", user);
+            resp.sendRedirect("./avatar");
+        } catch (UserNotSignedInException e) {
+            resp.sendRedirect(req.getContextPath() + "/sign-in");
+        }
     }
 
-    private AvatarController getAvatarController(HttpServletRequest req) {
+    private AvatarController getAvatarController(HttpServletRequest req) throws UserNotSignedInException {
         User user = (User) req.getSession().getAttribute("user");
+        if (user == null) {
+            throw new UserNotSignedInException();
+        }
         UserDao userDao = new UserDao();
         AvatarDao avatarDao = new AvatarDao();
         return new AvatarController(user, userDao, avatarDao);

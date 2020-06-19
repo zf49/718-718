@@ -1,21 +1,17 @@
 package ictgradschool.project.entity;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Article implements Serializable {
-    // TODO: make fields private
-    public int id;
-    public String title;
-    public String content;
-    public int authorId;
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    public LocalDateTime dateCreated;
-    public String authorName;
-    public String date;
+    private int id;
+    private String title;
+    private String content;
+    private int authorId;
+    private LocalDateTime dateCreated;
+    private String authorName;
+    private String date;
 
     public Article() {
     }

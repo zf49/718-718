@@ -1,7 +1,5 @@
 package ictgradschool.project.entity;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,20 +7,19 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Comment implements Serializable {
-    // TODO: make fields private
-    public int id;
-    public String content;
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    public LocalDateTime dateCreated;
-    public int authorId;
-    public int articleId;
-    public String authorName;
+    private int id;
+    private String content;
+    private LocalDateTime dateCreated;
+    private int authorId;
+    private int articleId;
+    private String authorName;
 
     private int level;
     private int parentId;
     private List<Comment> children = new LinkedList<>();
 
-    public Comment() {}
+    public Comment() {
+    }
 
     public Comment(int authorId, int articleId, int id, String content, LocalDateTime dateCreated, String authorName) {
         this.authorId = authorId;
@@ -45,18 +42,6 @@ public class Comment implements Serializable {
         this.parentId = parentId;
     }
 
-    public boolean hasParent() {
-        return parentId != 0;
-    }
-
-    public void addChild(Comment comment) {
-        children.add(comment);
-    }
-
-    public List<Comment> getChildren() {
-        return children;
-    }
-
     public static List<Comment> flatten(List<Comment> comments) {
         List<Comment> results = new LinkedList<>();
         for (Comment comment : comments) {
@@ -67,6 +52,7 @@ public class Comment implements Serializable {
 
     /**
      * First add the comment itself, then add its child comments recursively
+     *
      * @param results
      * @param comment
      */
@@ -75,6 +61,18 @@ public class Comment implements Serializable {
         for (Comment child : comment.getChildren()) {
             addCommentRecursively(results, child);
         }
+    }
+
+    public boolean hasParent() {
+        return parentId != 0;
+    }
+
+    public void addChild(Comment comment) {
+        children.add(comment);
+    }
+
+    public List<Comment> getChildren() {
+        return children;
     }
 
     @Override
@@ -156,4 +154,13 @@ public class Comment implements Serializable {
         this.parentId = parentId;
     }
 
+    public boolean canDelete(int userId, Article article) {
+        boolean isCommenter = userId == authorId;
+        boolean isAuthorOfArticle = userId == article.getAuthorId();
+        return isCommenter || isAuthorOfArticle;
+    }
+
+    public boolean getCanReply() {
+        return level < 2;
+    }
 }

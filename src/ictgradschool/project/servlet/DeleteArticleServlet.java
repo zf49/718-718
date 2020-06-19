@@ -3,6 +3,8 @@ package ictgradschool.project.servlet;
 import ictgradschool.project.controller.ArticleController;
 import ictgradschool.project.controller.exception.UnauthorizedException;
 import ictgradschool.project.entity.User;
+import ictgradschool.project.servlet.exception.UserNotSignedInException;
+import ictgradschool.project.util.ServletUtil;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,13 +17,17 @@ public class DeleteArticleServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         ArticleController controller = new ArticleController();
-        User user = (User) req.getSession().getAttribute("user");
-        int id = Integer.parseInt(req.getParameter("articleId"));
         try {
-            controller.deleteArticle(id, user.getId());
-            resp.sendRedirect(req.getHeader("referer"));
-        } catch (UnauthorizedException e) {
-            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+            User user = ServletUtil.getCurrentUser(req);
+            int id = Integer.parseInt(req.getParameter("articleId"));
+            try {
+                controller.deleteArticle(id, user.getId());
+                resp.sendRedirect(req.getHeader("referer"));
+            } catch (UnauthorizedException e) {
+                resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+            }
+        } catch (UserNotSignedInException e) {
+            resp.sendRedirect(req.getContextPath() + "/sign-in");
         }
     }
 }

@@ -52,7 +52,7 @@ class PasswordUtilTest {
         assertFalse(isExpectedPassword("password321".toCharArray(), salt, hash));
     }
 
-//    @Test
+    //    @Test
     void testGenerateHashForTestData() {
         String[] usernames = {
                 "Bret",

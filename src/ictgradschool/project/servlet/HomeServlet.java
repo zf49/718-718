@@ -2,7 +2,6 @@ package ictgradschool.project.servlet;
 
 import ictgradschool.project.entity.Article;
 import ictgradschool.project.repository.ArticleDao;
-import ictgradschool.project.util.ServletUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,6 +20,6 @@ public class HomeServlet extends HttpServlet {
         List<Article> articleList = a.getAllArticles();
         req.setAttribute("articles", articleList);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/home.jsp");
-        dispatcher.forward(req,resp);
+        dispatcher.forward(req, resp);
     }
 }
