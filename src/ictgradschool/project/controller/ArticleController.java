@@ -7,6 +7,7 @@ import ictgradschool.project.repository.ArticleDao;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+
 import org.apache.commons.text.StringEscapeUtils;
 
 public class ArticleController {
@@ -28,8 +29,9 @@ public class ArticleController {
             title = StringEscapeUtils.escapeHtml4(title);
             content = StringEscapeUtils.escapeHtml4(content);
             return articleDao.updateArticle(title, content, articleId);
-        } else
+        } else {
             throw new UnauthorizedException();
+        }
     }
 
     public Article addArticle(HttpServletRequest req) throws IOException {
@@ -45,8 +47,9 @@ public class ArticleController {
         int authorId = articleDao.getArticleById(articleId).getAuthorId();
         if (authorId == userId) {
             articleDao.deleteArticle(articleId);
-        } else
+        } else {
             throw new UnauthorizedException();
+        }
     }
 
 }

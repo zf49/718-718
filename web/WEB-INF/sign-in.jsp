@@ -22,7 +22,7 @@
         <label for="password">Password</label>
     </div>
     <div>
-        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign In">
+        <input class="btn btn-info btn-primary btn-block" type="submit" value="Sign In">
     </div>
 </form>
 </body>

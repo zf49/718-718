@@ -24,8 +24,7 @@ public class ArticleServlet extends HttpServlet {
 
         if (article == null) {
             req.getRequestDispatcher("/WEB-INF/not-exist.jsp").forward(req, resp);
-        }
-        else {
+        } else {
             CommentListController commentListController = new CommentListController();
             List<Comment> comments = commentListController.getCommentsByArticleId(articleId);
 
@@ -33,17 +32,14 @@ public class ArticleServlet extends HttpServlet {
             req.setAttribute("comments", comments);
             req.getRequestDispatcher("/WEB-INF/article.jsp").forward(req, resp);
         }
-
     }
 
     /* Creates a new comment */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
         CommentListController controller = new CommentListController();
         Comment comment = controller.addComment(req);
         resp.sendRedirect(req.getHeader("referer"));
-
     }
 
 }

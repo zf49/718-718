@@ -2,6 +2,7 @@ package ictgradschool.project.servlet;
 
 import ictgradschool.project.controller.UserController;
 import ictgradschool.project.controller.exception.InvalidUsernameException;
+import ictgradschool.project.controller.exception.InvalidPasswordException;
 import ictgradschool.project.controller.exception.PasswordsDontMatchException;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.UserDao;
@@ -32,7 +33,7 @@ public class SignUpServlet extends HttpServlet {
             User user = userController.signUp(username, password, confirmPassword);
             req.getSession().setAttribute("user", user);
             resp.sendRedirect(req.getContextPath() + "/sign-up-success");
-        } catch (InvalidUsernameException | PasswordsDontMatchException e) {
+        } catch (InvalidUsernameException | PasswordsDontMatchException | InvalidPasswordException e) {
             req.setAttribute("message", e.getMessage());
             ServletUtil.forward(req, resp, getServletContext(), "/sign-up-failure.jsp");
         }

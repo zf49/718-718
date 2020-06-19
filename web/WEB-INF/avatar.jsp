@@ -17,11 +17,11 @@
     <div class="container">
         <img height="450" src="<c:url value="/avatar/${user.avatarName}"/>" alt="${user.avatarName}"
              title="${user.avatarName}">
-        <p class="lead text-muted">You can upload your avatar or select one here. </p>
-        <p>
-            <a href="#uploadAvatar" class="btn btn-primary my-2">Upload Avatar</a>
-            <a href="#selectAvatar" class="btn btn-secondary my-2">Select Avatar</a>
-        </p>
+        <p class="lead text-muted">You can <a href="#selectAvatar">select</a> one from the list or <a href="#uploadAvatar">upload</a> your own avatar</p>
+<%--        <p>--%>
+<%--            <a href="#uploadAvatar" class="btn btn-outline-info">Upload Avatar</a>--%>
+<%--            <a href="#selectAvatar" class="btn btn-outline-secondary">Select Avatar</a>--%>
+<%--        </p>--%>
     </div>
 </section>
 
@@ -43,7 +43,7 @@
                 </c:forEach>
             </div>
             <div class="container" style="display: flex; justify-content: center;">
-                <button type="submit" class="btn btn-primary my-2" style="margin-bottom: 20px">Confirm</button>
+                <button type="submit" class="btn btn-info my-2" style="margin-bottom: 20px">Confirm</button>
             </div>
         </div>
     </form>
@@ -57,7 +57,7 @@
                     <legend class="lead text-muted">Upload Image</legend>
                     <%--            <label for="avatar-input" >Image:</label><br>--%>
                     <input type="file" name="avatar" id="avatar-input" required class="btn btn-secondary my-2">
-                    <button type="submit" class="btn btn-primary my-2 float-right" style="margin: 20px">Upload and
+                    <button type="submit" class="btn btn-info my-2 float-right" style="margin: 20px">Upload and
                         Confirm
                     </button>
                 </fieldset>

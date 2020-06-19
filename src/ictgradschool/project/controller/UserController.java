@@ -1,6 +1,7 @@
 package ictgradschool.project.controller;
 
 import ictgradschool.project.controller.exception.InvalidUsernameException;
+import ictgradschool.project.controller.exception.InvalidPasswordException;
 import ictgradschool.project.controller.exception.PasswordsDontMatchException;
 import ictgradschool.project.controller.exception.UnauthorizedException;
 import ictgradschool.project.entity.User;
@@ -19,17 +20,28 @@ import java.util.regex.Pattern;
 import static ictgradschool.project.util.PasswordUtil.*;
 
 public class UserController {
+    private static final int kMinUsernameLength = 3;
+    private static final int kMinPasswordLength = 3;
+
     private UserDao userDao;
 
     public UserController(UserDao userDao) {
         this.userDao = userDao;
     }
 
-    public User signUp(String username, String password, String confirmPassword) throws IOException, InvalidUsernameException, PasswordsDontMatchException {
+    public User signUp(String username, String password, String confirmPassword) throws IOException, InvalidUsernameException, PasswordsDontMatchException, InvalidPasswordException {
         checkUsernameValidity(username);
         checkPasswordsMatch(password, confirmPassword);
+        checkPasswordLength(password);
         HashInfo hashInfo = quickHash(password);
         return userDao.addUser(username, hashInfo.saltBase64, hashInfo.hashBase64);
+    }
+
+    private void checkPasswordLength(String password) throws InvalidPasswordException {
+        if (password.length() < kMinPasswordLength) {
+            throw new InvalidPasswordException(
+                    String.format("Password should have at least %d characters.", kMinPasswordLength));
+        }
     }
 
     private void checkPasswordsMatch(String password, String confirmPassword) throws PasswordsDontMatchException {
@@ -39,8 +51,9 @@ public class UserController {
     }
 
     private void checkUsernameValidity(String username) throws InvalidUsernameException {
-        if (username.length() < 3) {
-            throw new InvalidUsernameException("Username must be at least 3 characters.");
+        if (username.length() < kMinUsernameLength) {
+            throw new InvalidUsernameException(
+                    String.format("Username should have at least %d characters.", kMinUsernameLength));
         }
         if (!Pattern.matches("[a-zA-Z0-9]+", username)) {
             throw new InvalidUsernameException("Username can only contain letters and numbers.");

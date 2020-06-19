@@ -17,7 +17,7 @@
         <p class="container blog-post-title" style="text-align: center">There's nothing here!</p>
         <br><br>
     <c:if test="${user != null && user.id == pageUser.id}">
-        <a class="btn btn-lg btn-primary btn-block" href="<c:url value="/new-article"/>">Write Article</a><br>
+        <a class="btn btn-info btn-primary btn-block" href="<c:url value="/new-article"/>">Write Article</a><br>
     </c:if>
     </div>
 </c:if>
@@ -29,13 +29,13 @@
             <p class="blog-post-meta authorId">By ${pageUser.username}</p>
             <p class="content text-truncate">${fn:replace(article.briefContent, newLineChar, "<br>")}</p>
             <div style="display: inline-block">
-                <a class="btn btn-primary" href="<c:url value="/articles/${article.id}"/>">Show Details</a>
+                <a class="btn btn-outline-info" href="<c:url value="/articles/${article.id}"/>">Show Details</a>
                 <c:if test="${user != null && user.id == pageUser.id}">
-                <a class="btn btn-primary" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
+                <a class="btn btn-outline-info" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
             </div>
             <div style="display: inline-block">
                 <form action="<c:url value="/delete/articleId?articleId=${article.id}"/>" method="post">
-                    <input type="submit" class="btn btn-danger my-2" value="Delete">
+                    <input type="submit" class="btn btn-outline-danger my-2" value="Delete">
                 </form>
                 </c:if>
             </div>

@@ -18,18 +18,18 @@
 <div class="editArticle card-body container about-author center-text homeArticle ">
     <form action="" method="post">
         <div>
-            <h4><label for="titleArea">Title: </label></h4>
+            <p class="blog-post-title"><label for="titleArea">Title: </label></p>
             <input type="text" class="form-control form-control-dark w-100" name="articleTitle" id="titleArea"
                    required>
         </div>
         <br>
         <div>
-            <h4><label for="contentArea">Content:</label></h4>
+            <p class="blog-post-title"><label for="contentArea">Content:</label></p>
             <textarea name="articleContent" class="form-control form-control-dark w-100" id="contentArea"
                       rows="20" cols="80"></textarea>
         </div>
         <br>
-        <input type="submit" class="btn btn-primary" value="Post Article">
+        <input type="submit" class="btn btn-info" value="Post Article">
     </form>
 </div>
 <br><br><br>

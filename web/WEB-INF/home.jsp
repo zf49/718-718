@@ -26,14 +26,14 @@
         <p class="date blog-post-meta">Create Date: ${article.date}  By <a href="<c:url value="/user/${article.authorId}"/>">${article.authorName}</a></p>
         <p class="content blog-main text-truncate"> ${article.briefContent}...</p>
         <span>
-        <a class="btn btn-lg btn-primary btn-block" href="<c:url value="/articles/${article.id}"/>">Show Details</a>
+        <a class="btn btn-outline-info" style="font-weight:  500;" href="<c:url value="/articles/${article.id}"/>">Show Details</a>
         </span>
         <c:if test="${article.authorId == user.id}">
             <span>
-                <a class="btn btn-lg btn-primary btn-block homeButton" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
+                <a class="btn btn-outline-info" style="font-weight:  500;" href="<c:url value="/edit/articleId?articleId=${article.id}"/>">Edit</a>
             </span>
             <span>
-                <a class="btn btn-danger my-2 homeButton" style="display: block" href="<c:url value="/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
+                <a class="btn btn-outline-danger" style="display: inline-block;" href="<c:url value="/articles/${article.id}/delete/articleId?articleId=${article.id}"/>">Delete</a>
             </span>
         </c:if>
         <hr>

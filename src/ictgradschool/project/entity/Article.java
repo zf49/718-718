@@ -2,10 +2,12 @@ package ictgradschool.project.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Article {
+public class Article implements Serializable {
+    // TODO: make fields private
     public int id;
     public String title;
     public String content;
@@ -15,9 +17,10 @@ public class Article {
     public String authorName;
     public String date;
 
-    public Article() {}
+    public Article() {
+    }
 
-    public Article(int id, String title, String content,  LocalDateTime dateCreated,int authorId, String authorName) {
+    public Article(int id, String title, String content, LocalDateTime dateCreated, int authorId, String authorName) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -28,16 +31,17 @@ public class Article {
     }
 
     public String getBriefTitle() {
-        if (title.length() <= 20)
+        if (title.length() <= 20) {
             return title;
-        else
+        } else {
             return title.substring(0, 21) + "...";
+        }
     }
 
     public String getBriefContent() {
-        if(content.length() <= 140){
+        if (content.length() <= 140) {
             return content;
-        }else {
+        } else {
             return content.substring(0, 141) + "...";
         }
     }

@@ -1,12 +1,15 @@
 package ictgradschool.project.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Comment {
+public class Comment implements Serializable {
+    // TODO: make fields private
     public int id;
     public String content;
     @JsonSerialize(using = LocalDateTimeSerializer.class)

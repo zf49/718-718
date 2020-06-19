@@ -27,12 +27,14 @@ public class UserAccountServlet extends HttpServlet {
         UserController userController = new UserController(new UserDao());
         User user = (User) req.getSession().getAttribute("user");
         String form = req.getParameter("submitButton");
-        if (form.contains("additional"))
+        if (form.contains("additional")) {
             userController.changeUserDetail(req, user);
-        else
+        } else {
             user = userController.changeUser(req, user.getId());
-        if (user != null)
+        }
+        if (user != null) {
             req.getSession().setAttribute("user", user);
+        }
         resp.sendRedirect(req.getContextPath() + "/account");
     }
 
