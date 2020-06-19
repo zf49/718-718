@@ -9,13 +9,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Comment implements Serializable {
-    // TODO: make fields private
-    public int id;
-    public String content;
-    public LocalDateTime dateCreated;
-    public int authorId;
-    public int articleId;
-    public String authorName;
+    private int id;
+    private String content;
+    private LocalDateTime dateCreated;
+    private int authorId;
+    private int articleId;
+    private String authorName;
 
     private int level;
     private int parentId;
