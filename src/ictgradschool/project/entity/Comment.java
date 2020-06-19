@@ -155,4 +155,13 @@ public class Comment implements Serializable {
         this.parentId = parentId;
     }
 
+    public boolean canDelete(int userId, Article article) {
+        boolean isCommenter = userId == authorId;
+        boolean isAuthorOfArticle = userId == article.getAuthorId();
+        return isCommenter || isAuthorOfArticle;
+    }
+
+    public boolean getCanReply() {
+        return level < 2;
+    }
 }

@@ -57,6 +57,12 @@
                         <dt><a href="<c:url value="/user/${comment.authorId}"/>">${comment.authorName}</a>:</dt>
                         <dd class="text-break"><span>${comment.content}</span><br>
                             <span class="blog-post-meta" style="margin-right: 5px">${comment.date}</span>
+                            <c:if test="${comment.canReply}">
+                                <small>Can Reply</small>
+                            </c:if>
+                            <c:if test="${comment.canDelete(user.id, article)}">
+                                <small>Can Delete</small>
+                            </c:if>
                             <c:if test="${user != null && comment.level < 2}">
                                 <div style="display: contents">
                                         <button type="button" data-toggle="collapse"
