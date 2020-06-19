@@ -12,7 +12,6 @@ public class Comment implements Serializable {
     // TODO: make fields private
     public int id;
     public String content;
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
     public LocalDateTime dateCreated;
     public int authorId;
     public int articleId;

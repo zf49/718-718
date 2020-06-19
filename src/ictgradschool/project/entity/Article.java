@@ -1,7 +1,5 @@
 package ictgradschool.project.entity;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,7 +10,6 @@ public class Article implements Serializable {
     public String title;
     public String content;
     public int authorId;
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
     public LocalDateTime dateCreated;
     public String authorName;
     public String date;
