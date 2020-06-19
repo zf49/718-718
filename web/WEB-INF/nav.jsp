@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<header class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<header class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="display: -webkit-box">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
             <a  class="btn nav-link" style="font-size: 1.3rem" href="<c:url value="/home"/>">Home</a>
