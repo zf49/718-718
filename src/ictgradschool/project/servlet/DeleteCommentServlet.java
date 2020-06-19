@@ -20,9 +20,7 @@ public class DeleteCommentServlet extends HttpServlet {
             int id = Integer.parseInt(req.getParameter("commentId"));
             CommentListController commentListController = new CommentListController();
             int articleAuthorId = Integer.parseInt(req.getParameter("articleAuthorId"));
-            System.out.println("mark 2");
-            System.out.println(articleAuthorId);
-            commentListController.deleteComment2(user.getId(), id, articleAuthorId);
+            commentListController.deleteComment(user.getId(), id, articleAuthorId);
             resp.sendRedirect(req.getHeader("referer"));
         } catch (UnauthorizedException e) {
             resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);

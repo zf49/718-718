@@ -24,16 +24,7 @@ public class CommentListController {
         return Comment.flatten(comments);
     }
 
-    public void deleteComment(int userId, int commentId) throws IOException, UnauthorizedException {
-        int authorId = commentDao.getCommentById(commentId).getAuthorId();
-        if (authorId == userId) {
-            commentDao.deleteCommentById(commentId);
-        } else {
-            throw new UnauthorizedException();
-        }
-    }
-
-    public void deleteComment2(int userId, int commentId, int articleAuthorId) throws IOException, UnauthorizedException {
+    public void deleteComment(int userId, int commentId, int articleAuthorId) throws IOException, UnauthorizedException {
         int authorId = commentDao.getCommentById(commentId).getAuthorId();
         if (authorId == userId || articleAuthorId == userId) {
             commentDao.deleteCommentById(commentId);
