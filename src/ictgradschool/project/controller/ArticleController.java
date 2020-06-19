@@ -4,11 +4,10 @@ import ictgradschool.project.controller.exception.UnauthorizedException;
 import ictgradschool.project.entity.Article;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.ArticleDao;
+import org.apache.commons.text.StringEscapeUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-
-import org.apache.commons.text.StringEscapeUtils;
 
 public class ArticleController {
 

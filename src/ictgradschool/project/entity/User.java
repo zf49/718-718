@@ -16,7 +16,8 @@ public class User implements Serializable {
 
     private int detailId;
 
-    public User() {}
+    public User() {
+    }
 
     public User(int id, String username, String avatarName) {
         this.id = id;

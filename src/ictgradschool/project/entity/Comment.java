@@ -1,7 +1,5 @@
 package ictgradschool.project.entity;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,7 +18,8 @@ public class Comment implements Serializable {
     private int parentId;
     private List<Comment> children = new LinkedList<>();
 
-    public Comment() {}
+    public Comment() {
+    }
 
     public Comment(int authorId, int articleId, int id, String content, LocalDateTime dateCreated, String authorName) {
         this.authorId = authorId;
@@ -43,18 +42,6 @@ public class Comment implements Serializable {
         this.parentId = parentId;
     }
 
-    public boolean hasParent() {
-        return parentId != 0;
-    }
-
-    public void addChild(Comment comment) {
-        children.add(comment);
-    }
-
-    public List<Comment> getChildren() {
-        return children;
-    }
-
     public static List<Comment> flatten(List<Comment> comments) {
         List<Comment> results = new LinkedList<>();
         for (Comment comment : comments) {
@@ -65,6 +52,7 @@ public class Comment implements Serializable {
 
     /**
      * First add the comment itself, then add its child comments recursively
+     *
      * @param results
      * @param comment
      */
@@ -73,6 +61,18 @@ public class Comment implements Serializable {
         for (Comment child : comment.getChildren()) {
             addCommentRecursively(results, child);
         }
+    }
+
+    public boolean hasParent() {
+        return parentId != 0;
+    }
+
+    public void addChild(Comment comment) {
+        children.add(comment);
+    }
+
+    public List<Comment> getChildren() {
+        return children;
     }
 
     @Override

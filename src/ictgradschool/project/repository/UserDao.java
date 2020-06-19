@@ -21,7 +21,7 @@ public class UserDao {
 
     private User getUserById(Connection connection, int id) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(
-                "SELECT user.id as id, username, avatar.name as avatar_name\n" +
+                "SELECT user.id AS id, username, avatar.name AS avatar_name\n" +
                         "FROM user\n" +
                         "LEFT JOIN avatar ON user.avatar_id = avatar.id\n" +
                         "WHERE user.id = ?;")) {
@@ -41,9 +41,10 @@ public class UserDao {
             return null;
         }
     }
+
     private UserCredential getUserCredentialByName(Connection connection, String username) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(
-                "SELECT user.id, username, salt, password_hash, avatar.name as avatar_name\n" +
+                "SELECT user.id, username, salt, password_hash, avatar.name AS avatar_name\n" +
                         "FROM user\n" +
                         "LEFT JOIN avatar ON user.avatar_id = avatar.id\n" +
                         "WHERE username = ?;\n")) {
@@ -76,7 +77,7 @@ public class UserDao {
 
     private User getUserByName(Connection connection, String username) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(
-                "SELECT user.id, username, avatar.name as avatar_name\n" +
+                "SELECT user.id, username, avatar.name AS avatar_name\n" +
                         "FROM user\n" +
                         "LEFT JOIN avatar ON user.avatar_id = avatar.id\n" +
                         "WHERE username = ?;\n")) {
@@ -167,7 +168,7 @@ public class UserDao {
         try (Connection connection = getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO user (username, salt, password_hash)\n" +
-                            "values (?, ?, ?)\n"
+                            "VALUES (?, ?, ?)\n"
             )) {
                 statement.setString(1, username);
                 statement.setString(2, saltBase64);

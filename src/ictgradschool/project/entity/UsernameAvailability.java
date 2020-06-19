@@ -6,7 +6,8 @@ public class UsernameAvailability implements Serializable {
     private String username;
     private boolean available;
 
-    public UsernameAvailability() {}
+    public UsernameAvailability() {
+    }
 
     public UsernameAvailability(String username, boolean available) {
         this.username = username;

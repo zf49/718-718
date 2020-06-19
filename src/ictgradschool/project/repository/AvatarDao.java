@@ -11,7 +11,7 @@ public class AvatarDao {
     public int insertAvatar(String name) {
         try (Connection connection = DBConnectionUtils.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO avatar (name, is_predefined) VALUES (?, false)")) {
+                    "INSERT INTO avatar (name, is_predefined) VALUES (?, FALSE)")) {
                 statement.setString(1, name);
                 statement.executeUpdate();
             }
@@ -26,7 +26,7 @@ public class AvatarDao {
         try (Connection connection = DBConnectionUtils.getConnection()) {
             try (Statement statement1 = connection.createStatement()) {
                 ResultSet resultSet = statement1.executeQuery(
-                        "SELECT name from avatar WHERE is_predefined=true");
+                        "SELECT name FROM avatar WHERE is_predefined=TRUE");
                 List<String> names = new LinkedList<>();
                 while (resultSet.next()) {
                     names.add(resultSet.getString(1));

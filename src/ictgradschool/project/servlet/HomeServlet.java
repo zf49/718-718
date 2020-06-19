@@ -20,6 +20,6 @@ public class HomeServlet extends HttpServlet {
         List<Article> articleList = a.getAllArticles();
         req.setAttribute("articles", articleList);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/home.jsp");
-        dispatcher.forward(req,resp);
+        dispatcher.forward(req, resp);
     }
 }

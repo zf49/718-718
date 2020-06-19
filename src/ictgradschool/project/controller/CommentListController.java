@@ -8,7 +8,6 @@ import org.apache.commons.text.StringEscapeUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 public class CommentListController {

@@ -1,8 +1,8 @@
 package ictgradschool.project.servlet;
 
 import ictgradschool.project.controller.UserController;
-import ictgradschool.project.controller.exception.InvalidUsernameException;
 import ictgradschool.project.controller.exception.InvalidPasswordException;
+import ictgradschool.project.controller.exception.InvalidUsernameException;
 import ictgradschool.project.controller.exception.PasswordsDontMatchException;
 import ictgradschool.project.entity.User;
 import ictgradschool.project.repository.UserDao;
