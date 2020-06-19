@@ -22,7 +22,7 @@ public class SignUpSuccessServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserController userController = new UserController(new UserDao());
         userController.addUserDetail(req);
-        resp.sendRedirect(req.getContextPath() + "/home");
+        resp.sendRedirect(req.getContextPath() + "/avatar");
     }
 
 }
