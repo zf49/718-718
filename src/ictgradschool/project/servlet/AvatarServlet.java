@@ -93,7 +93,6 @@ public class AvatarServlet extends HttpServlet {
         String name = fileItem.getName();
         File imageFile = new File(uploadsFolder, name);
         while (imageFile.exists()) {
-            // TODO: fine grain the name management
             name = imageFile.getName() + "-2";
             imageFile = new File(uploadsFolder, name);
         }
