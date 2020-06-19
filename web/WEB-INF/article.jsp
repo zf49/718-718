@@ -57,13 +57,8 @@
                         <dt><a href="<c:url value="/user/${comment.authorId}"/>">${comment.authorName}</a>:</dt>
                         <dd class="text-break"><span>${comment.content}</span><br>
                             <span class="blog-post-meta" style="margin-right: 5px">${comment.date}</span>
+
                             <c:if test="${comment.canReply}">
-                                <small>Can Reply</small>
-                            </c:if>
-                            <c:if test="${comment.canDelete(user.id, article)}">
-                                <small>Can Delete</small>
-                            </c:if>
-                            <c:if test="${user != null && comment.level < 2}">
                                 <div style="display: contents">
                                     <button type="button" data-toggle="collapse"
                                             data-target="#replyComment${comment.id}"
@@ -71,12 +66,16 @@
                                             aria-controls="navbarHeader" aria-expanded="false"
                                             aria-label="Toggle navigation">Reply
                                     </button>
-                                    <c:if test="${comment.authorId == user.id || article.authorId == user.id}">
+                            </c:if>
+
+                                    <c:if test="${comment.canDelete(user.id, article)}">
                                         <form style="display: unset; margin-top: 1em;" action="<c:url value="/delete/commentId?commentId=${comment.id}"/>"
                                               method="post">
                                             <input type="submit" class="btn btn-outline-danger" value="Delete">
                                         </form>
                                     </c:if>
+
+                            <c:if test="${comment.canReply}">
                                 </div>
                                 <div class="collapse bg-light" id="replyComment${comment.id}"
                                      style="margin-bottom: 5px">
@@ -90,6 +89,7 @@
                                     </form>
                                 </div>
                             </c:if>
+
                         </dd>
                     </div>
                 </div>
