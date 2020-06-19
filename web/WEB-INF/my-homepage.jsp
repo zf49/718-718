@@ -16,7 +16,6 @@
     <div class="container about-author center-text homeArticle" style="padding: 9%">
         <p class="container blog-post-title" style="text-align: center">There's nothing here!</p>
         <br><br>
-<%--        TODO: check if the current user is the author--%>
     <c:if test="${user != null && user.id == pageUser.id}">
         <a class="btn btn-info btn-primary btn-block" href="<c:url value="/new-article"/>">Write Article</a><br>
     </c:if>
@@ -25,9 +24,9 @@
 <c:forEach items="${articles}" var="article">
     <div class="container about-author center-text homeArticle">
         <div class="articles card-body">
-            <p class="blog-post-title text-truncate">Title: ${article.title}</p>
+            <p class="blog-post-title text-truncate">${article.title}</p>
             <p class="blog-post-meta date">Create Date: ${article.date}</p>
-            <p class="blog-post-meta authorId">Author Name: ${pageUser.username}</p>
+            <p class="blog-post-meta authorId">By ${pageUser.username}</p>
             <p class="content text-truncate">${fn:replace(article.briefContent, newLineChar, "<br>")}</p>
             <div style="display: inline-block">
                 <a class="btn btn-outline-info" href="<c:url value="/articles/${article.id}"/>">Show Details</a>

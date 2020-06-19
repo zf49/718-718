@@ -97,8 +97,8 @@ public class UserDao {
                 try (ResultSet rs = statement.executeQuery()) {
                     while (rs.next()) {
                         user.setDetailId(rs.getInt(1));
-                        user.setFname(rs.getString(2));
-                        user.setLname(rs.getString(3));
+                        user.setFirstName(rs.getString(2));
+                        user.setLastName(rs.getString(3));
                         Date date = rs.getDate(4);
                         if (date == null) {
                             user.setDateBirth(null);
@@ -156,8 +156,8 @@ public class UserDao {
     }
 
     private void transferUserDetailToStatement(User user, PreparedStatement statement) throws SQLException {
-        statement.setString(1, user.getFname());
-        statement.setString(2, user.getLname());
+        statement.setString(1, user.getFirstName());
+        statement.setString(2, user.getLastName());
         statement.setDate(3, new Date(user.getDateBirth().getTime()));
         statement.setString(4, user.getDescription());
         statement.executeUpdate();

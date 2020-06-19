@@ -53,11 +53,11 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="fname">First Name: </label>
-                            <input type="text" name="fname" id="fname" value="${user.fname}" class="form-control" required>
+                            <input type="text" name="fname" id="fname" value="${user.firstName}" class="form-control" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="lname">Last Name: </label>
-                            <input type="text" name="lname" id="lname" value="${user.lname}" class="form-control" required>
+                            <input type="text" name="lname" id="lname" value="${user.lastName}" class="form-control" required>
                         </div>
                     </div>
                     <div class="mb-3">

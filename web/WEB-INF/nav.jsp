@@ -24,7 +24,7 @@
     </c:when>
     <c:otherwise>
         <li class="nav-item">
-        <a href="<c:url value="/avatar"/>">
+        <a href="<c:url value="/account"/>">
         <img class="avatar-img" src="<c:url value="/${user.avatarPath}"/>" alt="avatar">
         </a>
         </li>

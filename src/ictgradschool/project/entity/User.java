@@ -10,8 +10,8 @@ public class User implements Serializable {
 
     private String avatarName;
     // TODO: rename to `firstName` and `lastName`
-    private String fname;
-    private String lname;
+    private String firstName;
+    private String lastName;
     private Date dateBirth;
     private String description;
 
@@ -53,20 +53,20 @@ public class User implements Serializable {
         return "avatar/" + avatarName;
     }
 
-    public String getFname() {
-        return fname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFname(String fname) {
-        this.fname = fname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLname() {
-        return lname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLname(String lname) {
-        this.lname = lname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Date getDateBirth() {
