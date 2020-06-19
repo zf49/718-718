@@ -2,7 +2,6 @@ package ictgradschool.project.servlet;
 
 import ictgradschool.project.entity.Article;
 import ictgradschool.project.repository.ArticleDao;
-import ictgradschool.project.util.ServletUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
