@@ -29,7 +29,7 @@
                       rows="20" cols="80"></textarea>
         </div>
         <br>
-        <input type="submit" class="btn btn-primary" value="Post Article">
+        <input type="submit" class="btn btn-info" value="Post Article">
     </form>
 </div>
 <br><br><br>

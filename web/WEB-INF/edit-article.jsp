@@ -26,7 +26,7 @@
                       rows="20" cols="80">${article.content}</textarea>
         </div>
         <br>
-        <input type="submit" class="btn btn-primary" value="Confirm">
+        <input type="submit" class="btn btn-info" value="Confirm">
     </form>
 </div>
 </body>

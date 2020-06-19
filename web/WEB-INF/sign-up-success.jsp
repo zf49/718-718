@@ -16,7 +16,7 @@
 <div class="container homeArticle editArticle card-body container">
     <p class="blog-post-title" style="color: black">Welcome ${user.username}! Below is a list of information to let others know more about you. </p>
 
-    <button class="btn btn-primary" onclick="location.href='<c:url value="/home"/>'">Skip
+    <button class="btn btn-outline-info" onclick="location.href='<c:url value="/home"/>'">Skip
     </button>
     <form action="" method="post">
         <div class="row">
@@ -38,7 +38,7 @@
                       rows="5" required></textarea>
         </div>
         <div class="mb-4">
-            <input type="submit" class=" btn btn-danger my-2" value="Confirm">
+            <input type="submit" class=" btn btn-info value="Confirm">
         </div>
     </form>
 </div>
