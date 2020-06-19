@@ -1,15 +1,27 @@
 # PGCertIT Final Project - A Personal Blogging System
 
-**TODO:** Include some information about your team's project within this README. The following information must be included:
+We are Old Iron!
 
-- Team name
+"Old Iron" is a slang in China which means "long lasting friendship as firm as iron". It's the first term that came into our minds when the group is formed. It is also the perfect term to describe how we finish up the project - by close collaboration.
 
-- Website URL on the course server (trex-sandwich)
+## Website URL
 
-- A list of your extra features
+Visit the released version [here](https://trex-sandwich.com/tweety_group-6-release)
 
-- Are there any special setup instructions, beyond initializing the database and running your servlet project?
+## Extra Feature
 
-- At least one username / password combination for an existing user in your system, with some already-created articles & comments
+Nested comments
 
-- Any other instructions / comments you wish to make to your markers.
+## Usage
+
+- Copy `[PROJECT_ROOT]/web/WEB-INF/res/connection.properties` to `[PROJECT_ROOT]/web/WEB-INF/res/database.properties`
+- Set up database config in `database.properties`
+- Run `db-init.sql`
+- Build and the server
+
+## Test Account
+
+- Username: Kamren
+- Password: Kamren123
+
+## Other Comments
